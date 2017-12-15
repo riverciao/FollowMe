@@ -29,7 +29,7 @@ class ARViewController: UIViewController {
         self.sceneLocationView.scene.rootNode.addChildNode(node)
         
         // Upload new path to firebase
-        let startPointRef = FirebasePath.pathRef.childByAutoId().child("start-point")
+        let startPointRef = FirebasePath.pathRef.child("start-point")
         
         let positionX = node.position.x, positionY = node.position.y, positionZ = node.position.z
         let sphereRadius = node.geometry!.boundingSphere.radius
@@ -65,14 +65,10 @@ class ARViewController: UIViewController {
             self.node.addChildNode(newNode)
             
             // Upload new path to firebase
-//            let startPointRef = FirebasePath.pathRef.childByAutoId().child("start-point")
             let pointsRef = FirebasePath.pathRef.child("points")
-//            let pointsRef = FirebasePath.pointsRef
-            
             let sphereRadius = newNode.geometry!.boundingSphere.radius
             
             let values = [BoundingSphere.Schema.radius: sphereRadius]
-//            pointsRef.updateChildValues(values)
             
             pointsRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                 if let error = error {
