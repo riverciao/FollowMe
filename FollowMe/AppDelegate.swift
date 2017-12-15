@@ -21,16 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-        self.window!.makeKeyAndVisible()
-        
-        if #available(iOS 11.0, *) {
-            let vc = ViewController()
-            self.window!.rootViewController = vc
-        } else {
-            self.window!.rootViewController = NotSupportedViewController()
-        }
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        
+//        self.window!.makeKeyAndVisible()
+//        
+//        if #available(iOS 11.0, *) {
+//            let vc = ViewController()
+//            self.window!.rootViewController = vc
+//        } else {
+//            self.window!.rootViewController = NotSupportedViewController()
+//        }
         
         return true
     }
