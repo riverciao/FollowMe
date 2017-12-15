@@ -3,20 +3,50 @@ PODS:
   - CocoaLumberjack/Default (3.3.0)
   - CocoaLumberjack/Swift (3.3.0):
     - CocoaLumberjack/Default
+  - Firebase/Auth (4.6.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.3.2)
   - Firebase/Core (4.6.0):
     - FirebaseAnalytics (= 4.0.5)
     - FirebaseCore (= 4.0.11)
+  - Firebase/Database (4.6.0):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.1.1)
+  - Firebase/Storage (4.6.0):
+    - Firebase/Core
+    - FirebaseStorage (= 2.0.2)
   - FirebaseAnalytics (4.0.5):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
+  - FirebaseAuth (4.3.2):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
   - FirebaseCore (4.0.11):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseDatabase (4.1.1):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - leveldb-library (~> 1.18)
   - FirebaseInstanceID (2.0.6)
+  - FirebaseStorage (2.0.2):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
   - GoogleToolboxForMac/NSData+zlib (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+  - GTMSessionFetcher/Core (1.1.12)
+  - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -26,7 +56,10 @@ PODS:
 DEPENDENCIES:
   - ARCL
   - CocoaLumberjack/Swift (from `https://github.com/CocoaLumberjack/CocoaLumberjack`, branch `master`)
+  - Firebase/Auth
   - Firebase/Core
+  - Firebase/Database
+  - Firebase/Storage
 
 EXTERNAL SOURCES:
   CocoaLumberjack:
@@ -43,11 +76,16 @@ SPEC CHECKSUMS:
   CocoaLumberjack: eadb54b41bba07d02c55a0bc634297328c7257ba
   Firebase: 27321a925aa85520618255a7c630859e0502ccbd
   FirebaseAnalytics: 5b02a63ead2c3f0259cfc7f15e053e440587ecf8
+  FirebaseAuth: e58563adb207a43910a2ed87fecb9fa7d556df5a
   FirebaseCore: 2a946ece8fbe3ce1fdeeb55324f273caade22df9
+  FirebaseDatabase: 2e6e8e110b93b9a6e7aac71774c769a363035cb1
   FirebaseInstanceID: 24958382a1011bba5aaff37e334e7a650b9118f5
+  FirebaseStorage: 0cca42d9b889a0227c3a50121f45a4469fc9eb27
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  leveldb-library: 4f9eedf84ab46b4fa3b7893bf30714b2a1a74022
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: c68c2f54c2b8cf96d8f9f3b2a2d9e6b1421d5a2b
+PODFILE CHECKSUM: 9da770d946837ed1bab68b1a91539e4c77ff3b12
 
 COCOAPODS: 1.3.1

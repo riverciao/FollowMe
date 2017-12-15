@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */; };
-		5F184E301FE2837A00789BDF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E2F1FE2837A00789BDF /* ViewController.swift */; };
+		5F184E301FE2837A00789BDF /* ARViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E2F1FE2837A00789BDF /* ARViewController.swift */; };
 		5F184E3D1FE283A800789BDF /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E341FE283A700789BDF /* CGPoint+Extensions.swift */; };
 		5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E351FE283A700789BDF /* CLLocation+Extensions.swift */; };
 		5F184E3F1FE283A800789BDF /* FloatingPoint+Radians.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E361FE283A700789BDF /* FloatingPoint+Radians.swift */; };
@@ -21,6 +21,8 @@
 		5F184E471FE283D800789BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E461FE283D800789BDF /* Main.storyboard */; };
 		5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E481FE2848F00789BDF /* SceneLocationView.swift */; };
 		5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */; };
+		5F184E4E1FE37FC400789BDF /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E4D1FE37FC400789BDF /* Point.swift */; };
+		5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E501FE3B42400789BDF /* FirebasePath.swift */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -31,7 +33,7 @@
 /* Begin PBXFileReference section */
 		4B796D359C7781C267534C07 /* Pods-FollowMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FollowMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FollowMe/Pods-FollowMe.debug.xcconfig"; sourceTree = "<group>"; };
 		5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotSupportedViewController.swift; sourceTree = "<group>"; };
-		5F184E2F1FE2837A00789BDF /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5F184E2F1FE2837A00789BDF /* ARViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ARViewController.swift; sourceTree = "<group>"; };
 		5F184E341FE283A700789BDF /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		5F184E351FE283A700789BDF /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		5F184E361FE283A700789BDF /* FloatingPoint+Radians.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Radians.swift"; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		5F184E461FE283D800789BDF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5F184E481FE2848F00789BDF /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
 		5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5F184E4D1FE37FC400789BDF /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		5F184E501FE3B42400789BDF /* FirebasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePath.swift; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -92,6 +96,22 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		5F184E4C1FE37FA900789BDF /* Point */ = {
+			isa = PBXGroup;
+			children = (
+				5F184E4D1FE37FC400789BDF /* Point.swift */,
+			);
+			path = Point;
+			sourceTree = "<group>";
+		};
+		5F184E4F1FE3B3D500789BDF /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5F184E501FE3B42400789BDF /* FirebasePath.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		5FBE57261FDEB8FF002FDEB3 = {
 			isa = PBXGroup;
 			children = (
@@ -113,9 +133,11 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5F184E4F1FE3B3D500789BDF /* Firebase */,
+				5F184E4C1FE37FA900789BDF /* Point */,
 				5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */,
 				5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */,
-				5F184E2F1FE2837A00789BDF /* ViewController.swift */,
+				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
 				5F184E461FE283D800789BDF /* Main.storyboard */,
 				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
 				5FBE57341FDEB8FF002FDEB3 /* art.scnassets */,
@@ -217,14 +239,18 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-FollowMe/Pods-FollowMe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARCL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,14 +298,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F184E301FE2837A00789BDF /* ViewController.swift in Sources */,
+				5F184E301FE2837A00789BDF /* ARViewController.swift in Sources */,
 				5F184E431FE283A800789BDF /* SceneLocationEstimate.swift in Sources */,
 				5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
+				5F184E4E1FE37FC400789BDF /* Point.swift in Sources */,
 				5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */,
 				5F184E401FE283A800789BDF /* LocationManager.swift in Sources */,
 				5F184E421FE283A800789BDF /* SceneLocationEstimate+Extensions.swift in Sources */,
 				5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */,
+				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
 				5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */,
 				5F184E411FE283A800789BDF /* LocationNode.swift in Sources */,
 				5F184E3D1FE283A800789BDF /* CGPoint+Extensions.swift in Sources */,
