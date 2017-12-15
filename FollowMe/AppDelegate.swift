@@ -8,6 +8,7 @@
 
 import UIKit
 import CocoaLumberjack
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,26 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-//        DDLog.add(DDTTYLogger.sharedInstance) // TTY = Xcode console
-//        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-//        fileLogger.rollingFrequency = TimeInterval(60*60*24)  // 24 hours
-//        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-//        DDLog.add(fileLogger)
-//        
-//        DDLogDebug("NEW SESSION")
+        FirebaseApp.configure()
         
-//        UIApplication.shared.isIdleTimerDisabled = true
+        self.window = UIWindow(frame: UIScreen.main.bounds)
         
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.makeKeyAndVisible()
         
-//        self.window!.makeKeyAndVisible()
-        
-//        if #available(iOS 11.0, *) {
-//            let vc = ViewController()
-//            self.window!.rootViewController = vc
-//        } else {
-//            self.window!.rootViewController = NotSupportedViewController()
-//        }
+        if #available(iOS 11.0, *) {
+            let vc = ViewController()
+            self.window!.rootViewController = vc
+        } else {
+            self.window!.rootViewController = NotSupportedViewController()
+        }
         
         return true
     }

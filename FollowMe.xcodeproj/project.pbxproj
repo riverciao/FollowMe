@@ -20,6 +20,7 @@
 		5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E3C1FE283A700789BDF /* SCNVector3+Extensions.swift */; };
 		5F184E471FE283D800789BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E461FE283D800789BDF /* Main.storyboard */; };
 		5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E481FE2848F00789BDF /* SceneLocationView.swift */; };
+		5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		5F184E3C1FE283A700789BDF /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		5F184E461FE283D800789BDF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5F184E481FE2848F00789BDF /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
+		5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */,
 				5F184E331FE283A700789BDF /* Source */,
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
+				5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */,
 			);
 			path = FollowMe;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			files = (
 				5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
+				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
 				5F184E471FE283D800789BDF /* Main.storyboard in Resources */,
 			);
@@ -213,11 +217,15 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-FollowMe/Pods-FollowMe-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARCL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

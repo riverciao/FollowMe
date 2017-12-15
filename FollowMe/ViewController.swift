@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
     let node = SCNNode()
+//    var path: [SCNNode] = []
+    var timer = Timer()
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     @IBAction func addButton(_ sender: Any) {
@@ -30,23 +32,31 @@ class ViewController: UIViewController {
 
     //TODO: - Add new node automatically every 30 centermeter while user moving
     //TODO: - Add new node in the middle of view
-    @IBAction func newNodeButton(_ sender: Any) {
+    
+
+    @IBAction func pathButton(_ sender: UIButton) {
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        
+    }
+    
+    
+    @objc func timerAction() {
+        
         let newNode = SCNNode()
-
-
+        
         newNode.geometry = SCNSphere(radius: 0.1)
-
+        
         newNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
         newNode.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
         
         if let position = sceneLocationView.currentScenePosition() {
-            print("This is the current location: X-\(position.x), Y-\(position.y), Z-\(position.z)")
-            
+
             newNode.position = SCNVector3(position.x, position.y, position.z)
-//            self.node.addChildNode(newNode)
-            self.sceneLocationView.scene.rootNode.addChildNode(newNode)
+            self.node.addChildNode(newNode)
         }
     }
+
 
     
     @IBAction func resetButton(_ sender: Any) {

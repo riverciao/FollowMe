@@ -13,12 +13,12 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ARStarter" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FollowMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3t-Se-bBt" customClass="SceneLocationView" customModule="ARStarter" customModuleProvider="target">
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W3t-Se-bBt" customClass="SceneLocationView" customModule="FollowMe" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqP-wr-VXW">
@@ -54,7 +54,7 @@
                                 </constraints>
                                 <state key="normal" title="New"/>
                                 <connections>
-                                    <action selector="newNodeButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QS7-A7-VCO"/>
+                                    <action selector="pathButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gSf-pg-ovQ"/>
                                 </connections>
                             </button>
                         </subviews>

@@ -7,6 +7,7 @@ target 'FollowMe' do
 
   # Pods for FollowMe
   pod 'ARCL'
+  pod 'Firebase/Core'
   pod 'CocoaLumberjack/Swift', :git => 'https://github.com/CocoaLumberjack/CocoaLumberjack', :branch => 'master'
 
 
