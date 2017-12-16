@@ -40,10 +40,10 @@ class ARViewController: UIViewController {
     
     @IBAction func saveButton(_ sender: Any) {
         
-        upload(startNode: startNode)
+        upload()
         
         // Clean after saving
-        pathNodes = []
+//        pathNodes = []
         restartSession()
     }
     
@@ -55,7 +55,7 @@ class ARViewController: UIViewController {
         self.sceneLocationView.autoenablesDefaultLighting = true
     }
     
-    private func upload(startNode: Node) {
+    private func upload() {
         
         // Upload new path to firebase
         let pathIdRef = FirebasePath.pathRef.childByAutoId()
