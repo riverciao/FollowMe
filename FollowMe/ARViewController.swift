@@ -56,27 +56,32 @@ class ARViewController: UIViewController {
             pathNode.position = SCNVector3(position.x, position.y, position.z)
             self.node.addChildNode(pathNode)
             
-            // Upload new path to firebase
-            let pointsRef = FirebasePath.pathRef.child("points")
-            let sphereRadius = pathNode.geometry!.boundingSphere.radius
-            
-            let values = [BoundingSphere.Schema.radius: sphereRadius]
-            
-            pointsRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-
-                let pointsPositionRef = pointsRef.child("position").childByAutoId()
-
-                let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
-                let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
-
-                pointsPositionRef.updateChildValues(values)
-            })
+            upload(pathNode)
             
         }
+    }
+    
+    private func upload(_ pathNode: Node) {
+        
+        // Upload new path to firebase
+        let pointsRef = FirebasePath.pathRef.child("points")
+        let sphereRadius = pathNode.geometry!.boundingSphere.radius
+        
+        let values = [BoundingSphere.Schema.radius: sphereRadius]
+        
+        pointsRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            let pointsPositionRef = pointsRef.child("position").childByAutoId()
+            
+            let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
+            let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
+            
+            pointsPositionRef.updateChildValues(values)
+        })
         
     }
 
