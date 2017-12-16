@@ -28,9 +28,9 @@
                                     <constraint firstAttribute="height" constant="80" id="Cgt-ID-0gI"/>
                                     <constraint firstAttribute="width" constant="80" id="bfV-Jn-fqo"/>
                                 </constraints>
-                                <state key="normal" title="Add"/>
+                                <state key="normal" title="Save"/>
                                 <connections>
-                                    <action selector="addButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f3K-Ut-6Mf"/>
+                                    <action selector="saveButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nHG-2O-j37"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1o-nc-v4c">

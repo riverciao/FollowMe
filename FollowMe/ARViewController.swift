@@ -15,80 +15,81 @@ class ARViewController: UIViewController {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
-    let node = Node(nodeType: .start)
+    let startNode = Node(nodeType: .start)
+    var pathNodes: [Node] = []
     var timer = Timer()
     
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
-    @IBAction func addButton(_ sender: Any) {
-        
-        node.position = SCNVector3(0,0,0)
-        self.sceneLocationView.scene.rootNode.addChildNode(node)
-        
-        // Upload new path to firebase
-        let startPointRef = FirebasePath.pathRef.child("start-point")
-        
-        let positionX = node.position.x, positionY = node.position.y, positionZ = node.position.z
-        let sphereRadius = node.geometry!.boundingSphere.radius
-        
-        let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ, BoundingSphere.Schema.radius: sphereRadius]
-        
-        startPointRef.setValue(values)
-        
-    }
-
-    
     //TODO: - Add new node automatically every 30 centermeter while user moving
     //TODO: - Add new node in the middle of view
     @IBAction func pathButton(_ sender: UIButton) {
         
+        //Add startNode at Origin Point
+        startNode.position = SCNVector3(0,0,0)
+        self.sceneLocationView.scene.rootNode.addChildNode(startNode)
+        
+        //Add pathNodes for current user location every 0.5 second
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         
     }
     
-    
-    @objc func timerAction() {
-        
-        let pathNode = Node(nodeType: .path)
-        
-        if let position = sceneLocationView.currentScenePosition() {
-
-            pathNode.position = SCNVector3(position.x, position.y, position.z)
-            self.node.addChildNode(pathNode)
-            
-            upload(pathNode)
-            
-        }
-    }
-    
-    private func upload(_ pathNode: Node) {
-        
-        // Upload new path to firebase
-        let pointsRef = FirebasePath.pathRef.child("points")
-        let sphereRadius = pathNode.geometry!.boundingSphere.radius
-        
-        let values = [BoundingSphere.Schema.radius: sphereRadius]
-        
-        pointsRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            let pointsPositionRef = pointsRef.child("position").childByAutoId()
-            
-            let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
-            let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
-            
-            pointsPositionRef.updateChildValues(values)
-        })
-        
-    }
-
-
-    
     @IBAction func resetButton(_ sender: Any) {
         restartSession()
+    }
+    
+    @IBAction func saveButton(_ sender: Any) {
+        
+        upload(startNode: startNode)
+        upload(pathNodes: pathNodes)
+        
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+        self.sceneLocationView.session.run(configuration)
+        self.sceneLocationView.autoenablesDefaultLighting = true
+    }
+    
+    private func upload(startNode: Node) {
+        
+        // Upload new path to firebase
+        let startPointRef = FirebasePath.pathRef.child("start-point")
+        
+        let positionX = startNode.position.x, positionY = startNode.position.y, positionZ = startNode.position.z
+        let sphereRadius = startNode.geometry!.boundingSphere.radius
+        
+        let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ, BoundingSphere.Schema.radius: sphereRadius]
+        
+        startPointRef.setValue(values)
+
+    }
+    
+    private func upload(pathNodes: [Node]) {
+        
+        for pathNode in pathNodes {
+            // Upload new path to firebase
+            let pointsRef = FirebasePath.pathRef.child("points")
+            let sphereRadius = pathNode.geometry!.boundingSphere.radius
+            
+            let values = [BoundingSphere.Schema.radius: sphereRadius]
+            
+            pointsRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                let pointsPositionRef = pointsRef.child("position").childByAutoId()
+                
+                let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
+                let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
+                
+                pointsPositionRef.updateChildValues(values)
+            })
+        }
     }
     
     private func restartSession() {
@@ -99,12 +100,18 @@ class ARViewController: UIViewController {
         self.sceneLocationView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    @objc func timerAction() {
         
-        self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
-        self.sceneLocationView.session.run(configuration)
-        self.sceneLocationView.autoenablesDefaultLighting = true
+        let pathNode = Node(nodeType: .path)
+        
+        if let position = sceneLocationView.currentScenePosition() {
+            
+            pathNode.position = SCNVector3(position.x, position.y, position.z)
+            self.startNode.addChildNode(pathNode)
+            
+            pathNodes.append(pathNode)
+            
+        }
     }
 
 
