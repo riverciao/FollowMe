@@ -43,6 +43,9 @@ class ARViewController: UIViewController {
         upload(startNode: startNode)
         upload(pathNodes: pathNodes)
         
+        // Clean after saving
+        pathNodes = []
+        restartSession()
     }
     
     override func viewDidLoad() {
