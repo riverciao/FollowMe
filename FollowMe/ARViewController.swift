@@ -56,7 +56,7 @@ class ARViewController: UIViewController {
     private func upload(startNode: Node) {
         
         // Upload new path to firebase
-        let startPointRef = FirebasePath.pathRef.child("start-point")
+        let startPointRef = FirebasePath.pathRef.child("start-node")
         
         let positionX = startNode.position.x, positionY = startNode.position.y, positionZ = startNode.position.z
         let sphereRadius = startNode.geometry!.boundingSphere.radius
@@ -70,8 +70,9 @@ class ARViewController: UIViewController {
     private func upload(pathNodes: [Node]) {
         
         for pathNode in pathNodes {
+            
             // Upload new path to firebase
-            let pointsRef = FirebasePath.pathRef.child("points")
+            let pointsRef = FirebasePath.pathRef.child("path-nodes")
             let sphereRadius = pathNode.geometry!.boundingSphere.radius
             
             let values = [BoundingSphere.Schema.radius: sphereRadius]
