@@ -15,15 +15,12 @@ class ARViewController: UIViewController {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
-    let node = SCNNode()
+    let node = Node(nodeType: .start)
     var timer = Timer()
+    
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     @IBAction func addButton(_ sender: Any) {
-        node.geometry = SCNSphere(radius: 0.3)
-
-        node.geometry?.firstMaterial?.specular.contents = UIColor.orange
-        node.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
         
         node.position = SCNVector3(0,0,0)
         self.sceneLocationView.scene.rootNode.addChildNode(node)
@@ -56,8 +53,9 @@ class ARViewController: UIViewController {
         
         newNode.geometry = SCNSphere(radius: 0.1)
         
-        newNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
+        newNode.geometry?.firstMaterial?.specular.contents = UIColor.white
         newNode.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
+        newNode.name = "path"
         
         if let position = sceneLocationView.currentScenePosition() {
 
