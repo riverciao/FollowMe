@@ -11,6 +11,6 @@ import Firebase
 
 public struct FirebasePath {
     
-    public static let pathRef = Database.database().reference().child("paths").childByAutoId()
+    public static let pathRef = Database.database().reference().child("paths")
 
 }

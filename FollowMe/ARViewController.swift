@@ -41,7 +41,6 @@ class ARViewController: UIViewController {
     @IBAction func saveButton(_ sender: Any) {
         
         upload(startNode: startNode)
-        upload(pathNodes: pathNodes)
         
         // Clean after saving
         pathNodes = []
@@ -59,44 +58,50 @@ class ARViewController: UIViewController {
     private func upload(startNode: Node) {
         
         // Upload new path to firebase
-        let startPointRef = FirebasePath.pathRef.child("start-node")
+        let pathIdRef = FirebasePath.pathRef.childByAutoId()
+        let startNodeRef = pathIdRef.child("start-node")
         
         let positionX = startNode.position.x, positionY = startNode.position.y, positionZ = startNode.position.z
         let sphereRadius = startNode.geometry!.boundingSphere.radius
         
         let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ, BoundingSphere.Schema.radius: sphereRadius]
         
-        startPointRef.setValue(values)
-
-    }
-    
-    private func upload(pathNodes: [Node]) {
-        
-        for pathNode in pathNodes {
+        startNodeRef.setValue(values) { (error, ref) in
             
-            // Upload new path to firebase
-            let pointsRef = FirebasePath.pathRef.child("path-nodes")
-            let sphereRadius = pathNode.geometry!.boundingSphere.radius
+            if let error = error {
+                print(error)
+                return
+            }
             
-            let values = [BoundingSphere.Schema.radius: sphereRadius]
-            
-            pointsRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
-                if let error = error {
-                    print(error)
-                    return
-                }
+            for pathNode in self.pathNodes {
                 
-                let pointsPositionRef = pointsRef.child("position").childByAutoId()
+                // Upload new path to firebase
+                let pathId = pathIdRef.key
+                let pathNodesRef = FirebasePath.pathRef.child(pathId).child("path-nodes")
                 
-                let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
-                let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
+                let sphereRadius = pathNode.geometry!.boundingSphere.radius
+                let values = [BoundingSphere.Schema.radius: sphereRadius]
                 
-                pointsPositionRef.updateChildValues(values)
-            })
+                pathNodesRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                    if let error = error {
+                        print(error)
+                        return
+                    }
+                    
+                    let pointsPositionRef = pathNodesRef.child("position").childByAutoId()
+                    
+                    let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
+                    let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
+                    
+                    pointsPositionRef.updateChildValues(values)
+                })
+            }
         }
     }
+
     
     private func restartSession() {
+        
         self.sceneLocationView.session.pause()
         self.sceneLocationView.scene.rootNode.enumerateChildNodes { (node, _) in
             node.removeFromParentNode()
@@ -117,7 +122,5 @@ class ARViewController: UIViewController {
             
         }
     }
-
-
 }
 
