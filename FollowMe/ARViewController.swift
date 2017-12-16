@@ -49,22 +49,16 @@ class ARViewController: UIViewController {
     
     @objc func timerAction() {
         
-        let newNode = SCNNode()
-        
-        newNode.geometry = SCNSphere(radius: 0.1)
-        
-        newNode.geometry?.firstMaterial?.specular.contents = UIColor.white
-        newNode.geometry?.firstMaterial?.diffuse.contents = UIColor.yellow
-        newNode.name = "path"
+        let pathNode = Node(nodeType: .path)
         
         if let position = sceneLocationView.currentScenePosition() {
 
-            newNode.position = SCNVector3(position.x, position.y, position.z)
-            self.node.addChildNode(newNode)
+            pathNode.position = SCNVector3(position.x, position.y, position.z)
+            self.node.addChildNode(pathNode)
             
             // Upload new path to firebase
             let pointsRef = FirebasePath.pathRef.child("points")
-            let sphereRadius = newNode.geometry!.boundingSphere.radius
+            let sphereRadius = pathNode.geometry!.boundingSphere.radius
             
             let values = [BoundingSphere.Schema.radius: sphereRadius]
             
@@ -76,7 +70,7 @@ class ARViewController: UIViewController {
 
                 let pointsPositionRef = pointsRef.child("position").childByAutoId()
 
-                let positionX = newNode.position.x, positionY = newNode.position.y, positionZ = newNode.position.z
+                let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
                 let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
 
                 pointsPositionRef.updateChildValues(values)
@@ -99,11 +93,6 @@ class ARViewController: UIViewController {
         }
         self.sceneLocationView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
     }
-    
-    // random number from certain number to another number
-//    private func randomNumbers(firstNum: CGFloat, SecondNum: CGFloat) -> CGFloat {
-//        return CGFloat(arc4random()) / CGFloat(UINT32_MAX) * abs(firstNum - SecondNum) + min(firstNum, SecondNum)
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
