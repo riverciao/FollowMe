@@ -19,14 +19,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let distanceSpan: CLLocationDegrees = 250
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(locationCoordinate, distanceSpan, distanceSpan)
-
-        mapView.setRegion(coordinateRegion, animated: true)
-        
-        let pinWithAnnotation = Annotation(title: "Dong", subtitle: "Play Game", coordinate: locationCoordinate)
-        mapView.addAnnotation(pinWithAnnotation)
         
         mapView.delegate = self
         
@@ -39,36 +31,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
-        }
-    }
-    
-    private func setupDestination() {
-        
-        // Setup destination
-        let destinationLocation = CLLocationCoordinate2D(latitude: 25.025652, longitude: 121.556407)
-        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-        
-        let destinationAnnotation = MKPointAnnotation()
-        destinationAnnotation.title = "動桌遊"
-        
-        if let location = destinationPlacemark.location {
-            destinationAnnotation.coordinate = location.coordinate
-        }
-        
-    }
-    
-    private func setupCurrentLocation() {
-        // Setup current location
-        let currentLocationAnnotation = MKPointAnnotation()
-        currentLocationAnnotation.title = "Current Location"
-        
-        if let currentLocation = self.currentLocation {
-            currentLocationAnnotation.coordinate = currentLocation.coordinate
-            
-            let currentLocationPlacemark = MKPlacemark(coordinate: currentLocation.coordinate, addressDictionary: nil)
-            let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
-
         }
     }
 
@@ -140,16 +102,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if currentLocation == nil {
             // Zoom to user location
             if let userLocation = locations.last {
-                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 200, 200)
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
                 mapView.setRegion(viewRegion, animated: false)
-                
-                let pinWithAnnotation = Annotation(title: "Current Location", subtitle: "", coordinate: userLocation.coordinate)
-                mapView.addAnnotation(pinWithAnnotation)
-                
             }
         }
-        
-        
     }
-
+    
 }
