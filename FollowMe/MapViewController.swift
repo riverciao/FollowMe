@@ -15,6 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private var currentLocation: CLLocation?
     private var route: MKRoute?
     
+    // TODO: - delete this specific cordinate and make it optional
     var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
     
     @IBOutlet weak var mapView: MKMapView!
