@@ -15,11 +15,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     
+    let locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let distanceSpan: CLLocationDegrees = 250
-        let locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(locationCoordinate, distanceSpan, distanceSpan)
 
         mapView.setRegion(coordinateRegion, animated: true)
@@ -39,28 +40,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
-        
-        
     }
     
-    override func viewWillLayoutSubviews() {
-        print(currentLocation as Any)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        print(currentLocation as Any)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    private func setupDestination() {
         
-//        setDestinationForRoute()
-    }
-    
-    private func setDestinationForRoute() {
-        
-        let directionRequest = MKDirectionsRequest()
-        
+        // Setup destination
         let destinationLocation = CLLocationCoordinate2D(latitude: 25.025652, longitude: 121.556407)
         let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
         let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
@@ -72,47 +56,42 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             destinationAnnotation.coordinate = location.coordinate
         }
         
-        
-        ///// fake start point
-//        let startLocation = CLLocationCoordinate2D(latitude: 25.027508, longitude: 121.555770)
-//        let startLocationPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
-//        let startLocationMapItem = MKMapItem(placemark: startLocationPlacemark)
-//
-//        let startLocationAnnotation = MKPointAnnotation()
-//        startLocationAnnotation.title = "明月湯包"
-//
-//        if let location = startLocationPlacemark.location {
-//            startLocationAnnotation.coordinate = location.coordinate
-//        }
-        //////
-        
+    }
+    
+    private func setupCurrentLocation() {
+        // Setup current location
         let currentLocationAnnotation = MKPointAnnotation()
         currentLocationAnnotation.title = "Current Location"
-
+        
         if let currentLocation = self.currentLocation {
             currentLocationAnnotation.coordinate = currentLocation.coordinate
-
+            
             let currentLocationPlacemark = MKPlacemark(coordinate: currentLocation.coordinate, addressDictionary: nil)
             let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
 
-            self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
-
-
-            directionRequest.source = currentLocationMapItem
-            directionRequest.destination = destinationMapItem
-            directionRequest.transportType = .automobile
         }
+    }
+
+    
+    private func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
-        //////
-//        self.mapView.showAnnotations([startLocationAnnotation ,destinationAnnotation], animated: true )
-//
-//
-//        directionRequest.source = startLocationMapItem
-//        directionRequest.destination = destinationMapItem
-//        directionRequest.transportType = .automobile
-        //////
+        let directionRequest = MKDirectionsRequest()
         
+        let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
+        let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
         
+        self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
+        
+        let currentLocationPlacemark = MKPlacemark(coordinate: currentLocationCoordinate)
+        let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
+        
+        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        directionRequest.source = currentLocationMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .walking
+    
         
         // Calculate the direction
         let directions = MKDirections(request: directionRequest)
@@ -149,7 +128,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        defer { currentLocation = locations.last }
+        defer {
+            
+            currentLocation = locations.last
+            
+            if let currentLocation = currentLocation {
+                setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: locationCoordinate)
+            }
+        }
         
         if currentLocation == nil {
             // Zoom to user location
@@ -159,10 +145,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 let pinWithAnnotation = Annotation(title: "Current Location", subtitle: "", coordinate: userLocation.coordinate)
                 mapView.addAnnotation(pinWithAnnotation)
+                
             }
         }
         
-        setDestinationForRoute()
+        
     }
 
 }
