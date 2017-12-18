@@ -43,10 +43,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewWillLayoutSubviews() {
+        print(currentLocation as Any)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        print(currentLocation as Any)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        setDestinationForRoute()
+//        setDestinationForRoute()
     }
     
     private func setDestinationForRoute() {
@@ -66,42 +74,42 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         
         ///// fake start point
-        let startLocation = CLLocationCoordinate2D(latitude: 25.027508, longitude: 121.555770)
-        let startLocationPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
-        let startLocationMapItem = MKMapItem(placemark: startLocationPlacemark)
-        
-        let startLocationAnnotation = MKPointAnnotation()
-        startLocationAnnotation.title = "明月湯包"
-        
-        if let location = startLocationPlacemark.location {
-            startLocationAnnotation.coordinate = location.coordinate
-        }
-        //////
-        
-//        let currentLocationAnnotation = MKPointAnnotation()
-//        currentLocationAnnotation.title = "Current Location"
+//        let startLocation = CLLocationCoordinate2D(latitude: 25.027508, longitude: 121.555770)
+//        let startLocationPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
+//        let startLocationMapItem = MKMapItem(placemark: startLocationPlacemark)
 //
-//        if let currentLocation = self.currentLocation {
-//            currentLocationAnnotation.coordinate = currentLocation.coordinate
+//        let startLocationAnnotation = MKPointAnnotation()
+//        startLocationAnnotation.title = "明月湯包"
 //
-//            let currentLocationPlacemark = MKPlacemark(coordinate: currentLocation.coordinate, addressDictionary: nil)
-//            let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
-//
-//            self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
-//
-//
-//            directionRequest.source = currentLocationMapItem
-//            directionRequest.destination = destinationMapItem
-//            directionRequest.transportType = .automobile
+//        if let location = startLocationPlacemark.location {
+//            startLocationAnnotation.coordinate = location.coordinate
 //        }
+        //////
+        
+        let currentLocationAnnotation = MKPointAnnotation()
+        currentLocationAnnotation.title = "Current Location"
+
+        if let currentLocation = self.currentLocation {
+            currentLocationAnnotation.coordinate = currentLocation.coordinate
+
+            let currentLocationPlacemark = MKPlacemark(coordinate: currentLocation.coordinate, addressDictionary: nil)
+            let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
+
+            self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
+
+
+            directionRequest.source = currentLocationMapItem
+            directionRequest.destination = destinationMapItem
+            directionRequest.transportType = .automobile
+        }
         
         //////
-        self.mapView.showAnnotations([startLocationAnnotation ,destinationAnnotation], animated: true )
-        
-        
-        directionRequest.source = startLocationMapItem
-        directionRequest.destination = destinationMapItem
-        directionRequest.transportType = .automobile
+//        self.mapView.showAnnotations([startLocationAnnotation ,destinationAnnotation], animated: true )
+//
+//
+//        directionRequest.source = startLocationMapItem
+//        directionRequest.destination = destinationMapItem
+//        directionRequest.transportType = .automobile
         //////
         
         
@@ -153,6 +161,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 mapView.addAnnotation(pinWithAnnotation)
             }
         }
+        
+        setDestinationForRoute()
     }
 
 }
