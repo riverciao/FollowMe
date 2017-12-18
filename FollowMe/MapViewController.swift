@@ -39,69 +39,104 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
+        
+        
     }
     
-//    private func setDestinationForRoute() {
-//        
-//        let destinationLocation = CLLocationCoordinate2D(latitude: 25.025652, longitude: 121.556407)
-//        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-//        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-//        
-//        let currentLocationPlacemark = MKPlacemark(coordinate: (currentLocation?.coordinate)!, addressDictionary: nil)
-//        let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
-//        
-//        let destinationAnnotation = MKPointAnnotation()
-//        destinationAnnotation.title = "動桌遊"
-//        
-//        if let location = destinationPlacemark.location {
-//            destinationAnnotation.coordinate = location.coordinate
-//        }
-//        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setDestinationForRoute()
+    }
+    
+    private func setDestinationForRoute() {
+        
+        let directionRequest = MKDirectionsRequest()
+        
+        let destinationLocation = CLLocationCoordinate2D(latitude: 25.025652, longitude: 121.556407)
+        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
+        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        
+        let destinationAnnotation = MKPointAnnotation()
+        destinationAnnotation.title = "動桌遊"
+        
+        if let location = destinationPlacemark.location {
+            destinationAnnotation.coordinate = location.coordinate
+        }
+        
+        
+        ///// fake start point
+        let startLocation = CLLocationCoordinate2D(latitude: 25.027508, longitude: 121.555770)
+        let startLocationPlacemark = MKPlacemark(coordinate: startLocation, addressDictionary: nil)
+        let startLocationMapItem = MKMapItem(placemark: startLocationPlacemark)
+        
+        let startLocationAnnotation = MKPointAnnotation()
+        startLocationAnnotation.title = "明月湯包"
+        
+        if let location = startLocationPlacemark.location {
+            startLocationAnnotation.coordinate = location.coordinate
+        }
+        //////
+        
 //        let currentLocationAnnotation = MKPointAnnotation()
 //        currentLocationAnnotation.title = "Current Location"
-//        
+//
 //        if let currentLocation = self.currentLocation {
 //            currentLocationAnnotation.coordinate = currentLocation.coordinate
+//
+//            let currentLocationPlacemark = MKPlacemark(coordinate: currentLocation.coordinate, addressDictionary: nil)
+//            let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
+//
+//            self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
+//
+//
+//            directionRequest.source = currentLocationMapItem
+//            directionRequest.destination = destinationMapItem
+//            directionRequest.transportType = .automobile
 //        }
-//        
-//        self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
-//        
-//        let directionRequest = MKDirectionsRequest()
-//        directionRequest.source = currentLocationMapItem
-//        directionRequest.destination = destinationMapItem
-//        directionRequest.transportType = .automobile
-//        
-//        // Calculate the direction
-//        let directions = MKDirections(request: directionRequest)
-//        
-//        directions.calculate { (response, error) in
-//           
-//            
-//            guard let response = response else {
-//                if let error = error {
-//                    print(error)
-//                }
-//                
-//                return
-//                
-//            }
-//            
-//            let route = response.routes[0]
-//            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
-//            
-//            let rect = route.polyline.boundingMapRect
-//            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
-//        }
-//    }
-//    
-//    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-//        
-//        let renderer = MKPolylineRenderer(overlay: overlay)
-//        renderer.strokeColor = UIColor.red
-//        renderer.lineWidth = 4.0
-//        
-//        return renderer
-//    }
+        
+        //////
+        self.mapView.showAnnotations([startLocationAnnotation ,destinationAnnotation], animated: true )
+        
+        
+        directionRequest.source = startLocationMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .automobile
+        //////
+        
+        
+        
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
+        
+        directions.calculate { (response, error) in
+           
+            
+            guard let response = response else {
+                if let error = error {
+                    print(error)
+                }
+                
+                return
+                
+            }
+            
+            let route = response.routes[0]
+            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            
+            let rect = route.polyline.boundingMapRect
+            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.red
+        renderer.lineWidth = 4.0
+        
+        return renderer
+    }
     
     // MARK - CLLocationManagerDelegate
     
