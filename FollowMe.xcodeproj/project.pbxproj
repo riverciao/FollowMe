@@ -25,6 +25,9 @@
 		5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E501FE3B42400789BDF /* FirebasePath.swift */; };
 		5F184E531FE3E42200789BDF /* NodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E521FE3E42200789BDF /* NodeType.swift */; };
 		5F184E551FE4C67D00789BDF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E541FE4C67D00789BDF /* Node.swift */; };
+		5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F45267D1FE761FC004012D1 /* MapViewController.swift */; };
+		5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F45267E1FE761FC004012D1 /* MapViewController.xib */; };
+		5F4526821FE791D6004012D1 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526811FE791D6004012D1 /* Annotation.swift */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -52,6 +55,9 @@
 		5F184E501FE3B42400789BDF /* FirebasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePath.swift; sourceTree = "<group>"; };
 		5F184E521FE3E42200789BDF /* NodeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeType.swift; sourceTree = "<group>"; };
 		5F184E541FE4C67D00789BDF /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
+		5F45267D1FE761FC004012D1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5F45267E1FE761FC004012D1 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		5F4526811FE791D6004012D1 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -144,6 +150,9 @@
 				5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */,
 				5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */,
 				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
+				5F45267D1FE761FC004012D1 /* MapViewController.swift */,
+				5F4526811FE791D6004012D1 /* Annotation.swift */,
+				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
 				5F184E461FE283D800789BDF /* Main.storyboard */,
 				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
 				5FBE57341FDEB8FF002FDEB3 /* art.scnassets */,
@@ -226,6 +235,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */,
+				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
@@ -313,10 +323,12 @@
 				5F184E531FE3E42200789BDF /* NodeType.swift in Sources */,
 				5F184E401FE283A800789BDF /* LocationManager.swift in Sources */,
 				5F184E421FE283A800789BDF /* SceneLocationEstimate+Extensions.swift in Sources */,
+				5F4526821FE791D6004012D1 /* Annotation.swift in Sources */,
 				5F184E551FE4C67D00789BDF /* Node.swift in Sources */,
 				5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */,
 				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
 				5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */,
+				5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */,
 				5F184E411FE283A800789BDF /* LocationNode.swift in Sources */,
 				5F184E3D1FE283A800789BDF /* CGPoint+Extensions.swift in Sources */,
 				5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */,
