@@ -13,6 +13,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
+    private var route: MKRoute?
     
     var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
     
@@ -93,14 +94,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 return
                 
             }
+
             
-            print("PPPP:\(response.routes[0].polyline)")
+            self.route = response.routes[0]
+            print("OOO\(String(describing: self.route?.distance))")
             
-            let route = response.routes[0]
-            self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            if let route = self.route {
+                self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+            }
             
-            let rect = route.polyline.boundingMapRect
-            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
+//            let rect = route.polyline.boundingMapRect
+//            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
         }
     }
     
