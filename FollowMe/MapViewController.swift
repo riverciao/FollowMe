@@ -33,27 +33,32 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.startUpdatingLocation()
         }
     }
-
     
-    private func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
-        
-        let directionRequest = MKDirectionsRequest()
-        
+    private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
         let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
         
         self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
+    }
+    
+    private func getMapItem(with coordinate: CLLocationCoordinate2D) -> MKMapItem {
+        let placemark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placemark)
+        return mapItem
+    }
+
+    
+    private func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
-        let currentLocationPlacemark = MKPlacemark(coordinate: currentLocationCoordinate)
-        let currentLocationMapItem = MKMapItem(placemark: currentLocationPlacemark)
+        setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
         
-        let destinationPlacemark = MKPlacemark(coordinate: destinationCoordinate)
-        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
+        let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
+        let destinationMapItem = getMapItem(with: destinationCoordinate)
         
+        let directionRequest = MKDirectionsRequest()
         directionRequest.source = currentLocationMapItem
         directionRequest.destination = destinationMapItem
         directionRequest.transportType = .walking
-    
         
         // Calculate the direction
         let directions = MKDirections(request: directionRequest)
