@@ -23,6 +23,10 @@
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Xan-MG-hrP">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Lb3-2Z-yCK" appends="YES" id="Iz1-hV-DDC"/>
+                    </connections>
                 </mapView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -35,5 +39,10 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="26.5" y="51.5"/>
         </view>
+        <tapGestureRecognizer id="Lb3-2Z-yCK">
+            <connections>
+                <action selector="addPin:" destination="-1" id="qlU-KO-TWW"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

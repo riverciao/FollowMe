@@ -11,11 +11,23 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     
-    @IBOutlet weak var mapView: MKMapView!
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     
     let locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    
+    @IBAction func addPin(_ sender: UITapGestureRecognizer) {
+        
+        let location = sender.location(in: self.mapView)
+        let locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
+        let annotation = Annotation(title: "", subtitle: "", coordinate: locationCoordinate)
+        
+        self.mapView.addAnnotation(annotation)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
