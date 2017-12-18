@@ -14,18 +14,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     
-    let locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
+    var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
     
     @IBOutlet weak var mapView: MKMapView!
-    
     
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
         
         let location = sender.location(in: self.mapView)
-        let locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
+        self.locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         let annotation = Annotation(title: "", subtitle: "", coordinate: locationCoordinate)
         
+        self.mapView.removeAnnotations(self.mapView.annotations)
         self.mapView.addAnnotation(annotation)
+        
+        if let currentLocation = currentLocation {
+            setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: locationCoordinate)
+        }
         
     }
     
@@ -62,6 +66,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     private func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+        
         setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
         
         let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
@@ -86,6 +93,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 return
                 
             }
+            
+            print("PPPP:\(response.routes[0].polyline)")
             
             let route = response.routes[0]
             self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
