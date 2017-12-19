@@ -173,6 +173,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let activeSearch = MKLocalSearch(request: searchRequest)
         
         activeSearch.start { (response, error) in
+            
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            
             if let error = error {
                 print("Error: \(error)")
                 return
@@ -189,7 +193,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             //Create annotation
             let coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
             let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: coordinate)
-            self.mapView.addAnnotation(annotation )
+            self.mapView.addAnnotation(annotation)
+            
+            //Zoom in on annotation
+            let span = MKCoordinateSpanMake(0.1, 0.1)
+            let region = MKCoordinateRegionMake(coordinate, span)
+            self.mapView.setRegion(region, animated: true)
         }
         
     }
