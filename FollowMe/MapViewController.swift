@@ -161,6 +161,37 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         activityIndicator.startAnimating()
         
         self.view.addSubview(activityIndicator)
+        
+        //Hide search bar
+        searchBar.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+        
+        //Create the search request
+        let searchRequest = MKLocalSearchRequest()
+        searchRequest.naturalLanguageQuery = searchBar.text
+        
+        let activeSearch = MKLocalSearch(request: searchRequest)
+        
+        activeSearch.start { (response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            //Remove annotations
+            let annotations = self.mapView.annotations
+            self.mapView.removeAnnotations(annotations)
+            
+            //Getting data
+            let latitude = response?.boundingRegion.center.latitude
+            let longitude = response?.boundingRegion.center.longitude
+            
+            //Create annotation
+            let coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
+            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: coordinate)
+            self.mapView.addAnnotation(annotation )
+        }
+        
     }
     
 }
