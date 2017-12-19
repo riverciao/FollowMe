@@ -11,6 +11,7 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
     
+    let locationSearchTableViewController = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     private var route: MKRoute?
@@ -56,12 +57,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     @objc private func search(sender: UIBarButtonItem) {
-        let searchController = UISearchController(searchResultsController: nil)
+        
+        //Setup search results controller
+        let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
+        
+        //TODO: - fixing as? searchResultsUpdater
+        searchController.searchResultsUpdater = locationSearchTableViewController
         searchController.searchBar.delegate = self
+        
         present(searchController, animated: true, completion: nil)
+        
+        
     }
     
     private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+        //TODO: - change the current location annotation pin to a blue point or something diffrent from destination
         let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
         let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
         
@@ -200,6 +210,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 self.setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: self.locationCoordinate)
             }
             
+            //TODO: - adjust the scale of zoom in level (depends on the size of destination)
             //Zoom in on annotation
             let span = MKCoordinateSpanMake(0.1, 0.1)
             let region = MKCoordinateRegionMake(self.locationCoordinate, span)
