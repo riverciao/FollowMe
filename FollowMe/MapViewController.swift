@@ -68,6 +68,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     private func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
+        // TODO: - not delete all the overlays but redraw a new path to replace the old one
         let overlays = mapView.overlays
         mapView.removeOverlays(overlays)
         

@@ -27,7 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let mapViewController = MapViewController()
         
-        self.window?.rootViewController = mapViewController
+        let navigationController = UINavigationController(rootViewController: mapViewController)
+        
+        self.window?.rootViewController = navigationController
         
 
 //        
