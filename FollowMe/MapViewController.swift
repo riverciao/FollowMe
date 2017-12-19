@@ -48,6 +48,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //add addANewArticle navigationItem at rightside
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(search(sender:)))
         
+        //determines whether the Navigation Bar disappears when the search results are shown.
+        //searchController?.hidesNavigationBarDuringPresentation = false
+        
+        //gives the modal overlay a semi-transparent background when the search bar is selected
+        //searchController?.dimsBackgroundDuringPresentation = true
+        
         // Check for Location Services
         
         if CLLocationManager.locationServicesEnabled() {
@@ -61,12 +67,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //Setup search results controller
         let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
         
-        //TODO: - fixing as? searchResultsUpdater
         searchController.searchResultsUpdater = locationSearchTableViewController
         searchController.searchBar.delegate = self
         
-        present(searchController, animated: true, completion: nil)
+        // limits the overlap area to just the View Controller’s frame instead of the whole Navigation Controller
+        definesPresentationContext = true
         
+        //Pass Value
+        locationSearchTableViewController.mapView = self.mapView
+        present(searchController, animated: true, completion: nil)
         
     }
     
