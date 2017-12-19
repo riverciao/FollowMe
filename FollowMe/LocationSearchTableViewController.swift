@@ -9,11 +9,14 @@
 import UIKit
 import MapKit
 
+
+
 class LocationSearchTableViewController: UITableViewController {
 
     let cellId = "CellID"
     var matchingItems: [MKMapItem] = []
     var mapView: MKMapView? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,3 +88,5 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
         }
     }
 }
+
+

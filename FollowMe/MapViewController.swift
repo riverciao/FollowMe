@@ -9,12 +9,18 @@
 import UIKit
 import MapKit
 
+protocol HandleMapSearch {
+    
+    func dropPinZoomIn(placemark:MKPlacemark)
+}
+
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
     
     let locationSearchTableViewController = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     private var route: MKRoute?
+    var selectedPin: MKPlacemark? = nil
     
     // TODO: - delete this specific cordinate and make it optional
     var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
@@ -226,6 +232,33 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.mapView.setRegion(region, animated: true)
         }
         
+    }
+    
+}
+
+extension MapViewController: HandleMapSearch {
+    
+    func dropPinZoomIn(placemark: MKPlacemark) {
+        
+        // cache the pin
+        selectedPin = placemark
+        
+        // clear existing pins
+        mapView.removeAnnotations(mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        
+        if let city = placemark.locality,
+            let state = placemark.administrativeArea {
+            annotation.subtitle = "\(city) \(state)"
+        }
+        
+        mapView.addAnnotation(annotation)
+        let span = MKCoordinateSpanMake(0.05, 0.05)
+        let region = MKCoordinateRegionMake(placemark.coordinate, span)
+        
+        mapView.setRegion(region, animated: true)
     }
     
 }
