@@ -46,6 +46,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         
         mapView.delegate = self
+        locationSearchTableViewController.handleMapSearchDelegate = self
         
         locationManager = CLLocationManager()
         locationManager.delegate = self

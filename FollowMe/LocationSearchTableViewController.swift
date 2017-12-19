@@ -16,7 +16,7 @@ class LocationSearchTableViewController: UITableViewController {
     let cellId = "CellID"
     var matchingItems: [MKMapItem] = []
     var mapView: MKMapView? = nil
-    
+    var handleMapSearchDelegate: HandleMapSearch? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +87,16 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
             self.tableView.reloadData()
         }
     }
+}
+
+extension LocationSearchTableViewController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = matchingItems[indexPath.row].placemark
+        handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
