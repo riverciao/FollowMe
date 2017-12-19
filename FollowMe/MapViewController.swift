@@ -44,12 +44,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
+        //add addANewArticle navigationItem at rightside
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(search(sender:)))
+        
         // Check for Location Services
         
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
+    }
+    
+    @objc private func search(sender: UIBarButtonItem) {
+        print("123")
     }
     
     private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
