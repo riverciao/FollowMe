@@ -149,4 +149,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //Ignore user
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        //Activity indicator
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        
+        self.view.addSubview(activityIndicator)
+    }
+    
 }
