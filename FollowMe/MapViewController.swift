@@ -191,13 +191,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let longitude = response?.boundingRegion.center.longitude
             
             //Create annotation
-            let coordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: coordinate)
+            self.locationCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
+            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: self.locationCoordinate)
             self.mapView.addAnnotation(annotation)
+            
+            //Draw the route
+            if let currentLocation = self.currentLocation {
+                self.setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: self.locationCoordinate)
+            }
             
             //Zoom in on annotation
             let span = MKCoordinateSpanMake(0.1, 0.1)
-            let region = MKCoordinateRegionMake(coordinate, span)
+            let region = MKCoordinateRegionMake(self.locationCoordinate, span)
             self.mapView.setRegion(region, animated: true)
         }
         
