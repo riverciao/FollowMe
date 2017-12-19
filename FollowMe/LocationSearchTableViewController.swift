@@ -17,12 +17,12 @@ class LocationSearchTableViewController: UITableViewController {
     var matchingItems: [MKMapItem] = []
     var mapView: MKMapView? = nil
     var handleMapSearchDelegate: HandleMapSearch? = nil
+    var currentLocation: CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
-
 
     // MARK: - Table view data source
 
@@ -82,7 +82,7 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
             }
             
             guard let response = response else { return }
-            print("OOO:\(response)")
+            print("OOOresponse:\(response)")
             self.matchingItems = response.mapItems
             self.tableView.reloadData()
         }
@@ -94,6 +94,8 @@ extension LocationSearchTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = matchingItems[indexPath.row].placemark
         handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
+        handleMapSearchDelegate?.setRouteFromCurrentLocationCoordinate(destinationCoordinate: selectedItem.coordinate)
+        
         dismiss(animated: true, completion: nil)
     }
     

@@ -11,7 +11,8 @@ import MapKit
 
 protocol HandleMapSearch {
     
-    func dropPinZoomIn(placemark:MKPlacemark)
+    func dropPinZoomIn(placemark: MKPlacemark)
+    func setRouteFromCurrentLocationCoordinate(destinationCoordinate: CLLocationCoordinate2D)
 }
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
@@ -81,6 +82,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         definesPresentationContext = true
         
         //Pass Value
+        locationSearchTableViewController.currentLocation = self.currentLocation
         locationSearchTableViewController.mapView = self.mapView
         present(searchController, animated: true, completion: nil)
         
@@ -101,7 +103,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     
-    private func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+    func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
         // TODO: - not delete all the overlays but redraw a new path to replace the old one
         let overlays = mapView.overlays
@@ -250,8 +252,7 @@ extension MapViewController: HandleMapSearch {
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
         
-        if let city = placemark.locality,
-            let state = placemark.administrativeArea {
+        if let city = placemark.locality, let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
         
@@ -262,4 +263,48 @@ extension MapViewController: HandleMapSearch {
         mapView.setRegion(region, animated: true)
     }
     
+    
+    func setRouteFromCurrentLocationCoordinate(destinationCoordinate: CLLocationCoordinate2D) {
+        
+        // TODO: - not delete all the overlays but redraw a new path to replace the old one
+        let overlays = mapView.overlays
+        mapView.removeOverlays(overlays)
+        
+        if let currentLocation = self.currentLocation {
+            setupAnnotationsFor(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: destinationCoordinate)
+            
+            let currentLocationMapItem = getMapItem(with: currentLocation.coordinate)
+            let destinationMapItem = getMapItem(with: destinationCoordinate)
+            
+            let directionRequest = MKDirectionsRequest()
+            directionRequest.source = currentLocationMapItem
+            directionRequest.destination = destinationMapItem
+            directionRequest.transportType = .walking
+            
+            // Calculate the direction
+            let directions = MKDirections(request: directionRequest)
+            
+            directions.calculate { (response, error) in
+                
+                
+                guard let response = response else {
+                    if let error = error {
+                        print(error)
+                    }
+                    
+                    return
+                    
+                }
+                
+                
+                self.route = response.routes[0]
+                
+                if let route = self.route {
+                    self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+                }
+                
+            }
+        }
+    }
 }
+
