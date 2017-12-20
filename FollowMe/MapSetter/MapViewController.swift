@@ -31,8 +31,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func goToARButton(_ sender: Any) {
         
-//        let arViewController = ARViewController()
-        
+        self.dismiss(animated: true, completion: nil)
         
     }
     
