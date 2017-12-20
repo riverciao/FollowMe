@@ -93,7 +93,7 @@ class ARViewController: UIViewController {
         
         mapViewController.delegate = self
         
-        
+        drawNodesByCoordinate()
     }
     
     private func upload() {
@@ -189,6 +189,19 @@ class ARViewController: UIViewController {
             print("Append OO\(self.pathNodes.count)")
         }
     }
+    
+    private func drawNodesByCoordinate() {
+        
+        let coordinate = CLLocationCoordinate2D(latitude: 25.041337, longitude: 121.566021)
+        let location = CLLocation(coordinate: coordinate, altitude: 300)
+        let image = UIImage(named: "pin")!
+        
+        let annotationNode = LocationAnnotationNode(location: location, image: image)
+        
+        print("annotationNode\(annotationNode)")
+        
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+    }
 }
 
 extension ARViewController: CoordinateManagerDelegate {
@@ -199,8 +212,17 @@ extension ARViewController: CoordinateManagerDelegate {
         self.coordinatesPerMeter = coordinates
         
 //        startNode.position = SCNVector3(0,0,0)
+        let coordinate = coordinates[0]
+        let location = CLLocation(coordinate: coordinate, altitude: 300)
+        let image = UIImage(named: "pin")!
         
-        self.sceneLocationView.scene.rootNode.addChildNode(startNode)
+        let annotationNode = LocationAnnotationNode(location: location, image: image)
+        
+        print("annotationNode\(annotationNode)")
+        
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        
+//        self.sceneLocationView.scene.rootNode.addChildNode(startNode)
         
     }
     
