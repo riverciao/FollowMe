@@ -138,17 +138,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.route = response.routes[0]
             
             // MARK: - Retrieve GPS coordinate from polyline
-//            let distance = self.route?.distance
-            
-//            let routeCoordinates = self.route?.polyline.getCoordinatesPerMeter(with: distance!)
-//            print("OOOdistance\(distance)")
-//            print("OOOcount\(routeCoordinates?.count)")
-//            print("OOOrouteCoordinates\(routeCoordinates)")
             
             let routeCoordinates = self.route?.polyline.coordinates
             let moreCoordinates = self.getCoordinatesPerMeter(from: routeCoordinates!)
             
-//            print("OOOrouteCoordinates\(routeCoordinates)")
+            print("OOOmoreCoordinates\(moreCoordinates.count)")
+            print("OOOdistance\(self.route?.distance)")
             
             var routeAnnotations: [Annotation] = []
             for routeCoordinate in moreCoordinates {
@@ -156,17 +151,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 routeAnnotations.append(routeAnnotation)
             }
             
-//            print("OOOAnnotations\(routeAnnotations.count)")
-            
             if let route = self.route {
                 self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
                 for routeAnnotation in routeAnnotations {
                     self.mapView.addAnnotation(routeAnnotation)
                 }
             }
-            
-//            let rect = route.polyline.boundingMapRect
-//            self.mapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
         }
     }
     
@@ -187,8 +177,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             currentLocation = locations.last
             
             if let currentLocation = currentLocation {
+                
                 setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: locationCoordinate)
-                print("OOOOaltitude\(currentLocation.altitude)")
                 
             }
         }
@@ -286,8 +276,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             var count: Double = 1
             
-            print("OOOdistance\(distance)")
-            
             if distance > 1 {
                 
                 for _ in 1..<Int(distance) {
@@ -307,8 +295,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     let newLongitude = startLongitude * fraction + endLongitude * (1 - fraction)
                     
                     let newCoordinate = CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
-                    
-                    print("newCoordinateOOOO\(newCoordinate)")
                     
                     coordinatesPerMeter.append(newCoordinate)
                     
