@@ -22,6 +22,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private var currentLocation: CLLocation?
     private var route: MKRoute?
     var selectedPin: MKPlacemark? = nil
+    var coordinatesPerMeter: [CLLocationCoordinate2D] = []
+    // TODO: - weak var delegate
+    var delegate: CoordinateManagerDelegate? = nil
     
     // TODO: - delete this specific cordinate and make it optional
     var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
@@ -30,6 +33,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     
     @IBAction func goToARButton(_ sender: Any) {
+        
+        print("PPP\(coordinatesPerMeter.count)")
         
         self.dismiss(animated: true, completion: nil)
         
@@ -147,13 +152,18 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // MARK: - Retrieve GPS coordinate from polyline
             
             let routeCoordinates = self.route?.polyline.coordinates
-            let coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
+            self.coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
             
-            print("OOOcoordinatesPerMeter\(coordinatesPerMeter.count)")
+            print("OOOcoordinatesPerMeter\(self.coordinatesPerMeter.count)")
             print("OOOdistance\(String(describing: self.route?.distance))")
             
+            //Pass Value back to ARViewController
+            DispatchQueue.main.async {
+                self.delegate?.didGet(coordinates: self.coordinatesPerMeter)
+            }
+            
             var routeAnnotations: [Annotation] = []
-            for routeCoordinate in coordinatesPerMeter {
+            for routeCoordinate in self.coordinatesPerMeter {
                 let routeAnnotation = Annotation(title: "routeAnnotation", subtitle: "", coordinate: routeCoordinate)
                 routeAnnotations.append(routeAnnotation)
             }

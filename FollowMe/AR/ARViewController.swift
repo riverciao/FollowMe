@@ -8,7 +8,14 @@
 
 import UIKit
 import ARKit
+import MapKit
 import Firebase
+
+protocol CoordinateManagerDelegate: class {
+    
+    func didGet(coordinates: [CLLocationCoordinate2D])
+
+}
 
 class ARViewController: UIViewController {
 
@@ -19,7 +26,8 @@ class ARViewController: UIViewController {
     var pathNodes: [Node] = []
     var isSaved: Bool = true
     var timer = Timer()
-    
+    var coordinatesPerMeter: [CLLocationCoordinate2D]?
+    let mapViewController = MapViewController()
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     //TODO: - Add new node automatically every 30 centermeter while user moving
@@ -82,6 +90,10 @@ class ARViewController: UIViewController {
         self.sceneLocationView.session.run(configuration)
         
         self.sceneLocationView.autoenablesDefaultLighting = true
+        
+        mapViewController.delegate = self
+        
+        
     }
     
     private func upload() {
@@ -177,5 +189,21 @@ class ARViewController: UIViewController {
             print("Append OO\(self.pathNodes.count)")
         }
     }
+}
+
+extension ARViewController: CoordinateManagerDelegate {
+    
+    func didGet(coordinates: [CLLocationCoordinate2D]) {
+        //do something
+        // cash the coordinates
+        self.coordinatesPerMeter = coordinates
+        
+//        startNode.position = SCNVector3(0,0,0)
+        
+        self.sceneLocationView.scene.rootNode.addChildNode(startNode)
+        
+    }
+    
+    
 }
 

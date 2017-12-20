@@ -16,6 +16,7 @@ class LocationSearchTableViewController: UITableViewController {
     let cellId = "CellID"
     var matchingItems: [MKMapItem] = []
     var mapView: MKMapView? = nil
+    // TODO: - change to weak var delegate
     var handleMapSearchDelegate: HandleMapSearch? = nil
     var currentLocation: CLLocation?
     
