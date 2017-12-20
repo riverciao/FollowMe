@@ -134,6 +134,7 @@
 				5F45267D1FE761FC004012D1 /* MapViewController.swift */,
 				5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */,
 				5F4526881FEA15BD004012D1 /* Polyline.swift */,
+				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
 			);
 			path = MapSetter;
 			sourceTree = "<group>";
@@ -174,7 +175,6 @@
 				5F184E4C1FE37FA900789BDF /* Point */,
 				5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */,
 				5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */,
-				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
 				5F184E461FE283D800789BDF /* Main.storyboard */,
 				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
 				5FBE57341FDEB8FF002FDEB3 /* art.scnassets */,

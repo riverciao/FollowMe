@@ -28,6 +28,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
+    
+    @IBAction func goToARButton(_ sender: Any) {
+        
+        print("123")
+        
+    }
+    
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
         
         let location = sender.location(in: self.mapView)
@@ -140,13 +147,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // MARK: - Retrieve GPS coordinate from polyline
             
             let routeCoordinates = self.route?.polyline.coordinates
-            let moreCoordinates = self.getCoordinatesPerMeter(from: routeCoordinates!)
+            let coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
             
-            print("OOOmoreCoordinates\(moreCoordinates.count)")
-            print("OOOdistance\(self.route?.distance)")
+            print("OOOcoordinatesPerMeter\(coordinatesPerMeter.count)")
+            print("OOOdistance\(String(describing: self.route?.distance))")
             
             var routeAnnotations: [Annotation] = []
-            for routeCoordinate in moreCoordinates {
+            for routeCoordinate in coordinatesPerMeter {
                 let routeAnnotation = Annotation(title: "routeAnnotation", subtitle: "", coordinate: routeCoordinate)
                 routeAnnotations.append(routeAnnotation)
             }
@@ -336,7 +343,7 @@ extension MapViewController: HandleMapSearch {
         mapView.setRegion(region, animated: true)
     }
     
-    
+    // TODO: - write setRoute fonction only onece
     func setRouteFromCurrentLocationCoordinate(destinationCoordinate: CLLocationCoordinate2D) {
         
         // TODO: - not delete all the overlays but redraw a new path to replace the old one
