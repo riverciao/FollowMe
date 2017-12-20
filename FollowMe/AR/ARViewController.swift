@@ -69,6 +69,8 @@ class ARViewController: UIViewController {
     @IBAction func addNewPathByMapButton(_ sender: Any) {
         
         print("123")
+        let mapViewController = MapViewController()
+        present(mapViewController, animated: true, completion: nil)
         
     }
     
