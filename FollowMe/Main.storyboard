@@ -57,9 +57,24 @@
                                     <action selector="pathButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gSf-pg-ovQ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ib-6M-lfw">
+                                <rect key="frame" x="325" y="40" width="30" height="30"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="gJb-CP-jww"/>
+                                    <constraint firstAttribute="height" constant="30" id="kKe-6z-p7w"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="addNewPathByMapButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dqk-Ju-d1Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3Ib-6M-lfw" secondAttribute="trailing" constant="20" id="0Wb-GW-gsP"/>
+                            <constraint firstItem="3Ib-6M-lfw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Gus-qS-Wid"/>
                             <constraint firstItem="MZU-hV-98p" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JUI-kY-AZI"/>
                             <constraint firstItem="W3t-Se-bBt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="LC7-MA-8fE"/>
                             <constraint firstItem="OqP-wr-VXW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="OD5-bj-9NI"/>

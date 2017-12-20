@@ -65,6 +65,13 @@ class ARViewController: UIViewController {
     
     }
     
+    
+    @IBAction func addNewPathByMapButton(_ sender: Any) {
+        
+        print("123")
+        
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
