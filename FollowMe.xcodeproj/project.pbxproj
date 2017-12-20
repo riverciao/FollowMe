@@ -29,6 +29,7 @@
 		5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F45267E1FE761FC004012D1 /* MapViewController.xib */; };
 		5F4526821FE791D6004012D1 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526811FE791D6004012D1 /* Annotation.swift */; };
 		5F4526841FE9002B004012D1 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */; };
+		5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526881FEA15BD004012D1 /* Polyline.swift */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		5F45267E1FE761FC004012D1 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		5F4526811FE791D6004012D1 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
+		5F4526881FEA15BD004012D1 /* Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -126,6 +128,25 @@
 			path = Firebase;
 			sourceTree = "<group>";
 		};
+		5F4526861FE9FF61004012D1 /* MapSetter */ = {
+			isa = PBXGroup;
+			children = (
+				5F45267D1FE761FC004012D1 /* MapViewController.swift */,
+				5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */,
+				5F4526881FEA15BD004012D1 /* Polyline.swift */,
+			);
+			path = MapSetter;
+			sourceTree = "<group>";
+		};
+		5F4526871FE9FF8A004012D1 /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
+				5F4526811FE791D6004012D1 /* Annotation.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
 		5FBE57261FDEB8FF002FDEB3 = {
 			isa = PBXGroup;
 			children = (
@@ -147,22 +168,20 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5F4526871FE9FF8A004012D1 /* AR */,
+				5F4526861FE9FF61004012D1 /* MapSetter */,
 				5F184E4F1FE3B3D500789BDF /* Firebase */,
 				5F184E4C1FE37FA900789BDF /* Point */,
 				5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */,
 				5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */,
-				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
-				5F45267D1FE761FC004012D1 /* MapViewController.swift */,
-				5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */,
-				5F4526811FE791D6004012D1 /* Annotation.swift */,
 				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
 				5F184E461FE283D800789BDF /* Main.storyboard */,
 				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
 				5FBE57341FDEB8FF002FDEB3 /* art.scnassets */,
 				5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */,
-				5F184E331FE283A700789BDF /* Source */,
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
 				5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */,
+				5F184E331FE283A700789BDF /* Source */,
 			);
 			path = FollowMe;
 			sourceTree = "<group>";
@@ -335,6 +354,7 @@
 				5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */,
 				5F184E411FE283A800789BDF /* LocationNode.swift in Sources */,
 				5F184E3D1FE283A800789BDF /* CGPoint+Extensions.swift in Sources */,
+				5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */,
 				5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */,
 				5F184E3F1FE283A800789BDF /* FloatingPoint+Radians.swift in Sources */,
 			);

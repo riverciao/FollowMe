@@ -133,13 +133,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 return
                 
             }
-
+            
             
             self.route = response.routes[0]
-            print("OOO\(String(describing: self.route?.distance))")
+            
+            // MARK: - Retrieve GPS coordinate from polyline
+//            let distance = self.route?.distance
+            
+//            let routeCoordinates = self.route?.polyline.getCoordinatesPerMeter(with: distance!)
+//            print("OOOdistance\(distance)")
+//            print("OOOcount\(routeCoordinates?.count)")
+//            print("OOOrouteCoordinates\(routeCoordinates)")
+            
+            let routeCoordinates = self.route?.polyline.coordinates
+            let moreCoordinates = self.getCoordinatesPerMeter(from: routeCoordinates!)
+            
+//            print("OOOrouteCoordinates\(routeCoordinates)")
+            
+            var routeAnnotations: [Annotation] = []
+            for routeCoordinate in moreCoordinates {
+                let routeAnnotation = Annotation(title: "routeAnnotation", subtitle: "", coordinate: routeCoordinate)
+                routeAnnotations.append(routeAnnotation)
+            }
+            
+//            print("OOOAnnotations\(routeAnnotations.count)")
             
             if let route = self.route {
                 self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+                for routeAnnotation in routeAnnotations {
+                    self.mapView.addAnnotation(routeAnnotation)
+                }
             }
             
 //            let rect = route.polyline.boundingMapRect
@@ -165,6 +188,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             if let currentLocation = currentLocation {
                 setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: locationCoordinate)
+                print("OOOOaltitude\(currentLocation.altitude)")
+                
             }
         }
         
@@ -235,6 +260,68 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.mapView.setRegion(region, animated: true)
         }
         
+    }
+    
+    typealias coordinates = [CLLocationCoordinate2D]
+    
+    public func getCoordinatesPerMeter(from coordinates: coordinates) -> coordinates {
+        
+        var coordinatesPerMeter = coordinates
+        
+        var segment: Int = 0
+        
+        for _ in 1..<coordinates.count {
+            
+            // TODO: - add altitude to CLLocation argument
+            
+            let coordinate = coordinates[segment]
+            
+            let nextCoordinate = coordinates[segment + 1]
+            
+            let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            
+            let nextLocation = CLLocation(latitude: nextCoordinate.latitude, longitude: nextCoordinate.longitude)
+            
+            let distance = location.distance(from: nextLocation)
+            
+            var count: Double = 1
+            
+            print("OOOdistance\(distance)")
+            
+            if distance > 1 {
+                
+                for _ in 1..<Int(distance) {
+                    
+                    let  fraction = count/distance
+                    
+                    let startLatitude = coordinate.latitude
+                    
+                    let startLongitude = coordinate.longitude
+                    
+                    let endLatitude = nextCoordinate.latitude
+                    
+                    let endLongitude = nextCoordinate.longitude
+                    
+                    let newLatitude = startLatitude * fraction + endLatitude * (1 - fraction)
+                    
+                    let newLongitude = startLongitude * fraction + endLongitude * (1 - fraction)
+                    
+                    let newCoordinate = CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
+                    
+                    print("newCoordinateOOOO\(newCoordinate)")
+                    
+                    coordinatesPerMeter.append(newCoordinate)
+                    
+                    count += 1
+                }
+                
+            }
+            
+            segment += 1
+            
+        }
+        
+        return coordinatesPerMeter
     }
     
 }
