@@ -216,14 +216,25 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     }
     
     private func fetchPath() {
+        
         Database.database().reference().child("paths").observe( .childAdded) { (snapshot) in
             
             let pathId = snapshot.key
-            let pathRef = Database.database().reference().child("messages").child(pathId)
+            let pathRef = Database.database().reference().child("paths").child(pathId)
             
             pathRef.observeSingleEvent(of: .value, with: { (pathSnapshot) in
                 
-                print("pathSnapshot\(pathSnapshot)")
+                if let dictionary = pathSnapshot.value as? [String: AnyObject] {
+                    
+                    guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
+                    
+                    guard let x = startNode["x"] as? Double, let y = startNode["y"] as? Double, let z = startNode["z"] as? Double else { return }
+                    
+                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(x, y), altitude: z)
+                    
+                    self.existedStartNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
+                    
+                }
                 
             }, withCancel: nil)
             
