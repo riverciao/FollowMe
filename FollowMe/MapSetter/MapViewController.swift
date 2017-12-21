@@ -156,25 +156,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let routeCoordinates = self.route?.polyline.coordinates
             self.coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
             
-            print("OOOcoordinatesPerMeter\(self.coordinatesPerMeter.count)")
-            print("OOOdistance\(String(describing: self.route?.distance))")
-            
             //Pass Value back to ARViewController
             DispatchQueue.main.async {
                 self.delegate?.didGet(coordinates: self.coordinatesPerMeter)
             }
             
-            var routeAnnotations: [Annotation] = []
-            for routeCoordinate in self.coordinatesPerMeter {
-                let routeAnnotation = Annotation(title: "routeAnnotation", subtitle: "", coordinate: routeCoordinate)
-                routeAnnotations.append(routeAnnotation)
-            }
-            
             if let route = self.route {
+                
                 self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
-                for routeAnnotation in routeAnnotations {
-                    self.mapView.addAnnotation(routeAnnotation)
-                }
+
             }
         }
     }
