@@ -32,6 +32,10 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     let mapViewController = MapViewController()
     private var currentLocation: CLLocation?
     
+    //Existed Path Property
+    var existedStartNode: LocationAnnotationNode?
+    var existedPathNodes: [LocationAnnotationNode] = []
+    
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     //TODO: - Add new node automatically every 30 centermeter while user moving
     //TODO: - Add new node in the middle of view
@@ -102,6 +106,8 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         mapViewController.delegate = self
         
         sceneLocationView.locationDelegate = self
+        
+        fetchPath()
         
     }
     
@@ -209,6 +215,28 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
+    private func fetchPath() {
+        Database.database().reference().child("paths").observe( .childAdded) { (snapshot) in
+            
+            let pathId = snapshot.key
+            let pathRef = Database.database().reference().child("messages").child(pathId)
+            
+            pathRef.observeSingleEvent(of: .value, with: { (pathSnapshot) in
+                
+                print("pathSnapshot\(pathSnapshot)")
+                
+            }, withCancel: nil)
+            
+
+            
+            
+//            var existedStartNode: LocationAnnotationNode?
+//            var existedPathNodes: [LocationAnnotationNode] = []
+            
+        }
+            
+    }
+    
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
         
     }
@@ -228,6 +256,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
         
     }
+    
 }
 
 extension ARViewController: CoordinateManagerDelegate {
