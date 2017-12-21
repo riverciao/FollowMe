@@ -22,8 +22,12 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
-    let startNode = Node(nodeType: .start)
-    var pathNodes: [Node] = []
+    
+//    let startNode = Node(nodeType: .start)
+//    var pathNodes: [Node] = []
+    let startNode = LocationAnnotationNode(location: nil, image: UIImage(named: "pin")!)
+    var pathNodes: [LocationAnnotationNode] = []
+    
     var isSaved: Bool = true
     var timer = Timer()
     var coordinatesPerMeter: [CLLocationCoordinate2D]?
@@ -37,24 +41,18 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         
         if isSaved == true {
             
-            //////Test
-            let image = UIImage(named: "pin")!
-            let annotationNode = LocationAnnotationNode(location: nil, image: image)
-            annotationNode.scaleRelativeToDistance = true
-            sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-            //////
+            //Clean pathNodes before adding a new path
             
+            self.pathNodes = []
+
+            //Add startNode at user current location
+
+            startNode.scaleRelativeToDistance = true
             
-//            self.pathNodes = []
-//            
-//            //Add startNode at Origin Point
-//            
-//            startNode.position = SCNVector3(0,0,0)
-//            
-//            self.sceneLocationView.scene.rootNode.addChildNode(startNode)
-//            
-//            //Add pathNodes for current user location every 0.5 second
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            sceneLocationView.addLocationNodeForCurrentPosition(locationNode: startNode)
+            
+            //Add pathNodes for current user location per second
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(addPathNodes), userInfo: nil, repeats: true)
             
             isSaved = false
             
@@ -107,7 +105,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         
         sceneLocationView.locationDelegate = self
         
-        drawNodesByCoordinate()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,11 +130,14 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         
         let startNodeRef = pathIdRef.child("start-node")
         
-        let positionX = startNode.position.x, positionY = startNode.position.y, positionZ = startNode.position.z
+        let latitude = startNode.location.coordinate.latitude, longitude = startNode.location.coordinate.longitude, altitude = startNode.location.altitude
         
-        let sphereRadius = startNode.geometry!.boundingSphere.radius
+//        let positionX = startNode.position.x, positionY = startNode.position.y, positionZ = startNode.position.z
         
-        let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ, BoundingSphere.Schema.radius: sphereRadius]
+//        let sphereRadius = startNode.geometry!.boundingSphere.radius
+        
+        // TODO: - change schema
+        let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
         
         startNodeRef.setValue(values) { (error, ref) in
             
@@ -156,9 +156,9 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                 
                 let pathNodesRef = FirebasePath.pathRef.child(pathId).child("path-nodes")
                 
-                let sphereRadius = pathNode.geometry!.boundingSphere.radius
+//                let sphereRadius = pathNode.geometry!.boundingSphere.radius
                 
-                let values = [BoundingSphere.Schema.radius: sphereRadius]
+//                let values = [BoundingSphere.Schema.radius: sphereRadius]
                 
                 pathNodesRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     
@@ -171,9 +171,9 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                     
                     let pointsPositionRef = pathNodesRef.child("position").childByAutoId()
                     
-                    let positionX = pathNode.position.x, positionY = pathNode.position.y, positionZ = pathNode.position.z
+                    let latitude = pathNode.location.coordinate.latitude, longitude = pathNode.location.coordinate.longitude, altitude = pathNode.location.altitude
                     
-                    let values = [Position.Schema.x: positionX, Position.Schema.y: positionY, Position.Schema.z: positionZ]
+                    let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
                     
                     pointsPositionRef.updateChildValues(values)
                     
@@ -204,14 +204,19 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
-    @objc func timerAction() {
+    @objc func addPathNodes() {
         
-        //////Test
-        let image = UIImage(named: "path-node")!
-        let annotationNode = LocationAnnotationNode(location: nil, image: image)
-        annotationNode.scaleRelativeToDistance = true
-        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
-        //////
+        let pathNodeImage = UIImage(named: "path-node")!
+        
+        let pathNode = LocationAnnotationNode(location: nil, image: pathNodeImage)
+        
+        pathNode.scaleRelativeToDistance = true
+        
+        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: pathNode)
+        
+        pathNodes.append(pathNode)
+
+        print("Append OO\(self.pathNodes.count)")
         
 //        let pathNode = Node(nodeType: .path)
 //
@@ -225,19 +230,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
 //
 //            print("Append OO\(self.pathNodes.count)")
 //        }
-    }
-    
-    private func drawNodesByCoordinate() {
-        
-        let coordinate = CLLocationCoordinate2D(latitude: 25.039185, longitude: 121.543322)
-        let location = CLLocation(coordinate: coordinate, altitude: 300)
-        let image = UIImage(named: "pin")!
-        
-        let annotationNode = LocationAnnotationNode(location: location, image: image)
-        print("annotationNode\(annotationNode)")
-        
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
-        
     }
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
