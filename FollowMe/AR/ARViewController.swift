@@ -234,6 +234,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                     
                     self.existedStartNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
                     
+                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
                 }
                 
             }, withCancel: nil)
