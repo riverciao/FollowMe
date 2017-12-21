@@ -156,11 +156,13 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                 
                 let pathNodesRef = FirebasePath.pathRef.child(pathId).child("path-nodes")
                 
-//                let sphereRadius = pathNode.geometry!.boundingSphere.radius
+                let pointsPositionRef = pathNodesRef.childByAutoId()
                 
-//                let values = [BoundingSphere.Schema.radius: sphereRadius]
+                let latitude = pathNode.location.coordinate.latitude, longitude = pathNode.location.coordinate.longitude, altitude = pathNode.location.altitude
                 
-                pathNodesRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
+                
+                pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     
                     if let error = error {
                        
@@ -168,14 +170,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                         
                         return
                     }
-                    
-                    let pointsPositionRef = pathNodesRef.child("position").childByAutoId()
-                    
-                    let latitude = pathNode.location.coordinate.latitude, longitude = pathNode.location.coordinate.longitude, altitude = pathNode.location.altitude
-                    
-                    let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
-                    
-                    pointsPositionRef.updateChildValues(values)
                     
                     print("Saving OO\(self.pathNodes.count)")
                 
