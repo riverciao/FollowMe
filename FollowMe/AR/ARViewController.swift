@@ -17,7 +17,7 @@ protocol CoordinateManagerDelegate: class {
 
 }
 
-class ARViewController: UIViewController, SceneLocationViewDelegate {
+class ARViewController: UIViewController, SceneLocationViewDelegate, CLLocationManagerDelegate {
 
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
@@ -28,6 +28,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     var timer = Timer()
     var coordinatesPerMeter: [CLLocationCoordinate2D]?
     let mapViewController = MapViewController()
+    private var currentLocation: CLLocation?
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     //TODO: - Add new node automatically every 30 centermeter while user moving
@@ -35,6 +36,18 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     @IBAction func pathButton(_ sender: UIButton) {
         
         if isSaved == true {
+            
+            //////Test
+            let coordinate = CLLocationCoordinate2D(latitude: 25.039185, longitude: 121.543322)
+            let location = CLLocation(coordinate: coordinate, altitude: 300)
+            let image = UIImage(named: "pin")!
+            
+            let annotationNode = LocationAnnotationNode(location: location, image: image)
+            print("annotationNode\(annotationNode)")
+            
+            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+            //////
+            
             
             self.pathNodes = []
             
@@ -82,6 +95,8 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
+    //MARK: - View life cycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -110,6 +125,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         super.viewWillDisappear(animated)
         
         sceneLocationView.pause()
+        
     }
     
     
@@ -215,13 +231,29 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         let image = UIImage(named: "pin")!
         
         let annotationNode = LocationAnnotationNode(location: location, image: image)
-        
         print("annotationNode\(annotationNode)")
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
         
-        view.addSubview(sceneLocationView)
     }
+    
+    // MARK: - CLLocationManagerDelegate
+    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        defer {
+//
+//            currentLocation = locations.last
+//            print("OOOOOOO\(currentLocation)")
+//        }
+//
+////        if currentLocation == nil {
+////            // Zoom to user location
+////            if let userLocation = locations.last {
+////                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
+////                mapView.setRegion(viewRegion, animated: false)
+////            }
+////        }
+//    }
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
         
