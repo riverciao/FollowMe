@@ -26,6 +26,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // TODO: - weak var delegate
     var delegate: CoordinateManagerDelegate? = nil
     
+    var isSaved: Bool = true
+    
     // TODO: - delete this specific cordinate and make it optional
     var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
     
@@ -34,7 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func goToARButton(_ sender: Any) {
         
-        print("PPP\(coordinatesPerMeter.count)")
+        upload()
         
         self.dismiss(animated: true, completion: nil)
         
@@ -325,6 +327,75 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         return coordinatesPerMeter
+    }
+    
+    //TODO: - make component
+    //MARK: - upload to firebase
+    
+    private func upload() {
+        
+        // Upload new path to firebase
+        let pathIdRef = FirebasePath.pathRef.childByAutoId()
+        
+        let startNodeRef = pathIdRef.child("start-node")
+        
+        //Make current location assign only onece when user press add path button
+        
+        guard let currentLocation = currentLocation else {
+         
+            print("currentLocation not found")
+            
+            return
+            
+        }
+            
+        let latitude = currentLocation.coordinate.latitude, longitude = currentLocation.coordinate.longitude, altitude = 28
+        
+        // TODO: - change schema
+        let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude] as [String : Any]
+        
+        startNodeRef.setValue(values) { (error, ref) in
+            
+            if let error = error {
+                
+                print(error)
+                
+                return
+                
+            }
+            
+            for pathNode in self.coordinatesPerMeter {
+                
+                // Upload new path to firebase
+                let pathId = pathIdRef.key
+                
+                let pathNodesRef = FirebasePath.pathRef.child(pathId).child("path-nodes")
+                
+                let pointsPositionRef = pathNodesRef.childByAutoId()
+                
+                let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 28
+                
+                let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude] as [String : Any]
+                
+                pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                    
+                    if let error = error {
+                        
+                        print(error)
+                        
+                        return
+                    }
+                    
+                    print("Saving OO\(self.coordinatesPerMeter.count)")
+                    
+                })
+                
+            }
+            
+            self.isSaved = true
+            
+            print("isSaved")
+        }
     }
     
 }
