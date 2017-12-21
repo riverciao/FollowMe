@@ -17,7 +17,7 @@ protocol CoordinateManagerDelegate: class {
 
 }
 
-class ARViewController: UIViewController {
+class ARViewController: UIViewController, SceneLocationViewDelegate {
 
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
@@ -94,8 +94,25 @@ class ARViewController: UIViewController {
         
         mapViewController.delegate = self
         
+        sceneLocationView.locationDelegate = self
+        
         drawNodesByCoordinate()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        sceneLocationView.run()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        sceneLocationView.pause()
+    }
+    
+    
     
     private func upload() {
         
@@ -193,7 +210,7 @@ class ARViewController: UIViewController {
     
     private func drawNodesByCoordinate() {
         
-        let coordinate = CLLocationCoordinate2D(latitude: 25.041337, longitude: 121.566021)
+        let coordinate = CLLocationCoordinate2D(latitude: 25.039185, longitude: 121.543322)
         let location = CLLocation(coordinate: coordinate, altitude: 300)
         let image = UIImage(named: "pin")!
         
@@ -202,6 +219,28 @@ class ARViewController: UIViewController {
         print("annotationNode\(annotationNode)")
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+        
+        view.addSubview(sceneLocationView)
+    }
+    
+    func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
+        
+    }
+    
+    func sceneLocationViewDidRemoveSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
+        
+    }
+    
+    func sceneLocationViewDidConfirmLocationOfNode(sceneLocationView: SceneLocationView, node: LocationNode) {
+        
+    }
+    
+    func sceneLocationViewDidSetupSceneNode(sceneLocationView: SceneLocationView, sceneNode: SCNNode) {
+        
+    }
+    
+    func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
+        
     }
 }
 
