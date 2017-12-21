@@ -42,6 +42,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    
+    @IBAction func CancelButton(_ sender: Any) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
         
         let location = sender.location(in: self.mapView)
