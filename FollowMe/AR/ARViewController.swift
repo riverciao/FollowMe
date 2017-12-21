@@ -77,7 +77,8 @@ class ARViewController: UIViewController {
     @IBAction func addNewPathByMapButton(_ sender: Any) {
         
         let mapViewController = MapViewController()
-        present(mapViewController, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: mapViewController)
+        present(navigationController, animated: true, completion: nil)
         
     }
     
