@@ -23,8 +23,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
     
-//    let startNode = Node(nodeType: .start)
-//    var pathNodes: [Node] = []
     let startNode = LocationAnnotationNode(location: nil, image: UIImage(named: "pin")!)
     var pathNodes: [LocationAnnotationNode] = []
     
@@ -131,10 +129,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         let startNodeRef = pathIdRef.child("start-node")
         
         let latitude = startNode.location.coordinate.latitude, longitude = startNode.location.coordinate.longitude, altitude = startNode.location.altitude
-        
-//        let positionX = startNode.position.x, positionY = startNode.position.y, positionZ = startNode.position.z
-        
-//        let sphereRadius = startNode.geometry!.boundingSphere.radius
+
         
         // TODO: - change schema
         let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
@@ -212,18 +207,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
 
         print("Append OO\(self.pathNodes.count)")
         
-//        let pathNode = Node(nodeType: .path)
-//
-//        if let position = sceneLocationView.currentScenePosition() {
-//
-//            pathNode.position = SCNVector3(position.x, position.y, position.z)
-//
-//            self.startNode.addChildNode(pathNode)
-//
-//            pathNodes.append(pathNode)
-//
-//            print("Append OO\(self.pathNodes.count)")
-//        }
     }
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
