@@ -17,7 +17,7 @@ protocol CoordinateManagerDelegate: class {
 
 }
 
-class ARViewController: UIViewController, SceneLocationViewDelegate, CLLocationManagerDelegate {
+class ARViewController: UIViewController, SceneLocationViewDelegate {
 
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
@@ -38,26 +38,22 @@ class ARViewController: UIViewController, SceneLocationViewDelegate, CLLocationM
         if isSaved == true {
             
             //////Test
-            let coordinate = CLLocationCoordinate2D(latitude: 25.039185, longitude: 121.543322)
-            let location = CLLocation(coordinate: coordinate, altitude: 300)
             let image = UIImage(named: "pin")!
-            
-            let annotationNode = LocationAnnotationNode(location: location, image: image)
-            print("annotationNode\(annotationNode)")
-            
-            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
+            let annotationNode = LocationAnnotationNode(location: nil, image: image)
+            annotationNode.scaleRelativeToDistance = true
+            sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
             //////
             
             
-            self.pathNodes = []
-            
-            //Add startNode at Origin Point
-            
-            startNode.position = SCNVector3(0,0,0)
-            
-            self.sceneLocationView.scene.rootNode.addChildNode(startNode)
-            
-            //Add pathNodes for current user location every 0.5 second
+//            self.pathNodes = []
+//            
+//            //Add startNode at Origin Point
+//            
+//            startNode.position = SCNVector3(0,0,0)
+//            
+//            self.sceneLocationView.scene.rootNode.addChildNode(startNode)
+//            
+//            //Add pathNodes for current user location every 0.5 second
             timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
             
             isSaved = false
@@ -210,18 +206,25 @@ class ARViewController: UIViewController, SceneLocationViewDelegate, CLLocationM
     
     @objc func timerAction() {
         
-        let pathNode = Node(nodeType: .path)
+        //////Test
+        let image = UIImage(named: "path-node")!
+        let annotationNode = LocationAnnotationNode(location: nil, image: image)
+        annotationNode.scaleRelativeToDistance = true
+        sceneLocationView.addLocationNodeForCurrentPosition(locationNode: annotationNode)
+        //////
         
-        if let position = sceneLocationView.currentScenePosition() {
-            
-            pathNode.position = SCNVector3(position.x, position.y, position.z)
-            
-            self.startNode.addChildNode(pathNode)
-            
-            pathNodes.append(pathNode)
-            
-            print("Append OO\(self.pathNodes.count)")
-        }
+//        let pathNode = Node(nodeType: .path)
+//
+//        if let position = sceneLocationView.currentScenePosition() {
+//
+//            pathNode.position = SCNVector3(position.x, position.y, position.z)
+//
+//            self.startNode.addChildNode(pathNode)
+//
+//            pathNodes.append(pathNode)
+//
+//            print("Append OO\(self.pathNodes.count)")
+//        }
     }
     
     private func drawNodesByCoordinate() {
@@ -236,24 +239,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate, CLLocationM
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
         
     }
-    
-    // MARK: - CLLocationManagerDelegate
-    
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        defer {
-//
-//            currentLocation = locations.last
-//            print("OOOOOOO\(currentLocation)")
-//        }
-//
-////        if currentLocation == nil {
-////            // Zoom to user location
-////            if let userLocation = locations.last {
-////                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
-////                mapView.setRegion(viewRegion, animated: false)
-////            }
-////        }
-//    }
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
         
