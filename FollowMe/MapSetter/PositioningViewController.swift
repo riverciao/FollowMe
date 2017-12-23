@@ -20,7 +20,9 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBAction func confirmLocationButton(_ sender: Any) {
         
-        print("123")
+        let location = currentLocationPointerImageView.center
+        let locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
+        print("locationCoordinate\(locationCoordinate)")
         
     }
     
