@@ -8,11 +8,14 @@
 
 import UIKit
 import MapKit
+import CoreMotion
 
 class PositioningViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     private var currentLocation: CLLocation?
     private var locationManager: CLLocationManager!
+    let manager = CMMotionManager()
+    let queue = OperationQueue()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -37,6 +40,8 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
 
         setupCurrentLocationPointerImageView()
         
+        rotateMapViewWithDeviceAngle()
+        
         // Check for Location Services
         
         if CLLocationManager.locationServicesEnabled() {
@@ -46,10 +51,31 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
     }
     
+    private func rotateMapViewWithDeviceAngle() {
+        manager.deviceMotionUpdateInterval = 0.01
+        
+        if manager.isDeviceMotionAvailable {
+            
+            manager.startDeviceMotionUpdates(to: queue) {
+                [weak self] (data: CMDeviceMotion?, error: Error?) in
+                if let gravity = data?.gravity {
+                    let rotation = atan2(gravity.x, gravity.y) - Double.pi
+                    
+                    DispatchQueue.main.async {
+                        self?.mapView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
+                    }
+                    
+                }
+            }
+        }
+        manager.startGyroUpdates()
+    }
+    
     private func setupCurrentLocationPointerImageView() {
         
         //Rotate to point front side
         currentLocationPointerImageView.transform = currentLocationPointerImageView.transform.rotated(by: CGFloat.init(Double.pi * 3 / 2))
+        
     }
 
     // MARK - CLLocationManagerDelegate
