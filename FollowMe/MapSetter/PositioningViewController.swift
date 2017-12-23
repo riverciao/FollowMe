@@ -28,6 +28,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
+        setupCurrentLocationPointerImageView()
         
         // Check for Location Services
         
@@ -36,6 +37,12 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
             locationManager.startUpdatingLocation()
         }
         
+    }
+    
+    private func setupCurrentLocationPointerImageView() {
+        
+        //Rotate to point front side
+        currentLocationPointerImageView.transform = currentLocationPointerImageView.transform.rotated(by: CGFloat.init(Double.pi * 3 / 2))
     }
 
     // MARK - CLLocationManagerDelegate
