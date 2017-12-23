@@ -32,13 +32,30 @@
                         <constraint firstAttribute="height" constant="30" id="ZPZ-XG-81s"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rq1-br-1Vc">
+                    <rect key="frame" x="12.5" y="592" width="350" height="50"/>
+                    <color key="backgroundColor" red="0.3083356619" green="0.85123449559999997" blue="0.64486020799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="350" id="YFt-IJ-PPP"/>
+                        <constraint firstAttribute="height" constant="50" id="fYv-1e-sYp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <state key="normal" title="Confirm Location">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="confirmLocationButton:" destination="-1" eventType="touchUpInside" id="1pO-GS-Fry"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="1SW-qI-OuW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qKE-ZY-8S6" secondAttribute="bottom" id="FDK-aj-smA"/>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HKV-y0-qTJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rq1-br-1Vc" secondAttribute="bottom" constant="25" id="Ldi-2Z-3Dg"/>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fvn-Pg-1Ii"/>
+                <constraint firstItem="rq1-br-1Vc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gqY-YK-Coi"/>
                 <constraint firstItem="gC9-f2-R9s" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="k0N-m4-UhD"/>
                 <constraint firstItem="gC9-f2-R9s" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zsT-uo-8CX"/>
             </constraints>

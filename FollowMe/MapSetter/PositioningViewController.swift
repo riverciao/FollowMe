@@ -16,8 +16,13 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBOutlet weak var mapView: MKMapView!
     
-    
     @IBOutlet weak var currentLocationPointerImageView: UIImageView!
+    
+    @IBAction func confirmLocationButton(_ sender: Any) {
+        
+        print("123")
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
