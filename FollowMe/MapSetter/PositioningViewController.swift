@@ -47,7 +47,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         if currentLocation == nil {
             // Zoom to user location
             if let userLocation = locations.last {
-                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 60, 60)
                 mapView.setRegion(viewRegion, animated: false)
             }
         }
