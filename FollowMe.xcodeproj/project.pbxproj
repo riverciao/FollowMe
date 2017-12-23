@@ -21,7 +21,7 @@
 		5F184E471FE283D800789BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E461FE283D800789BDF /* Main.storyboard */; };
 		5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E481FE2848F00789BDF /* SceneLocationView.swift */; };
 		5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */; };
-		5F184E4E1FE37FC400789BDF /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E4D1FE37FC400789BDF /* Point.swift */; };
+		5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E4D1FE37FC400789BDF /* NodeSchema.swift */; };
 		5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E501FE3B42400789BDF /* FirebasePath.swift */; };
 		5F184E531FE3E42200789BDF /* NodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E521FE3E42200789BDF /* NodeType.swift */; };
 		5F184E551FE4C67D00789BDF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E541FE4C67D00789BDF /* Node.swift */; };
@@ -53,7 +53,7 @@
 		5F184E461FE283D800789BDF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5F184E481FE2848F00789BDF /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
 		5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		5F184E4D1FE37FC400789BDF /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		5F184E4D1FE37FC400789BDF /* NodeSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeSchema.swift; sourceTree = "<group>"; };
 		5F184E501FE3B42400789BDF /* FirebasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePath.swift; sourceTree = "<group>"; };
 		5F184E521FE3E42200789BDF /* NodeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeType.swift; sourceTree = "<group>"; };
 		5F184E541FE4C67D00789BDF /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		5F184E4C1FE37FA900789BDF /* Point */ = {
 			isa = PBXGroup;
 			children = (
-				5F184E4D1FE37FC400789BDF /* Point.swift */,
+				5F184E4D1FE37FC400789BDF /* NodeSchema.swift */,
 				5F184E521FE3E42200789BDF /* NodeType.swift */,
 				5F184E541FE4C67D00789BDF /* Node.swift */,
 			);
@@ -131,6 +131,7 @@
 		5F4526861FE9FF61004012D1 /* MapSetter */ = {
 			isa = PBXGroup;
 			children = (
+				5F4526811FE791D6004012D1 /* Annotation.swift */,
 				5F45267D1FE761FC004012D1 /* MapViewController.swift */,
 				5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */,
 				5F4526881FEA15BD004012D1 /* Polyline.swift */,
@@ -143,7 +144,6 @@
 			isa = PBXGroup;
 			children = (
 				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
-				5F4526811FE791D6004012D1 /* Annotation.swift */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 				5F184E431FE283A800789BDF /* SceneLocationEstimate.swift in Sources */,
 				5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
-				5F184E4E1FE37FC400789BDF /* Point.swift in Sources */,
+				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
 				5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */,
 				5F184E531FE3E42200789BDF /* NodeType.swift in Sources */,
 				5F184E401FE283A800789BDF /* LocationManager.swift in Sources */,

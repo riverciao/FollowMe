@@ -349,7 +349,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let latitude = currentLocation.coordinate.latitude, longitude = currentLocation.coordinate.longitude, altitude = 28
         
         // TODO: - change schema
-        let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude] as [String : Any]
+        let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
         
         startNodeRef.setValue(values) { (error, ref) in
             
@@ -372,7 +372,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 28
                 
-                let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude] as [String : Any]
+                let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
                 
                 pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     
@@ -460,7 +460,6 @@ extension MapViewController: HandleMapSearch {
                 if let route = self.route {
                     self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
                 }
-                
             }
         }
     }

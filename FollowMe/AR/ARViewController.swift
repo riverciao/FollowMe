@@ -138,7 +138,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
 
         
         // TODO: - change schema
-        let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
+        let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude]
         
         startNodeRef.setValue(values) { (error, ref) in
             
@@ -161,7 +161,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                 
                 let latitude = pathNode.location.coordinate.latitude, longitude = pathNode.location.coordinate.longitude, altitude = pathNode.location.altitude
                 
-                let values = [Position.Schema.x: latitude, Position.Schema.y: longitude, Position.Schema.z: altitude]
+                let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude]
                 
                 pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                     
@@ -231,10 +231,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                     guard let x = startNode["x"] as? Double, let y = startNode["y"] as? Double, let z = startNode["z"] as? Double else { return }
                     
                     let location = CLLocation(coordinate: CLLocationCoordinate2DMake(x, y), altitude: z)
-                    
-                    //Clean before adding new path
-                    
-//                    self.restartSession()
                     
                     self.existedStartNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
                     
