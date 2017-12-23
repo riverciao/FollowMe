@@ -346,7 +346,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }
             
-        let latitude = currentLocation.coordinate.latitude, longitude = currentLocation.coordinate.longitude, altitude = 28
+        let latitude = currentLocation.coordinate.latitude, longitude = currentLocation.coordinate.longitude, altitude = 29
         
         // TODO: - change schema
         let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
@@ -370,7 +370,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
                 let pointsPositionRef = pathNodesRef.childByAutoId()
                 
-                let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 28
+                let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 29
                 
                 let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
                 

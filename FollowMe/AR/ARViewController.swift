@@ -228,9 +228,9 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                     
                     guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
                     
-                    guard let x = startNode["x"] as? Double, let y = startNode["y"] as? Double, let z = startNode["z"] as? Double else { return }
+                    guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
                     
-                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(x, y), altitude: z)
+                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
                     
                     self.existedStartNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
                     
@@ -248,9 +248,9 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                             
                             if let dictionary = positionSnapshot.value as? [String: Any] {
                                 
-                                guard let x = dictionary["x"] as? Double, let y = dictionary["y"] as? Double, let z = dictionary["z"] as? Double else { return }
+                                guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
                                 
-                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(x, y), altitude: z)
+                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
                                 
                                 self.existedPathNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "path-node"))
                                 
