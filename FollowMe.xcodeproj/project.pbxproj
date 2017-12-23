@@ -34,6 +34,8 @@
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
+		5FE74AC11FEE8FC80048C711 /* PositioningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */; };
+		5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */; };
 		F5C5A5C9C623F8B481215331 /* Pods_FollowMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DFB47838EA75E502DDE38C /* Pods_FollowMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBE573E1FDEB8FF002FDEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningViewController.swift; sourceTree = "<group>"; };
+		5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositioningViewController.xib; sourceTree = "<group>"; };
 		66DFB47838EA75E502DDE38C /* Pods_FollowMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FollowMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28DA5FDC88243CE723DF950 /* Pods-FollowMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FollowMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-FollowMe/Pods-FollowMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +140,8 @@
 				5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */,
 				5F4526881FEA15BD004012D1 /* Polyline.swift */,
 				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
+				5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */,
+				5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */,
 			);
 			path = MapSetter;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
+				5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */,
 				5F184E471FE283D800789BDF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +363,7 @@
 				5F184E3D1FE283A800789BDF /* CGPoint+Extensions.swift in Sources */,
 				5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */,
 				5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */,
+				5FE74AC11FEE8FC80048C711 /* PositioningViewController.swift in Sources */,
 				5F184E3F1FE283A800789BDF /* FloatingPoint+Radians.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

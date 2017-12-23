@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//
-//        self.window!.makeKeyAndVisible()
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+
+        self.window!.makeKeyAndVisible()
 //
 //        let mapViewController = MapViewController()
 //
@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = navigationController
         
 
+        let positioningViewController = PositioningViewController()
+        
+        self.window?.rootViewController = positioningViewController
 //        
 //        if #available(iOS 11.0, *) {
 //            let vc = ViewController()
