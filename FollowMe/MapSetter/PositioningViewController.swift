@@ -16,6 +16,9 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     
     @IBOutlet weak var mapView: MKMapView!
     
+    
+    @IBOutlet weak var currentLocationPointerImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

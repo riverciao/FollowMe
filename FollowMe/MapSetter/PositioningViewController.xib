@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PositioningViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="currentLocationPointerImageView" destination="gC9-f2-R9s" id="Rsz-KZ-S11"/>
                 <outlet property="mapView" destination="qKE-ZY-8S6" id="3Rp-Tq-MFL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,6 +25,13 @@
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qKE-ZY-8S6">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </mapView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-current-location" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-f2-R9s">
+                    <rect key="frame" x="172.5" y="318.5" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="P5d-a3-rKD"/>
+                        <constraint firstAttribute="height" constant="30" id="ZPZ-XG-81s"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -31,9 +39,14 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qKE-ZY-8S6" secondAttribute="bottom" id="FDK-aj-smA"/>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HKV-y0-qTJ"/>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fvn-Pg-1Ii"/>
+                <constraint firstItem="gC9-f2-R9s" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="k0N-m4-UhD"/>
+                <constraint firstItem="gC9-f2-R9s" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zsT-uo-8CX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-current-location" width="50" height="50"/>
+    </resources>
 </document>
