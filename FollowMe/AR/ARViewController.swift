@@ -18,7 +18,6 @@ protocol CoordinateManagerDelegate: class {
 }
 
 class ARViewController: UIViewController, SceneLocationViewDelegate {
-
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()

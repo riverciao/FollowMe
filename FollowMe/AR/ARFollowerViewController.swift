@@ -15,6 +15,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
     
+    //property fpr current location coordinate to start node 3D vector
+    var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,7 +30,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
 //        mapViewController.delegate = self
         
         sceneLocationView.locationDelegate = self
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {

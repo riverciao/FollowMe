@@ -40,6 +40,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         upload()
         
         let arFollowerViewController = ARFollowerViewController()
+        
+        if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
+            
+            arFollowerViewController.currentLocationCoordinateForARSetting = currentLocationCoordinateForARSetting
+        
+        }
+        
         present(arFollowerViewController, animated: true, completion: nil)
     }
     
