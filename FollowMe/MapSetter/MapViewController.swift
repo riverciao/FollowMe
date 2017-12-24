@@ -39,8 +39,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         upload()
         
-        self.dismiss(animated: true, completion: nil)
-        
+        let arFollowerViewController = ARFollowerViewController()
+        present(arFollowerViewController, animated: true, completion: nil)
     }
     
     

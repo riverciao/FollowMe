@@ -36,6 +36,8 @@
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
 		5FE74AC11FEE8FC80048C711 /* PositioningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */; };
 		5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */; };
+		5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */; };
+		5FE74AC61FEF706D0048C711 /* ARFollowerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE74AC41FEF706D0048C711 /* ARFollowerViewController.xib */; };
 		F5C5A5C9C623F8B481215331 /* Pods_FollowMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66DFB47838EA75E502DDE38C /* Pods_FollowMe.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,8 @@
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningViewController.swift; sourceTree = "<group>"; };
 		5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositioningViewController.xib; sourceTree = "<group>"; };
+		5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFollowerViewController.swift; sourceTree = "<group>"; };
+		5FE74AC41FEF706D0048C711 /* ARFollowerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ARFollowerViewController.xib; sourceTree = "<group>"; };
 		66DFB47838EA75E502DDE38C /* Pods_FollowMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FollowMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F28DA5FDC88243CE723DF950 /* Pods-FollowMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FollowMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-FollowMe/Pods-FollowMe.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -150,6 +154,8 @@
 			isa = PBXGroup;
 			children = (
 				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
+				5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */,
+				5FE74AC41FEF706D0048C711 /* ARFollowerViewController.xib */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */,
+				5FE74AC61FEF706D0048C711 /* ARFollowerViewController.xib in Resources */,
 				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
@@ -356,6 +363,7 @@
 				5F184E551FE4C67D00789BDF /* Node.swift in Sources */,
 				5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */,
 				5F4526841FE9002B004012D1 /* LocationSearchTableViewController.swift in Sources */,
+				5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */,
 				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
 				5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */,
 				5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */,
