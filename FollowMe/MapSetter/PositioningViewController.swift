@@ -26,6 +26,10 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         print("locationCoordinate\(locationCoordinate)")
         print("heading\(mapView.camera.heading)")
         
+        //Transfer to mapViewController
+        let mapViewController = MapViewController()
+        let navigationController = UINavigationController(rootViewController: mapViewController)
+        present(navigationController, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -57,7 +61,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     }
 
     // MARK - CLLocationManagerDelegate
-    
+    // TODO: - track location and heading for onece and do not keep  tracking to let user adjust it by self
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         defer {
             
