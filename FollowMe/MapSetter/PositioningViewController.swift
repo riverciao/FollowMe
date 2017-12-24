@@ -8,13 +8,11 @@
 
 import UIKit
 import MapKit
-import CoreMotion
 
 class PositioningViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     private var currentLocation: CLLocation?
-    private var locationManager: CLLocationManager!
-    let manager = CMMotionManager()
+    private var locationManager = CLLocationManager()
     let queue = OperationQueue()
     
     @IBOutlet weak var mapView: MKMapView!
@@ -26,6 +24,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         let location = currentLocationPointerImageView.center
         let locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         print("locationCoordinate\(locationCoordinate)")
+        print("heading\(mapView.camera.heading)")
         
     }
     
@@ -34,13 +33,11 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
 
         mapView.delegate = self
         
-        locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingHeading()
 
         setupCurrentLocationPointerImageView()
-        
-        rotateMapViewWithDeviceAngle()
         
         // Check for Location Services
         
@@ -50,26 +47,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         }
         
     }
-    
-    private func rotateMapViewWithDeviceAngle() {
-        manager.deviceMotionUpdateInterval = 0.01
-        
-        if manager.isDeviceMotionAvailable {
-            
-            manager.startDeviceMotionUpdates(to: queue) {
-                [weak self] (data: CMDeviceMotion?, error: Error?) in
-                if let gravity = data?.gravity {
-                    let rotation = atan2(gravity.x, gravity.y) - Double.pi
-                    
-                    DispatchQueue.main.async {
-                        self?.mapView.transform = CGAffineTransform(rotationAngle: CGFloat(rotation))
-                    }
-                    
-                }
-            }
-        }
-        manager.startGyroUpdates()
-    }
+
     
     private func setupCurrentLocationPointerImageView() {
         
@@ -94,6 +72,13 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
                 mapView.setRegion(viewRegion, animated: false)
             }
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        
+        mapView.camera.heading = newHeading.magneticHeading
+        mapView.setCamera(mapView.camera, animated: true)
+    
     }
 
 }
