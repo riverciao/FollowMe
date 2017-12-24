@@ -30,10 +30,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     var coordinatesPerMeter: [CLLocationCoordinate2D]?
     let mapViewController = MapViewController()
     private var currentLocation: CLLocation?
-    
-//    //Existed Path Property
-//    var existedStartNode: LocationAnnotationNode?
-//    var existedPathNode: LocationAnnotationNode?
+
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     //TODO: - Add new node automatically every 30 centermeter while user moving
