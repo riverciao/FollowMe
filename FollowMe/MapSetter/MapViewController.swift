@@ -62,13 +62,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let location = sender.location(in: self.mapView)
         self.destinationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         
-        if let destinationCoordinate = destinationCoordinate, let currentLocation = currentLocation {
+        if let destinationCoordinate = destinationCoordinate, let currentLocationCoordinate = currentLocationCoordinateForARSetting {
             let annotation = Annotation(title: "", subtitle: "", coordinate: destinationCoordinate)
             
             self.mapView.removeAnnotations(self.mapView.annotations)
             self.mapView.addAnnotation(annotation)
-            
-            setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: destinationCoordinate)
+                
+            setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
+
         }
         
     }
@@ -213,15 +214,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             currentLocation = locations.last
             
             //Setup current location annotation
-            if let currentLocation = self.currentLocation {
+            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
                 
-                setupAnnotationsFor(currentLocationCoordinate: currentLocation.coordinate)
+                setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
                 
             }
             
-            if let currentLocation = currentLocation, let destinationCoordinate = destinationCoordinate {
+            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting, let destinationCoordinate = destinationCoordinate {
                 
-                setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: destinationCoordinate)
+                setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
                 
             }
         }
@@ -455,10 +456,10 @@ extension MapViewController: HandleMapSearch {
         let overlays = mapView.overlays
         mapView.removeOverlays(overlays)
         
-        if let currentLocation = self.currentLocation {
+        if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
             setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
             
-            let currentLocationMapItem = getMapItem(with: currentLocation.coordinate)
+            let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
             let destinationMapItem = getMapItem(with: destinationCoordinate)
             
             let directionRequest = MKDirectionsRequest()

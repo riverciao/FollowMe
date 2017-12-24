@@ -14,7 +14,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
-//    var startNode: LocationAnnotationNode?
     var startNode: LocationSphereNode?
     
     //property for current location coordinate to start node 3D vector
@@ -47,26 +46,26 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
-    private func adjustARAnchor() {
-        
-        
-        // Create anchor using the camera's current position
-        if let currentFrame = sceneLocationView.session.currentFrame {
-            
-            // Create a transform with a translation of 30 cm in front of the camera
-            var translation = matrix_identity_float4x4
-            translation.columns.3.z = -0.3
-            let transform = simd_mul(currentFrame.camera.transform, translation)
-
-            
-            // Add a new anchor to the session
-            let anchor = ARAnchor(transform: transform)
-            self.sceneLocationView.session.pause()
-            self.sceneLocationView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
-            sceneLocationView.session.add(anchor: anchor)
-        }
-        
-    }
+//    private func adjustARAnchor() {
+//
+//
+//        // Create anchor using the camera's current position
+//        if let currentFrame = sceneLocationView.session.currentFrame {
+//
+//            // Create a transform with a translation of 30 cm in front of the camera
+//            var translation = matrix_identity_float4x4
+//            translation.columns.3.z = -0.3
+//            let transform = simd_mul(currentFrame.camera.transform, translation)
+//
+//
+//            // Add a new anchor to the session
+//            let anchor = ARAnchor(transform: transform)
+//            self.sceneLocationView.session.pause()
+//            self.sceneLocationView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
+//            sceneLocationView.session.add(anchor: anchor)
+//        }
+//
+//    }
     
     private func drawStartNode() {
         
@@ -85,24 +84,12 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         }
         
     }
-    
-    private func findAnchor() {
-        
-        if let startNode = startNode {
-            let what = sceneLocationView.anchor(for: startNode)
-            print("OOOOO\(what)")
-        }
-    }
 
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("123")
         
-//        adjustARAnchor()
-        
         drawStartNode()
-        
-//        findAnchor()
         
         //the altitude must be position.z
 //        if let position = sceneLocationView.currentScenePosition() {

@@ -115,7 +115,7 @@ open class LocationSphereNode: LocationNode {
         
         self.geometry?.firstMaterial?.specular.contents = nodeType.specularContent
 
-        
+        // TODO: - what is SCNBillboardConstraint?
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         constraints = [billboardConstraint]
