@@ -118,7 +118,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
         
         self.mapView.addAnnotation(destinationAnnotation)
-//        self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
     }
     
     private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D) {
