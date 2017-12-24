@@ -29,7 +29,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var isSaved: Bool = true
     
     // TODO: - delete this specific cordinate and make it optional
-    var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
+//    var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
+    var destinationCoordinate: CLLocationCoordinate2D?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -52,14 +53,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
         
         let location = sender.location(in: self.mapView)
-        self.locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
-        let annotation = Annotation(title: "", subtitle: "", coordinate: locationCoordinate)
+        self.destinationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         
-        self.mapView.removeAnnotations(self.mapView.annotations)
-        self.mapView.addAnnotation(annotation)
-        
-        if let currentLocation = currentLocation {
-            setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: locationCoordinate)
+        if let destinationCoordinate = destinationCoordinate, let currentLocation = currentLocation {
+            let annotation = Annotation(title: "", subtitle: "", coordinate: destinationCoordinate)
+            
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            self.mapView.addAnnotation(annotation)
+            
+            setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: destinationCoordinate)
         }
         
     }
@@ -192,9 +194,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             currentLocation = locations.last
             
-            if let currentLocation = currentLocation {
+            if let currentLocation = currentLocation, let destinationCoordinate = destinationCoordinate {
                 
-                setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: locationCoordinate)
+                setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: destinationCoordinate)
                 
             }
         }
@@ -250,19 +252,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let longitude = response?.boundingRegion.center.longitude
             
             //Create annotation
-            self.locationCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: self.locationCoordinate)
+            self.destinationCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
+            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: self.destinationCoordinate!)
             self.mapView.addAnnotation(annotation)
             
             //Draw the route
             if let currentLocation = self.currentLocation {
-                self.setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: self.locationCoordinate)
+                self.setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: self.destinationCoordinate!)
             }
             
             //TODO: - adjust the scale of zoom in level (depends on the size of destination)
             //Zoom in on annotation
             let span = MKCoordinateSpanMake(0.1, 0.1)
-            let region = MKCoordinateRegionMake(self.locationCoordinate, span)
+            let region = MKCoordinateRegionMake(self.destinationCoordinate!, span)
             self.mapView.setRegion(region, animated: true)
         }
         
