@@ -105,7 +105,7 @@ extension NodeType {
             
         case .start:
             
-            return 3
+            return 0.3
             
         case .path:
             

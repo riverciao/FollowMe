@@ -31,9 +31,9 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     let mapViewController = MapViewController()
     private var currentLocation: CLLocation?
     
-    //Existed Path Property
-    var existedStartNode: LocationAnnotationNode?
-    var existedPathNode: LocationAnnotationNode?
+//    //Existed Path Property
+//    var existedStartNode: LocationAnnotationNode?
+//    var existedPathNode: LocationAnnotationNode?
     
     //TODO: - Add Origin Point Setup and set it with sceneLocationView.currentScenePosition()
     //TODO: - Add new node automatically every 30 centermeter while user moving
@@ -112,8 +112,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         super.viewWillAppear(animated)
         
         sceneLocationView.run()
-        
-        fetchPath()
         
     }
     
@@ -212,61 +210,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
 
         print("Append OO\(self.pathNodes.count)")
         
-    }
-    
-    private func fetchPath() {
-        
-        Database.database().reference().child("paths").observe( .childAdded) { (snapshot) in
-            
-            let pathId = snapshot.key
-            let pathRef = Database.database().reference().child("paths").child(pathId)
-            
-            pathRef.observeSingleEvent(of: .value, with: { (pathSnapshot) in
-                
-                if let dictionary = pathSnapshot.value as? [String: AnyObject] {
-                    
-                    guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
-                    
-                    guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
-                    
-                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
-                    
-                    self.existedStartNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
-                    
-                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
-                    
-                    let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes")
-                    
-                    pathNodesRef.observe( .childAdded, with: { (pathNodesSnapshot) in
-                        
-                        let pathNodesId = pathNodesSnapshot.key
-                        
-                        let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes").child(pathNodesId)
-                        
-                        pathNodesRef.observeSingleEvent(of: .value, with: { (positionSnapshot) in
-                            
-                            if let dictionary = positionSnapshot.value as? [String: Any] {
-                                
-                                guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
-                                
-                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
-                                
-                                self.existedPathNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "path-node"))
-                                
-                                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
-                                
-                            }
-                            
-                        }, withCancel: nil)
-                        
-                    }, withCancel: nil)
-                    
-                }
-                
-            }, withCancel: nil)
-            
-        }
-            
     }
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
