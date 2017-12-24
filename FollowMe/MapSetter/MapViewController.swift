@@ -28,9 +28,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var isSaved: Bool = true
     
-    // TODO: - delete this specific cordinate and make it optional
-//    var locationCoordinate = CLLocationCoordinate2DMake(25.025652, 121.556407)
     var destinationCoordinate: CLLocationCoordinate2D?
+    
+    var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -51,6 +51,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
+        
+        print("currentLocationCoordinateForARSetting\(currentLocationCoordinateForARSetting)")
         
         let location = sender.location(in: self.mapView)
         self.destinationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
