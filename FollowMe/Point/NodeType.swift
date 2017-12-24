@@ -105,15 +105,15 @@ extension NodeType {
             
         case .start:
             
-            return 0.3
+            return 3
             
         case .path:
             
-            return 0.1
+            return 1
             
         case .end:
             
-            return 0.3
+            return 3
             
         }
         

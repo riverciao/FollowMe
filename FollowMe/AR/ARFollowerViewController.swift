@@ -89,7 +89,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     
                     guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
                     
-                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
+//                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
+                    let location = CLLocation(latitude: latitude, longitude: longitude)
                     
                     self.existedStartNode = LocationSphereNode(location: location, nodeType: .start)
                     
@@ -109,7 +110,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 
                                 guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
                                 
-                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
+//                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: altitude)
+                                let location = CLLocation(latitude: latitude, longitude: longitude)
                                 
                                 self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
                                 
