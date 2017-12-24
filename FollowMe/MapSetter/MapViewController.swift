@@ -52,8 +52,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
         
-        print("currentLocationCoordinateForARSetting\(currentLocationCoordinateForARSetting)")
-        
         let location = sender.location(in: self.mapView)
         self.destinationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         
@@ -93,6 +91,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
+        
+        
     }
     
     @objc private func search(sender: UIBarButtonItem) {
@@ -113,12 +113,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
-        //TODO: - change the current location annotation pin to a blue point or something diffrent from destination
-        let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
+    private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
+        
         let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
         
-        self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
+        self.mapView.addAnnotation(destinationAnnotation)
+//        self.mapView.showAnnotations([currentLocationAnnotation ,destinationAnnotation], animated: true )
+    }
+    
+    private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D) {
+        
+        //TODO: - change the current location annotation pin to a blue point or something diffrent from destination
+        
+        let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
+        
+        self.mapView.showAnnotations([currentLocationAnnotation], animated: true)
+        
     }
     
     private func getMapItem(with coordinate: CLLocationCoordinate2D) -> MKMapItem {
@@ -134,7 +144,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let overlays = mapView.overlays
         mapView.removeOverlays(overlays)
         
-        setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
+        setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
         
         let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
         let destinationMapItem = getMapItem(with: destinationCoordinate)
@@ -195,6 +205,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         defer {
             
             currentLocation = locations.last
+            
+            //Setup current location annotation
+            if let currentLocation = self.currentLocation {
+                
+                setupAnnotationsFor(currentLocationCoordinate: currentLocation.coordinate)
+                
+            }
             
             if let currentLocation = currentLocation, let destinationCoordinate = destinationCoordinate {
                 
@@ -433,7 +450,7 @@ extension MapViewController: HandleMapSearch {
         mapView.removeOverlays(overlays)
         
         if let currentLocation = self.currentLocation {
-            setupAnnotationsFor(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: destinationCoordinate)
+            setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
             
             let currentLocationMapItem = getMapItem(with: currentLocation.coordinate)
             let destinationMapItem = getMapItem(with: destinationCoordinate)
