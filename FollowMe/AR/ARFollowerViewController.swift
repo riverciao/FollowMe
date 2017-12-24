@@ -14,8 +14,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     let configuration = ARWorldTrackingConfiguration()
+//    var startNode: LocationAnnotationNode?
+    var startNode: LocationSphereNode?
     
-    //property fpr current location coordinate to start node 3D vector
+    //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
@@ -70,14 +72,28 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         if let currentLocationCoordinate = currentLocationCoordinateForARSetting {
             let location = CLLocation(latitude: currentLocationCoordinate.latitude, longitude: currentLocationCoordinate.longitude)
-            let startNode = LocationAnnotationNode(location: location, image: UIImage(named: "pin")!)
+//            startNode = LocationAnnotationNode(location: location, image: UIImage(named: "pin")!)
+            
+            startNode = LocationSphereNode(location: location, nodeType: .start)
             
 //            startNode.scaleRelativeToDistance = true
-            
-            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: startNode)
+            if let startNode = startNode {
+                
+                sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: startNode)
+                
+            }
         }
         
     }
+    
+    private func findAnchor() {
+        
+        if let startNode = startNode {
+            let what = sceneLocationView.anchor(for: startNode)
+            print("OOOOO\(what)")
+        }
+    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         print("123")
@@ -85,6 +101,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
 //        adjustARAnchor()
         
         drawStartNode()
+        
+//        findAnchor()
         
         //the altitude must be position.z
 //        if let position = sceneLocationView.currentScenePosition() {

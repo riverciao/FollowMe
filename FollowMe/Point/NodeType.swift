@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum NodeType {
+public enum NodeType {
     
     // MARK: Case
     
@@ -105,7 +105,7 @@ extension NodeType {
             
         case .start:
             
-            return 0.3
+            return 3
             
         case .path:
             

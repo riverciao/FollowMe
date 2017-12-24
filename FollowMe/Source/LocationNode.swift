@@ -68,6 +68,7 @@ open class LocationAnnotationNode: LocationNode {
     ///For landmarks in the distance, the default is correct
     public var scaleRelativeToDistance = false
     
+    
     public init(location: CLLocation?, image: UIImage) {
         self.image = image
         
@@ -90,4 +91,41 @@ open class LocationAnnotationNode: LocationNode {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+open class LocationSphereNode: LocationNode {
+    
+    // MARK: Property
+    
+    var nodeType: NodeType?
+    
+    // MARK: Init
+    
+    public init(location: CLLocation?, nodeType: NodeType) {
+        
+        super.init(location: location)
+
+        self.nodeType = nodeType
+        
+        self.name = nodeType.name
+        
+        self.geometry = SCNSphere(radius: nodeType.radius)
+        
+        self.geometry?.firstMaterial?.diffuse.contents = nodeType.diffuseContent
+        
+        self.geometry?.firstMaterial?.specular.contents = nodeType.specularContent
+
+        
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        constraints = [billboardConstraint]
+
+        addChildNode(self)
+        
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
