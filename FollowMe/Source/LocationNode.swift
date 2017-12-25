@@ -32,8 +32,8 @@ open class LocationNode: SCNNode {
     ///When this is set to true, this means a node may appear to jump around
     ///as the user's location estimates update,
     ///but the position is generally more accurate.
-    ///Defaults to true.
-    public var continuallyAdjustNodePositionWhenWithinRange = true
+    ///Defaults to false.
+    public var continuallyAdjustNodePositionWhenWithinRange = false
     
     ///Whether a node's position and scale should be updated automatically on a continual basis.
     ///This should only be set to false if you plan to manually update position and scale
