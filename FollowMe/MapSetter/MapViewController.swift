@@ -74,6 +74,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,6 +105,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        setupCurrentLocationFromUserSetting()
+    }
+    
+    private func setupCurrentLocationFromUserSetting() {
+        
+        //Setup current location annotation
+        if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
+            
+            setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
+            
+            let viewRegion = MKCoordinateRegionMakeWithDistance(currentLocationCoordinate, 150, 150)
+            
+            mapView.setRegion(viewRegion, animated: true)
+            
+        }
+        
+    }
+    
     @objc private func search(sender: UIBarButtonItem) {
         
         //Setup search results controller
@@ -114,6 +138,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // limits the overlap area to just the View Controller’s frame instead of the whole Navigation Controller
         definesPresentationContext = true
         
+        //MARK: -----------
         //Pass Value
         locationSearchTableViewController.currentLocation = self.currentLocation
         locationSearchTableViewController.mapView = self.mapView
@@ -152,6 +177,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.removeOverlays(overlays)
         
         setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
+        setupAnnotationsFor(destinationCoordinate: currentLocationCoordinate)
         
         let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
         let destinationMapItem = getMapItem(with: destinationCoordinate)
@@ -182,12 +208,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // MARK: - Retrieve GPS coordinate from polyline
             
             let routeCoordinates = self.route?.polyline.coordinates
-            self.coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
             
-            //Pass Value back to ARViewController
-//            DispatchQueue.main.async {
-//                self.delegate?.didGet(coordinates: self.coordinatesPerMeter)
-//            }
+            self.coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
             
             if let route = self.route {
                 
@@ -209,30 +231,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         defer {
             
             currentLocation = locations.last
             
-            //Setup current location annotation
-            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
-                
-                setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
-                
-            }
-            
-            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting, let destinationCoordinate = destinationCoordinate {
-                
-                setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
-                
-            }
         }
         
         if currentLocation == nil {
-            // Zoom to user location
-            if let userLocation = locations.last {
-                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
-                mapView.setRegion(viewRegion, animated: false)
-            }
+            
         }
     }
     
@@ -283,8 +290,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.mapView.addAnnotation(annotation)
             
             //Draw the route
-            if let currentLocation = self.currentLocation {
-                self.setRouteWith(currentLocationCoordinate: currentLocation.coordinate, destinationCoordinate: self.destinationCoordinate!)
+            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
+                self.setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: self.destinationCoordinate!)
             }
             
             //TODO: - adjust the scale of zoom in level (depends on the size of destination)
