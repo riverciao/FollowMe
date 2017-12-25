@@ -18,8 +18,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var startNode: LocationSphereNode?
     
     //Existed Path Property
-    var existedStartNode: LocationSphereNode?
-    var existedPathNode: LocationSphereNode?
+//    var existedStartNode: LocationSphereNode?
+//    var existedPathNode: LocationSphereNode?
+    var existedStartNode: LocationNode?
+    var existedPathNode: LocationNode?
+    
     
     //x, z converted from GPS
     var x: Float?
@@ -78,7 +81,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
 //                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
                     let location = CLLocation(latitude: latitude, longitude: longitude)
                     
-                    self.existedStartNode = LocationSphereNode(location: location, nodeType: .start)
+//                    self.existedStartNode = LocationSphereNode(location: location, nodeType: .start)
+                    
+                    self.existedStartNode = LocationNode(location: location)
+                    
+                    self.existedStartNode?.name = "start"
                     
                     self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
                     
@@ -99,7 +106,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
 //                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
                                 let location = CLLocation(latitude: latitude, longitude: longitude)
                                 
-                                self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
+//                                self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
+                                
+                                self.existedPathNode = LocationNode(location: location)
+                                
+                                self.existedPathNode?.name = "path"
                                 
                                 self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
                                 
