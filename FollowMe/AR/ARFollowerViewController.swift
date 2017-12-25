@@ -18,11 +18,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var startNode: LocationSphereNode?
     
     //Existed Path Property
-//    var existedStartNode: LocationSphereNode?
-//    var existedPathNode: LocationSphereNode?
     var existedStartNode: LocationNode?
     var existedPathNode: LocationNode?
-    
+    var existedStartNodes: [LocationNode] = []
     
     //x, z converted from GPS
     var x: Float?
@@ -77,11 +75,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
                     
                     guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
-                    
-//                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
+
                     let location = CLLocation(latitude: latitude, longitude: longitude)
-                    
-//                    self.existedStartNode = LocationSphereNode(location: location, nodeType: .start)
                     
                     self.existedStartNode = LocationNode(location: location)
                     
@@ -103,10 +98,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 
                                 guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
                                 
-//                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
                                 let location = CLLocation(latitude: latitude, longitude: longitude)
-                                
-//                                self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
                                 
                                 self.existedPathNode = LocationNode(location: location)
                                 
