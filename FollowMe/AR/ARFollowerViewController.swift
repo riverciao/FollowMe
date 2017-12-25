@@ -51,9 +51,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         fetchPath()
         
-        testFarNode()
+//        testFarNode()
         
-        drawNewNode()
+//        drawNewNode()
         
     }
     
@@ -92,14 +92,34 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     }
     
     private func drawNewNode() {
-        let newNode = SCNNode()
-
-        newNode.geometry = SCNSphere(radius: 0.1)
-        newNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
-        newNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
         
-        newNode.position = SCNVector3(0.2, 0.2, 0.2)
-        self.sceneLocationView.scene.rootNode.addChildNode(newNode)
+        let location = CLLocation(latitude: 25.042480, longitude: 121.564890)
+        
+        let newNode = LocationSphereNode(location: location, nodeType: .start)
+        
+        let x = newNode.position.x
+        
+        let z = newNode.position.z
+
+        
+        let targetNode = SCNNode()
+        
+        targetNode.position = SCNVector3(x, 0.2, z)
+        targetNode.geometry = SCNSphere(radius: 0.1)
+        targetNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
+        targetNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+        
+        print("OOOO\((x,z))")
+        
+        
+//        newNode.position
+//
+//        newNode.geometry = SCNSphere(radius: 0.1)
+//        newNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
+//        newNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+//
+//        newNode.position = SCNVector3(0.2, 0.2, 0.2)
+        self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
     }
     
     private func fetchPath() {
@@ -123,9 +143,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     self.existedStartNode = LocationSphereNode(location: location, nodeType: .start)
                     
                     ////
-//                    self.existedStartNode?.position = self.cameraPosition!
-//                    print("OOOOOOOOOOOO\(self.cameraPosition!)")
-//                    self.sceneLocationView.scene.rootNode.addChildNode(self.existedStartNode!)
+//                    let x = self.existedStartNode!.position.x
+//                    let z = self.existedStartNode!.position.z
+//                    print("OOOOOOOO\((x, z))")
                     
                     self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
                     
@@ -149,9 +169,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
                                 
                                 ////
-//                                self.existedPathNode?.position = self.cameraPosition!
-//                                print("cameraPosition\(self.cameraPosition!)")
-//                                self.sceneLocationView.scene.rootNode.addChildNode(self.existedPathNode!)
+//                                let x = self.existedPathNode!.position.x
+//                                let z = self.existedPathNode!.position.z
+//                                print("XXXXXXXX\((x, z))")
                                 
                                 self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
                                 
@@ -209,6 +229,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     }
     
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
+        
+        let x = locationNode.position.x
+        
+        let z = locationNode.position.z
+        
+        print("OOOOO\((x,z))")
+        //
+        //        sceneLocationView.currentScenePosition().y
+        //
+        //        sceneLocationView.
         
     }
 }
