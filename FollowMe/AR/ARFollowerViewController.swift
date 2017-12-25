@@ -24,7 +24,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var existedEndNode: LocationNode?
     var nowLoadingPathId: String = ""
     
-    //x, z converted from GPS
+    //x, z for 3DVector converted from GPS
     var x: Float?
     var z: Float?
     
