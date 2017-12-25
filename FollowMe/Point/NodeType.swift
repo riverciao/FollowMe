@@ -12,7 +12,7 @@ import UIKit
 public enum NodeType {
     
     // MARK: Case
-    
+
     case start, path, end
     
 }
