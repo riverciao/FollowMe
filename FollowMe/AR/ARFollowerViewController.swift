@@ -21,15 +21,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var existedStartNode: LocationSphereNode?
     var existedPathNode: LocationSphereNode?
     
+    
+    
     //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
-    
-    ////
-    var cameraPosition: SCNVector3?
-    
-    ////
-    var startLocation: CLLocation?
-    var pathLocations: [CLLocation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +45,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         sceneLocationView.run()
         
         fetchPath()
-        
-//        testFarNode()
-        
-//        drawNewNode()
+
         
     }
     
@@ -63,64 +55,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         sceneLocationView.pause()
         
     }
-    
-//    private func adjustARAnchor() {
-//
-//
-//        // Create anchor using the camera's current position
-//        if let currentFrame = sceneLocationView.session.currentFrame {
-//
-//            // Create a transform with a translation of 30 cm in front of the camera
-//            var translation = matrix_identity_float4x4
-//            translation.columns.3.z = -0.3
-//            let transform = simd_mul(currentFrame.camera.transform, translation)
-//
-//
-//            // Add a new anchor to the session
-//            let anchor = ARAnchor(transform: transform)
-//            self.sceneLocationView.session.pause()
-//            self.sceneLocationView.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
-//            sceneLocationView.session.add(anchor: anchor)
-//        }
-//
-//    }
-    
-    private func testFarNode() {
-        let location = CLLocation(latitude: 51.521296, longitude: -0.126323)
-        let newNode = LocationSphereNode(location: location, nodeType: .start)
-        self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: newNode)
-    }
-    
-    private func drawNewNode() {
-        
-        let location = CLLocation(latitude: 25.042480, longitude: 121.564890)
-        
-        let newNode = LocationSphereNode(location: location, nodeType: .start)
-        
-        let x = newNode.position.x
-        
-        let z = newNode.position.z
 
-        
-        let targetNode = SCNNode()
-        
-        targetNode.position = SCNVector3(x, 0.2, z)
-        targetNode.geometry = SCNSphere(radius: 0.1)
-        targetNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
-        targetNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-        
-        print("OOOO\((x,z))")
-        
-        
-//        newNode.position
-//
-//        newNode.geometry = SCNSphere(radius: 0.1)
-//        newNode.geometry?.firstMaterial?.specular.contents = UIColor.orange
-//        newNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-//
-//        newNode.position = SCNVector3(0.2, 0.2, 0.2)
-        self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
-    }
     
     private func fetchPath() {
         
@@ -163,7 +98,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 
                                 self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
                                 
-//                                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
+                                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
                                 
                             }
                             
@@ -179,18 +114,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
 
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("123")
-        
-        //the altitude must be position.z
-//        if let position = sceneLocationView.currentScenePosition() {
-//            print("This is the current location: X-\(position.x), Y-\(position.y), Z-\(position.z)")
-//
-//            newNode.position = SCNVector3(position.x, position.y, position.z)
-//            self.node.addChildNode(newNode)
-//        }
-    }
+
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
         
@@ -209,22 +133,28 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     }
     
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
+
         
-        let x = locationNode.position.x
+        switch locationNode.name! {
+        case "start": print("start")
+        case "path": print("path")
+        case "end": print("end")
+        default: print("XX")
+        }
         
-        let z = locationNode.position.z
-        
-        print("OOOOO\((x,z))")
-        //
-        //        sceneLocationView.currentScenePosition().y
-        //
-        //        sceneLocationView.
-        
-        
-        let targetNode = Node(nodeType: .start)
-        
-        targetNode.position = SCNVector3(x, 0.2, z)
-        
-        self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
+//        if let position = sceneLocationView.currentScenePosition() {
+//
+//            let x = locationNode.position.x
+//
+//            let z = locationNode.position.z
+//
+//            print("OOOOO\((x,z))")
+//
+//            let targetNode = Node(nodeType: .start)
+//
+//            targetNode.position = SCNVector3(x, position.y, z)
+//
+//            self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
+//        }
     }
 }
