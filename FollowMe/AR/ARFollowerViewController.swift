@@ -21,6 +21,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var existedStartNode: LocationSphereNode?
     var existedPathNode: LocationSphereNode?
     
+    //x, z converted from GPS
+    var x: Float?
+    var z: Float?
     
     
     //property for current location coordinate to start node 3D vector
@@ -138,11 +141,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             switch name {
             case "start":
                 
-                if let position = sceneLocationView.currentScenePosition() {
-                    
-                    let x = locationNode.position.x
-                    
-                    let z = locationNode.position.z
+                self.x = locationNode.position.x
+                
+                self.z = locationNode.position.z
+                
+                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
                     
                     let targetNode = Node(nodeType: .start)
                     
@@ -156,11 +159,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                 
             case "path":
                 
-                if let position = sceneLocationView.currentScenePosition() {
-                    
-                    let x = locationNode.position.x
-                    
-                    let z = locationNode.position.z
+                self.x = locationNode.position.x
+                
+                self.z = locationNode.position.z
+                
+                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
                     
                     let targetNode = Node(nodeType: .path)
                     
