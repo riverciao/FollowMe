@@ -137,15 +137,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     
                     guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
                     
-                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
-//                    let location = CLLocation(latitude: latitude, longitude: longitude)
+//                    let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
+                    let location = CLLocation(latitude: latitude, longitude: longitude)
                     
                     self.existedStartNode = LocationSphereNode(location: location, nodeType: .start)
-                    
-                    ////
-//                    let x = self.existedStartNode!.position.x
-//                    let z = self.existedStartNode!.position.z
-//                    print("OOOOOOOO\((x, z))")
                     
                     self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
                     
@@ -163,17 +158,12 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 
                                 guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
                                 
-                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
-//                                let location = CLLocation(latitude: latitude, longitude: longitude)
+//                                let location = CLLocation(coordinate: CLLocationCoordinate2DMake(latitude, longitude), altitude: 26)
+                                let location = CLLocation(latitude: latitude, longitude: longitude)
                                 
                                 self.existedPathNode = LocationSphereNode(location: location, nodeType: .path)
                                 
-                                ////
-//                                let x = self.existedPathNode!.position.x
-//                                let z = self.existedPathNode!.position.z
-//                                print("XXXXXXXX\((x, z))")
-                                
-                                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
+//                                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
                                 
                             }
                             
@@ -203,16 +193,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     }
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
-//        self.existedStartNode?.position.z = position.z
-//        if let existedStartNode = self.existedStartNode {
-//            existedStartNode.position.z = position.z
-//            self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: existedStartNode)
-//
-////            self.sceneLocationView.scene.rootNode.addChildNode(existedStartNode)
-//
-//        }
-        
-//        print("------------\(position)")
         
     }
     
@@ -240,5 +220,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         //
         //        sceneLocationView.
         
+        
+        let targetNode = Node(nodeType: .start)
+        
+        targetNode.position = SCNVector3(x, 0.2, z)
+        
+        self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
     }
 }
