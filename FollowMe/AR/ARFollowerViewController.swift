@@ -135,44 +135,39 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
+    private func draw(_ locationNode: LocationNode, inNodeType nodeType: NodeType) {
+        
+        if self.x != locationNode.position.x || self.z != locationNode.position.z {
+            
+            self.x = locationNode.position.x
+            
+            self.z = locationNode.position.z
+            
+            if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
+                
+                let targetNode = Node(nodeType: nodeType)
+                
+                targetNode.position = SCNVector3(x, position.y, z)
+                
+                self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
+                
+            }
+        }
+    }
+    
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
 
         if let name = locationNode.name {
+            
             switch name {
+                
             case "start":
                 
-                self.x = locationNode.position.x
-                
-                self.z = locationNode.position.z
-                
-                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
-                    
-                    let targetNode = Node(nodeType: .start)
-                    
-                    targetNode.position = SCNVector3(x, position.y, z)
-                    
-                    self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
-                    
-                }
-                
-                print("start")
+                draw(locationNode, inNodeType: .start)
                 
             case "path":
                 
-                self.x = locationNode.position.x
-                
-                self.z = locationNode.position.z
-                
-                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
-                    
-                    let targetNode = Node(nodeType: .path)
-                    
-                    targetNode.position = SCNVector3(x, position.y, z)
-                    
-                    self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
-                }
-                
-                print("path")
+                draw(locationNode, inNodeType: .path)
                 
             case "end": print("end")
             default: print("XX")
