@@ -20,7 +20,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     //Existed Path Property
     var existedStartNode: LocationNode?
     var existedPathNode: LocationNode?
-    var existedStartNodes: [LocationNode] = []
+    var existedPathNodes: [LocationNode] = []
+    var existedEndNode: LocationNode?
+    var nowLoadingPathId: String = ""
     
     //x, z converted from GPS
     var x: Float?
@@ -104,7 +106,26 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 
                                 self.existedPathNode?.name = "path"
                                 
+                                self.existedPathNodes.append(self.existedPathNode!)
+                                
                                 self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
+                                
+                                // Retrieve end node from the last element of existedPathNodes for every path
+                                if self.nowLoadingPathId != pathId {
+                                    
+                                    self.nowLoadingPathId = pathId
+
+                                    self.existedEndNode = self.existedPathNodes.last
+                                    
+                                    self.existedEndNode?.name = "end"
+                                    
+                                    if let existedEndNode = self.existedEndNode {
+                                        
+                                        self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: existedEndNode)
+                                        
+                                    }
+                                    
+                                }
                                 
                             }
                             
@@ -173,9 +194,12 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                 draw(locationNode, inNodeType: .path)
                 
             case "end": print("end")
-            default: print("XX")
+                
+                draw(locationNode, inNodeType: .end)
+                
+            default: break
+                
             }
         }
-
     }
 }
