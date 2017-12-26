@@ -106,7 +106,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                                 
                                 self.existedPathNode?.name = "path"
                                 
-                                self.existedPathNodes.append(self.existedPathNode!)
+                                self.existedPathNodes.insert(self.existedPathNode!, at: 0)
                                 
                                 self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
                                 

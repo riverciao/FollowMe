@@ -65,11 +65,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.destinationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
         
         if let destinationCoordinate = destinationCoordinate, let currentLocationCoordinate = currentLocationCoordinateForARSetting {
-            let annotation = Annotation(title: "", subtitle: "", coordinate: destinationCoordinate)
             
             self.mapView.removeAnnotations(self.mapView.annotations)
-            self.mapView.addAnnotation(annotation)
-                
+            
             setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: destinationCoordinate)
 
         }
@@ -423,7 +421,7 @@ extension MapViewController: HandleMapSearch {
         mapView.removeOverlays(overlays)
         
         setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
-        setupAnnotationsFor(destinationCoordinate: currentLocationCoordinate)
+        setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
         
         let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
         let destinationMapItem = getMapItem(with: destinationCoordinate)
