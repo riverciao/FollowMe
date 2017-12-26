@@ -19,9 +19,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     //Existed Path Property
     var existedStartNode: LocationPathNode?
-    var existedPathNode: LocationNode?
-    var existedPathNodes: [LocationNode] = []
-    var existedEndNode: LocationNode?
+    var existedPathNode: LocationPathNode?
+    var existedPathNodes: [LocationPathNode] = []
+    var existedEndNode: LocationPathNode?
 //    var pathId: String = ""
     
     //x, z for 3DVector converted from GPS
@@ -105,7 +105,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
-    private func retrieveEndNode(from dictionary: [String: AnyObject]) {
+    private func retrieveEndNode(from dictionary: [String: AnyObject], with pathId: pathId) {
         
         //retrieve start node
         guard let endNode = dictionary["end-node"] as? [String: AnyObject] else { return }
@@ -114,7 +114,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         let location = CLLocation(latitude: latitude, longitude: longitude)
         
-        self.existedEndNode = LocationNode(location: location)
+        self.existedEndNode = LocationPathNode(location: location, belongToPathId: pathId)
         
         self.existedEndNode?.name = "end"
         
@@ -142,11 +142,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     
                     let location = CLLocation(latitude: latitude, longitude: longitude)
                     
-                    self.existedPathNode = LocationNode(location: location)
+                    self.existedPathNode = LocationPathNode(location: location, belongToPathId: pathId)
                     
                     self.existedPathNode?.name = "path"
                     
-                    self.existedPathNodes.insert(self.existedPathNode!, at: 0)
+                    self.existedPathNodes.append(self.existedPathNode!)
                     
                     self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
                     
@@ -171,7 +171,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     
                     self.retrieveStartNode(from: dictionary, with: pathId)
                     
-                    self.retrieveEndNode(from: dictionary)
+                    self.retrieveEndNode(from: dictionary, with: pathId)
                     
                     self.retrievePathNodes(with: pathId)
 
@@ -237,13 +237,21 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     
                 }
                 
-            case "path": break
+            case "path":
                 
-//                draw(locationNode, inNodeType: .path)
+                if let locationPathNode = locationNode as? LocationPathNode {
+                
+                    draw(locationPathNode, inNodeType: .path)
+                    
+                }
                 
             case "end": print("end")
                 
-//                draw(locationNode, inNodeType: .end)
+                if let locationPathNode = locationNode as? LocationPathNode {
+                    
+                    draw(locationPathNode, inNodeType: .end)
+                    
+                }
                 
             default: break
                 
