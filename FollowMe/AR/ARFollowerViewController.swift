@@ -43,8 +43,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         sceneLocationView.locationDelegate = self
         
         //add touch gesture
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
+        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        self.sceneLocationView.addGestureRecognizer(longPressGestureRecognizer)
 
     }
     
@@ -72,17 +73,35 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         let hitTestResults = sceneViewTappedOn.hitTest(touchCoordinates)
         
         guard let node = hitTestResults.first?.node as? Node else { return }
-            
-        if let pathId = node.belongToPathId {
-            
-            let pathRef = Database.database().reference().child("paths").child(pathId)
-            
-            pathRef.removeValue()
-            
-            removeNodes(with: pathId)
-            
-        }
         
+        addDeletionCheckNode(with: node)
+        
+//        if let pathId = node.belongToPathId {
+//
+//            let pathRef = Database.database().reference().child("paths").child(pathId)
+//
+//            pathRef.removeValue()
+//
+//            removeNodes(with: pathId)
+//
+//
+//        }
+        
+    }
+    
+    private func addDeletionCheckNode(with node: Node) {
+        
+        let deletionCheckNode = SCNNode()
+        
+        deletionCheckNode.geometry = SCNPlane(width: 10, height: 10)
+        
+        deletionCheckNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "button_close")
+        
+        //            plane.geometry?.firstMaterial?.specular.contents
+        
+        deletionCheckNode.position = SCNVector3(1.5,1.5,1.5)
+        
+        node.addChildNode(deletionCheckNode)
     }
     
     private func removeNodes(with pathId: pathId) {

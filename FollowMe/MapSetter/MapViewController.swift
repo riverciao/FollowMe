@@ -471,10 +471,6 @@ extension MapViewController: HandleMapSearch {
             
             let routeCoordinates = self.route?.polyline.coordinates
             
-//            print("routeCoordinates[0]\(routeCoordinates![0])")
-//            print("routeCoordinates.last-1\(routeCoordinates![(routeCoordinates?.count)! - 3])")
-//            print("routeCoordinates.last\(routeCoordinates!.last)")
-            
             self.coordinatesPerMeter = self.getCoordinatesFromStraintLine(from: routeCoordinates!)
             
             if let route = self.route {
