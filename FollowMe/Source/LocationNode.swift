@@ -93,6 +93,25 @@ open class LocationAnnotationNode: LocationNode {
     }
 }
 
+open class LocationPathNode: LocationNode {
+    
+    var belongToPathId: String
+    
+    public init(location: CLLocation?, belongToPathId: String) {
+        
+        self.belongToPathId = belongToPathId
+        
+        super.init(location: location)
+        
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+}
+
+
 open class LocationSphereNode: LocationNode {
     
     // MARK: Property

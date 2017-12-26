@@ -18,11 +18,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var startNode: LocationSphereNode?
     
     //Existed Path Property
-    var existedStartNode: LocationNode?
+    var existedStartNode: LocationPathNode?
     var existedPathNode: LocationNode?
     var existedPathNodes: [LocationNode] = []
     var existedEndNode: LocationNode?
-    var nowLoadingPathId: String = ""
+//    var pathId: String = ""
     
     //x, z for 3DVector converted from GPS
     var x: Float?
@@ -80,7 +80,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             
             if let node = hitTest.first?.node as? Node {
                 
-                print("OOOOO\(node.nodeType)")
+                print("OOOOO\(node.belongToPathId)")
             
             }
             
@@ -88,7 +88,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
-    private func retrieveStartNode(from dictionary: [String: AnyObject]) {
+    private func retrieveStartNode(from dictionary: [String: AnyObject], with pathId: pathId) {
         
         //retrieve start node
         guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
@@ -97,7 +97,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         let location = CLLocation(latitude: latitude, longitude: longitude)
         
-        self.existedStartNode = LocationNode(location: location)
+        self.existedStartNode = LocationPathNode(location: location, belongToPathId: pathId)
         
         self.existedStartNode?.name = "start"
         
@@ -169,7 +169,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                 
                 if let dictionary = pathSnapshot.value as? [String: AnyObject] {
                     
-                    self.retrieveStartNode(from: dictionary)
+                    self.retrieveStartNode(from: dictionary, with: pathId)
                     
                     self.retrieveEndNode(from: dictionary)
                     
@@ -201,17 +201,19 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
-    private func draw(_ locationNode: LocationNode, inNodeType nodeType: NodeType) {
+    private func draw(_ locationPathNode: LocationPathNode, inNodeType nodeType: NodeType) {
         
-        if self.x != locationNode.position.x || self.z != locationNode.position.z {
+        if self.x != locationPathNode.position.x || self.z != locationPathNode.position.z {
             
-            self.x = locationNode.position.x
+            self.x = locationPathNode.position.x
             
-            self.z = locationNode.position.z
+            self.z = locationPathNode.position.z
             
             if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
                 
-                let targetNode = Node(nodeType: nodeType)
+                let pathId = locationPathNode.belongToPathId
+                
+                let targetNode = Node(nodeType: nodeType, pathId: pathId)
                 
                 targetNode.position = SCNVector3(x, position.y, z)
                 
@@ -229,15 +231,19 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                 
             case "start":
                 
-                draw(locationNode, inNodeType: .start)
+                if let locationPathNode = locationNode as? LocationPathNode {
+                    
+                    draw(locationPathNode, inNodeType: .start)
+                    
+                }
                 
-            case "path":
+            case "path": break
                 
-                draw(locationNode, inNodeType: .path)
+//                draw(locationNode, inNodeType: .path)
                 
             case "end": print("end")
                 
-                draw(locationNode, inNodeType: .end)
+//                draw(locationNode, inNodeType: .end)
                 
             default: break
                 

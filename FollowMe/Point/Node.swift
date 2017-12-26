@@ -18,13 +18,17 @@ class Node: SCNNode {
     
     var nodeType: NodeType?
     
+    var belongToPathId: String?
+    
     // MARK: Init
     
-    init(nodeType: NodeType) {
+    init(nodeType: NodeType, pathId: String) {
         
         super.init()
         
         self.nodeType = nodeType
+        
+        self.belongToPathId = pathId
         
         self.name = nodeType.name
         
