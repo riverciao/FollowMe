@@ -327,38 +327,31 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Upload new path to firebase
         let pathIdRef = FirebasePath.pathRef.childByAutoId()
         
+        self.uploadStartNode(in: pathIdRef)
+        self.uploadPathNode(in: pathIdRef)
+        self.uploadEndNode(in: pathIdRef)
+    }
+    
+    private func uploadStartNode(in pathIdRef: DatabaseReference) {
+        
         let startNodeRef = pathIdRef.child("start-node")
         
         //Make current location assign only onece when user press add path button
         
         guard let currentLocationCoordinate = currentLocationCoordinateForARSetting else {
-         
+            
             print("currentLocation not found")
             
             return
             
         }
-            
+        
         let latitude = currentLocationCoordinate.latitude, longitude = currentLocationCoordinate.longitude, altitude = 0
         
         let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
         
-        startNodeRef.setValue(values) { (error, ref) in
-            
-            if let error = error {
-                
-                print(error)
-                
-                return
-                
-            }
-            
-            self.uploadPathNode(in: pathIdRef)
-            
-            self.isSaved = true
-            
-            print("isSaved")
-        }
+        startNodeRef.setValue(values)
+        
     }
     
     private func uploadPathNode(in pathIdRef: DatabaseReference) {
@@ -390,6 +383,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             })
             
         }
+    }
+    
+    private func uploadEndNode(in pathIdRef: DatabaseReference) {
+        
+        let endNodeRef = pathIdRef.child("end-node")
+        
+        guard let destinationCoordinate = destinationCoordinate else {
+            
+            print("destinationCoordinate not found")
+            
+            return
+            
+        }
+        
+        let latitude = destinationCoordinate.latitude, longitude = destinationCoordinate.longitude
+        
+        let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude] as [String : Any]
+        
+        endNodeRef.setValue(values)
+        
     }
     
 }
@@ -458,9 +471,9 @@ extension MapViewController: HandleMapSearch {
             
             let routeCoordinates = self.route?.polyline.coordinates
             
-            print("routeCoordinates[0]\(routeCoordinates![0])")
-            print("routeCoordinates.last-1\(routeCoordinates![(routeCoordinates?.count)! - 3])")
-            print("routeCoordinates.last\(routeCoordinates!.last)")
+//            print("routeCoordinates[0]\(routeCoordinates![0])")
+//            print("routeCoordinates.last-1\(routeCoordinates![(routeCoordinates?.count)! - 3])")
+//            print("routeCoordinates.last\(routeCoordinates!.last)")
             
             self.coordinatesPerMeter = self.getCoordinatesFromStraintLine(from: routeCoordinates!)
             
