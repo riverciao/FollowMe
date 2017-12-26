@@ -61,6 +61,75 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         sceneLocationView.pause()
         
     }
+    
+    private func retrieveStartNode(from dictionary: [String: AnyObject]) {
+        
+        //retrieve start node
+        guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
+        
+        guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
+        
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        
+        self.existedStartNode = LocationNode(location: location)
+        
+        self.existedStartNode?.name = "start"
+        
+        self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
+        
+    }
+    
+    private func retrieveEndNode(from dictionary: [String: AnyObject]) {
+        
+        //retrieve start node
+        guard let endNode = dictionary["end-node"] as? [String: AnyObject] else { return }
+        
+        guard let latitude = endNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = endNode[NodeCoordinate.Schema.longitude] as? Double else { return }
+        
+        let location = CLLocation(latitude: latitude, longitude: longitude)
+        
+        self.existedEndNode = LocationNode(location: location)
+        
+        self.existedEndNode?.name = "end"
+        
+        self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedEndNode!)
+        
+    }
+    
+    typealias pathId = String
+    
+    private func retrievePathNodes(with pathId: pathId) {
+        
+        let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes")
+        
+        pathNodesRef.observe( .childAdded, with: { (pathNodesSnapshot) in
+            
+            let pathNodesId = pathNodesSnapshot.key
+            
+            let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes").child(pathNodesId)
+            
+            pathNodesRef.observeSingleEvent(of: .value, with: { (positionSnapshot) in
+                
+                if let dictionary = positionSnapshot.value as? [String: Any] {
+                    
+                    guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
+                    
+                    let location = CLLocation(latitude: latitude, longitude: longitude)
+                    
+                    self.existedPathNode = LocationNode(location: location)
+                    
+                    self.existedPathNode?.name = "path"
+                    
+                    self.existedPathNodes.insert(self.existedPathNode!, at: 0)
+                    
+                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
+                    
+                }
+                
+            }, withCancel: nil)
+            
+        }, withCancel: nil)
+    }
 
     
     private func fetchPath() {
@@ -74,65 +143,12 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                 
                 if let dictionary = pathSnapshot.value as? [String: AnyObject] {
                     
-                    guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
+                    self.retrieveStartNode(from: dictionary)
                     
-                    guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
+                    self.retrieveEndNode(from: dictionary)
+                    
+                    self.retrievePathNodes(with: pathId)
 
-                    let location = CLLocation(latitude: latitude, longitude: longitude)
-                    
-                    self.existedStartNode = LocationNode(location: location)
-                    
-                    self.existedStartNode?.name = "start"
-                    
-                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
-                    
-                    let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes")
-                    
-                    pathNodesRef.observe( .childAdded, with: { (pathNodesSnapshot) in
-                        
-                        let pathNodesId = pathNodesSnapshot.key
-                        
-                        let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes").child(pathNodesId)
-                        
-                        pathNodesRef.observeSingleEvent(of: .value, with: { (positionSnapshot) in
-                            
-                            if let dictionary = positionSnapshot.value as? [String: Any] {
-                                
-                                guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
-                                
-                                let location = CLLocation(latitude: latitude, longitude: longitude)
-                                
-                                self.existedPathNode = LocationNode(location: location)
-                                
-                                self.existedPathNode?.name = "path"
-                                
-                                self.existedPathNodes.insert(self.existedPathNode!, at: 0)
-                                
-                                self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
-                                
-                                // Retrieve end node from the last element of existedPathNodes for every path
-                                if self.nowLoadingPathId != pathId {
-                                    
-                                    self.nowLoadingPathId = pathId
-
-                                    self.existedEndNode = self.existedPathNodes.last
-                                    
-                                    self.existedEndNode?.name = "end"
-                                    
-                                    if let existedEndNode = self.existedEndNode {
-                                        
-                                        self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: existedEndNode)
-                                        
-                                    }
-                                    
-                                }
-                                
-                            }
-                            
-                        }, withCancel: nil)
-                        
-                    }, withCancel: nil)
-                    
                 }
                 
             }, withCancel: nil)
