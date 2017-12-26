@@ -42,6 +42,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         self.sceneLocationView.autoenablesDefaultLighting = true
         
         sceneLocationView.locationDelegate = self
+        
+        //add touch gesture
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
 
     }
     
@@ -59,6 +63,24 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         super.viewWillDisappear(animated)
         
         sceneLocationView.pause()
+        
+    }
+    
+    @objc func handleTap(sender: UIGestureRecognizer) {
+        
+        let sceneViewTappedOn = sender.view as!  SceneLocationView
+        let touchCoordinates = sender.location(in: sceneViewTappedOn)
+        let hitTest = sceneViewTappedOn.hitTest(touchCoordinates)
+        
+        if hitTest.isEmpty {
+            
+            print("hit nothing")
+            
+        } else {
+            
+            print("OOOOO\(hitTest.first?.node.name)")
+            
+        }
         
     }
     
