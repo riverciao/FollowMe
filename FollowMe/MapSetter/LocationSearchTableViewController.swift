@@ -97,7 +97,8 @@ extension LocationSearchTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedItem = matchingItems[indexPath.row].placemark
         handleMapSearchDelegate?.dropPinZoomIn(placemark: selectedItem)
-        handleMapSearchDelegate?.setRouteFromCurrentLocationCoordinate(destinationCoordinate: selectedItem.coordinate)
+//        handleMapSearchDelegate?.setRouteFromCurrentLocationCoordinate(destinationCoordinate: selectedItem.coordinate)
+        handleMapSearchDelegate?.setRouteWith(currentLocationCoordinate: (currentLocation?.coordinate)!, destinationCoordinate: selectedItem.coordinate)
         
         dismiss(animated: true, completion: nil)
     }
