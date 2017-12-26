@@ -95,6 +95,8 @@ open class LocationAnnotationNode: LocationNode {
 
 open class LocationPathNode: LocationNode {
     
+    var isDrawn = false
+    
     var belongToPathId: String
     
     public init(location: CLLocation?, belongToPathId: String) {

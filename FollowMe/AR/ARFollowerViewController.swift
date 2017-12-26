@@ -69,34 +69,23 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         let sceneViewTappedOn = sender.view as!  SceneLocationView
         let touchCoordinates = sender.location(in: sceneViewTappedOn)
-        let hitTest = sceneViewTappedOn.hitTest(touchCoordinates)
+        let hitTestResults = sceneViewTappedOn.hitTest(touchCoordinates)
         
-        if hitTest.isEmpty {
+        guard let node = hitTestResults.first?.node as? Node else { return }
             
-            print("hit nothing")
+        if let pathId = node.belongToPathId {
             
-        } else {
+            let pathRef = Database.database().reference().child("paths").child(pathId)
             
-            let node = hitTest.first?.node as? Node
+            pathRef.removeValue()
             
-            if let pathId = node?.belongToPathId {
-                
-                let pathRef = Database.database().reference().child("paths").child(pathId)
-                
-                pathRef.removeValue()
-                
-                removeNodes(with: pathId)
-                
-//                fetchPath()
-            }
+            removeNodes(with: pathId)
             
         }
         
     }
     
     private func removeNodes(with pathId: pathId) {
-            
-        self.sceneLocationView.session.pause()
         
         self.sceneLocationView.scene.rootNode.enumerateChildNodes { (node, _) in
             
@@ -108,9 +97,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                 }
             }
         }
-        
-        self.sceneLocationView.session.run(configuration, options: [ .resetTracking])
-            
     }
     
     private func retrieveStartNode(from dictionary: [String: AnyObject], with pathId: pathId) {
@@ -128,6 +114,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedStartNode!)
         
+        self.existedStartNode?.removeFromParentNode()
     }
     
     private func retrieveEndNode(from dictionary: [String: AnyObject], with pathId: pathId) {
@@ -174,6 +161,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
                     self.existedPathNodes.append(self.existedPathNode!)
                     
                     self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
+                    
                     
                 }
                 
@@ -228,28 +216,33 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     private func draw(_ locationPathNode: LocationPathNode, inNodeType nodeType: NodeType) {
         
-        if self.x != locationPathNode.position.x || self.z != locationPathNode.position.z {
+        if !locationPathNode.isDrawn {
             
-            self.x = locationPathNode.position.x
-            
-            self.z = locationPathNode.position.z
-            
-            if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
+            if self.x != locationPathNode.position.x || self.z != locationPathNode.position.z {
                 
-                let pathId = locationPathNode.belongToPathId
+                self.x = locationPathNode.position.x
                 
-                let targetNode = Node(nodeType: nodeType, pathId: pathId)
+                self.z = locationPathNode.position.z
                 
-                targetNode.position = SCNVector3(x, position.y, z)
+                locationPathNode.isDrawn = true
                 
-                self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
-                
+                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
+                    
+                    let pathId = locationPathNode.belongToPathId
+                    
+                    let targetNode = Node(nodeType: nodeType, pathId: pathId)
+                    
+                    targetNode.position = SCNVector3(x, position.y, z)
+                    
+                    self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
+                    
+                }
             }
         }
     }
     
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
-
+        
         if let name = locationNode.name {
             
             switch name {
@@ -257,20 +250,20 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             case "start":
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
-                    
+
                     draw(locationPathNode, inNodeType: .start)
-                    
+
                 }
                 
             case "path":
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
-                
+
                     draw(locationPathNode, inNodeType: .path)
-                    
+
                 }
                 
-            case "end": print("end")
+            case "end":
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
                     
