@@ -330,7 +330,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //Make current location assign only onece when user press add path button
         
-        guard let currentLocation = currentLocation else {
+        guard let currentLocationCoordinate = currentLocationCoordinateForARSetting else {
          
             print("currentLocation not found")
             
@@ -338,9 +338,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }
             
-        let latitude = currentLocation.coordinate.latitude, longitude = currentLocation.coordinate.longitude, altitude = 0
+        let latitude = currentLocationCoordinate.latitude, longitude = currentLocationCoordinate.longitude, altitude = 0
         
-        // TODO: - change schema
         let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
         
         startNodeRef.setValue(values) { (error, ref) in
@@ -385,6 +384,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             print("isSaved")
         }
+    }
+    
+    private func uploadStartNode() {
+        
     }
     
 }
