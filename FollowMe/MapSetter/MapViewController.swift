@@ -32,6 +32,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
+    
+    
     @IBOutlet weak var mapView: MKMapView!
     
     
@@ -138,12 +140,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // limits the overlap area to just the View Controller’s frame instead of the whole Navigation Controller
         definesPresentationContext = true
         
-        //MARK: -----------
-        //Pass Value
-        locationSearchTableViewController.currentLocation = self.currentLocation
-        locationSearchTableViewController.mapView = self.mapView
-        present(searchController, animated: true, completion: nil)
+        //turn currentLocationCoordinateForARSetting to CLLocation
+        let currentLatitude = currentLocationCoordinateForARSetting?.latitude
+        let currentLongitude = currentLocationCoordinateForARSetting?.longitude
         
+        if let currentLatitude = currentLatitude, let currentLongitude = currentLongitude {
+            
+             let currentLocationForARSetting = CLLocation(latitude: currentLatitude, longitude: currentLongitude)
+            //MARK: -----------
+            //Pass Value
+            locationSearchTableViewController.currentLocation = currentLocationForARSetting
+//            locationSearchTableViewController.currentLocation = self.currentLocation
+            locationSearchTableViewController.mapView = self.mapView
+            present(searchController, animated: true, completion: nil)
+        }
+
     }
     
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
