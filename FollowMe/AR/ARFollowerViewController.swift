@@ -22,7 +22,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var existedPathNode: LocationPathNode?
     var existedPathNodes: [LocationPathNode] = []
     var existedEndNode: LocationPathNode?
-//    var pathId: String = ""
     
     //x, z for 3DVector converted from GPS
     var x: Float?
@@ -78,14 +77,40 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             
         } else {
             
-            if let node = hitTest.first?.node as? Node {
-                
-                print("OOOOO\(node.belongToPathId)")
+            let node = hitTest.first?.node as? Node
             
+            if let pathId = node?.belongToPathId {
+                
+                let pathRef = Database.database().reference().child("paths").child(pathId)
+                
+                pathRef.removeValue()
+                
+                removeNodes(with: pathId)
+                
+//                fetchPath()
             }
             
         }
         
+    }
+    
+    private func removeNodes(with pathId: pathId) {
+            
+        self.sceneLocationView.session.pause()
+        
+        self.sceneLocationView.scene.rootNode.enumerateChildNodes { (node, _) in
+            
+            if let pathNode = node as? Node {
+                
+                if pathNode.belongToPathId == pathId {
+                    
+                    pathNode.removeFromParentNode()
+                }
+            }
+        }
+        
+        self.sceneLocationView.session.run(configuration, options: [ .resetTracking])
+            
     }
     
     private func retrieveStartNode(from dictionary: [String: AnyObject], with pathId: pathId) {
