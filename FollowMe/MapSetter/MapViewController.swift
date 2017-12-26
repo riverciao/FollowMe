@@ -147,10 +147,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let currentLatitude = currentLatitude, let currentLongitude = currentLongitude {
             
              let currentLocationForARSetting = CLLocation(latitude: currentLatitude, longitude: currentLongitude)
-            //MARK: -----------
             //Pass Value
             locationSearchTableViewController.currentLocation = currentLocationForARSetting
-//            locationSearchTableViewController.currentLocation = self.currentLocation
             locationSearchTableViewController.mapView = self.mapView
             present(searchController, animated: true, completion: nil)
         }
@@ -179,56 +177,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let mapItem = MKMapItem(placemark: placemark)
         return mapItem
     }
-
-    
-//    func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
-//
-//        // TODO: - not delete all the overlays but redraw a new path to replace the old one
-//        let overlays = mapView.overlays
-//        mapView.removeOverlays(overlays)
-//
-//        setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
-//        setupAnnotationsFor(destinationCoordinate: currentLocationCoordinate)
-//
-//        let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
-//        let destinationMapItem = getMapItem(with: destinationCoordinate)
-//
-//        let directionRequest = MKDirectionsRequest()
-//        directionRequest.source = currentLocationMapItem
-//        directionRequest.destination = destinationMapItem
-//        directionRequest.transportType = .walking
-//
-//        // Calculate the direction
-//        let directions = MKDirections(request: directionRequest)
-//
-//        directions.calculate { (response, error) in
-//
-//
-//            guard let response = response else {
-//                if let error = error {
-//                    print(error)
-//                }
-//
-//                return
-//
-//            }
-//
-//
-//            self.route = response.routes[0]
-//
-//            // MARK: - Retrieve GPS coordinate from polyline
-//
-//            let routeCoordinates = self.route?.polyline.coordinates
-//
-//            self.coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
-//
-//            if let route = self.route {
-//
-//                self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
-//
-//            }
-//        }
-//    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
@@ -492,6 +440,7 @@ extension MapViewController: HandleMapSearch {
             
             
             guard let response = response else {
+                
                 if let error = error {
                     print(error)
                 }
