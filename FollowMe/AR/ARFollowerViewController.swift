@@ -78,7 +78,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             
         } else {
             
-            print("OOOOO\(hitTest.first?.node.name)")
+            if let node = hitTest.first?.node as? Node {
+                
+                print("OOOOO\(node.nodeType)")
+            
+            }
             
         }
         
