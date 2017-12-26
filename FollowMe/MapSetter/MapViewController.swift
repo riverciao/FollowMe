@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Firebase
 
 protocol HandleMapSearch {
     
@@ -352,33 +353,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
             }
             
-            for pathNode in self.coordinatesPerMeter {
-                
-                // Upload new path to firebase
-                let pathId = pathIdRef.key
-                
-                let pathNodesRef = FirebasePath.pathRef.child(pathId).child("path-nodes")
-                
-                let pointsPositionRef = pathNodesRef.childByAutoId()
-                
-                let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 0
-                
-                let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
-                
-                pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
-                    
-                    if let error = error {
-                        
-                        print(error)
-                        
-                        return
-                    }
-                    
-                    print("Saving OO\(self.coordinatesPerMeter.count)")
-                    
-                })
-                
-            }
+            self.uploadPathNode(in: pathIdRef)
             
             self.isSaved = true
             
@@ -386,8 +361,35 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    private func uploadStartNode() {
+    private func uploadPathNode(in pathIdRef: DatabaseReference) {
         
+        for pathNode in self.coordinatesPerMeter {
+            
+            // Upload pathNodes to firebase
+            let pathId = pathIdRef.key
+            
+            let pathNodesRef = FirebasePath.pathRef.child(pathId).child("path-nodes")
+            
+            let pointsPositionRef = pathNodesRef.childByAutoId()
+            
+            let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 0
+            
+            let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
+            
+            pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                
+                if let error = error {
+                    
+                    print(error)
+                    
+                    return
+                }
+                
+                print("Saving OO\(self.coordinatesPerMeter.count)")
+                
+            })
+            
+        }
     }
     
 }
