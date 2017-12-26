@@ -262,7 +262,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     typealias coordinates = [CLLocationCoordinate2D]
     
-    public func getCoordinatesPerMeter(from coordinates: coordinates) -> coordinates {
+    public func getCoordinatesFromStraintLine(from coordinates: coordinates) -> coordinates {
         
         var coordinatesPerMeter = coordinates
         
@@ -416,7 +416,6 @@ extension MapViewController: HandleMapSearch {
     
     func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
-        // TODO: - not delete all the overlays but redraw a new path to replace the old one
         let overlays = mapView.overlays
         mapView.removeOverlays(overlays)
         
@@ -454,7 +453,11 @@ extension MapViewController: HandleMapSearch {
             
             let routeCoordinates = self.route?.polyline.coordinates
             
-            self.coordinatesPerMeter = self.getCoordinatesPerMeter(from: routeCoordinates!)
+            print("routeCoordinates[0]\(routeCoordinates![0])")
+            print("routeCoordinates.last-1\(routeCoordinates![(routeCoordinates?.count)! - 3])")
+            print("routeCoordinates.last\(routeCoordinates!.last)")
+            
+            self.coordinatesPerMeter = self.getCoordinatesFromStraintLine(from: routeCoordinates!)
             
             if let route = self.route {
                 
