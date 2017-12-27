@@ -85,9 +85,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             if nodeName == "delete" {
                 
                 if let pathNode = node?.parent as? Node {
-                    
-//                    deletePath(from: pathNode)
-                    showDeleteAlert()
+
+                    showDeleteAlert(with: pathNode)
                     
                 }
                 
@@ -101,18 +100,18 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         }
     }
     
-    private func showDeleteAlert() {
+    private func showDeleteAlert(with node: Node) {
         
         let alert = UIAlertController(
             title: NSLocalizedString("Are you sure to delete this route?", comment: ""),
-            message: "You won’t be able to re-open the route. There is no undo.",
+            message: nil,
             preferredStyle: .alert
         )
         
         let delete = UIAlertAction(
             title: NSLocalizedString("Delete", comment: ""),
             style: .destructive,
-            handler: nil
+            handler: { action in self.deletePath(from: node) }
         )
         
         let cancel = UIAlertAction(
@@ -127,6 +126,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         present(alert, animated: true, completion: nil)
         
     }
+
     
     private func hideDeletionCheckNode() {
         
