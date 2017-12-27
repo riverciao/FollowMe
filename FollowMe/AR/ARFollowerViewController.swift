@@ -43,9 +43,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         sceneLocationView.locationDelegate = self
         
         //add touch gesture
-        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        self.sceneLocationView.addGestureRecognizer(longPressGestureRecognizer)
+//        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
 
     }
     
@@ -74,6 +74,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         guard let node = hitTestResults.first?.node as? Node else { return }
         
+        print("Pressing")
+        
         addDeletionCheckNode(with: node)
         
 //        if let pathId = node.belongToPathId {
@@ -93,13 +95,20 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         let deletionCheckNode = SCNNode()
         
-        deletionCheckNode.geometry = SCNPlane(width: 10, height: 10)
+//        deletionCheckNode.geometry = SCNPlane(width: 0.8, height: 0.8)
         
-        deletionCheckNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "button_close")
+        deletionCheckNode.geometry = SCNSphere(radius: 0.3)
         
-        //            plane.geometry?.firstMaterial?.specular.contents
+        deletionCheckNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "icon-current-location")
         
-        deletionCheckNode.position = SCNVector3(1.5,1.5,1.5)
+        deletionCheckNode.geometry?.firstMaterial?.specular.contents = UIColor.white
+        
+        deletionCheckNode.position = SCNVector3( 0.8, 1.2, 0.8)
+        
+        // TODO: - what is SCNBillboardConstraint?
+        let billboardConstraint = SCNBillboardConstraint()
+        billboardConstraint.freeAxes = SCNBillboardAxis.Y
+        deletionCheckNode.constraints = [billboardConstraint]
         
         node.addChildNode(deletionCheckNode)
     }
