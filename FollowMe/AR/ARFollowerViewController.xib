@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ARFollowerViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
                 <outlet property="sceneLocationView" destination="8kw-EC-e5C" id="Tqb-SS-mKj"/>
+                <outlet property="smallSyncMapView" destination="fDD-vY-JAG" id="tyl-56-leM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -24,13 +25,22 @@
                 <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kw-EC-e5C" customClass="SceneLocationView" customModule="FollowMe" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                 </arscnView>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fDD-vY-JAG">
+                    <rect key="frame" x="215" y="507" width="150" height="150"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="xAv-aH-Ln9"/>
+                        <constraint firstAttribute="width" constant="150" id="xoa-tF-Y5l"/>
+                    </constraints>
+                </mapView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8kw-EC-e5C" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="38E-W1-wZG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8kw-EC-e5C" secondAttribute="bottom" id="E81-92-05w"/>
                 <constraint firstItem="8kw-EC-e5C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QKi-QI-TEA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fDD-vY-JAG" secondAttribute="trailing" constant="10" id="cNc-DU-SpX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8kw-EC-e5C" secondAttribute="trailing" id="jC7-PK-n0z"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fDD-vY-JAG" secondAttribute="bottom" constant="10" id="rUT-ft-jl2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>

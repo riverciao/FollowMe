@@ -11,15 +11,18 @@ import ARKit
 import MapKit
 import Firebase
 
-class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKMapViewDelegate {
+class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     
+    @IBOutlet weak var smallSyncMapView: MKMapView!
     
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
 
-    var smallSyncMapView = SmallSyncMapView(frame: CGRect(x: 10, y: 10, width: 150, height: 150))
+    //currentlocation manager
+    private var currentLocation: CLLocation?
+    private var locationManager: CLLocationManager!
     
     //Existed Path Property
     var existedStartNode: LocationPathNode?
@@ -37,9 +40,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //SmallSyncMapView setup
-        self.view.addSubview(smallSyncMapView)
-        self.smallSyncMapView.delegate = self
+        setupSmallSyncMapView()
         
         self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
@@ -71,6 +72,27 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         sceneLocationView.pause()
         
+    }
+    
+    private func setupSmallSyncMapView() {
+        self.view.addSubview(smallSyncMapView)
+        self.smallSyncMapView.delegate = self
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        
+        // Check for Location Services
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func setupCurrentLocationAnnotation() {
+        if let currentLocation = currentLocation {
+            let annotation = Annotation(title: "", subtitle: "", coordinate: currentLocation.coordinate)
+            self.smallSyncMapView.addAnnotation(annotation)
+        }
     }
     
     @objc func handleTap(sender: UIGestureRecognizer) {
@@ -160,6 +182,25 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 
         }
         
+    }
+    
+    // MARK - CLLocationManagerDelegate
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        defer {
+            
+            currentLocation = locations.last
+            setupCurrentLocationAnnotation()
+            
+        }
+        
+        if currentLocation == nil {
+            // Zoom to user location
+            if let userLocation = locations.last {
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 100, 100)
+                smallSyncMapView.setRegion(viewRegion, animated: false)
+            }
+        }
     }
     
     private func addDeletionCheckNode(fromParent node: Node) {

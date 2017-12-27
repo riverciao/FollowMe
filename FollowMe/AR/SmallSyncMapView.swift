@@ -9,59 +9,64 @@
 import UIKit
 import MapKit
 
-class SmallSyncMapView: MKMapView, CLLocationManagerDelegate, MKMapViewDelegate {
+class SmallSyncMapView: MKMapView {
 
-    private var currentLocation: CLLocation?
-    private var locationManager: CLLocationManager!
+    //, CLLocationManagerDelegate
+//    private var currentLocation: CLLocation?
+//    private var locationManager: CLLocationManager!
     
     @IBOutlet var smallSyncMapView: MKMapView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        commonInit()
+        commonInit()
     }
     
     private func commonInit() {
-        
-//        self.smallSyncMapView.delegate = self
         
         Bundle.main.loadNibNamed("SmallSyncMapView", owner: self, options: nil)
         addSubview(smallSyncMapView)
         smallSyncMapView.frame = self.bounds
         smallSyncMapView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
-        locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        
-        // Check for Location Services
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
+//        locationManager = CLLocationManager()
+//        locationManager.delegate = self
+//        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+//        
+//        
+//        // Check for Location Services
+//        locationManager.requestWhenInUseAuthorization()
+//        locationManager.startUpdatingLocation()
         
     }
     
-    // MARK - CLLocationManagerDelegate
+//    private func setupCurrentLocationAnnotation() {
+//        if let currentLocation = currentLocation {
+//            let annotation = Annotation(title: "", subtitle: "", coordinate: currentLocation.coordinate)
+//            self.smallSyncMapView.addAnnotation(annotation)
+//        }
+//    }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        defer {
-            
-            currentLocation = locations.last
-            
-        }
-        
-        if currentLocation == nil {
-            // Zoom to user location
-            if let userLocation = locations.last {
-                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
-                smallSyncMapView.setRegion(viewRegion, animated: false)
-            }
-        }
-    }
+//    // MARK - CLLocationManagerDelegate
+//    
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        defer {
+//            
+//            currentLocation = locations.last
+//            
+//        }
+//        
+//        if currentLocation == nil {
+//            // Zoom to user location
+//            if let userLocation = locations.last {
+//                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 100, 100)
+//                smallSyncMapView.setRegion(viewRegion, animated: false)
+//            }
+//        }
+//    }
 
 }
