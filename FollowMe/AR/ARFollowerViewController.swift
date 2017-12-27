@@ -14,8 +14,10 @@ import Firebase
 class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
-    
     @IBOutlet weak var smallSyncMapView: MKMapView!
+    
+    @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
@@ -81,7 +83,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         for step in steps! {
             
-            print("\(step.instructions) for \(Int(step.distance))m")
+            self.instructionLabel.text = step.instructions
+            self.distanceLabel.text = "\(Int(step.distance)) m"
             
         }
     }
