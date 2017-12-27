@@ -462,6 +462,15 @@ extension MapViewController: HandleMapSearch {
             
             self.route = response.routes[0]
             
+            let steps = self.route?.steps
+            
+            for step in steps! {
+                
+                print("\(step.instructions) for \(Int(step.distance))m")
+                
+            }
+            
+            
             // MARK: - Retrieve GPS coordinate from polyline
             
             let routeCoordinates = self.route?.polyline.coordinates

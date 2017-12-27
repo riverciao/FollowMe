@@ -36,18 +36,23 @@ class LocationSearchTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return 80.0
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
+        
         var locationCell = LocationSearchTableViewCell()
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell") as? LocationSearchTableViewCell {
             
             let selectedItem = matchingItems[indexPath.row].placemark
+            
             let selectedLocation = selectedItem.location
             
             cell.locationLabel.text = selectedItem.name
+            
             cell.addressLabel.text = parseAddress(selectedItem: selectedItem)
             
             if let currentLocation = self.currentLocation {
@@ -117,7 +122,6 @@ extension LocationSearchTableViewController : UISearchResultsUpdating {
             }
             
             guard let response = response else { return }
-            print("OOOresponse:\(response)")
             self.matchingItems = response.mapItems
             self.tableView.reloadData()
         }
