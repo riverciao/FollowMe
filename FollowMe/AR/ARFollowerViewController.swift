@@ -95,17 +95,17 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         let deletionCheckNode = SCNNode()
         
-//        deletionCheckNode.geometry = SCNPlane(width: 0.8, height: 0.8)
+        deletionCheckNode.geometry = SCNPlane(width: 0.8, height: 0.8)
         
-        deletionCheckNode.geometry = SCNSphere(radius: 0.3)
+        //change to SCNCylinder
         
-        deletionCheckNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "icon-current-location")
+        deletionCheckNode.geometry?.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "icon-delete")
         
         deletionCheckNode.geometry?.firstMaterial?.specular.contents = UIColor.white
         
         deletionCheckNode.position = SCNVector3( 0.8, 1.2, 0.8)
         
-        // TODO: - what is SCNBillboardConstraint?
+        // plane node always face to user
         let billboardConstraint = SCNBillboardConstraint()
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         deletionCheckNode.constraints = [billboardConstraint]
