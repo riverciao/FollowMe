@@ -45,9 +45,26 @@ class LocationSearchTableViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell") as? LocationSearchTableViewCell {
             
             let selectedItem = matchingItems[indexPath.row].placemark
+            let selectedLocation = selectedItem.location
+            
             cell.locationLabel.text = selectedItem.name
             cell.addressLabel.text = parseAddress(selectedItem: selectedItem)
-        
+            
+            if let currentLocation = self.currentLocation {
+                
+                if let distance = selectedLocation?.distance(from: currentLocation) {
+                    
+                    cell.distanceLabel.text = "\(Int(distance)) m"
+
+                } else {
+                    
+                    cell.distanceLabel.text = "? m"
+                    
+                }
+                
+            }
+            
+            
             locationCell = cell
         }
         
