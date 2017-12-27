@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PositioningViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
@@ -23,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qKE-ZY-8S6">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                 </mapView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-current-location" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-f2-R9s">
                     <rect key="frame" x="172.5" y="318.5" width="30" height="30"/>
@@ -47,16 +52,41 @@
                         <action selector="confirmLocationButton:" destination="-1" eventType="touchUpInside" id="1pO-GS-Fry"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6Q-YT-D4F">
+                    <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-eA-mfk">
+                            <rect key="frame" x="104" y="8" width="166" height="24"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                            <color key="textColor" red="0.10715164027269128" green="0.22968216770562289" blue="0.48313194513320934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Move the map to set exactly where you are" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqz-Ob-DkD">
+                            <rect key="frame" x="49" y="35" width="277" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.52587890625" green="0.52587890625" blue="0.52587890625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="cyH-he-dhH"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="1SW-qI-OuW"/>
+                <constraint firstItem="F6Q-YT-D4F" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2MI-Pv-VPI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qKE-ZY-8S6" secondAttribute="bottom" id="FDK-aj-smA"/>
-                <constraint firstItem="qKE-ZY-8S6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HKV-y0-qTJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rq1-br-1Vc" secondAttribute="bottom" constant="25" id="Ldi-2Z-3Dg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="F6Q-YT-D4F" secondAttribute="trailing" id="UHH-lz-zzC"/>
                 <constraint firstItem="qKE-ZY-8S6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="fvn-Pg-1Ii"/>
                 <constraint firstItem="rq1-br-1Vc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="gqY-YK-Coi"/>
+                <constraint firstItem="qKE-ZY-8S6" firstAttribute="top" secondItem="F6Q-YT-D4F" secondAttribute="bottom" id="hX6-ke-rGl"/>
                 <constraint firstItem="gC9-f2-R9s" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="k0N-m4-UhD"/>
+                <constraint firstItem="F6Q-YT-D4F" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="usu-s1-zfk"/>
                 <constraint firstItem="gC9-f2-R9s" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zsT-uo-8CX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
