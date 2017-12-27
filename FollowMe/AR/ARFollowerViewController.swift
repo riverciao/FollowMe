@@ -78,22 +78,25 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
             
         } else {
             
-            guard let node = hitTestResults.first?.node as? Node else { return }
+            let node = hitTestResults.first?.node
             
-            guard let nodeName = node.name else { return }
+            guard let nodeName = node?.name else { return }
             
-            switch nodeName {
-            case "start": print("start")
-            case "path": print("path")
-            case "end": print("end")
-            case "delete": print("delete")
-            default: break
+            if nodeName == "delete" {
+                
+                if let pathNode = node?.parent as? Node {
+                    
+                    deletePath(from: pathNode)
+                    
+                }
+                
+            } else  {
+                
+                guard let pathNode = hitTestResults.first?.node as? Node else { return }
+                
+                addDeletionCheckNode(fromParent: pathNode)
                 
             }
-            
-            addDeletionCheckNode(with: node)
-            
-            
         }
     }
     
@@ -125,7 +128,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
     }
     
-    private func addDeletionCheckNode(with node: Node) {
+    private func addDeletionCheckNode(fromParent node: Node) {
         
         let deletionCheckNode = SCNNode()
         
@@ -139,7 +142,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         
         deletionCheckNode.geometry?.firstMaterial?.specular.contents = UIColor.white
         
-        deletionCheckNode.position = SCNVector3( 0.8, 1.2, 0.8)
+        deletionCheckNode.position = SCNVector3( 1.2, 1.2, 1.2)
         
         // plane node always face to user
         let billboardConstraint = SCNBillboardConstraint()
