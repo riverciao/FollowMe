@@ -28,7 +28,7 @@ class SmallSyncMapView: MKMapView, CLLocationManagerDelegate, MKMapViewDelegate 
     
     private func commonInit() {
         
-        self.smallSyncMapView.delegate = self
+//        self.smallSyncMapView.delegate = self
         
         Bundle.main.loadNibNamed("SmallSyncMapView", owner: self, options: nil)
         addSubview(smallSyncMapView)
@@ -41,11 +41,8 @@ class SmallSyncMapView: MKMapView, CLLocationManagerDelegate, MKMapViewDelegate 
         
         
         // Check for Location Services
-        
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.requestWhenInUseAuthorization()
-            locationManager.startUpdatingLocation()
-        }
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
         
     }
     

@@ -11,14 +11,15 @@ import ARKit
 import MapKit
 import Firebase
 
-class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
+class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKMapViewDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     
-    @IBOutlet weak var smallSyncMapView: SmallSyncMapView!
     
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
+
+    var smallSyncMapView = SmallSyncMapView(frame: CGRect(x: 10, y: 10, width: 150, height: 150))
     
     //Existed Path Property
     var existedStartNode: LocationPathNode?
@@ -30,13 +31,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     var x: Float?
     var z: Float?
     
-    
     //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //SmallSyncMapView setup
+        self.view.addSubview(smallSyncMapView)
+        self.smallSyncMapView.delegate = self
+        
         self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
         self.sceneLocationView.session.run(configuration)
