@@ -90,10 +90,15 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             let coordinates = step.polyline.coordinates
             let instructions = step.instructions
             
-            for coordinate in coordinates {
-                let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate)
-                self.smallSyncMapView.addAnnotation(annotation)
-            }
+            let coordinate = coordinates.last
+            let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate!)
+            self.smallSyncMapView.addAnnotation(annotation)
+            
+            
+//            for coordinate in coordinates {
+//                let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate)
+//                self.smallSyncMapView.addAnnotation(annotation)
+//            }
             
             
         }
