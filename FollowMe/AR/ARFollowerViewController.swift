@@ -23,6 +23,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //currentlocation manager
     private var currentLocation: CLLocation?
     private var locationManager: CLLocationManager!
+    var route: MKRoute?
     
     //Existed Path Property
     var existedStartNode: LocationPathNode?
@@ -55,6 +56,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
 
+        getRouteInstructions()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +67,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         fetchPath()
 
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,6 +74,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         sceneLocationView.pause()
         
+    }
+    
+    private func getRouteInstructions() {
+        let steps = self.route?.steps
+        
+        for step in steps! {
+            
+            print("\(step.instructions) for \(Int(step.distance))m")
+            
+        }
     }
     
     private func setupSmallSyncMapView() {
@@ -184,7 +196,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
-    // MARK - CLLocationManagerDelegate
+    // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         defer {
@@ -197,7 +209,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         if currentLocation == nil {
             // Zoom to user location
             if let userLocation = locations.last {
-                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 100, 100)
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 150, 150)
                 smallSyncMapView.setRegion(viewRegion, animated: false)
             }
         }
