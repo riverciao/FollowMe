@@ -126,7 +126,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         present(alert, animated: true, completion: nil)
         
     }
-
     
     private func hideDeletionCheckNode() {
         

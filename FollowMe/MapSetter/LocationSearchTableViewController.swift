@@ -23,7 +23,9 @@ class LocationSearchTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        let nib = UINib(nibName: "LocationSearchTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "locationCell")
+        
     }
 
     // MARK: - Table view data source
@@ -33,13 +35,26 @@ class LocationSearchTableViewController: UITableViewController {
         return matchingItems.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
-        let selectedItem = matchingItems[indexPath.row].placemark
-        cell.textLabel?.text = selectedItem.name
-        cell.detailTextLabel?.text = parseAddress(selectedItem: selectedItem)
-        return cell
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
+        var locationCell = LocationSearchTableViewCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "locationCell") as? LocationSearchTableViewCell {
+            
+            let selectedItem = matchingItems[indexPath.row].placemark
+            cell.locationLabel.text = selectedItem.name
+            cell.addressLabel.text = parseAddress(selectedItem: selectedItem)
+        
+            locationCell = cell
+        }
+        
+        return locationCell
+    }
+    
+    
     
     //TODO: - rearrange address format
     func parseAddress(selectedItem:MKPlacemark) -> String {
