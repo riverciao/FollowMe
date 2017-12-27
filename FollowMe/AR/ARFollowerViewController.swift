@@ -72,22 +72,56 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         let touchCoordinates = sender.location(in: sceneViewTappedOn)
         let hitTestResults = sceneViewTappedOn.hitTest(touchCoordinates)
         
-        guard let node = hitTestResults.first?.node as? Node else { return }
+        if hitTestResults.isEmpty {
+            
+            hideDeletionCheckNode()
+            
+        } else {
+            
+            guard let node = hitTestResults.first?.node as? Node else { return }
+            
+            guard let nodeName = node.name else { return }
+            
+            switch nodeName {
+            case "start": print("start")
+            case "path": print("path")
+            case "end": print("end")
+            case "delete": print("delete")
+            default: break
+                
+            }
+            
+            addDeletionCheckNode(with: node)
+            
+            
+        }
+    }
+    
+    private func hideDeletionCheckNode() {
         
-        print("Pressing")
+        self.sceneLocationView.scene.rootNode.enumerateChildNodes { (node, _) in
+            
+            if node.name == "delete" {
+                
+                node.removeFromParentNode()
+                
+            }
+            
+        }
         
-        addDeletionCheckNode(with: node)
+    }
+    
+    private func deletePath(from selectedNode: Node) {
         
-//        if let pathId = node.belongToPathId {
-//
-//            let pathRef = Database.database().reference().child("paths").child(pathId)
-//
-//            pathRef.removeValue()
-//
-//            removeNodes(with: pathId)
-//
-//
-//        }
+        if let pathId = selectedNode.belongToPathId {
+
+            let pathRef = Database.database().reference().child("paths").child(pathId)
+
+            pathRef.removeValue()
+
+            removeNodes(with: pathId)
+
+        }
         
     }
     
@@ -96,6 +130,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
         let deletionCheckNode = SCNNode()
         
         deletionCheckNode.geometry = SCNPlane(width: 0.8, height: 0.8)
+        
+        deletionCheckNode.name = "delete"
         
         //change to SCNCylinder
         
