@@ -14,6 +14,9 @@ import Firebase
 class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
+    
+    @IBOutlet weak var smallSyncMapView: SmallSyncMapView!
+    
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
     
@@ -33,6 +36,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        smallSyncMapView.testLabel.text = "HAHnd,s md.s, djsaklmm,"
 
         self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
