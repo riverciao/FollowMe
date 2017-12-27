@@ -85,6 +85,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             self.instructionLabel.text = step.instructions
             self.distanceLabel.text = "\(Int(step.distance)) m"
+            print("stepCoordinates\(step.polyline.coordinates) for \(step.instructions)")
+            
+            let coordinates = step.polyline.coordinates
+            let instructions = step.instructions
+            
+            for coordinate in coordinates {
+                let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate)
+                self.smallSyncMapView.addAnnotation(annotation)
+            }
+            
             
         }
     }
@@ -203,6 +213,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         defer {
+            
             
             currentLocation = locations.last
             setupCurrentLocationAnnotation()

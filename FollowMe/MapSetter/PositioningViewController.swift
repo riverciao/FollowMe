@@ -63,7 +63,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
     }
 
-    // MARK - CLLocationManagerDelegate
+    // MARK: - CLLocationManagerDelegate
     // TODO: - track location and heading for onece and do not keep  tracking to let user adjust it by self
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         defer {
