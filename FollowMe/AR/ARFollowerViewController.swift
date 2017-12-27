@@ -57,8 +57,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 //        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
-
-        getRouteInstructions()
         
     }
     
@@ -81,25 +79,44 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     private func getRouteInstructions() {
         let steps = self.route?.steps
         
+        if let firstStep = steps?.first {
+            self.instructionLabel.text = firstStep.instructions
+            self.distanceLabel.text = "\(Int(firstStep.distance)) m"
+        }
+        
+        
+        
         for step in steps! {
             
-            self.instructionLabel.text = step.instructions
-            self.distanceLabel.text = "\(Int(step.distance)) m"
+            
             print("stepCoordinates\(step.polyline.coordinates) for \(step.instructions)")
             
             let coordinates = step.polyline.coordinates
             let instructions = step.instructions
-            
+
             let coordinate = coordinates.last
+            
+            //Add the last coordinate of polyline to observe instruction
             let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate!)
             self.smallSyncMapView.addAnnotation(annotation)
             
-            
-//            for coordinate in coordinates {
-//                let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate)
-//                self.smallSyncMapView.addAnnotation(annotation)
-//            }
-            
+            if let currentLocation = self.currentLocation {
+
+                
+                let nextStepLocation = CLLocation(coordinate: coordinate!, altitude: 0)
+                let distanceToShowNextStep = currentLocation.distance(from: nextStepLocation)
+                
+                print("distanceToShowNextStep\(distanceToShowNextStep)")
+                
+                if distanceToShowNextStep < 5 {
+                    
+                    self.instructionLabel.text = step.instructions
+                    self.distanceLabel.text = "\(Int(step.distance)) m"
+
+
+                }
+                
+            }
             
         }
     }
@@ -222,6 +239,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             currentLocation = locations.last
             setupCurrentLocationAnnotation()
+            getRouteInstructions()
             
         }
         
