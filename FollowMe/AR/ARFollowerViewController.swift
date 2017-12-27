@@ -36,8 +36,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        smallSyncMapView.testLabel.text = "HAHnd,s md.s, djsaklmm,"
 
         self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         

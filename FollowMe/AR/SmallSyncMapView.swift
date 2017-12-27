@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import MapKit
 
-class SmallSyncMapView: UIView {
+class SmallSyncMapView: MKMapView, CLLocationManagerDelegate, MKMapViewDelegate {
 
-    @IBOutlet var smallSyncMapView: UIView!
-    @IBOutlet weak var testLabel: UILabel!
+    private var currentLocation: CLLocation?
+    private var locationManager: CLLocationManager!
+    
+    @IBOutlet var smallSyncMapView: MKMapView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,16 +23,48 @@ class SmallSyncMapView: UIView {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
+//        commonInit()
     }
     
     private func commonInit() {
+        
+        self.smallSyncMapView.delegate = self
         
         Bundle.main.loadNibNamed("SmallSyncMapView", owner: self, options: nil)
         addSubview(smallSyncMapView)
         smallSyncMapView.frame = self.bounds
         smallSyncMapView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        
+        // Check for Location Services
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+        
+    }
+    
+    // MARK - CLLocationManagerDelegate
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        defer {
+            
+            currentLocation = locations.last
+            
+        }
+        
+        if currentLocation == nil {
+            // Zoom to user location
+            if let userLocation = locations.last {
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 600, 600)
+                smallSyncMapView.setRegion(viewRegion, animated: false)
+            }
+        }
     }
 
 }

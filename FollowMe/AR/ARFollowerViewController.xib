@@ -13,7 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ARFollowerViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
                 <outlet property="sceneLocationView" destination="8kw-EC-e5C" id="Tqb-SS-mKj"/>
-                <outlet property="smallSyncMapView" destination="Wir-gI-1iO" id="fic-3s-nPo"/>
+                <outlet property="smallSyncMapView" destination="NEl-3e-bPE" id="BFQ-uq-rA9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,23 +25,22 @@
                 <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kw-EC-e5C" customClass="SceneLocationView" customModule="FollowMe" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                 </arscnView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wir-gI-1iO" customClass="SmallSyncMapView" customModule="FollowMe" customModuleProvider="target">
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NEl-3e-bPE" customClass="SmallSyncMapView" customModule="FollowMe" customModuleProvider="target">
                     <rect key="frame" x="215" y="507" width="150" height="150"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="150" id="BJ5-kc-QSD"/>
-                        <constraint firstAttribute="height" constant="150" id="tAj-3L-4mq"/>
+                        <constraint firstAttribute="height" constant="150" id="xBd-Pp-5Ux"/>
+                        <constraint firstAttribute="width" constant="150" id="xwf-I1-L2R"/>
                     </constraints>
-                </view>
+                </mapView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8kw-EC-e5C" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="38E-W1-wZG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8kw-EC-e5C" secondAttribute="bottom" id="E81-92-05w"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NEl-3e-bPE" secondAttribute="trailing" constant="10" id="MhT-j7-duu"/>
                 <constraint firstItem="8kw-EC-e5C" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="QKi-QI-TEA"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Wir-gI-1iO" secondAttribute="trailing" constant="10" id="cdS-zm-Jo1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="NEl-3e-bPE" secondAttribute="bottom" constant="10" id="XAI-Nf-G6X"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8kw-EC-e5C" secondAttribute="trailing" id="jC7-PK-n0z"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Wir-gI-1iO" secondAttribute="bottom" constant="10" id="zrQ-Lx-hul"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>
