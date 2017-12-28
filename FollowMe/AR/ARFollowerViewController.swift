@@ -30,33 +30,14 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     private var locationManager: CLLocationManager!
     var currentLocationAnnotation: Annotation?
     var route: MKRoute?
-    
-    //test redraw route
-    var routeRedrawn: MKRoute?
-    
+
     //Existed Path Property
-    var existedStartNode: LocationPathNode? {
-        didSet {
-            print("existedStartNodeOOO\(existedStartNode)")
-        }
-    }
+    var existedStartNode: LocationPathNode?
     var existedPathNode: LocationPathNode?
     var existedPathNodes: [LocationPathNode] = []
-    var existedEndNode: LocationPathNode? {
-        didSet {
-            if let existedStartNode = existedStartNode, let existedEndNode = existedEndNode {
-                let startLocation = CLLocation(coordinate: existedStartNode.location.coordinate, altitude: 0)
-                let endLocation = CLLocation(coordinate: existedEndNode.location.coordinate, altitude: 0)
-                let mapViewController = MapViewController()
-                
-                setRouteWith(currentLocationCoordinate: startLocation.coordinate, destinationCoordinate: endLocation.coordinate)
-                
-                print("OOOOOOO\(route)")
-            }
-        }
-    }
+    var existedEndNode: LocationPathNode?
     
-    //take pathIf from mapViewController
+    //take pathId from mapViewController
     var currentPathId: pathId?
     
     
@@ -450,60 +431,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
         }
         
-    }
-    
-    // MARK: - set route
-    
-    func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
-        
-        let overlays = smallSyncMapView.overlays
-        smallSyncMapView.removeOverlays(overlays)
-        
-        setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
-        setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
-        
-        let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
-        let destinationMapItem = getMapItem(with: destinationCoordinate)
-        
-        let directionRequest = MKDirectionsRequest()
-        directionRequest.source = currentLocationMapItem
-        directionRequest.destination = destinationMapItem
-        directionRequest.transportType = .walking
-        
-        // Calculate the direction
-        let directions = MKDirections(request: directionRequest)
-        
-        directions.calculate { (response, error) in
-            
-            
-            guard let response = response else {
-                
-                if let error = error {
-                    print(error)
-                }
-                
-                return
-                
-            }
-            
-            
-            self.route = response.routes[0]
-            
-            if let route = self.route {
-                
-                self.smallSyncMapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
-                
-            }
-        }
-    }
-    
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.red
-        renderer.lineWidth = 4.0
-        
-        return renderer
     }
     
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
