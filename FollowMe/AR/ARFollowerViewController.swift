@@ -57,6 +57,18 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 
     }
     
+    
+    @IBAction func goToManageRoutes(_ sender: Any) {
+        
+        if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
+            routesTableViewController.pathId = self.currentPathId
+            print(">>>>>>>\(self.currentPathId)")
+            self.navigationController?.popToViewController(routesTableViewController, animated: true)
+        }
+        
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -396,10 +408,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             guard let pathId = self.currentPathId else {
                 
-                //if not receive currentPathId form mapViewController
+                // TODO: - if not receive currentPathId form mapViewController
                 return
             }
             
+            // TODO: - invalid pathId
             
             let pathRef = Database.database().reference().child("paths").child(pathId)
             

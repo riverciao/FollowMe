@@ -40,6 +40,7 @@
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
+		5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */; };
 		5FE74AC11FEE8FC80048C711 /* PositioningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */; };
 		5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */; };
 		5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */; };
@@ -84,6 +85,7 @@
 		5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBE573E1FDEB8FF002FDEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningViewController.swift; sourceTree = "<group>"; };
 		5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositioningViewController.xib; sourceTree = "<group>"; };
 		5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFollowerViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5FD7E38E1FF51CB600E8CFBA /* RoutesManagement */,
 				5F9116481FF4B4760030E9EF /* FollowerEntrance */,
 				5F9116421FF4B00D0030E9EF /* Landing */,
 				5F4526871FE9FF8A004012D1 /* AR */,
@@ -230,6 +233,14 @@
 				5F184E331FE283A700789BDF /* Source */,
 			);
 			path = FollowMe;
+			sourceTree = "<group>";
+		};
+		5FD7E38E1FF51CB600E8CFBA /* RoutesManagement */ = {
+			isa = PBXGroup;
+			children = (
+				5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */,
+			);
+			path = RoutesManagement;
 			sourceTree = "<group>";
 		};
 		83443FCB039D975896EB26DE /* Frameworks */ = {
@@ -390,6 +401,7 @@
 				5F184E301FE2837A00789BDF /* ARViewController.swift in Sources */,
 				5F184E431FE283A800789BDF /* SceneLocationEstimate.swift in Sources */,
 				5F9116381FF3AED90030E9EF /* LocationSearchTableViewCell.swift in Sources */,
+				5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */,
 				5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,

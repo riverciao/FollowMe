@@ -28,11 +28,11 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         //Transfer to mapViewController
         let mapViewController = MapViewController()
-        let navigationController = UINavigationController(rootViewController: mapViewController)
         
         mapViewController.currentLocationCoordinateForARSetting = CLLocationCoordinate2D(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
         
-        present(navigationController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(mapViewController, animated: true)
+
     }
     
     override func viewDidLoad() {

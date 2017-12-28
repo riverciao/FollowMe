@@ -58,7 +58,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         arFollowerViewController.currentPathId = self.currentPathId
         
-        present(arFollowerViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
+        
     }
     
     
