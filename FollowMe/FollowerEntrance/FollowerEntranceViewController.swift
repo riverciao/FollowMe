@@ -10,6 +10,29 @@ import UIKit
 
 class FollowerEntranceViewController: UIViewController {
 
+    
+    @IBOutlet weak var invitationCodeTextField: UITextField!
+    
+    @IBAction func goToARButton(_ sender: Any) {
+        
+        guard let pathId: pathId = invitationCodeTextField.text else {
+            
+            //deal with empty text field
+            
+            return
+            
+        }
+        
+        let arFollowerViewController = ARFollowerViewController()
+        
+//        arFollowerViewController.route = self.route
+        
+        arFollowerViewController.currentPathId = pathId
+        
+        present(arFollowerViewController, animated: true, completion: nil)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
