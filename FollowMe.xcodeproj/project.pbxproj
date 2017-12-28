@@ -32,6 +32,8 @@
 		5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526881FEA15BD004012D1 /* Polyline.swift */; };
 		5F9116381FF3AED90030E9EF /* LocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */; };
 		5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */; };
+		5F9116451FF4B03D0030E9EF /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116431FF4B03D0030E9EF /* LandingViewController.swift */; };
+		5F9116461FF4B03D0030E9EF /* LandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116441FF4B03D0030E9EF /* LandingViewController.xib */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -70,6 +72,8 @@
 		5F4526881FEA15BD004012D1 /* Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
 		5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCell.swift; sourceTree = "<group>"; };
 		5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchTableViewCell.xib; sourceTree = "<group>"; };
+		5F9116431FF4B03D0030E9EF /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		5F9116441FF4B03D0030E9EF /* LandingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingViewController.xib; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -166,6 +170,15 @@
 			path = AR;
 			sourceTree = "<group>";
 		};
+		5F9116421FF4B00D0030E9EF /* Landing */ = {
+			isa = PBXGroup;
+			children = (
+				5F9116431FF4B03D0030E9EF /* LandingViewController.swift */,
+				5F9116441FF4B03D0030E9EF /* LandingViewController.xib */,
+			);
+			path = Landing;
+			sourceTree = "<group>";
+		};
 		5FBE57261FDEB8FF002FDEB3 = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +200,7 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5F9116421FF4B00D0030E9EF /* Landing */,
 				5F4526871FE9FF8A004012D1 /* AR */,
 				5F4526861FE9FF61004012D1 /* MapSetter */,
 				5F184E4F1FE3B3D500789BDF /* Firebase */,
@@ -274,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F9116461FF4B03D0030E9EF /* LandingViewController.xib in Resources */,
 				5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */,
 				5FE74AC61FEF706D0048C711 /* ARFollowerViewController.xib in Resources */,
 				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
@@ -375,6 +390,7 @@
 				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
 				5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */,
 				5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */,
+				5F9116451FF4B03D0030E9EF /* LandingViewController.swift in Sources */,
 				5F184E411FE283A800789BDF /* LocationNode.swift in Sources */,
 				5F184E3D1FE283A800789BDF /* CGPoint+Extensions.swift in Sources */,
 				5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */,
