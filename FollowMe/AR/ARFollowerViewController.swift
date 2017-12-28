@@ -94,16 +94,15 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
     
     private func getRouteInstructions() {
-        let steps = self.route?.steps
         
-        if let firstStep = steps?.first {
+        guard let steps = self.route?.steps else { return }
+        
+        if let firstStep = steps.first {
             self.instructionLabel.text = firstStep.instructions
             self.distanceLabel.text = "\(Int(firstStep.distance)) m"
         }
         
-        
-        
-        for step in steps! {
+        for step in steps {
             
             
             print("stepCoordinates\(step.polyline.coordinates) for \(step.instructions)")

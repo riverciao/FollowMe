@@ -32,9 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = navigationController
         
 
-        let positioningViewController = PositioningViewController()
+        let landingViewController = LandingViewController()
         
-        self.window?.rootViewController = positioningViewController
+        self.window?.rootViewController = landingViewController
 //        
 //        if #available(iOS 11.0, *) {
 //            let vc = ViewController()

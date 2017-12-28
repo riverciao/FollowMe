@@ -9,7 +9,19 @@
 import UIKit
 
 class LandingViewController: UIViewController {
-
+    
+    
+    @IBAction func setRouteButton(_ sender: Any) {
+        
+        let positioningViewController = PositioningViewController()
+        present(positioningViewController, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func followRouteButton(_ sender: Any) {
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
