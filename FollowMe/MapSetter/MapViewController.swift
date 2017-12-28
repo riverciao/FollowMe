@@ -18,6 +18,7 @@ protocol HandleMapSearch {
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
     
+    //Location Manager
     let locationSearchTableViewController = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
@@ -34,6 +35,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
+    //add pathId to pass to ARFollowerController
+    var currentPathId: pathId?
     
     
     @IBOutlet weak var mapView: MKMapView!
@@ -52,6 +55,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         arFollowerViewController.route = self.route
+        
+        arFollowerViewController.currentPathId = self.currentPathId
         
         present(arFollowerViewController, animated: true, completion: nil)
     }
@@ -328,6 +333,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.uploadStartNode(in: pathIdRef)
         self.uploadPathNode(in: pathIdRef)
         self.uploadEndNode(in: pathIdRef)
+        
+        self.currentPathId = pathIdRef.key
+        print("pathId---------\(self.currentPathId)")
     }
     
     private func uploadStartNode(in pathIdRef: DatabaseReference) {

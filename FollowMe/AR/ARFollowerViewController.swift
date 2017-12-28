@@ -11,6 +11,8 @@ import ARKit
 import MapKit
 import Firebase
 
+typealias pathId = String
+
 class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var sceneLocationView: SceneLocationView!
@@ -33,6 +35,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     var existedPathNode: LocationPathNode?
     var existedPathNodes: [LocationPathNode] = []
     var existedEndNode: LocationPathNode?
+    
+    //take pathIf from mapViewController
+    var currentPathId: pathId?
+    
     
     //x, z for 3DVector converted from GPS
     var x: Float?
@@ -59,6 +65,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
         
+        print("ARcurrentPathId--------\(self.currentPathId)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -300,6 +307,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             }
         }
     }
+
     
     private func retrieveStartNode(from dictionary: [String: AnyObject], with pathId: pathId) {
         
@@ -336,7 +344,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
-    typealias pathId = String
     
     private func retrievePathNodes(with pathId: pathId) {
         
