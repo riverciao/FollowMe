@@ -335,7 +335,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.uploadEndNode(in: pathIdRef)
         
         self.currentPathId = pathIdRef.key
-        print("pathId---------\(self.currentPathId)")
+
     }
     
     private func uploadStartNode(in pathIdRef: DatabaseReference) {

@@ -65,7 +65,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
         
-        print("ARcurrentPathId--------\(self.currentPathId)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -384,7 +383,15 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         Database.database().reference().child("paths").observe( .childAdded) { (snapshot) in
             
-            let pathId = snapshot.key
+//            let pathId = snapshot.key
+            
+            guard let pathId = self.currentPathId else {
+                
+                //if not receive currentPathId form mapViewController
+                return
+            }
+            
+            
             let pathRef = Database.database().reference().child("paths").child(pathId)
             
             pathRef.observeSingleEvent(of: .value, with: { (pathSnapshot) in
