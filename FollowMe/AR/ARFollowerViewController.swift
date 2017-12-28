@@ -133,6 +133,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         // Check for Location Services
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
     }
     
     private func setupCurrentLocationAnnotation() {
@@ -246,10 +247,18 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         if currentLocation == nil {
             // Zoom to user location
             if let userLocation = locations.last {
+                smallSyncMapView.centerCoordinate = userLocation.coordinate
                 let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 150, 150)
                 smallSyncMapView.setRegion(viewRegion, animated: false)
             }
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        
+        smallSyncMapView.camera.heading = newHeading.magneticHeading
+        smallSyncMapView.setCamera(smallSyncMapView.camera, animated: true)
+        
     }
     
     private func addDeletionCheckNode(fromParent node: Node) {
