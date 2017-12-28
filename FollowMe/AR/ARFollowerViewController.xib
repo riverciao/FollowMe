@@ -28,10 +28,10 @@
                     <rect key="frame" x="0.0" y="88" width="375" height="579"/>
                 </arscnView>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fDD-vY-JAG">
-                    <rect key="frame" x="-5" y="307" width="370" height="350"/>
+                    <rect key="frame" x="215" y="507" width="150" height="150"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="350" id="xAv-aH-Ln9"/>
-                        <constraint firstAttribute="width" constant="370" id="xoa-tF-Y5l"/>
+                        <constraint firstAttribute="height" constant="150" id="xAv-aH-Ln9"/>
+                        <constraint firstAttribute="width" constant="150" id="xoa-tF-Y5l"/>
                     </constraints>
                 </mapView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLB-Yz-eMz">

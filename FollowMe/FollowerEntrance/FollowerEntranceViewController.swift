@@ -25,8 +25,6 @@ class FollowerEntranceViewController: UIViewController {
         
         let arFollowerViewController = ARFollowerViewController()
         
-//        arFollowerViewController.route = self.route
-        
         arFollowerViewController.currentPathId = pathId
         
         present(arFollowerViewController, animated: true, completion: nil)

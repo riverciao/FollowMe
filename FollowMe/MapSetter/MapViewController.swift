@@ -334,6 +334,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.uploadStartNode(in: pathIdRef)
         self.uploadPathNode(in: pathIdRef)
         self.uploadEndNode(in: pathIdRef)
+        uploadStepNode(in: pathIdRef)
         
         self.currentPathId = pathIdRef.key
 
@@ -410,6 +411,40 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    private func uploadStepNode(in pathIdRef: DatabaseReference) {
+        
+        guard let steps = self.route?.steps else { return }
+        
+        for step in steps {
+            
+            //data to be uploaded
+            let coordinate = step.polyline.coordinates.last
+            let latitude = coordinate?.latitude, longitude = coordinate?.longitude
+            
+            let instruction = step.instructions
+            let distance = step.distance
+            
+            //setup firebase reference
+            let pathId = pathIdRef.key
+            let stepNodesRef = FirebasePath.pathRef.child(pathId).child("step-nodes")
+            let stepNodeRef = stepNodesRef.childByAutoId()
+            let values = ["latitude": latitude!, "longitude": longitude!, "instruction": instruction, "distance": distance] as [String: Any]
+            
+            stepNodeRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
+                
+                if let error = error {
+                    
+                    print(error)
+                    
+                    return
+                }
+                
+            })
+        
+        }
+
+    }
+    
 }
 
 extension MapViewController: HandleMapSearch {
@@ -436,7 +471,7 @@ extension MapViewController: HandleMapSearch {
         
         mapView.setRegion(region, animated: true)
     }
-    
+     
     func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
         
         let overlays = mapView.overlays
