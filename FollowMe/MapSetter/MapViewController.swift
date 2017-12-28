@@ -331,9 +331,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // Upload new path to firebase
         let pathIdRef = FirebasePath.pathRef.childByAutoId()
         
-        self.uploadStartNode(in: pathIdRef)
-        self.uploadPathNode(in: pathIdRef)
-        self.uploadEndNode(in: pathIdRef)
+        uploadStartNode(in: pathIdRef)
+        uploadPathNode(in: pathIdRef)
+        uploadEndNode(in: pathIdRef)
         uploadStepNode(in: pathIdRef)
         
         self.currentPathId = pathIdRef.key

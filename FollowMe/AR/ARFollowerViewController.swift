@@ -107,9 +107,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
+    
     private func getRouteInstructions() {
         
-        guard let steps = self.route?.steps else { return }
+        guard let steps = self.route?.steps else {
+            
+            retrieveStepNodes(with: currentPathId!)
+            
+            return
+            
+        }
         
         if let firstStep = steps.first {
             self.instructionLabel.text = firstStep.instructions
@@ -256,6 +263,31 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 
         }
         
+    }
+    
+    private func retrieveStepNodes(with pathId: pathId) {
+        
+        let stepNodesRef = Database.database().reference().child("paths").child(pathId).child("step-nodes")
+        
+        stepNodesRef.observe( .childAdded, with: { [weak self] (pathNodesSnapshot) in
+            
+            let stepNodeId = pathNodesSnapshot.key
+            
+            let stepNodeRef = Database.database().reference().child("paths").child(pathId).child("path-nodes").child(stepNodeId)
+            
+            stepNodeRef.observeSingleEvent(of: .value, with: { (snapShot) in
+                
+                if let dictionary = snapShot.value as? [String: Any] {
+                    
+                    guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let instruction = dictionary["instruciotn"] as? String, let distance = dictionary["distance"] as? Int else { return }
+                    
+                    print("latitude\(latitude) longitude\(longitude) instruction\(instruction) distance\(distance)")
+                    
+                }
+                
+            }, withCancel: nil)
+            
+            }, withCancel: nil)
     }
     
     // MARK: - CLLocationManagerDelegate
