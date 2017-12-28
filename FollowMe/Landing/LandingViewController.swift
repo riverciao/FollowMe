@@ -19,6 +19,10 @@ class LandingViewController: UIViewController {
     }
     
     @IBAction func followRouteButton(_ sender: Any) {
+        
+        let followerEntranceViewController = FollowerEntranceViewController()
+        present(followerEntranceViewController, animated: true, completion: nil)
+        
     }
     
     

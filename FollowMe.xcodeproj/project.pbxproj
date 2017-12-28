@@ -34,6 +34,8 @@
 		5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */; };
 		5F9116451FF4B03D0030E9EF /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116431FF4B03D0030E9EF /* LandingViewController.swift */; };
 		5F9116461FF4B03D0030E9EF /* LandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116441FF4B03D0030E9EF /* LandingViewController.xib */; };
+		5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */; };
+		5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -74,6 +76,8 @@
 		5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchTableViewCell.xib; sourceTree = "<group>"; };
 		5F9116431FF4B03D0030E9EF /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
 		5F9116441FF4B03D0030E9EF /* LandingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingViewController.xib; sourceTree = "<group>"; };
+		5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerEntranceViewController.swift; sourceTree = "<group>"; };
+		5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowerEntranceViewController.xib; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -179,6 +183,15 @@
 			path = Landing;
 			sourceTree = "<group>";
 		};
+		5F9116481FF4B4760030E9EF /* FollowerEntrance */ = {
+			isa = PBXGroup;
+			children = (
+				5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */,
+				5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */,
+			);
+			path = FollowerEntrance;
+			sourceTree = "<group>";
+		};
 		5FBE57261FDEB8FF002FDEB3 = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +213,7 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5F9116481FF4B4760030E9EF /* FollowerEntrance */,
 				5F9116421FF4B00D0030E9EF /* Landing */,
 				5F4526871FE9FF8A004012D1 /* AR */,
 				5F4526861FE9FF61004012D1 /* MapSetter */,
@@ -296,6 +310,7 @@
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
 				5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */,
+				5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */,
 				5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */,
 				5F184E471FE283D800789BDF /* Main.storyboard in Resources */,
 			);
@@ -378,6 +393,7 @@
 				5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
+				5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */,
 				5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */,
 				5F184E531FE3E42200789BDF /* NodeType.swift in Sources */,
 				5F184E401FE283A800789BDF /* LocationManager.swift in Sources */,
