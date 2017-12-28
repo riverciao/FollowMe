@@ -64,8 +64,6 @@ public extension MKPolyline {
                 
                 let newCoordinate = CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
                 
-                print("newCoordinateOOOO\(newCoordinate)")
-                
                 coordinatesPerMeter.append(newCoordinate)
                 
                 count += 1

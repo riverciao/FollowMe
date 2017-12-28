@@ -23,8 +23,6 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         let location = currentLocationPointerImageView.center
         let locationCoordinate = self.mapView.convert(location, toCoordinateFrom: self.mapView)
-        print("locationCoordinate\(locationCoordinate)")
-        print("heading\(mapView.camera.heading)")
         
         //Transfer to mapViewController
         let mapViewController = MapViewController()

@@ -54,11 +54,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
             
             isSaved = false
             
-            print("New Path to Be Saved")
-            
-        } else {
-            
-            print("wait for saving...")
         }
     }
     
@@ -165,8 +160,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
                         
                         return
                     }
-                    
-                    print("Saving OO\(self.pathNodes.count)")
                 
                 })
            
@@ -174,7 +167,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
             
             self.isSaved = true
             
-            print("isSaved")
         }
     }
 
@@ -204,8 +196,6 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
         sceneLocationView.addLocationNodeForCurrentPosition(locationNode: pathNode)
         
         pathNodes.append(pathNode)
-
-        print("Append OO\(self.pathNodes.count)")
         
     }
     
@@ -238,18 +228,14 @@ extension ARViewController: CoordinateManagerDelegate {
         // cash the coordinates
         self.coordinatesPerMeter = coordinates
         
-//        startNode.position = SCNVector3(0,0,0)
         let coordinate = coordinates[0]
         let location = CLLocation(coordinate: coordinate, altitude: 300)
         let image = UIImage(named: "pin")!
         
         let annotationNode = LocationAnnotationNode(location: location, image: image)
         
-        print("annotationNode\(annotationNode)")
-        
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
         
-//        self.sceneLocationView.scene.rootNode.addChildNode(startNode)
         
     }
     

@@ -385,8 +385,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     return
                 }
                 
-                print("Saving OO\(self.coordinatesPerMeter.count)")
-                
             })
             
         }
@@ -473,15 +471,6 @@ extension MapViewController: HandleMapSearch {
             
             
             self.route = response.routes[0]
-            
-            //MARK: - route instructions
-//            let steps = self.route?.steps
-//
-//            for step in steps! {
-//
-//                print("\(step.instructions) for \(Int(step.distance))m")
-//
-//            }
             
             
             // MARK: - Retrieve GPS coordinate from polyline

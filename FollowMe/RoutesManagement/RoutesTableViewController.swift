@@ -11,6 +11,7 @@ import UIKit
 class RoutesTableViewController: UITableViewController {
 
     var pathId: pathId?
+    var pathIds: [pathId] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,12 @@ class RoutesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("pathIdRoutesTableViewController\(pathId)")
+        // pass pathId back
+        // TODO: - Coredata or Firebase to cach data
+        if let pathId = pathId {
+            pathIds.insert(pathId, at: 0)
+        }
+        
     }
 
     // MARK: - Table view data source

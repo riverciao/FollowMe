@@ -24,17 +24,37 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
 
+    
     //currentlocation manager
     private var currentLocation: CLLocation?
     private var locationManager: CLLocationManager!
     var currentLocationAnnotation: Annotation?
     var route: MKRoute?
     
+    //test redraw route
+    var routeRedrawn: MKRoute?
+    
     //Existed Path Property
-    var existedStartNode: LocationPathNode?
+    var existedStartNode: LocationPathNode? {
+        didSet {
+            print("existedStartNodeOOO\(existedStartNode)")
+        }
+    }
     var existedPathNode: LocationPathNode?
     var existedPathNodes: [LocationPathNode] = []
-    var existedEndNode: LocationPathNode?
+    var existedEndNode: LocationPathNode? {
+        didSet {
+            if let existedStartNode = existedStartNode, let existedEndNode = existedEndNode {
+                let startLocation = CLLocation(coordinate: existedStartNode.location.coordinate, altitude: 0)
+                let endLocation = CLLocation(coordinate: existedEndNode.location.coordinate, altitude: 0)
+                let mapViewController = MapViewController()
+                
+                setRouteWith(currentLocationCoordinate: startLocation.coordinate, destinationCoordinate: endLocation.coordinate)
+                
+                print("OOOOOOO\(route)")
+            }
+        }
+    }
     
     //take pathIf from mapViewController
     var currentPathId: pathId?
@@ -62,7 +82,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
             routesTableViewController.pathId = self.currentPathId
-            print(">>>>>>>\(self.currentPathId)")
             self.navigationController?.popToViewController(routesTableViewController, animated: true)
         }
         
@@ -81,6 +100,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         self.sceneLocationView.autoenablesDefaultLighting = true
         
         sceneLocationView.locationDelegate = self
+        
+        smallSyncMapView.showsCompass = false
         
         //add touch gesture
 //        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
@@ -116,9 +137,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         for step in steps {
             
-            
-            print("stepCoordinates\(step.polyline.coordinates) for \(step.instructions)")
-            
             let coordinates = step.polyline.coordinates
             let instructions = step.instructions
 
@@ -133,8 +151,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 let nextStepLocation = CLLocation(coordinate: coordinate!, altitude: 0)
                 let distanceToShowNextStep = currentLocation.distance(from: nextStepLocation)
-                
-                print("distanceToShowNextStep\(distanceToShowNextStep)")
                 
                 if distanceToShowNextStep < 5 {
                     
@@ -369,7 +385,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         let pathNodesRef = Database.database().reference().child("paths").child(pathId).child("path-nodes")
         
-        pathNodesRef.observe( .childAdded, with: { (pathNodesSnapshot) in
+        pathNodesRef.observe( .childAdded, with: { [weak self] (pathNodesSnapshot) in
             
             let pathNodesId = pathNodesSnapshot.key
             
@@ -383,14 +399,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                     
                     let location = CLLocation(latitude: latitude, longitude: longitude)
                     
-                    self.existedPathNode = LocationPathNode(location: location, belongToPathId: pathId)
+                    self?.existedPathNode = LocationPathNode(location: location, belongToPathId: pathId)
                     
-                    self.existedPathNode?.name = "path"
+                    self?.existedPathNode?.name = "path"
                     
-                    self.existedPathNodes.append(self.existedPathNode!)
-                    
-                    self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: self.existedPathNode!)
-                    
+                    if let existedPathNode = self?.existedPathNode {
+                        
+                        self?.existedPathNodes.append(existedPathNode)
+                        
+                        self?.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: existedPathNode)
+                    }
                     
                 }
                 
@@ -402,11 +420,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     private func fetchPath() {
         
-        Database.database().reference().child("paths").observe( .childAdded) { (snapshot) in
+        Database.database().reference().child("paths").observe( .childAdded) { [weak self] (snapshot) in
             
 //            let pathId = snapshot.key
             
-            guard let pathId = self.currentPathId else {
+            guard let pathId = self?.currentPathId else {
                 
                 // TODO: - if not receive currentPathId form mapViewController
                 return
@@ -420,11 +438,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let dictionary = pathSnapshot.value as? [String: AnyObject] {
                     
-                    self.retrieveStartNode(from: dictionary, with: pathId)
+                    self?.retrieveStartNode(from: dictionary, with: pathId)
                     
-                    self.retrieveEndNode(from: dictionary, with: pathId)
+                    self?.retrieveEndNode(from: dictionary, with: pathId)
                     
-                    self.retrievePathNodes(with: pathId)
+                    self?.retrievePathNodes(with: pathId)
 
                 }
                 
@@ -432,6 +450,83 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
         }
         
+    }
+    
+    // MARK: - set route
+    
+    func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {
+        
+        let overlays = smallSyncMapView.overlays
+        smallSyncMapView.removeOverlays(overlays)
+        
+        setupAnnotationsFor(destinationCoordinate: destinationCoordinate)
+        setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
+        
+        let currentLocationMapItem = getMapItem(with: currentLocationCoordinate)
+        let destinationMapItem = getMapItem(with: destinationCoordinate)
+        
+        let directionRequest = MKDirectionsRequest()
+        directionRequest.source = currentLocationMapItem
+        directionRequest.destination = destinationMapItem
+        directionRequest.transportType = .walking
+        
+        // Calculate the direction
+        let directions = MKDirections(request: directionRequest)
+        
+        directions.calculate { (response, error) in
+            
+            
+            guard let response = response else {
+                
+                if let error = error {
+                    print(error)
+                }
+                
+                return
+                
+            }
+            
+            
+            self.route = response.routes[0]
+            
+            if let route = self.route {
+                
+                self.smallSyncMapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
+                
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = UIColor.red
+        renderer.lineWidth = 4.0
+        
+        return renderer
+    }
+    
+    private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
+        
+        let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
+        
+        self.smallSyncMapView.addAnnotation(destinationAnnotation)
+    }
+    
+    private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D) {
+        
+        //TODO: - change the current location annotation pin to a blue point or something diffrent from destination
+        
+        let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
+        
+        self.smallSyncMapView.showAnnotations([currentLocationAnnotation], animated: true)
+        
+    }
+    
+    private func getMapItem(with coordinate: CLLocationCoordinate2D) -> MKMapItem {
+        let placemark = MKPlacemark(coordinate: coordinate)
+        let mapItem = MKMapItem(placemark: placemark)
+        return mapItem
     }
 
 
