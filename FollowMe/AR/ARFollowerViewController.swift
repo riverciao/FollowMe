@@ -25,6 +25,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //currentlocation manager
     private var currentLocation: CLLocation?
     private var locationManager: CLLocationManager!
+    var currentLocationAnnotation: Annotation?
     var route: MKRoute?
     
     //Existed Path Property
@@ -138,8 +139,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     private func setupCurrentLocationAnnotation() {
         if let currentLocation = currentLocation {
-            let annotation = Annotation(title: "", subtitle: "", coordinate: currentLocation.coordinate)
-            self.smallSyncMapView.addAnnotation(annotation)
+
+            self.currentLocationAnnotation = Annotation(title: "", subtitle: "", coordinate: currentLocation.coordinate)
+            self.smallSyncMapView.addAnnotation(self.currentLocationAnnotation!)
         }
     }
     
