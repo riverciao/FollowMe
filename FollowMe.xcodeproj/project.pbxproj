@@ -32,8 +32,6 @@
 		5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526881FEA15BD004012D1 /* Polyline.swift */; };
 		5F9116381FF3AED90030E9EF /* LocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */; };
 		5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */; };
-		5F91163F1FF3D5160030E9EF /* SmallSyncMapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F91163E1FF3D5160030E9EF /* SmallSyncMapView.xib */; };
-		5F9116411FF3D6790030E9EF /* SmallSyncMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116401FF3D6790030E9EF /* SmallSyncMapView.swift */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -72,8 +70,6 @@
 		5F4526881FEA15BD004012D1 /* Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
 		5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCell.swift; sourceTree = "<group>"; };
 		5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchTableViewCell.xib; sourceTree = "<group>"; };
-		5F91163E1FF3D5160030E9EF /* SmallSyncMapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SmallSyncMapView.xib; sourceTree = "<group>"; };
-		5F9116401FF3D6790030E9EF /* SmallSyncMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallSyncMapView.swift; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -166,8 +162,6 @@
 				5F184E2F1FE2837A00789BDF /* ARViewController.swift */,
 				5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */,
 				5FE74AC41FEF706D0048C711 /* ARFollowerViewController.xib */,
-				5F9116401FF3D6790030E9EF /* SmallSyncMapView.swift */,
-				5F91163E1FF3D5160030E9EF /* SmallSyncMapView.xib */,
 			);
 			path = AR;
 			sourceTree = "<group>";
@@ -282,7 +276,6 @@
 			files = (
 				5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */,
 				5FE74AC61FEF706D0048C711 /* ARFollowerViewController.xib in Resources */,
-				5F91163F1FF3D5160030E9EF /* SmallSyncMapView.xib in Resources */,
 				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
@@ -374,7 +367,6 @@
 				5F184E531FE3E42200789BDF /* NodeType.swift in Sources */,
 				5F184E401FE283A800789BDF /* LocationManager.swift in Sources */,
 				5F184E421FE283A800789BDF /* SceneLocationEstimate+Extensions.swift in Sources */,
-				5F9116411FF3D6790030E9EF /* SmallSyncMapView.swift in Sources */,
 				5F4526821FE791D6004012D1 /* Annotation.swift in Sources */,
 				5F184E551FE4C67D00789BDF /* Node.swift in Sources */,
 				5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */,
