@@ -39,6 +39,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //take pathId from mapViewController
     var currentPathId: pathId?
     
+    //Route screen shot
+    var routeImageView: UIImageView?
+    
     //take instructions from location node -> step node
     var locationStepNodes: [LocationStepNode] = [] {
         didSet {
@@ -87,6 +90,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
             routesTableViewController.pathId = self.currentPathId
+            routesTableViewController.routeImageView = self.routeImageView
             self.navigationController?.popToViewController(routesTableViewController, animated: true)
         }
         

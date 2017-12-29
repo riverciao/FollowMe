@@ -17,9 +17,7 @@ protocol HandleMapSearch {
 }
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
-    
-    
-    @IBOutlet weak var imageView: UIImageView!
+
     
     //Location Manager
     let locationSearchTableViewController = LocationSearchTableViewController()
@@ -41,6 +39,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //add pathId to pass to ARFollowerController
     var currentPathId: pathId?
     
+    //Route screen shot
+    var routeImageView: UIImageView?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -48,6 +48,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     @IBAction func goToARButton(_ sender: Any) {
         
         upload()
+        
+        takeSnapShot()
         
         let arFollowerViewController = ARFollowerViewController()
         
@@ -60,6 +62,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         arFollowerViewController.route = self.route
         
         arFollowerViewController.currentPathId = self.currentPathId
+        
+        arFollowerViewController.routeImageView = self.routeImageView
+        
+        print("Map--routeImageView\(routeImageView)")
         
         self.navigationController?.pushViewController(arFollowerViewController, animated: true)
         
@@ -123,8 +129,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewWillAppear(animated)
         
         setupCurrentLocationFromUserSetting()
-        
-        takeSnapShot()
+
     }
     
     private func setupCurrentLocationFromUserSetting() {
@@ -164,6 +169,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapSnapshotOptions.scale = UIScreen.main.scale
         
         // Set the size of the image output.
+        // TODO: - change size to routes table view controller
         mapSnapshotOptions.size = CGSize(width: 150, height: 150)
         
         // Show buildings and Points of Interest on the snapshot
@@ -177,8 +183,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 return
             }
             // Don't just pass snapshot.image, pass snapshot itself!
-            self.imageView.image = self.drawLineOnImage(snapshot: snapshot)
-            self.imageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
+            let screenShotImageView = UIImageView()
+            screenShotImageView.image = self.drawLineOnImage(snapshot: snapshot)
+            screenShotImageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
+            self.routeImageView = screenShotImageView
+            print("MaptakeSnapShot--routeImageView\(self.routeImageView)")
         }
     }
     
@@ -186,7 +195,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let image = snapshot.image
         
         // for Retina screen
-        UIGraphicsBeginImageContextWithOptions(self.imageView.frame.size, true, 0)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 150, height: 150), true, 0)
         
         // draw original image into the context
         image.draw(at: CGPoint.zero)

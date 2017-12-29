@@ -13,12 +13,15 @@ class RoutesTableViewController: UITableViewController {
     var pathId: pathId?
     var pathIds: [pathId] = []
     
+    //Route screen shot
+    var routeImageView: UIImageView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +33,7 @@ class RoutesTableViewController: UITableViewController {
             pathIds.insert(pathId, at: 0)
         }
         
+        print("routeImageView\(routeImageView)")
     }
 
     // MARK: - Table view data source
