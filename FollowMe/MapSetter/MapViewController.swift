@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import Firebase
 
-protocol RouteDelegate: class {
+protocol RouteProviderDelegate: class {
     func didGet(routeImageView: UIImageView)
 }
 
@@ -33,7 +33,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var coordinatesPerMeter: [CLLocationCoordinate2D] = []
     // TODO: - weak var delegate
     var delegate: CoordinateManagerDelegate? = nil
-    weak var routeDelegate: RouteDelegate?
+    weak var routeDelegate: RouteProviderDelegate?
     
     var isSaved: Bool = true
     
@@ -45,7 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var currentPathId: pathId?
     
     //Route screen shot
-//    var routeImageView: UIImageView?
+    var routeImageView: UIImageView?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -67,6 +67,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         arFollowerViewController.route = self.route
         
         arFollowerViewController.currentPathId = self.currentPathId
+        
+        arFollowerViewController.routeImageView = self.routeImageView
         
         self.navigationController?.pushViewController(arFollowerViewController, animated: true)
         
@@ -544,6 +546,7 @@ extension MapViewController {
     
     // MARK: - Route screen shot
     func takeSnapShot() {
+        
         let mapSnapshotOptions = MKMapSnapshotOptions()
         
         // Set the region of the map that is rendered. (by polyline)
@@ -578,15 +581,54 @@ extension MapViewController {
                 return
             }
             // Don't just pass snapshot.image, pass snapshot itself!
-            let routeImageView = UIImageView()
-            routeImageView.image = self.drawLineOnImage(snapshot: snapshot)
-            routeImageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
+            let imageView = UIImageView()
+            imageView.frame = CGRect(origin: .zero, size: CGSize(width: 150, height: 150))
+            imageView.image = self.drawLineOnImage(snapshot: snapshot)
+            
+            self.routeImageView = self.annotationAddedImageView(annotationImage: #imageLiteral(resourceName: "pin"), to: imageView, at: snapshot.point(for: self.destinationCoordinate!))
+            
+            //handle image
+            let image = self.routeImageView?.image
+            let imageData = UIImageJPEGRepresentation(image!, 1)
             
             DispatchQueue.main.async {
-                self.routeDelegate?.didGet(routeImageView: routeImageView)
-                print("routeImageView\(routeImageView)")
+                if let pathId = self.currentPathId, let imageData = imageData {
+                    
+                    CoreDataHandler.saveObject(id: pathId, image: imageData)
+                    
+                }
             }
+            
+            
+            self.routeDelegate?.didGet(routeImageView: self.routeImageView!)
         }
+    }
+    
+    func annotationAddedImageView(annotationImage: UIImage, to baseImageView: UIImageView, at point: CGPoint) -> UIImageView {
+        
+        let size = baseImageView.frame.size
+        UIGraphicsBeginImageContext(size)
+        
+        let areaSize = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let baseImage = baseImageView.image
+        baseImage!.draw(in: areaSize)
+        
+        
+        let topImageSize = CGSize(width: 30, height: 30)
+        let newSizeTopImage = annotationImage.resizedImage(newSize: topImageSize)
+        let origin = CGPoint(x: point.x - topImageSize.width / 2, y: point.y - topImageSize.height / 2)
+        newSizeTopImage.draw(at: origin)
+        
+        
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        baseImageView.image = newImage
+        let newImageView = baseImageView
+        
+        
+        return newImageView
+        
     }
     
     func drawLineOnImage(snapshot: MKMapSnapshot) -> UIImage {

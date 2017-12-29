@@ -16,16 +16,16 @@ class RoutesTableViewController: UITableViewController {
     let mapViewController = MapViewController()
     
     //Route screen shot
-    var routeImageView: UIImageView? {
-        didSet {
-            print("RoutesTableViewController--routeImageView\(routeImageView)")
-        }
-    }
+    var routeImageView: UIImageView?
+    
+    //routes for coredata
+    var items: [Item] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let nib = UINib(nibName: "RouteTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "routeCell")
         
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
@@ -37,6 +37,10 @@ class RoutesTableViewController: UITableViewController {
         
         mapViewController.routeDelegate = self
         
+        if let items = CoreDataHandler.fetchObject() {
+            self.items = items
+        }
+        
         // pass pathId back
         // TODO: - Coredata or Firebase to cach data
         if let pathId = pathId {
@@ -47,12 +51,39 @@ class RoutesTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 0
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        print("OOOOOO\(items.count)")
+        return items.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 110
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var routeCell = RouteTableViewCell()
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "routeCell", for: indexPath) as? RouteTableViewCell {
+            
+            let route = items[indexPath.row]
+            
+            if items.count > indexPath.row {
+                
+                if let id = route.id {
+                    cell.routeName.text = id
+                }
+                
+                if let imageData = route.image {
+                    if let image = UIImage(data: imageData) {
+                        cell.routeImageView.image = image
+                    }
+                }
+            }
+            
+            routeCell = cell
+        }
+        return routeCell
     }
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
@@ -62,13 +93,12 @@ class RoutesTableViewController: UITableViewController {
     
 }
 
-extension RoutesTableViewController: RouteDelegate {
+extension RoutesTableViewController: RouteProviderDelegate {
+    
     func didGet(routeImageView: UIImageView) {
+        print("RoutesTable--routeImageView\(routeImageView)")
         
-        self.routeImageView = routeImageView
-        
-        print("OOOOrouteImageView\(self.routeImageView)")
+        self.routeImageView?.image = routeImageView.image
         
     }
-    
 }

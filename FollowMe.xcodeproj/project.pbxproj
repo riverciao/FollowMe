@@ -41,7 +41,12 @@
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
 		5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */; };
-		5FD7E3B81FF6138800E8CFBA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3B71FF6138800E8CFBA /* UIViewExtension.swift */; };
+		5FD7E3B81FF6138800E8CFBA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */; };
+		5FD7E3BF1FF6645700E8CFBA /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */; };
+		5FD7E3C51FF664CE00E8CFBA /* Route.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3C31FF664CE00E8CFBA /* Route.xcdatamodeld */; };
+		5FD7E3C81FF667AA00E8CFBA /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3C71FF667A900E8CFBA /* Route.swift */; };
+		5FD7E3CB1FF668FE00E8CFBA /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3C91FF668FE00E8CFBA /* RouteTableViewCell.swift */; };
+		5FD7E3CC1FF668FE00E8CFBA /* RouteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FD7E3CA1FF668FE00E8CFBA /* RouteTableViewCell.xib */; };
 		5FE74AC11FEE8FC80048C711 /* PositioningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */; };
 		5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */; };
 		5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */; };
@@ -87,7 +92,12 @@
 		5FBE573E1FDEB8FF002FDEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
-		5FD7E3B71FF6138800E8CFBA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
+		5FD7E3C41FF664CE00E8CFBA /* Route.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Route.xcdatamodel; sourceTree = "<group>"; };
+		5FD7E3C71FF667A900E8CFBA /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		5FD7E3C91FF668FE00E8CFBA /* RouteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
+		5FD7E3CA1FF668FE00E8CFBA /* RouteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteTableViewCell.xib; sourceTree = "<group>"; };
 		5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningViewController.swift; sourceTree = "<group>"; };
 		5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositioningViewController.xib; sourceTree = "<group>"; };
 		5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFollowerViewController.swift; sourceTree = "<group>"; };
@@ -217,6 +227,7 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5FD7E3C61FF6679B00E8CFBA /* Route */,
 				5FD7E3B41FF6132800E8CFBA /* UIView */,
 				5FD7E38E1FF51CB600E8CFBA /* RoutesManagement */,
 				5F9116481FF4B4760030E9EF /* FollowerEntrance */,
@@ -233,6 +244,7 @@
 				5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */,
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
 				5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */,
+				5FD7E3BD1FF6644B00E8CFBA /* CoreData */,
 				5F184E331FE283A700789BDF /* Source */,
 			);
 			path = FollowMe;
@@ -242,6 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */,
+				5FD7E3C91FF668FE00E8CFBA /* RouteTableViewCell.swift */,
+				5FD7E3CA1FF668FE00E8CFBA /* RouteTableViewCell.xib */,
 			);
 			path = RoutesManagement;
 			sourceTree = "<group>";
@@ -249,9 +263,26 @@
 		5FD7E3B41FF6132800E8CFBA /* UIView */ = {
 			isa = PBXGroup;
 			children = (
-				5FD7E3B71FF6138800E8CFBA /* UIViewExtension.swift */,
+				5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */,
 			);
 			path = UIView;
+			sourceTree = "<group>";
+		};
+		5FD7E3BD1FF6644B00E8CFBA /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */,
+				5FD7E3C31FF664CE00E8CFBA /* Route.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		5FD7E3C61FF6679B00E8CFBA /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				5FD7E3C71FF667A900E8CFBA /* Route.swift */,
+			);
+			path = Route;
 			sourceTree = "<group>";
 		};
 		83443FCB039D975896EB26DE /* Frameworks */ = {
@@ -329,6 +360,7 @@
 				5FE74AC61FEF706D0048C711 /* ARFollowerViewController.xib in Resources */,
 				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
+				5FD7E3CC1FF668FE00E8CFBA /* RouteTableViewCell.xib in Resources */,
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
 				5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */,
@@ -411,8 +443,10 @@
 			files = (
 				5F184E301FE2837A00789BDF /* ARViewController.swift in Sources */,
 				5F184E431FE283A800789BDF /* SceneLocationEstimate.swift in Sources */,
+				5FD7E3C81FF667AA00E8CFBA /* Route.swift in Sources */,
 				5F9116381FF3AED90030E9EF /* LocationSearchTableViewCell.swift in Sources */,
 				5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */,
+				5FD7E3CB1FF668FE00E8CFBA /* RouteTableViewCell.swift in Sources */,
 				5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
@@ -422,12 +456,14 @@
 				5F184E401FE283A800789BDF /* LocationManager.swift in Sources */,
 				5F184E421FE283A800789BDF /* SceneLocationEstimate+Extensions.swift in Sources */,
 				5F4526821FE791D6004012D1 /* Annotation.swift in Sources */,
+				5FD7E3BF1FF6645700E8CFBA /* CoreDataHandler.swift in Sources */,
 				5F184E551FE4C67D00789BDF /* Node.swift in Sources */,
+				5FD7E3C51FF664CE00E8CFBA /* Route.xcdatamodeld in Sources */,
 				5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */,
 				5F4526841FE9002B004012D1 /* LocationSearchTableViewController.swift in Sources */,
 				5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */,
 				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
-				5FD7E3B81FF6138800E8CFBA /* UIViewExtension.swift in Sources */,
+				5FD7E3B81FF6138800E8CFBA /* UIImageExtension.swift in Sources */,
 				5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */,
 				5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */,
 				5F9116451FF4B03D0030E9EF /* LandingViewController.swift in Sources */,
@@ -615,6 +651,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5FD7E3C31FF664CE00E8CFBA /* Route.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5FD7E3C41FF664CE00E8CFBA /* Route.xcdatamodel */,
+			);
+			currentVersion = 5FD7E3C41FF664CE00E8CFBA /* Route.xcdatamodel */;
+			path = Route.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5FBE57271FDEB8FF002FDEB3 /* Project object */;
 }

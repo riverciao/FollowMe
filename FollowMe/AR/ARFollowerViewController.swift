@@ -128,6 +128,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         fetchPath()
 
         getRouteInstructions()
+        
+        print("AR---routeImageView\(routeImageView)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
