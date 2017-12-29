@@ -107,12 +107,13 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
+    // MARK: - get instruction
     
     private func getRouteInstructions() {
         
         guard let steps = self.route?.steps else {
             
-            retrieveStepNodes(with: currentPathId!)
+//            retrieveStepNodes(with: currentPathId!)
             
             return
             
@@ -273,13 +274,13 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             let stepNodeId = pathNodesSnapshot.key
             
-            let stepNodeRef = Database.database().reference().child("paths").child(pathId).child("path-nodes").child(stepNodeId)
+            let stepNodeRef = Database.database().reference().child("paths").child(pathId).child("step-nodes").child(stepNodeId)
             
             stepNodeRef.observeSingleEvent(of: .value, with: { (snapShot) in
                 
                 if let dictionary = snapShot.value as? [String: Any] {
                     
-                    guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let instruction = dictionary["instruciotn"] as? String, let distance = dictionary["distance"] as? Int else { return }
+                    guard let latitude = dictionary["latitude"] as? Double, let longitude = dictionary["longitude"] as? Double, let instruction = dictionary["instruction"] as? String, let distance = dictionary["distance"] as? Int else { return }
                     
                     print("latitude\(latitude) longitude\(longitude) instruction\(instruction) distance\(distance)")
                     
@@ -298,7 +299,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             currentLocation = locations.last
             setupCurrentLocationAnnotation()
-            getRouteInstructions()
+            retrieveStepNodes(with: currentPathId!)
+//            getRouteInstructions()
             
         }
         
