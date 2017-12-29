@@ -40,7 +40,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var currentPathId: pathId?
     
     //Route screen shot
-    var routeImageView: UIImageView?
+    var routeImageView: UIImageView? {
+        didSet {
+            print("didSet\(routeImageView)")
+        }
+    }
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -49,7 +53,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         upload()
         
-        takeSnapShot()
+        self.takeSnapShot()
         
         let arFollowerViewController = ARFollowerViewController()
         
