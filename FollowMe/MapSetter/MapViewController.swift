@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import Firebase
 
+protocol RouteDelegate: class {
+    func routeImageProvider(didGet routeImageView: UIImageView)
+}
+
 protocol HandleMapSearch {
     
     func dropPinZoomIn(placemark: MKPlacemark)
@@ -29,6 +33,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var coordinatesPerMeter: [CLLocationCoordinate2D] = []
     // TODO: - weak var delegate
     var delegate: CoordinateManagerDelegate? = nil
+    weak var routeDelegate: RouteDelegate?
     
     var isSaved: Bool = true
     
@@ -40,11 +45,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var currentPathId: pathId?
     
     //Route screen shot
-    var routeImageView: UIImageView? {
-        didSet {
-            print("didSet\(routeImageView)")
-        }
-    }
+//    var routeImageView: UIImageView?
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -187,11 +188,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 return
             }
             // Don't just pass snapshot.image, pass snapshot itself!
-            let screenShotImageView = UIImageView()
-            screenShotImageView.image = self.drawLineOnImage(snapshot: snapshot)
-            screenShotImageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
-            self.routeImageView = screenShotImageView
-            print("MaptakeSnapShot--routeImageView\(self.routeImageView)")
+            let routeImageView = UIImageView()
+            routeImageView.image = self.drawLineOnImage(snapshot: snapshot)
+            routeImageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
+            
+            DispatchQueue.main.async {
+                self.routeDelegate?.routeImageProvider(didGet: routeImageView)
+            }
         }
     }
     
