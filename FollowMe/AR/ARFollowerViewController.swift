@@ -40,8 +40,30 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     var currentPathId: pathId?
     
     //take instructions from location node -> step node
-//    var steps:[MKRouteStep] = []
-    var locationStepNodes: [LocationStepNode] = []
+    var locationStepNodes: [LocationStepNode] = [] {
+        didSet {
+                
+            guard let firstStepNode = locationStepNodes.first else { return }
+            self.instructionLabel.text = firstStepNode.instruction
+            self.distanceLabel.text = "\(firstStepNode.distance) m"
+            
+            for locationStepNode in locationStepNodes {
+                
+                if let currentLocation = self.currentLocation {
+                    
+                    let nextStepLocation = CLLocation(coordinate: locationStepNode.location.coordinate, altitude: 0)
+                    let distanceToShowNextStep = currentLocation.distance(from: nextStepLocation)
+                    
+                    if distanceToShowNextStep < 5 {
+                        
+                        self.instructionLabel.text = locationStepNode.instruction
+                        self.distanceLabel.text = "\(locationStepNode.distance) m"
+                        
+                    }
+                }
+            }
+        }
+    }
     
     //x, z for 3DVector converted from GPS
     var x: Float?
@@ -140,7 +162,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             self.smallSyncMapView.addAnnotation(annotation)
             
             if let currentLocation = self.currentLocation {
-
                 
                 let nextStepLocation = CLLocation(coordinate: coordinate!, altitude: 0)
                 let distanceToShowNextStep = currentLocation.distance(from: nextStepLocation)
