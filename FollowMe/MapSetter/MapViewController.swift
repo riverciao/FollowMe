@@ -11,7 +11,7 @@ import MapKit
 import Firebase
 
 protocol RouteDelegate: class {
-    func routeImageProvider(didGet routeImageView: UIImageView)
+    func didGet(routeImageView: UIImageView)
 }
 
 protocol HandleMapSearch {
@@ -67,10 +67,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         arFollowerViewController.route = self.route
         
         arFollowerViewController.currentPathId = self.currentPathId
-        
-        arFollowerViewController.routeImageView = self.routeImageView
-        
-        print("Map--routeImageView\(routeImageView)")
         
         self.navigationController?.pushViewController(arFollowerViewController, animated: true)
         
@@ -152,92 +148,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    // MARK: - Route screen shot
-    func takeSnapShot() {
-        let mapSnapshotOptions = MKMapSnapshotOptions()
-        
-        // Set the region of the map that is rendered. (by polyline)
-//        let polyLine = MKPolyline(coordinates: &yourCoordinates, count: yourCoordinates.count)
-        guard let polyLine = self.route?.polyline else {
-            print("polyLine is nil")
-            return
-        }
-        
-        //change destinationCoordinate to polyline.coordinate
-        let span = MKCoordinateSpanMake(0.003, 0.003)
-        let region = MKCoordinateRegionMake(polyLine.coordinate, span)
-        
-        
-        mapSnapshotOptions.region = region
-        
-        // Set the scale of the image. We'll just use the scale of the current device, which is 2x scale on Retina screens.
-        mapSnapshotOptions.scale = UIScreen.main.scale
-        
-        // Set the size of the image output.
-        // TODO: - change size to routes table view controller
-        mapSnapshotOptions.size = CGSize(width: 150, height: 150)
-        
-        // Show buildings and Points of Interest on the snapshot
-        mapSnapshotOptions.showsBuildings = true
-        mapSnapshotOptions.showsPointsOfInterest = true
-        
-        let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
-        
-        snapShotter.start() { snapshot, error in
-            guard let snapshot = snapshot else {
-                return
-            }
-            // Don't just pass snapshot.image, pass snapshot itself!
-            let routeImageView = UIImageView()
-            routeImageView.image = self.drawLineOnImage(snapshot: snapshot)
-            routeImageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
-            
-            DispatchQueue.main.async {
-                self.routeDelegate?.routeImageProvider(didGet: routeImageView)
-            }
-        }
-    }
     
-    func drawLineOnImage(snapshot: MKMapSnapshot) -> UIImage {
-        let image = snapshot.image
-        
-        // for Retina screen
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 150, height: 150), true, 0)
-        
-        // draw original image into the context
-        image.draw(at: CGPoint.zero)
-        
-        // get the context for CoreGraphics
-        let context = UIGraphicsGetCurrentContext()
-        
-        // set stroking width and color of the context
-        context!.setLineWidth(2.0)
-        context!.setStrokeColor(UIColor.orange.cgColor)
-        
-        //polyline coordinates
-        let polylineCoordinates = self.route?.polyline.coordinates
-        
-        // Here is the trick :
-        // We use addLine() and move() to draw the line, this should be easy to understand.
-        // The diificult part is that they both take CGPoint as parameters, and it would be way too complex for us to calculate by ourselves
-        // Thus we use snapshot.point() to save the pain.
-        context!.move(to: snapshot.point(for: polylineCoordinates![0]))
-        for i in 0...polylineCoordinates!.count-1 {
-            context!.addLine(to: snapshot.point(for: polylineCoordinates![i]))
-            context!.move(to: snapshot.point(for: polylineCoordinates![i]))
-        }
-        
-        // apply the stroke to the context
-        context!.strokePath()
-        
-        // get the image from the graphics context
-        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
-        
-        // end the graphics context
-        UIGraphicsEndImageContext()
-        
-        return resultImage!
-    }
 
     
     
@@ -629,3 +540,94 @@ extension MapViewController: HandleMapSearch {
     }
 }
 
+extension MapViewController {
+    
+    // MARK: - Route screen shot
+    func takeSnapShot() {
+        let mapSnapshotOptions = MKMapSnapshotOptions()
+        
+        // Set the region of the map that is rendered. (by polyline)
+        //        let polyLine = MKPolyline(coordinates: &yourCoordinates, count: yourCoordinates.count)
+        guard let polyLine = self.route?.polyline else {
+            print("polyLine is nil")
+            return
+        }
+        
+        //change destinationCoordinate to polyline.coordinate
+        let span = MKCoordinateSpanMake(0.003, 0.003)
+        let region = MKCoordinateRegionMake(polyLine.coordinate, span)
+        
+        
+        mapSnapshotOptions.region = region
+        
+        // Set the scale of the image. We'll just use the scale of the current device, which is 2x scale on Retina screens.
+        mapSnapshotOptions.scale = UIScreen.main.scale
+        
+        // Set the size of the image output.
+        // TODO: - change size to routes table view controller
+        mapSnapshotOptions.size = CGSize(width: 150, height: 150)
+        
+        // Show buildings and Points of Interest on the snapshot
+        mapSnapshotOptions.showsBuildings = true
+        mapSnapshotOptions.showsPointsOfInterest = true
+        
+        let snapShotter = MKMapSnapshotter(options: mapSnapshotOptions)
+        
+        snapShotter.start() { snapshot, error in
+            guard let snapshot = snapshot else {
+                return
+            }
+            // Don't just pass snapshot.image, pass snapshot itself!
+            let routeImageView = UIImageView()
+            routeImageView.image = self.drawLineOnImage(snapshot: snapshot)
+            routeImageView.addAnnotation(image: #imageLiteral(resourceName: "pin"), to: snapshot.point(for: self.destinationCoordinate!))
+            
+            DispatchQueue.main.async {
+                self.routeDelegate?.didGet(routeImageView: routeImageView)
+                print("routeImageView\(routeImageView)")
+            }
+        }
+    }
+    
+    func drawLineOnImage(snapshot: MKMapSnapshot) -> UIImage {
+        let image = snapshot.image
+        
+        // for Retina screen
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 150, height: 150), true, 0)
+        
+        // draw original image into the context
+        image.draw(at: CGPoint.zero)
+        
+        // get the context for CoreGraphics
+        let context = UIGraphicsGetCurrentContext()
+        
+        // set stroking width and color of the context
+        context!.setLineWidth(2.0)
+        context!.setStrokeColor(UIColor.orange.cgColor)
+        
+        //polyline coordinates
+        let polylineCoordinates = self.route?.polyline.coordinates
+        
+        // Here is the trick :
+        // We use addLine() and move() to draw the line, this should be easy to understand.
+        // The diificult part is that they both take CGPoint as parameters, and it would be way too complex for us to calculate by ourselves
+        // Thus we use snapshot.point() to save the pain.
+        context!.move(to: snapshot.point(for: polylineCoordinates![0]))
+        for i in 0...polylineCoordinates!.count-1 {
+            context!.addLine(to: snapshot.point(for: polylineCoordinates![i]))
+            context!.move(to: snapshot.point(for: polylineCoordinates![i]))
+        }
+        
+        // apply the stroke to the context
+        context!.strokePath()
+        
+        // get the image from the graphics context
+        let resultImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        // end the graphics context
+        UIGraphicsEndImageContext()
+        
+        return resultImage!
+    }
+    
+}

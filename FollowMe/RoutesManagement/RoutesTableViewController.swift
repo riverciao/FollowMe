@@ -13,12 +13,20 @@ class RoutesTableViewController: UITableViewController {
     var pathId: pathId?
     var pathIds: [pathId] = []
     
+    let mapViewController = MapViewController()
+    
     //Route screen shot
-    var routeImageView: UIImageView?
+    var routeImageView: UIImageView? {
+        didSet {
+            print("RoutesTableViewController--routeImageView\(routeImageView)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+        
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
 
@@ -27,13 +35,14 @@ class RoutesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        mapViewController.routeDelegate = self
+        
         // pass pathId back
         // TODO: - Coredata or Firebase to cach data
         if let pathId = pathId {
             pathIds.insert(pathId, at: 0)
         }
         
-        print("routeImageView\(routeImageView)")
     }
 
     // MARK: - Table view data source
@@ -49,6 +58,17 @@ class RoutesTableViewController: UITableViewController {
     @objc func addANewRoute(sender: UIBarButtonItem) {
         let positioningViewController = PositioningViewController()
         self.navigationController?.pushViewController(positioningViewController, animated: true)
+    }
+    
+}
+
+extension RoutesTableViewController: RouteDelegate {
+    func didGet(routeImageView: UIImageView) {
+        
+        self.routeImageView = routeImageView
+        
+        print("OOOOrouteImageView\(self.routeImageView)")
+        
     }
     
 }
