@@ -47,7 +47,7 @@ open class LocationNode: SCNNode {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
 }
 
@@ -91,6 +91,28 @@ open class LocationAnnotationNode: LocationNode {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+open class LocationStepNode: LocationNode {
+    
+    var instruction: String
+    
+    var distance: Int
+    
+    public init(location: CLLocation?, instruction: String, for distance: Int) {
+        
+        self.instruction = instruction
+        
+        self.distance = distance
+        
+        super.init(location: location)
+        
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 }
 
 open class LocationPathNode: LocationNode {

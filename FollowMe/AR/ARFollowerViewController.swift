@@ -23,7 +23,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
-
     
     //currentlocation manager
     private var currentLocation: CLLocation?
@@ -40,6 +39,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //take pathId from mapViewController
     var currentPathId: pathId?
     
+    //take instructions from location node -> step node
+//    var steps:[MKRouteStep] = []
+    var locationStepNodes: [LocationStepNode] = []
     
     //x, z for 3DVector converted from GPS
     var x: Float?
@@ -68,6 +70,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
+    // MARK: - View life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,7 +91,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 //        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,6 +101,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         fetchPath()
 
+        getRouteInstructions()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,7 +117,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         guard let steps = self.route?.steps else {
             
-//            retrieveStepNodes(with: currentPathId!)
+            retrieveStepNodes(with: currentPathId!)
             
             return
             
@@ -270,9 +274,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         let stepNodesRef = Database.database().reference().child("paths").child(pathId).child("step-nodes")
         
-        stepNodesRef.observe( .childAdded, with: { [weak self] (pathNodesSnapshot) in
+        stepNodesRef.observe( .childAdded, with: { [weak self] (stepNodesSnapshot) in
             
-            let stepNodeId = pathNodesSnapshot.key
+            let stepNodeId = stepNodesSnapshot.key
             
             let stepNodeRef = Database.database().reference().child("paths").child(pathId).child("step-nodes").child(stepNodeId)
             
@@ -282,13 +286,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                     
                     guard let latitude = dictionary["latitude"] as? Double, let longitude = dictionary["longitude"] as? Double, let instruction = dictionary["instruction"] as? String, let distance = dictionary["distance"] as? Int else { return }
                     
-                    print("latitude\(latitude) longitude\(longitude) instruction\(instruction) distance\(distance)")
-                    
+                    let location = CLLocation(latitude: latitude, longitude: longitude)
+                    let locationStepNode = LocationStepNode(location: location, instruction: instruction, for: distance)
+
+                    self?.locationStepNodes.append(locationStepNode)
+ 
                 }
                 
             }, withCancel: nil)
             
-            }, withCancel: nil)
+        }, withCancel: nil)
     }
     
     // MARK: - CLLocationManagerDelegate
@@ -299,8 +306,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             currentLocation = locations.last
             setupCurrentLocationAnnotation()
-            retrieveStepNodes(with: currentPathId!)
-//            getRouteInstructions()
             
         }
         
