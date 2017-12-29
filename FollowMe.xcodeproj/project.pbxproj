@@ -41,6 +41,7 @@
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
 		5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */; };
+		5FD7E3B81FF6138800E8CFBA /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3B71FF6138800E8CFBA /* UIViewExtension.swift */; };
 		5FE74AC11FEE8FC80048C711 /* PositioningViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */; };
 		5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */; };
 		5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */; };
@@ -86,6 +87,7 @@
 		5FBE573E1FDEB8FF002FDEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
+		5FD7E3B71FF6138800E8CFBA /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositioningViewController.swift; sourceTree = "<group>"; };
 		5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PositioningViewController.xib; sourceTree = "<group>"; };
 		5FE74AC31FEF706D0048C711 /* ARFollowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARFollowerViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5FD7E3B41FF6132800E8CFBA /* UIView */,
 				5FD7E38E1FF51CB600E8CFBA /* RoutesManagement */,
 				5F9116481FF4B4760030E9EF /* FollowerEntrance */,
 				5F9116421FF4B00D0030E9EF /* Landing */,
@@ -241,6 +244,14 @@
 				5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */,
 			);
 			path = RoutesManagement;
+			sourceTree = "<group>";
+		};
+		5FD7E3B41FF6132800E8CFBA /* UIView */ = {
+			isa = PBXGroup;
+			children = (
+				5FD7E3B71FF6138800E8CFBA /* UIViewExtension.swift */,
+			);
+			path = UIView;
 			sourceTree = "<group>";
 		};
 		83443FCB039D975896EB26DE /* Frameworks */ = {
@@ -416,6 +427,7 @@
 				5F4526841FE9002B004012D1 /* LocationSearchTableViewController.swift in Sources */,
 				5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */,
 				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
+				5FD7E3B81FF6138800E8CFBA /* UIViewExtension.swift in Sources */,
 				5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */,
 				5F45267F1FE761FC004012D1 /* MapViewController.swift in Sources */,
 				5F9116451FF4B03D0030E9EF /* LandingViewController.swift in Sources */,

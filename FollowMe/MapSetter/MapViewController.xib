@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="imageView" destination="yId-lN-P5U" id="l4h-SV-g6T"/>
                 <outlet property="mapView" destination="Xan-MG-hrP" id="BA2-No-mwg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -49,16 +50,25 @@
                         <action selector="CancelButton:" destination="-1" eventType="touchUpInside" id="H5p-Ep-DaU"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yId-lN-P5U">
+                    <rect key="frame" x="10" y="457" width="200" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="8g7-s5-Vf9"/>
+                        <constraint firstAttribute="width" constant="200" id="NiN-th-cHP"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="iMd-QF-j0m" secondAttribute="bottom" constant="20" id="4nK-rw-dv0"/>
+                <constraint firstItem="yId-lN-P5U" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="78P-rf-xGP"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BHX-Yz-ZrA"/>
                 <constraint firstItem="Iqa-2y-ZnP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="CPj-UL-Uxi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iMd-QF-j0m" secondAttribute="trailing" constant="20" id="Ckk-BB-MZA"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="NfR-xB-DuU"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UgY-iQ-bLo"/>
                 <constraint firstItem="Iqa-2y-ZnP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="XYP-zq-Ik5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="yId-lN-P5U" secondAttribute="bottom" constant="10" id="c5F-Xb-jVf"/>
                 <constraint firstAttribute="trailing" secondItem="Xan-MG-hrP" secondAttribute="trailing" id="xGa-op-wab"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
