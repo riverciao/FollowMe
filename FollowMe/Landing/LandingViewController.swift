@@ -13,8 +13,6 @@ class LandingViewController: UIViewController {
     
     @IBAction func setRouteButton(_ sender: Any) {
         
-//        let positioningViewController = PositioningViewController()
-        
         let routesTableViewController = RoutesTableViewController()
         let navigationController = UINavigationController(rootViewController: routesTableViewController)
         present(navigationController, animated: true, completion: nil)

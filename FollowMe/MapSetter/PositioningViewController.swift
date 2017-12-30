@@ -52,6 +52,12 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         }
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
 
     
     private func setupCurrentLocationPointerImageView() {
@@ -67,7 +73,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         defer {
             
             currentLocation = locations.last
-            
+
         }
         
         if currentLocation == nil {
@@ -75,6 +81,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
             if let userLocation = locations.last {
                 let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 60, 60)
                 mapView.setRegion(viewRegion, animated: false)
+                
             }
         }
     }

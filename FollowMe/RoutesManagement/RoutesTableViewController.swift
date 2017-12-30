@@ -52,7 +52,7 @@ class RoutesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("OOOOOO\(items.count)")
+
         return items.count
     }
     
@@ -96,7 +96,6 @@ class RoutesTableViewController: UITableViewController {
 extension RoutesTableViewController: RouteProviderDelegate {
     
     func didGet(routeImageView: UIImageView) {
-        print("RoutesTable--routeImageView\(routeImageView)")
         
         self.routeImageView?.image = routeImageView.image
         
