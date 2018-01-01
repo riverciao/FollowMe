@@ -29,6 +29,8 @@ class RoutesTableViewController: UITableViewController {
         
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
+        
+        self.view.backgroundColor = Palette.mystic
 
     }
     
@@ -59,7 +61,7 @@ class RoutesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 110
+        return 140
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,12 +71,15 @@ class RoutesTableViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "routeCell", for: indexPath) as? RouteTableViewCell {
             
             let route = items[indexPath.row]
+            cell.shareButtonOutlet.tag = indexPath.row
             
             if items.count > indexPath.row {
                 
-                if let id = route.id {
-                    cell.routeName.text = id
-                }
+//                if let distance = route.id {
+//                    cell.routeName.text = id
+//                }
+                
+                cell.shareButtonOutlet.addTarget(self, action: #selector(share(sender:)), for: .touchUpInside)
                 
                 if let imageData = route.image {
                     if let image = UIImage(data: imageData) {
@@ -92,6 +97,25 @@ class RoutesTableViewController: UITableViewController {
         let positioningViewController = PositioningViewController()
         self.navigationController?.pushViewController(positioningViewController, animated: true)
     }
+    
+    @objc func share(sender: UIButton) {
+        print("234")
+        
+        let index = sender.tag
+        let route = items[index]
+        
+        if let id = route.id {
+            let activityViewController = UIActivityViewController(activityItems: [id], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+
+    }
+    
+
+    
+
     
 }
 

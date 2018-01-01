@@ -20,30 +20,54 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XAf-2g-gY9">
-                        <rect key="frame" x="5" y="5" width="100" height="100"/>
+                        <rect key="frame" x="15" y="5" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="P2H-lO-mkR"/>
                             <constraint firstAttribute="height" constant="100" id="inV-fl-y6A"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3s-p2-e65">
-                        <rect key="frame" x="134" y="45" width="148" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtZ-13-6WF">
+                        <rect key="frame" x="133" y="64.5" width="67" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cOC-gq-hxm">
+                        <rect key="frame" x="346" y="55.5" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="PtH-Qu-Spk"/>
+                            <constraint firstAttribute="height" constant="30" id="td1-lW-Wmj"/>
+                        </constraints>
+                        <connections>
+                            <action selector="shareButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cM8-ZJ-FBP"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Route Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3s-p2-e65">
+                        <rect key="frame" x="133" y="30" width="123" height="26.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="XAf-2g-gY9" firstAttribute="top" secondItem="SJo-qR-Hsa" secondAttribute="top" constant="5" id="5Bs-1L-GhH"/>
-                    <constraint firstItem="XAf-2g-gY9" firstAttribute="leading" secondItem="SJo-qR-Hsa" secondAttribute="leading" constant="5" id="OVC-u2-lsp"/>
+                    <constraint firstItem="XAf-2g-gY9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5tE-gk-nc6"/>
+                    <constraint firstItem="k3s-p2-e65" firstAttribute="leading" secondItem="XAf-2g-gY9" secondAttribute="trailing" constant="18" id="96c-Q2-ber"/>
+                    <constraint firstItem="k3s-p2-e65" firstAttribute="top" secondItem="SJo-qR-Hsa" secondAttribute="top" constant="30" id="A2f-VO-tWl"/>
+                    <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="cOC-gq-hxm" secondAttribute="bottom" constant="24" id="FqL-LX-2Pc"/>
+                    <constraint firstItem="SJo-qR-Hsa" firstAttribute="trailing" secondItem="cOC-gq-hxm" secondAttribute="trailing" constant="12" id="Ihe-CG-acG"/>
+                    <constraint firstItem="XAf-2g-gY9" firstAttribute="leading" secondItem="SJo-qR-Hsa" secondAttribute="leading" constant="15" id="OVC-u2-lsp"/>
+                    <constraint firstItem="BtZ-13-6WF" firstAttribute="leading" secondItem="XAf-2g-gY9" secondAttribute="trailing" constant="18" id="Trv-VZ-u0H"/>
+                    <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="BtZ-13-6WF" secondAttribute="bottom" constant="24" id="j57-Qu-lLU"/>
+                    <constraint firstItem="BtZ-13-6WF" firstAttribute="top" secondItem="k3s-p2-e65" secondAttribute="bottom" constant="8" id="pxs-b2-wAA"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="SJo-qR-Hsa"/>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="distance" destination="BtZ-13-6WF" id="C2V-2R-GYZ"/>
                 <outlet property="routeImageView" destination="XAf-2g-gY9" id="GgM-9g-T6J"/>
                 <outlet property="routeName" destination="k3s-p2-e65" id="DvY-sf-hJZ"/>
+                <outlet property="shareButtonOutlet" destination="cOC-gq-hxm" id="QT0-eO-RaR"/>
             </connections>
             <point key="canvasLocation" x="60" y="85"/>
         </tableViewCell>
