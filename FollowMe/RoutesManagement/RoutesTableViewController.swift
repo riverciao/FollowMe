@@ -30,7 +30,10 @@ class RoutesTableViewController: UITableViewController {
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
         
+        
+        
         self.view.backgroundColor = Palette.mystic
+        setupHeader()
 
     }
     
@@ -38,6 +41,8 @@ class RoutesTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         mapViewController.routeDelegate = self
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
         
         if let items = CoreDataHandler.fetchObject() {
             self.items = items
@@ -52,8 +57,22 @@ class RoutesTableViewController: UITableViewController {
         }
         
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
 
     // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let view = UIView()
+//        return view
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -99,8 +118,8 @@ class RoutesTableViewController: UITableViewController {
     }
     
     @objc func share(sender: UIButton) {
-        print("234")
         
+        // TODO: revise tag to super super
         let index = sender.tag
         let route = items[index]
         
@@ -113,8 +132,15 @@ class RoutesTableViewController: UITableViewController {
 
     }
     
-
-    
+    func setupHeader() {
+        let headerView = EntryListHeaderView.create()
+        
+        headerView.titleLabel.text = NSLocalizedString("Routes", comment: "")
+        headerView.addButton.addTarget(self, action: #selector(addANewRoute(sender:)), for: .touchUpInside)
+        
+        tableView.tableHeaderView = headerView
+        tableView.separatorStyle = .none
+    }
 
     
 }
