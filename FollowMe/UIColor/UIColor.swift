@@ -18,7 +18,7 @@ extension UIColor {
 
 struct Palette {
     
-    static let baliHai = UIColor(r: 245, g: 169, b: 180)
+    static let baliHai = UIColor(r: 145, g: 169, b: 180)
     
     static let mystic = UIColor(r: 228, g: 237, b: 238)
     

@@ -10,6 +10,8 @@ import UIKit
 
 class LandingViewController: UIViewController {
     
+    @IBOutlet weak var newRouteButton: UIButton!
+    @IBOutlet weak var invitationCodeButton: UIButton!
     
     @IBAction func setRouteButton(_ sender: Any) {
         
@@ -30,7 +32,26 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor(r: 228, g: 237, b: 238)
+        self.view.backgroundColor = Palette.mystic
+        setupNewRouteButton()
+        setupInvitationCodeButton()
+    }
+    
+    func setupNewRouteButton() {
+        newRouteButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        newRouteButton.setTitleColor(Palette.abbey, for: .normal)
+        newRouteButton.backgroundColor = Palette.baliHai
+        newRouteButton.layer.cornerRadius = 8
+    }
+    
+    func setupInvitationCodeButton() {
+        invitationCodeButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        invitationCodeButton.setTitleColor(Palette.abbey, for: .normal)
+        invitationCodeButton.backgroundColor = Palette.baliHai
+        invitationCodeButton.layer.cornerRadius = 8
+        
     }
 
 }

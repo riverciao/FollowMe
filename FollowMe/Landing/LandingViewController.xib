@@ -9,9 +9,16 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="ARCADECLASSIC.TTF">
+            <string>ArcadeClassic</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LandingViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="invitationCodeButton" destination="pIg-WU-fbL" id="qba-3W-jPO"/>
+                <outlet property="newRouteButton" destination="gGK-3t-Zhq" id="HsI-e0-eXV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,24 +27,42 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGK-3t-Zhq">
-                    <rect key="frame" x="136" y="491" width="102" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Set New Route"/>
-                    <connections>
-                        <action selector="setRouteButton:" destination="-1" eventType="touchUpInside" id="1P5-rA-10T"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIg-WU-fbL">
-                    <rect key="frame" x="143" y="545" width="88" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Follow Route"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pIg-WU-fbL">
+                    <rect key="frame" x="62.5" y="537" width="250" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="Ooy-H4-hPZ"/>
+                        <constraint firstAttribute="width" constant="250" id="VS4-YG-0X8"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArcadeClassic" family="ArcadeClassic" pointSize="36"/>
+                    <state key="normal" title="Follow  Route">
+                        <color key="titleColor" red="0.5258789062" green="0.5258789062" blue="0.5258789062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
                     <connections>
                         <action selector="followRouteButton:" destination="-1" eventType="touchUpInside" id="ggj-1W-xoz"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGK-3t-Zhq">
+                    <rect key="frame" x="62" y="479" width="250" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="250" id="YeP-O5-sfs"/>
+                        <constraint firstAttribute="height" constant="50" id="geb-Yf-R0s"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="ArcadeClassic" family="ArcadeClassic" pointSize="36"/>
+                    <state key="normal" title="New  Route">
+                        <color key="titleColor" red="0.5258789062" green="0.5258789062" blue="0.5258789062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="setRouteButton:" destination="-1" eventType="touchUpInside" id="1P5-rA-10T"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gGK-3t-Zhq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GXJ-C3-Kkv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pIg-WU-fbL" secondAttribute="bottom" constant="80" id="ObD-H5-j8H"/>
+                <constraint firstItem="pIg-WU-fbL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aua-fI-2Dt"/>
+                <constraint firstItem="pIg-WU-fbL" firstAttribute="top" secondItem="gGK-3t-Zhq" secondAttribute="bottom" constant="8" id="lpj-Sr-IHV"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>

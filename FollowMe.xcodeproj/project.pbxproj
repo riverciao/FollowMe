@@ -37,6 +37,7 @@
 		5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */; };
 		5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */; };
 		5FAAE8841FFA403A00531AB2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAAE8831FFA403A00531AB2 /* UIColor.swift */; };
+		5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -87,6 +88,7 @@
 		5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerEntranceViewController.swift; sourceTree = "<group>"; };
 		5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowerEntranceViewController.xib; sourceTree = "<group>"; };
 		5FAAE8831FFA403A00531AB2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARCADECLASSIC.TTF; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -129,7 +131,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		5F184E331FE283A700789BDF /* Source */ = {
+		5F184E331FE283A700789BDF /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
 				5F184E341FE283A700789BDF /* CGPoint+Extensions.swift */,
@@ -143,7 +145,7 @@
 				5F184E481FE2848F00789BDF /* SceneLocationView.swift */,
 				5F184E3C1FE283A700789BDF /* SCNVector3+Extensions.swift */,
 			);
-			path = Source;
+			path = SourceCode;
 			sourceTree = "<group>";
 		};
 		5F184E4C1FE37FA900789BDF /* Point */ = {
@@ -216,6 +218,14 @@
 			path = UIColor;
 			sourceTree = "<group>";
 		};
+		5FAAE8861FFA521F00531AB2 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
 		5FBE57261FDEB8FF002FDEB3 = {
 			isa = PBXGroup;
 			children = (
@@ -256,7 +266,8 @@
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
 				5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */,
 				5FD7E3BD1FF6644B00E8CFBA /* CoreData */,
-				5F184E331FE283A700789BDF /* Source */,
+				5F184E331FE283A700789BDF /* SourceCode */,
+				5FAAE8861FFA521F00531AB2 /* Source */,
 			);
 			path = FollowMe;
 			sourceTree = "<group>";
@@ -375,6 +386,7 @@
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
 				5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */,
+				5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */,
 				5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */,
 				5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */,
 				5F184E471FE283D800789BDF /* Main.storyboard in Resources */,
@@ -395,7 +407,6 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Hex/Hex.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -405,7 +416,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
