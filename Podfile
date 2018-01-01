@@ -12,5 +12,6 @@ target 'FollowMe' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'Hex', '5.0.1'
 
 end
