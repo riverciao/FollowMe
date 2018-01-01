@@ -41,6 +41,8 @@ class RoutesTableViewController: UITableViewController {
             self.items = items
         }
         
+        self.tableView.reloadData()
+        
         // pass pathId back
         // TODO: - Coredata or Firebase to cach data
         if let pathId = pathId {
