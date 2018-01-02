@@ -41,6 +41,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
+    var currentLocationAnnotation: Annotation!
+    
     //add pathId to pass to ARFollowerController
     var currentPathId: pathId?
     
@@ -49,6 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
+    @IBOutlet weak var goToARButtonOutlet: UIButton!
     
     @IBAction func goToARButton(_ sender: Any) {
         
@@ -122,7 +125,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if CLLocationManager.locationServicesEnabled() {
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
+        
+        } else {
+            
+            self.mapView.showsUserLocation = false
+        
         }
+        
+        if let currentLocationCoordinate = currentLocationCoordinateForARSetting {
+            setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
+        }
+        
         
         
     }
@@ -131,29 +144,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         super.viewWillAppear(animated)
         
-        setupCurrentLocationFromUserSetting()
-
     }
-    
-    private func setupCurrentLocationFromUserSetting() {
-        
-        //Setup current location annotation
-        if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
-            
-            setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
-            
-            let viewRegion = MKCoordinateRegionMakeWithDistance(currentLocationCoordinate, 150, 150)
-            
-            mapView.setRegion(viewRegion, animated: true)
-            
-        }
-        
-    }
-    
-    
-
-    
-    
     
     
     @objc private func search(sender: UIBarButtonItem) {
@@ -177,6 +168,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     }
     
+    private func setupGoToARButtonOutlet() {
+        
+    }
+    
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
         
         let destinationAnnotation = Annotation(title: "Destination", subtitle: "You want to arrive here", coordinate: destinationCoordinate)
@@ -185,14 +180,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     private func setupAnnotationsFor(currentLocationCoordinate: CLLocationCoordinate2D) {
+
+        let region = MKCoordinateRegionMakeWithDistance(currentLocationCoordinate, 200, 200)
+        mapView.setRegion(region, animated: true)
         
-        //TODO: - change the current location annotation pin to a blue point or something diffrent from destination
+        self.currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
         
-        let currentLocationAnnotation = Annotation(title: "Current Location", subtitle: "You are here now", coordinate: currentLocationCoordinate)
-        
-        self.mapView.showAnnotations([currentLocationAnnotation], animated: true)
-        
+        mapView.addAnnotation(currentLocationAnnotation)
     }
+    
     
     private func getMapItem(with coordinate: CLLocationCoordinate2D) -> MKMapItem {
         let placemark = MKPlacemark(coordinate: coordinate)
@@ -222,6 +218,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if currentLocation == nil {
             
         }
+    }
+    
+    // MARK: - Custom Annotation
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKAnnotationView(annotation: currentLocationAnnotation, reuseIdentifier: "currentLocationAnnotation")
+        annotationView.image = #imageLiteral(resourceName: "icon-start-node")
+//        let transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+//        annotationView.transform = transform
+        return annotationView
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -672,4 +677,23 @@ extension MapViewController {
         return resultImage!
     }
     
+
 }
+
+class CustomPointAnnotation: MKPointAnnotation {
+    var imageName: UIImage!
+}
+
+//class AnnotationPin: NSObject, MKPointAnnotation {
+//    var title: String?
+//    var subtitle: String?
+//    var coordinate: CLLocationCoordinate2D
+//
+//    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D) {
+//        self.title = title
+//        self.subtitle = subtitle
+//        self.coordinate = coordinate
+//    }
+//
+//}
+

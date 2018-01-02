@@ -15,9 +15,18 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     private var locationManager = CLLocationManager()
     let queue = OperationQueue()
     
+    
+    @IBOutlet weak var headerView: UIView!
+    
+    @IBOutlet weak var headerTitle: UILabel!
+    
+    @IBOutlet weak var headerContent: UILabel!
+    
     @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var currentLocationPointerImageView: UIImageView!
+    
+    @IBOutlet weak var confirmButtton: UIButton!
     
     @IBAction func confirmLocationButton(_ sender: Any) {
         
@@ -43,6 +52,8 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.startUpdatingHeading()
 
         setupCurrentLocationPointerImageView()
+//        setupHeader()
+        setupConfirmButton()
         
         // Check for Location Services
         
@@ -72,14 +83,27 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
     }
     
-//    func setupHeader() {
-//        let headerView = EntryListHeaderView.create()
-//
-//        headerView.titleLabel.text = NSLocalizedString("Routes", comment: "")
-//
-//        tableView.tableHeaderView = headerView
-//        tableView.separatorStyle = .none
-//    }
+    func setupHeader() {
+        
+        headerView.backgroundColor = Palette.baliHai
+        
+        headerTitle.textColor = Palette.abbey
+        
+        headerContent.textColor = Palette.mystic
+        
+    }
+    
+    func setupConfirmButton() {
+        
+        confirmButtton.setTitleColor(Palette.mystic, for: .normal)
+        
+        confirmButtton.backgroundColor = Palette.baliHai
+        
+        confirmButtton.titleLabel?.font = UIFont(name: "ARCADECLASSIC", size: 36)
+        
+        confirmButtton.layer.cornerRadius = 12
+    }
+
 
     // MARK: - CLLocationManagerDelegate
     // TODO: - track location and heading for onece and do not keep  tracking to let user adjust it by self

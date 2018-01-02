@@ -17,7 +17,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PositioningViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="confirmButtton" destination="rq1-br-1Vc" id="ZdP-k2-OKd"/>
                 <outlet property="currentLocationPointerImageView" destination="gC9-f2-R9s" id="Rsz-KZ-S11"/>
+                <outlet property="headerContent" destination="cqz-Ob-DkD" id="Luf-EN-6BO"/>
+                <outlet property="headerTitle" destination="X4g-eA-mfk" id="oYn-ZD-3Hr"/>
+                <outlet property="headerView" destination="F6Q-YT-D4F" id="RKa-c9-tHz"/>
                 <outlet property="mapView" destination="qKE-ZY-8S6" id="3Rp-Tq-MFL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -45,7 +49,7 @@
                         <constraint firstAttribute="height" constant="50" id="fYv-1e-sYp"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <state key="normal" title="Confirm Location">
+                    <state key="normal" title="Confirm">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
