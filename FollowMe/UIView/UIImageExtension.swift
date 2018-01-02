@@ -23,3 +23,16 @@ extension UIImage {
         return newImage
     }
 }
+
+extension UIButton {
+    func setBackgroundColor(color: UIColor, forState: UIControlState) {
+        UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        let colorImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+//        self.layer.cornerRadius = self.bounds.height / 2
+        self.setBackgroundImage(colorImage, for: forState)
+    }
+}

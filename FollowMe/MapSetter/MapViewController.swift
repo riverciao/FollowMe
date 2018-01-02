@@ -136,6 +136,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
         }
         
+        setupGoToARButtonOutlet()
+        
         
         
     }
@@ -169,7 +171,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     private func setupGoToARButtonOutlet() {
-        
+        goToARButtonOutlet.backgroundColor = Palette.duckBeak
+        goToARButtonOutlet.setTitleColor(Palette.mystic, for: .normal)
+        goToARButtonOutlet.titleLabel?.font = UIFont(name: "ARCADECLASSIC", size: 36)
+        goToARButtonOutlet.layer.cornerRadius = goToARButtonOutlet.bounds.height / 2
+        goToARButtonOutlet.clipsToBounds = true
+        goToARButtonOutlet.setImage(#imageLiteral(resourceName: "icon-walking-bird"), for: .highlighted)
+        goToARButtonOutlet.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
+        goToARButtonOutlet.imageView?.contentMode = .scaleAspectFit
+        goToARButtonOutlet.setBackgroundColor(color: Palette.baliHai, forState: .highlighted)
     }
     
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {

@@ -29,12 +29,12 @@
                         <outletCollection property="gestureRecognizers" destination="Lb3-2Z-yCK" appends="YES" id="Iz1-hV-DDC"/>
                     </connections>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMd-QF-j0m">
-                    <rect key="frame" x="305" y="597" width="50" height="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMd-QF-j0m">
+                    <rect key="frame" x="275" y="567" width="80" height="80"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="PC9-fB-wKP"/>
-                        <constraint firstAttribute="height" constant="50" id="aSG-lW-38g"/>
+                        <constraint firstAttribute="width" constant="80" id="PC9-fB-wKP"/>
+                        <constraint firstAttribute="height" constant="80" id="aSG-lW-38g"/>
                     </constraints>
                     <state key="normal" title="Go"/>
                     <connections>
