@@ -71,6 +71,15 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         currentLocationPointerImageView.transform = currentLocationPointerImageView.transform.rotated(by: CGFloat.init(Double.pi * 3 / 2))
         
     }
+    
+//    func setupHeader() {
+//        let headerView = EntryListHeaderView.create()
+//
+//        headerView.titleLabel.text = NSLocalizedString("Routes", comment: "")
+//
+//        tableView.tableHeaderView = headerView
+//        tableView.separatorStyle = .none
+//    }
 
     // MARK: - CLLocationManagerDelegate
     // TODO: - track location and heading for onece and do not keep  tracking to let user adjust it by self

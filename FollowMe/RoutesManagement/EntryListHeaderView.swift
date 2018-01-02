@@ -31,7 +31,7 @@ class EntryListHeaderView: UIView, Identifiable {
     
     private func setUp() {
         
-        self.backgroundColor = Palette.mystic
+        self.backgroundColor = Palette.baliHai
         
         titleLabel.text = ""
         titleLabel.textColor = Palette.abbey
