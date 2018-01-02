@@ -51,6 +51,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
+    var searchBackgroundView: UIView {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.frame = self.view.frame
+        view.backgroundColor = Palette.duckFeather
+        return view
+    }
+    
     @IBOutlet weak var goToARButtonOutlet: UIButton!
     
     @IBAction func goToARButton(_ sender: Any) {
@@ -114,11 +122,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //add addANewArticle navigationItem at rightside
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(search(sender:)))
         
-        //determines whether the Navigation Bar disappears when the search results are shown.
-        //searchController?.hidesNavigationBarDuringPresentation = false
-        
-        //gives the modal overlay a semi-transparent background when the search bar is selected
-        //searchController?.dimsBackgroundDuringPresentation = true
+
         
         // Check for Location Services
         
@@ -138,8 +142,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         setupGoToARButtonOutlet()
         
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -149,7 +151,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     
+    // MARK: - Search Controller
+    
     @objc private func search(sender: UIBarButtonItem) {
+        
+        self.mapView.addSubview(searchBackgroundView)
         
         //Setup search results controller
         let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
@@ -160,14 +166,74 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // limits the overlap area to just the View Controller’s frame instead of the whole Navigation Controller
         definesPresentationContext = true
         
-        if let letcurrentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
+        if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
             //Pass Value
-            let currentLocationForARSetting = CLLocation(coordinate: letcurrentLocationCoordinateForARSetting, altitude: 0)
+            let currentLocationForARSetting = CLLocation(coordinate: currentLocationCoordinateForARSetting, altitude: 0)
             locationSearchTableViewController.currentLocation = currentLocationForARSetting
             locationSearchTableViewController.mapView = self.mapView
             present(searchController, animated: true, completion: nil)
         }
 
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        //Ignore user
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        
+        //Activity indicator
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.startAnimating()
+        
+        self.view.addSubview(activityIndicator)
+        
+        //Hide search bar
+        searchBar.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+        
+        //Create the search request
+        let searchRequest = MKLocalSearchRequest()
+        searchRequest.naturalLanguageQuery = searchBar.text
+        
+        let activeSearch = MKLocalSearch(request: searchRequest)
+        
+        activeSearch.start { (response, error) in
+            
+            activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+            
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            
+            //Remove annotations
+            let annotations = self.mapView.annotations
+            self.mapView.removeAnnotations(annotations)
+            
+            //Getting data
+            let latitude = response?.boundingRegion.center.latitude
+            let longitude = response?.boundingRegion.center.longitude
+            
+            //Create annotation
+            self.destinationCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
+            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: self.destinationCoordinate!)
+            self.mapView.addAnnotation(annotation)
+            
+            //Draw the route
+            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
+                self.setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: self.destinationCoordinate!)
+            }
+            
+            //TODO: - adjust the scale of zoom in level (depends on the size of destination)
+            //Zoom in on annotation
+            let span = MKCoordinateSpanMake(0.1, 0.1)
+            let region = MKCoordinateRegionMake(self.destinationCoordinate!, span)
+            self.mapView.setRegion(region, animated: true)
+        }
+        
     }
     
     private func setupGoToARButtonOutlet() {
@@ -239,65 +305,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return annotationView
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //Ignore user
-        UIApplication.shared.beginIgnoringInteractionEvents()
-        
-        //Activity indicator
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.startAnimating()
-        
-        self.view.addSubview(activityIndicator)
-        
-        //Hide search bar
-        searchBar.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
-        
-        //Create the search request
-        let searchRequest = MKLocalSearchRequest()
-        searchRequest.naturalLanguageQuery = searchBar.text
-        
-        let activeSearch = MKLocalSearch(request: searchRequest)
-        
-        activeSearch.start { (response, error) in
-            
-            activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
-            
-            if let error = error {
-                print("Error: \(error)")
-                return
-            }
-            
-            //Remove annotations
-            let annotations = self.mapView.annotations
-            self.mapView.removeAnnotations(annotations)
-            
-            //Getting data
-            let latitude = response?.boundingRegion.center.latitude
-            let longitude = response?.boundingRegion.center.longitude
-            
-            //Create annotation
-            self.destinationCoordinate = CLLocationCoordinate2DMake(latitude!, longitude!)
-            let annotation = Annotation(title: searchBar.text!, subtitle: "", coordinate: self.destinationCoordinate!)
-            self.mapView.addAnnotation(annotation)
-            
-            //Draw the route
-            if let currentLocationCoordinate = self.currentLocationCoordinateForARSetting {
-                self.setRouteWith(currentLocationCoordinate: currentLocationCoordinate, destinationCoordinate: self.destinationCoordinate!)
-            }
-            
-            //TODO: - adjust the scale of zoom in level (depends on the size of destination)
-            //Zoom in on annotation
-            let span = MKCoordinateSpanMake(0.1, 0.1)
-            let region = MKCoordinateRegionMake(self.destinationCoordinate!, span)
-            self.mapView.setRegion(region, animated: true)
-        }
-        
-    }
+
     
     typealias coordinates = [CLLocationCoordinate2D]
     
