@@ -51,13 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
-    var searchBackgroundView: UIView {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.frame = self.view.frame
-        view.backgroundColor = Palette.duckFeather
-        return view
-    }
+    @IBOutlet weak var searchBackgroundView: UIView!
     
     @IBOutlet weak var goToARButtonOutlet: UIButton!
     
@@ -142,12 +136,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         setupGoToARButtonOutlet()
         
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
+        setupSearchBackgroundView()
+        hideKeyboardWhenTappedAround()
+        hideSearchBackgroundViewWhenTappedAround()
+    
     }
     
     
@@ -155,7 +153,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @objc private func search(sender: UIBarButtonItem) {
         
-        self.mapView.addSubview(searchBackgroundView)
+        searchBackgroundView.isHidden = false
         
         //Setup search results controller
         let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
@@ -176,7 +174,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     }
     
+    func setupSearchBackgroundView() {
+        searchBackgroundView.backgroundColor = Palette.duckFeather
+        searchBackgroundView.isHidden = true
+    }
+
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+
+        searchBackgroundView.isHidden = true
+        
         //Ignore user
         UIApplication.shared.beginIgnoringInteractionEvents()
         
@@ -234,6 +241,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             self.mapView.setRegion(region, animated: true)
         }
         
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.showsCancelButton = false
+        searchBackgroundView.isHidden = true
     }
     
     private func setupGoToARButtonOutlet() {
@@ -702,16 +715,27 @@ class CustomPointAnnotation: MKPointAnnotation {
     var imageName: UIImage!
 }
 
-//class AnnotationPin: NSObject, MKPointAnnotation {
-//    var title: String?
-//    var subtitle: String?
-//    var coordinate: CLLocationCoordinate2D
-//
-//    init(title: String, subtitle: String, coordinate: CLLocationCoordinate2D) {
-//        self.title = title
-//        self.subtitle = subtitle
-//        self.coordinate = coordinate
-//    }
-//
-//}
+extension MapViewController {
+    func hideSearchBackgroundViewWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideSearchBackgroundView))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func hideSearchBackgroundView() {
+        searchBackgroundView.isHidden = true
+    }
+}
+
+extension MapViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 
