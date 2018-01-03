@@ -175,11 +175,11 @@
 			children = (
 				5F4526811FE791D6004012D1 /* Annotation.swift */,
 				5F45267D1FE761FC004012D1 /* MapViewController.swift */,
+				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
 				5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */,
 				5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */,
 				5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */,
 				5F4526881FEA15BD004012D1 /* Polyline.swift */,
-				5F45267E1FE761FC004012D1 /* MapViewController.xib */,
 				5FE74ABF1FEE8FC80048C711 /* PositioningViewController.swift */,
 				5FE74AC01FEE8FC80048C711 /* PositioningViewController.xib */,
 			);

@@ -23,17 +23,7 @@ protocol HandleMapSearch {
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
 
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
-        searchBackgroundView.isHidden = false
-        
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-        searchBackgroundView.isHidden = true
-        
-    }
+
     
     //Location Manager
     let locationSearchTableViewController = LocationSearchTableViewController()
@@ -91,12 +81,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
-    
-    @IBAction func CancelButton(_ sender: Any) {
-        
-        self.dismiss(animated: true, completion: nil)
-        
-    }
+
     
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
         
@@ -187,6 +172,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBackgroundView.backgroundColor = Palette.duckFeather
         searchBackgroundView.isHidden = true
     }
+    
+
 
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -247,6 +234,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             let region = MKCoordinateRegionMake(self.destinationCoordinate!, span)
             self.mapView.setRegion(region, animated: true)
         }
+        
+    }
+    
+    // MARK: - UISearchBarDelegate
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBackgroundView.isHidden = false
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        searchBackgroundView.isHidden = true
         
     }
     

@@ -42,15 +42,6 @@
                         <action selector="goToARButton:" destination="-1" eventType="touchUpInside" id="isf-dy-RvN"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqa-2y-ZnP">
-                    <rect key="frame" x="20" y="40" width="48" height="30"/>
-                    <state key="normal" title="Cancel">
-                        <color key="titleColor" red="0.20784313730000001" green="0.72156862749999995" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="CancelButton:" destination="-1" eventType="touchUpInside" id="H5p-Ep-DaU"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-bI-g6F">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,11 +51,9 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="iMd-QF-j0m" secondAttribute="bottom" constant="20" id="4nK-rw-dv0"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BHX-Yz-ZrA"/>
-                <constraint firstItem="Iqa-2y-ZnP" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="CPj-UL-Uxi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iMd-QF-j0m" secondAttribute="trailing" constant="20" id="Ckk-BB-MZA"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="NfR-xB-DuU"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UgY-iQ-bLo"/>
-                <constraint firstItem="Iqa-2y-ZnP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="XYP-zq-Ik5"/>
                 <constraint firstItem="rYa-bI-g6F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ymg-Qb-rLk"/>
                 <constraint firstAttribute="bottom" secondItem="rYa-bI-g6F" secondAttribute="bottom" id="anX-v4-AhW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rYa-bI-g6F" secondAttribute="trailing" id="nKd-kB-mdr"/>
