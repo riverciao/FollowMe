@@ -23,6 +23,18 @@ protocol HandleMapSearch {
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
 
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBackgroundView.isHidden = false
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        searchBackgroundView.isHidden = true
+        
+    }
+    
     //Location Manager
     let locationSearchTableViewController = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
