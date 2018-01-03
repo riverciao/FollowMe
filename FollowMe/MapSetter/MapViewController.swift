@@ -141,7 +141,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewWillAppear(animated)
         setupSearchBackgroundView()
         hideKeyboardWhenTappedAround()
-    
+        
     }
     
     
@@ -155,7 +155,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchController.searchResultsUpdater = locationSearchTableViewController
         searchController.searchBar.delegate = self
         
-        // limits the overlap area to just the View Controller’s frame instead of the whole Navigation Controller
+        searchController.searchBar.barTintColor = UIColor.clear
+        
         definesPresentationContext = true
         
         if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
@@ -172,6 +173,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBackgroundView.backgroundColor = Palette.duckFeather
         searchBackgroundView.isHidden = true
     }
+    
+//    func setupSearchBar(searchBar: UISearchBar) {
+//        searchController.searchBar.translucent = true
+//        searchController.searchBar.alpha = 1
+//        searchController.searchBar.backgroundImage = UIImage()
+//        searchController.searchBar.barTintColor = UIColor.clear
+//    }
     
 
 
