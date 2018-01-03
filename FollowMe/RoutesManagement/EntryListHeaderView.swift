@@ -31,17 +31,17 @@ class EntryListHeaderView: UIView, Identifiable {
     
     private func setUp() {
         
-        self.backgroundColor = Palette.baliHai
+        self.backgroundColor = Palette.seaBlue
         
         titleLabel.text = ""
-        titleLabel.textColor = Palette.abbey
+        titleLabel.textColor = .white
         titleLabel.font = UIFont(name: "ARCADECLASSIC", size: 36.0)
         
         addButton.setImage(
             UIImage(named: "icon_plus")!.withRenderingMode(.alwaysTemplate),
             for: .normal
         )
-        addButton.tintColor = Palette.abbey
+        addButton.tintColor = .white
         
     }
 

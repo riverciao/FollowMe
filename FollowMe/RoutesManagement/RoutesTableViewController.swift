@@ -32,7 +32,7 @@ class RoutesTableViewController: UITableViewController {
         
         
         
-        self.view.backgroundColor = Palette.mystic
+        self.view.backgroundColor = .white
         setupHeader()
 
     }
@@ -143,7 +143,6 @@ class RoutesTableViewController: UITableViewController {
     }
     
     func setupStatusBarColor() {
-        UIApplication.shared.statusBarStyle = .lightContent
         UIApplication.shared.statusBarView?.backgroundColor = Palette.seaBlue
     }
     
