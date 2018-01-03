@@ -37,6 +37,10 @@ class LandingViewController: UIViewController {
         setupInvitationCodeButton()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     func setupNewRouteButton() {
         newRouteButton.translatesAutoresizingMaskIntoConstraints = false
         

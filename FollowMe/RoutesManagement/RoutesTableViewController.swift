@@ -62,6 +62,15 @@ class RoutesTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupStatusBarColor()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     // MARK: - Table view data source
     
@@ -133,6 +142,11 @@ class RoutesTableViewController: UITableViewController {
 
     }
     
+    func setupStatusBarColor() {
+        UIApplication.shared.statusBarStyle = .lightContent
+        UIApplication.shared.statusBarView?.backgroundColor = Palette.seaBlue
+    }
+    
     func setupHeader() {
         let headerView = EntryListHeaderView.create()
         
@@ -152,5 +166,11 @@ extension RoutesTableViewController: RouteProviderDelegate {
         
         self.routeImageView?.image = routeImageView.image
         
+    }
+}
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        return value(forKey: "statusBar") as? UIView
     }
 }

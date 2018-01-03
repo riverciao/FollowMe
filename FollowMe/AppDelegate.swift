@@ -37,6 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            self.window!.rootViewController = NotSupportedViewController()
 //        }
         
+        
+        
         return true
     }
 
