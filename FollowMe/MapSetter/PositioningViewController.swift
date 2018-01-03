@@ -53,7 +53,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         locationManager.startUpdatingHeading()
 
         setupCurrentLocationPointerImageView()
-//        setupHeader()
+        setupHeader()
         setupConfirmButton()
         
         // Check for Location Services
@@ -75,6 +75,10 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     
     private func setupCurrentLocationPointerImageView() {
@@ -84,13 +88,22 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
     }
     
+    
     func setupHeader() {
         
-        headerView.backgroundColor = Palette.baliHai
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerTitle.translatesAutoresizingMaskIntoConstraints = false
+        headerContent.translatesAutoresizingMaskIntoConstraints = false
         
-        headerTitle.textColor = Palette.abbey
+        headerView.backgroundColor = Palette.seaBlue
         
-        headerContent.textColor = Palette.mystic
+        headerTitle.textColor = .white
+        
+        headerContent.textColor = .white
+        
+        headerTitle.font = UIFont.systemFont(ofSize: 20)
+        
+        headerContent.font = UIFont.systemFont(ofSize: 10)
         
     }
     
