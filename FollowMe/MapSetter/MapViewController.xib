@@ -15,6 +15,7 @@
                 <outlet property="goToARButtonOutlet" destination="iMd-QF-j0m" id="Wkw-gs-Ubf"/>
                 <outlet property="mapView" destination="Xan-MG-hrP" id="BA2-No-mwg"/>
                 <outlet property="searchBackgroundView" destination="rYa-bI-g6F" id="BXC-xR-v5m"/>
+                <outlet property="searchDisplayController" destination="AIp-O6-jn3" id="y9d-qx-KQD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -68,5 +69,13 @@
                 <action selector="addPin:" destination="-1" id="qlU-KO-TWW"/>
             </connections>
         </tapGestureRecognizer>
+        <searchDisplayController id="AIp-O6-jn3">
+            <connections>
+                <outlet property="delegate" destination="-1" id="EEo-ID-yoW"/>
+                <outlet property="searchContentsController" destination="-1" id="bLt-cM-IpS"/>
+                <outlet property="searchResultsDataSource" destination="-1" id="s0L-t0-jyP"/>
+                <outlet property="searchResultsDelegate" destination="-1" id="bS8-LB-4eO"/>
+            </connections>
+        </searchDisplayController>
     </objects>
 </document>
