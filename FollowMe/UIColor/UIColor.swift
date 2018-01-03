@@ -28,7 +28,7 @@ struct Palette {
     
     static let duckBeak = UIColor(r: 255, g: 79, b: 25)
     
-    static let seaBlue = UIColor(r: 0, g: 191, b: 255)
+    static let seaBlue = UIColor(r: 17, g: 143, b: 228)
     
     static let dandelion = UIColor(r: 255, g: 233, b: 129)
     

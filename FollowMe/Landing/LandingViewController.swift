@@ -32,7 +32,7 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = Palette.mystic
+        self.view.backgroundColor = Palette.seaBlue
         setupNewRouteButton()
         setupInvitationCodeButton()
     }
@@ -40,16 +40,16 @@ class LandingViewController: UIViewController {
     func setupNewRouteButton() {
         newRouteButton.translatesAutoresizingMaskIntoConstraints = false
         
-        newRouteButton.setTitleColor(Palette.abbey, for: .normal)
-        newRouteButton.backgroundColor = Palette.baliHai
+        newRouteButton.setTitleColor( .white, for: .normal)
+        newRouteButton.backgroundColor = Palette.duckBeak
         newRouteButton.layer.cornerRadius = 8
     }
     
     func setupInvitationCodeButton() {
         invitationCodeButton.translatesAutoresizingMaskIntoConstraints = false
         
-        invitationCodeButton.setTitleColor(Palette.abbey, for: .normal)
-        invitationCodeButton.backgroundColor = Palette.baliHai
+        invitationCodeButton.setTitleColor( .white, for: .normal)
+        invitationCodeButton.backgroundColor = Palette.duckBeak
         invitationCodeButton.layer.cornerRadius = 8
         
     }
