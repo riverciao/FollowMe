@@ -22,9 +22,7 @@ protocol HandleMapSearch {
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
 
-    
 
-    
     //Location Manager
     let locationSearchTableViewController = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
@@ -62,11 +60,23 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     lazy var searchBar: UISearchBar = {
         let searchBar = searchController.searchBar
+        searchBar.isTranslucent = true
+        searchBar.alpha = 1
+        searchBar.barTintColor = .clear
+        searchBar.backgroundImage = UIImage()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
     
-    @IBOutlet weak var searchBackgroundView: UIView!
+    lazy var searchBackgroundView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = Palette.duckFeather
+        return view
+    }()
+//    let searchBackgroundView = UIView()
+    
+//    @IBOutlet weak var searchBackgroundView: UIView!
     
     @IBOutlet weak var goToARButtonOutlet: UIButton!
     
@@ -90,7 +100,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         arFollowerViewController.routeImageView = self.routeImageView
         
-        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
+//        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
+        present(arFollowerViewController, animated: true, completion: nil)
         
     }
     
@@ -115,6 +126,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         mapView.delegate = self
         locationSearchTableViewController.handleMapSearchDelegate = self
@@ -152,22 +165,36 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        setupSearchBackgroundView()
-        setupSearchBar()
+        
         setupSearchController()
         hideKeyboardWhenTappedAround()
         
         self.navigationController?.navigationBar.isHidden = true
+        searchBackgroundView.isHidden = true
+    }
+
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupSearchBar()
+        setupSearchBackgroundView()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
+        
     }
-    
+
     
     // MARK: - Search Controller
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     
     @objc private func search(sender: UIBarButtonItem) {
         
@@ -192,10 +219,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func setupSearchBar() {
-        searchBar.barTintColor = .clear
+//        searchBar.barTintColor = .clear
+//        searchBar.backgroundImage = UIImage()
         
         mapView.addSubview(searchBar)
-        
+//        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+//        mapView.bringSubview(toFront: searchBar)
+    
         searchBar.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
         searchBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
         searchBar.widthAnchor.constraint(equalTo: mapView.widthAnchor).isActive = true
@@ -217,19 +247,22 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func setupSearchBackgroundView() {
-        searchBackgroundView.backgroundColor = Palette.duckFeather
-        searchBackgroundView.isHidden = true
+//        searchBackgroundView.isHidden = true
+        
+        mapView.insertSubview(searchBackgroundView, belowSubview: searchBar)
+//        self.mapView.addSubview(searchBackgroundView)
+        
+//        self.searchBackgroundView.frame = self.view.frame
+        self.searchBackgroundView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+//        self.view.bringSubview(toFront: searchBackgroundView)
+        
+        searchBackgroundView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        searchBackgroundView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        searchBackgroundView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        searchBackgroundView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
+//
+        
     }
-    
-//    func setupSearchBar(searchBar: UISearchBar) {
-//        searchController.searchBar.translucent = true
-//        searchController.searchBar.alpha = 1
-//        searchController.searchBar.backgroundImage = UIImage()
-//        searchController.searchBar.barTintColor = UIColor.clear
-//    }
-    
-
-
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -296,12 +329,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         
+        print("Begin--isHidden\(self.navigationController?.navigationBar.isHidden)")
         searchBackgroundView.isHidden = false
         
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
+
+        print("End--isHidden\(self.navigationController?.navigationBar.isHidden)")
         searchBackgroundView.isHidden = true
         
     }

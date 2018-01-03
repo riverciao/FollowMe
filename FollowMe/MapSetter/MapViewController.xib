@@ -14,7 +14,6 @@
             <connections>
                 <outlet property="goToARButtonOutlet" destination="iMd-QF-j0m" id="Wkw-gs-Ubf"/>
                 <outlet property="mapView" destination="Xan-MG-hrP" id="BA2-No-mwg"/>
-                <outlet property="searchBackgroundView" destination="rYa-bI-g6F" id="BXC-xR-v5m"/>
                 <outlet property="searchDisplayController" destination="AIp-O6-jn3" id="y9d-qx-KQD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -43,10 +42,6 @@
                         <action selector="goToARButton:" destination="-1" eventType="touchUpInside" id="isf-dy-RvN"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYa-bI-g6F">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -55,10 +50,6 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iMd-QF-j0m" secondAttribute="trailing" constant="20" id="Ckk-BB-MZA"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="NfR-xB-DuU"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UgY-iQ-bLo"/>
-                <constraint firstItem="rYa-bI-g6F" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ymg-Qb-rLk"/>
-                <constraint firstAttribute="bottom" secondItem="rYa-bI-g6F" secondAttribute="bottom" id="anX-v4-AhW"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rYa-bI-g6F" secondAttribute="trailing" id="nKd-kB-mdr"/>
-                <constraint firstItem="rYa-bI-g6F" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wAA-iX-SRN"/>
                 <constraint firstAttribute="trailing" secondItem="Xan-MG-hrP" secondAttribute="trailing" id="xGa-op-wab"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

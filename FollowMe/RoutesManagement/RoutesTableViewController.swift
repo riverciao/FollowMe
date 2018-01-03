@@ -114,7 +114,8 @@ class RoutesTableViewController: UITableViewController {
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
         let positioningViewController = PositioningViewController()
-        self.navigationController?.pushViewController(positioningViewController, animated: true)
+        present(positioningViewController, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(positioningViewController, animated: true)
     }
     
     @objc func share(sender: UIButton) {

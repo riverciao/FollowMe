@@ -38,7 +38,8 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         mapViewController.currentLocationCoordinateForARSetting = CLLocationCoordinate2D(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
         
-        self.navigationController?.pushViewController(mapViewController, animated: true)
+//        self.navigationController?.pushViewController(mapViewController, animated: true)
+        present(mapViewController, animated: true, completion: nil)
 
     }
     

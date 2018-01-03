@@ -88,11 +88,23 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     @IBAction func goToManageRoutes(_ sender: Any) {
         
-        if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
-            routesTableViewController.pathId = self.currentPathId
-            routesTableViewController.routeImageView = self.routeImageView
-            self.navigationController?.popToViewController(routesTableViewController, animated: true)
-        }
+        let routesTableViewController = RoutesTableViewController()
+        routesTableViewController.pathId = self.currentPathId
+        routesTableViewController.routeImageView = self.routeImageView
+        
+//        let positioningViewController = PositioningViewController()
+//        positioningViewController.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+
+        
+//        present(routesTableViewController, animated: true, completion: nil)
+        
+
+//        if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
+//            routesTableViewController.pathId = self.currentPathId
+//            routesTableViewController.routeImageView = self.routeImageView
+//            self.navigationController?.popToViewController(routesTableViewController, animated: true)
+//        }
         
     }
     
