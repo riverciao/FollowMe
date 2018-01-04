@@ -161,6 +161,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        setupStatusBarColor()
         setupGoToManageRoutesButton()
         setupHeader()
     }
@@ -226,6 +227,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     private func setupHeader() {
         
         headerView.backgroundColor = Palette.seaBlue
+        instructionLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 24)
         instructionLabel.textColor = .white
         distanceLabel.textColor = .white
     }
@@ -243,6 +245,14 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
+    }
+    
+    func setupStatusBarColor() {
+        UIApplication.shared.statusBarView?.backgroundColor = Palette.seaBlue
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     private func setupCurrentLocationAnnotation() {
