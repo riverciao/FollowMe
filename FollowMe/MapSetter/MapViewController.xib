@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
-                <outlet property="goToARButtonOutlet" destination="iMd-QF-j0m" id="Wkw-gs-Ubf"/>
                 <outlet property="mapView" destination="Xan-MG-hrP" id="BA2-No-mwg"/>
                 <outlet property="searchDisplayController" destination="AIp-O6-jn3" id="y9d-qx-KQD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -30,24 +29,10 @@
                         <outletCollection property="gestureRecognizers" destination="Lb3-2Z-yCK" appends="YES" id="Iz1-hV-DDC"/>
                     </connections>
                 </mapView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMd-QF-j0m">
-                    <rect key="frame" x="275" y="567" width="80" height="80"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="80" id="PC9-fB-wKP"/>
-                        <constraint firstAttribute="height" constant="80" id="aSG-lW-38g"/>
-                    </constraints>
-                    <state key="normal" title="Go"/>
-                    <connections>
-                        <action selector="goToARButton:" destination="-1" eventType="touchUpInside" id="isf-dy-RvN"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="iMd-QF-j0m" secondAttribute="bottom" constant="20" id="4nK-rw-dv0"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BHX-Yz-ZrA"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iMd-QF-j0m" secondAttribute="trailing" constant="20" id="Ckk-BB-MZA"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="NfR-xB-DuU"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UgY-iQ-bLo"/>
                 <constraint firstAttribute="trailing" secondItem="Xan-MG-hrP" secondAttribute="trailing" id="xGa-op-wab"/>

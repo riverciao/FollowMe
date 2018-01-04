@@ -78,7 +78,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
 //    @IBOutlet weak var searchBackgroundView: UIView!
     
-    @IBOutlet weak var goToARButtonOutlet: UIButton!
+//    @IBOutlet weak var goToARButtonOutlet: UIButton!
+    
+    lazy var goToARButtonOutlet: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(origin: .zero, size: CGSize(width: 80, height: 80))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = Palette.duckBeak
+        button.setTitleColor(Palette.mystic, for: .normal)
+        button.setTitle("GO", for: .normal)
+        button.titleLabel?.font = UIFont(name: "ARCADECLASSIC", size: 36)
+        button.layer.cornerRadius = button.bounds.height / 2
+        button.clipsToBounds = true
+        button.setImage(#imageLiteral(resourceName: "icon-walking-bird"), for: .highlighted)
+        button.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.setBackgroundColor(color: Palette.seaBlue, forState: .highlighted)
+        return button
+    }()
     
     @IBAction func goToARButton(_ sender: Any) {
         
@@ -157,7 +174,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
         }
         
-        setupGoToARButtonOutlet()
+        
         
         
     }
@@ -172,15 +189,21 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.navigationController?.navigationBar.isHidden = true
         searchBackgroundView.isHidden = true
     }
-
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         
         setupStatusBarColor()
         setupSearchBackgroundView()
         setupSearchBar()
+        setupGoToARButtonOutlet()
         
+        
+    }
+
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
     }
     
@@ -336,18 +359,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     private func setupGoToARButtonOutlet() {
-        goToARButtonOutlet.backgroundColor = Palette.duckBeak
-        goToARButtonOutlet.setTitleColor(Palette.mystic, for: .normal)
-        goToARButtonOutlet.titleLabel?.font = UIFont(name: "ARCADECLASSIC", size: 36)
-        goToARButtonOutlet.layer.cornerRadius = goToARButtonOutlet.bounds.height / 2
-        goToARButtonOutlet.clipsToBounds = true
-        goToARButtonOutlet.setImage(#imageLiteral(resourceName: "icon-walking-bird"), for: .highlighted)
-        goToARButtonOutlet.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
-        goToARButtonOutlet.imageView?.contentMode = .scaleAspectFit
-        goToARButtonOutlet.setBackgroundColor(color: Palette.seaBlue, forState: .highlighted)
+        mapView.insertSubview(goToARButtonOutlet, belowSubview: searchBackgroundView)
         
-        mapView.sendSubview(toBack: goToARButtonOutlet)
-//        mapView.insertSubview(goToARButtonOutlet, belowSubview: <#T##UIView#>)
+        goToARButtonOutlet.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
+        goToARButtonOutlet.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        goToARButtonOutlet.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        goToARButtonOutlet.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
     }
     
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
