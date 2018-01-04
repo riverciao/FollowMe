@@ -20,12 +20,19 @@ class LocationSearchTableViewController: UITableViewController {
     var handleMapSearchDelegate: HandleMapSearch? = nil
     var currentLocation: CLLocation?
     
+    // MARK: - View life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let nib = UINib(nibName: "LocationSearchTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "locationCell")
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupTableView()
     }
 
     // MARK: - Table view data source
@@ -101,6 +108,12 @@ class LocationSearchTableViewController: UITableViewController {
             selectedItem.administrativeArea ?? ""
         )
         return addressLine
+    }
+    
+    // MARK: - Setup
+    
+    func setupTableView() {
+        tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     }
 
 }

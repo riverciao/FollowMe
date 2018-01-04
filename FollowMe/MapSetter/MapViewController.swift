@@ -236,13 +236,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let locationSearchTableView = locationSearchTableViewController.view
         
+        //position and size
         let searchBarHeight = searchBar.frame.size.height
-        let searchBarWidth = searchBar.frame.size.width
+        let searchBarWidth = searchBar.frame.size.width - 20
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let y = searchBarHeight + statusBarHeight
         let x = mapView.center.x - searchBarWidth/2
-
+        
         locationSearchTableView?.frame = CGRect(x: x, y: y, width: searchBarWidth, height: view.frame.height - y)
+        
+        //corner radius
+        if let locationSearchTableViewWidth = locationSearchTableView?.frame.width {
+            locationSearchTableView?.layer.cornerRadius = locationSearchTableViewWidth / 24
+            locationSearchTableView?.clipsToBounds = true
+        }
         
     }
     
