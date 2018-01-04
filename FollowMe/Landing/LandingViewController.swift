@@ -28,6 +28,14 @@ class LandingViewController: UIViewController {
         
     }
     
+    lazy var landingImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = #imageLiteral(resourceName: "landing-walking-bird")
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +55,24 @@ class LandingViewController: UIViewController {
         setupStatusBarColor()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupLandingImageView()
+    }
+    
     func setupStatusBarColor() {
-        UIApplication.shared.statusBarView?.backgroundColor = Palette.mystic
+        UIApplication.shared.statusBarView?.backgroundColor = Palette.duckFeather
+    }
+    
+    func setupLandingImageView() {
+        view.addSubview(landingImageView)
+        
+        landingImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        landingImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        landingImageView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        landingImageView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        
+        view.sendSubview(toBack: landingImageView)
     }
     
     func setupNewRouteButton() {
