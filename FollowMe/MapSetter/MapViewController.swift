@@ -94,10 +94,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         button.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
         button.imageView?.contentMode = .scaleAspectFit
         button.setBackgroundColor(color: Palette.seaBlue, forState: .highlighted)
+        button.addTarget(self, action: #selector(goToARButton), for: .touchUpInside)
         return button
     }()
     
-    @IBAction func goToARButton(_ sender: Any) {
+    @objc func goToARButton() {
         
         upload()
         
@@ -108,7 +109,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
             
             arFollowerViewController.currentLocationCoordinateForARSetting = currentLocationCoordinateForARSetting
-        
+            
         }
         
         arFollowerViewController.route = self.route
@@ -117,11 +118,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         arFollowerViewController.routeImageView = self.routeImageView
         
-//        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
+        //        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
         present(arFollowerViewController, animated: true, completion: nil)
         
     }
-    
 
     
     @IBAction func addPin(_ sender: UITapGestureRecognizer) {
