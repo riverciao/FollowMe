@@ -18,6 +18,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     @IBOutlet weak var sceneLocationView: SceneLocationView!
     @IBOutlet weak var smallSyncMapView: MKMapView!
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
@@ -161,6 +162,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         super.viewDidLayoutSubviews()
         
         setupGoToManageRoutesButton()
+        setupHeader()
     }
     
     // MARK: - get instruction
@@ -219,6 +221,13 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         goToManageRoutesButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
         goToManageRoutesButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
+    }
+    
+    private func setupHeader() {
+        
+        headerView.backgroundColor = Palette.seaBlue
+        instructionLabel.textColor = .white
+        distanceLabel.textColor = .white
     }
     
     private func setupSmallSyncMapView() {

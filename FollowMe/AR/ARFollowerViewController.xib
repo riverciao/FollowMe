@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ARFollowerViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
                 <outlet property="distanceLabel" destination="QJv-yT-dkV" id="8Ze-Jh-pRv"/>
+                <outlet property="headerView" destination="eLB-Yz-eMz" id="u0j-fD-uTD"/>
                 <outlet property="instructionLabel" destination="cnd-Ms-Lky" id="khx-C9-kho"/>
                 <outlet property="sceneLocationView" destination="8kw-EC-e5C" id="Tqb-SS-mKj"/>
                 <outlet property="smallSyncMapView" destination="fDD-vY-JAG" id="tyl-56-leM"/>
