@@ -75,17 +75,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
-    
-    @IBAction func shareButton(_ sender: Any) {
-        
-        let activityViewController = UIActivityViewController(activityItems: [currentPathId], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = self.view
-        
-        self.present(activityViewController, animated: true, completion: nil)
-
-    }
-    
-    
     @IBAction func goToManageRoutes(_ sender: Any) {
         
         let routesTableViewController = RoutesTableViewController()
