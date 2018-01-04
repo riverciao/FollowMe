@@ -216,10 +216,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
     
     // MARK: - Search Controller
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
     
     @objc private func search(sender: UIBarButtonItem) {
         
@@ -348,6 +344,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         print("Begin--isHidden\(self.navigationController?.navigationBar.isHidden)")
         searchBackgroundView.isHidden = false
+        
+        searchBar.showsCancelButton = false
         
     }
     

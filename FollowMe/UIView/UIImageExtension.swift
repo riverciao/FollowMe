@@ -36,3 +36,12 @@ extension UIButton {
         self.setBackgroundImage(colorImage, for: forState)
     }
 }
+
+class NoCancelButtonSearchController: UISearchController {
+    let noCancelButtonSearchBar = NoCancelButtonSearchBar()
+    override var searchBar: UISearchBar { return noCancelButtonSearchBar }
+}
+
+class NoCancelButtonSearchBar: UISearchBar {
+    override func setShowsCancelButton(_ showsCancelButton: Bool, animated: Bool) { /* void */ }
+}
