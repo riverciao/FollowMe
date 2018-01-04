@@ -75,27 +75,43 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
-    @IBAction func goToManageRoutes(_ sender: Any) {
+    lazy var goToManageRoutesButton: UIButton = {
+        let button = UIButton()
+        button.frame = CGRect(origin: .zero, size: CGSize(width: 80, height: 80))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = Palette.duckBeak
+        button.layer.cornerRadius = button.bounds.height / 2
+        button.clipsToBounds = true
+        let routesImage = #imageLiteral(resourceName: "icon-routes").withRenderingMode(.alwaysTemplate)
+        button.setImage(routesImage, for: .normal)
+        button.tintColor = .white
+        button.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
+        button.imageView?.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(goToManageRoutes), for: .touchUpInside)
         
+        return button
+    }()
+    
+    @objc func goToManageRoutes() {
         let routesTableViewController = RoutesTableViewController()
         routesTableViewController.pathId = self.currentPathId
         routesTableViewController.routeImageView = self.routeImageView
         
-//        let positioningViewController = PositioningViewController()
-//        positioningViewController.dismiss(animated: true, completion: nil)
+        //        let positioningViewController = PositioningViewController()
+        //        positioningViewController.dismiss(animated: true, completion: nil)
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-
         
-//        present(routesTableViewController, animated: true, completion: nil)
         
-
-//        if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
-//            routesTableViewController.pathId = self.currentPathId
-//            routesTableViewController.routeImageView = self.routeImageView
-//            self.navigationController?.popToViewController(routesTableViewController, animated: true)
-//        }
+        //        present(routesTableViewController, animated: true, completion: nil)
         
+        
+        //        if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
+        //            routesTableViewController.pathId = self.currentPathId
+        //            routesTableViewController.routeImageView = self.routeImageView
+        //            self.navigationController?.popToViewController(routesTableViewController, animated: true)
+        //        }
     }
+    
     
     // MARK: - View life cycle
     
@@ -139,6 +155,12 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupGoToManageRoutesButton()
     }
     
     // MARK: - get instruction
@@ -185,6 +207,18 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             }
             
         }
+    }
+    
+    // MARK: - Setup
+    
+    private func setupGoToManageRoutesButton() {
+        self.view.addSubview(goToManageRoutesButton)
+        
+        goToManageRoutesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        goToManageRoutesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        goToManageRoutesButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        goToManageRoutesButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
     }
     
     private func setupSmallSyncMapView() {
