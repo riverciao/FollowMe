@@ -35,12 +35,17 @@ class LandingViewController: UIViewController {
         self.view.backgroundColor = Palette.mystic
         setupNewRouteButton()
         setupInvitationCodeButton()
-        setupStatusBarColor()
+        
     }
     
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return .lightContent
 //    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupStatusBarColor()
+    }
     
     func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = Palette.mystic
