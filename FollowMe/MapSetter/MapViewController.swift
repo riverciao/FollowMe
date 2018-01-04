@@ -53,8 +53,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var mapView: MKMapView!
     
-    lazy var searchController: UISearchController = {
-        let controller = UISearchController(searchResultsController: locationSearchTableViewController)
+    lazy var searchController: NoCancelButtonSearchController = {
+        let controller = NoCancelButtonSearchController(searchResultsController: locationSearchTableViewController)
         return controller
     }()
     
