@@ -28,11 +28,19 @@ class LocationSearchTableViewController: UITableViewController {
         let nib = UINib(nibName: "LocationSearchTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "locationCell")
         
+        // TODO: - change search bar in navigation bar
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = .never
+//        } else {
+//            automaticallyAdjustsScrollViewInsets = false
+//        }
+        automaticallyAdjustsScrollViewInsets = false
+
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setupTableView()
+        
     }
 
     // MARK: - Table view data source
@@ -108,12 +116,6 @@ class LocationSearchTableViewController: UITableViewController {
             selectedItem.administrativeArea ?? ""
         )
         return addressLine
-    }
-    
-    // MARK: - Setup
-    
-    func setupTableView() {
-        tableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
     }
 
 }
