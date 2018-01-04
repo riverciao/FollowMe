@@ -178,8 +178,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLayoutSubviews()
         
         setupStatusBarColor()
-        setupSearchBar()
         setupSearchBackgroundView()
+        setupSearchBar()
+        
         
     }
     
@@ -220,12 +221,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func setupSearchBar() {
-//        searchBar.barTintColor = .clear
-//        searchBar.backgroundImage = UIImage()
         
-        mapView.addSubview(searchBar)
-//        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
-//        mapView.bringSubview(toFront: searchBar)
+        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
     
         searchBar.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
         searchBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
@@ -248,20 +245,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func setupSearchBackgroundView() {
-//        searchBackgroundView.isHidden = true
+
+        self.mapView.addSubview(searchBackgroundView)
+        mapView.bringSubview(toFront: searchBackgroundView)
         
-        mapView.insertSubview(searchBackgroundView, belowSubview: searchBar)
-//        self.mapView.addSubview(searchBackgroundView)
-        
-//        self.searchBackgroundView.frame = self.view.frame
         self.searchBackgroundView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-//        self.view.bringSubview(toFront: searchBackgroundView)
         
         searchBackgroundView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         searchBackgroundView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         searchBackgroundView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         searchBackgroundView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
-//
         
     }
     
@@ -351,7 +344,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         goToARButtonOutlet.setImage(#imageLiteral(resourceName: "icon-walking-bird"), for: .highlighted)
         goToARButtonOutlet.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
         goToARButtonOutlet.imageView?.contentMode = .scaleAspectFit
-        goToARButtonOutlet.setBackgroundColor(color: Palette.baliHai, forState: .highlighted)
+        goToARButtonOutlet.setBackgroundColor(color: Palette.seaBlue, forState: .highlighted)
+        
+        mapView.sendSubview(toBack: goToARButtonOutlet)
+//        mapView.insertSubview(goToARButtonOutlet, belowSubview: <#T##UIView#>)
     }
     
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
