@@ -35,7 +35,7 @@ class EntryListHeaderView: UIView, Identifiable {
         
         titleLabel.text = ""
         titleLabel.textColor = .white
-        titleLabel.font = UIFont(name: "ARCADECLASSIC", size: 36.0)
+        titleLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 36.0)
         
         addButton.setImage(
             UIImage(named: "icon_plus")!.withRenderingMode(.alwaysTemplate),

@@ -22,6 +22,8 @@ struct Palette {
     
     static let mystic = UIColor(r: 228, g: 237, b: 238)
     
+    static let silverSand = UIColor(r: 187, g: 194, b: 195)
+    
     static let abbey = UIColor(r: 83, g: 86, b: 86)
     
     static let duckFeather = UIColor(r: 255, g: 201, b: 10)

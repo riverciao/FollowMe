@@ -17,6 +17,9 @@ class RouteTableViewCell: UITableViewCell {
     @IBOutlet weak var shareButtonOutlet: UIButton!
     @IBAction func shareButton(_ sender: Any) {
     }
+    @IBOutlet weak var bottomSeparatorLineView: UIView!
+    @IBOutlet weak var bottomsSeparatorCircleViewRight: UIView!
+    @IBOutlet weak var bottomsSeparatorCircleViewLeft: UIView!
     
     var indexPath = IndexPath()
     
@@ -32,12 +35,30 @@ class RouteTableViewCell: UITableViewCell {
         
         setupRouteImageView()
         setupShareButtonOutlet()
+        setupRoutesLabel()
+        setupBottomsSeparator()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func setupRoutesLabel() {
+        routeName.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
+        distance.font = UIFont(name: "ChalkboardSE-Regular", size: 17)
+    }
+    
+    func setupBottomsSeparator() {
+        bottomSeparatorLineView.backgroundColor = Palette.silverSand
+        
+        bottomsSeparatorCircleViewRight.backgroundColor = Palette.silverSand
+        bottomsSeparatorCircleViewRight.layer.cornerRadius = 4.0
+        
+        bottomsSeparatorCircleViewLeft.backgroundColor = Palette.silverSand
+        bottomsSeparatorCircleViewLeft.layer.cornerRadius = 4.0
+
     }
     
     func setupRouteImageView() {
@@ -50,7 +71,7 @@ class RouteTableViewCell: UITableViewCell {
         let shareImage = #imageLiteral(resourceName: "icon-share")
         let tintedImage = shareImage.withRenderingMode(.alwaysTemplate)
         shareButtonOutlet.setImage(tintedImage, for: .normal)
-        shareButtonOutlet.tintColor = Palette.abbey
+        shareButtonOutlet.tintColor = Palette.duckBeak
     }
     
 }

@@ -44,6 +44,7 @@ class LandingViewController: UIViewController {
     func setupNewRouteButton() {
         newRouteButton.translatesAutoresizingMaskIntoConstraints = false
         
+        newRouteButton.titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 32)
         newRouteButton.setTitleColor( .white, for: .normal)
         newRouteButton.backgroundColor = Palette.duckBeak
         newRouteButton.layer.cornerRadius = 8
@@ -52,6 +53,7 @@ class LandingViewController: UIViewController {
     func setupInvitationCodeButton() {
         invitationCodeButton.translatesAutoresizingMaskIntoConstraints = false
         
+        invitationCodeButton.titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 32)
         invitationCodeButton.setTitleColor( .white, for: .normal)
         invitationCodeButton.backgroundColor = Palette.duckBeak
         invitationCodeButton.layer.cornerRadius = 8
