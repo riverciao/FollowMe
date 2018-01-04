@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import YXWaveView
 
 class LandingViewController: UIViewController {
     
     @IBOutlet weak var newRouteButton: UIButton!
     @IBOutlet weak var invitationCodeButton: UIButton!
+    fileprivate var waveView: YXWaveView?
+
     
     @IBAction func setRouteButton(_ sender: Any) {
         
@@ -58,10 +61,33 @@ class LandingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupLandingImageView()
+        setupWaterView()
     }
+    
+    // MARK: - Setup
     
     func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = Palette.duckFeather
+    }
+    
+    func setupWaterView() {
+        
+        let waterHeight: CGFloat = 220
+        let frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: view.frame.size.height - waterHeight)
+        waveView = YXWaveView(frame: frame, waterColor: Palette.seaBlue)
+        waveView!.waveHeight = 12
+        
+        // declare waterView
+        let waterView = UIView()
+        waterView.frame = CGRect(x: 0, y: view.frame.size.height - waterHeight, width: view.frame.size.width, height: waterHeight)
+        waterView.backgroundColor = Palette.seaBlue
+        
+        // add waveView
+        self.view.addSubview(waveView!)
+        self.view.addSubview(waterView)
+        
+        // Start wave
+        waveView!.start()
     }
     
     func setupLandingImageView() {

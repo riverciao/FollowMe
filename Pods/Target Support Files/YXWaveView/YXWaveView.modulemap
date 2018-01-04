@@ -1,0 +1,6 @@
+framework module YXWaveView {
+  umbrella header "YXWaveView-umbrella.h"
+
+  export *
+  module * { export * }
+}
