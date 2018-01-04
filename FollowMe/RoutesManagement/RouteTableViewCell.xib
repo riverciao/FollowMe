@@ -57,22 +57,6 @@
                             <constraint firstAttribute="height" constant="0.5" id="5mO-6A-8YW"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yYf-tA-hm5">
-                        <rect key="frame" x="370" y="111.5" width="8" height="8"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="8" id="ZZ0-VA-Uyv"/>
-                            <constraint firstAttribute="width" constant="8" id="zR6-ch-dYL"/>
-                        </constraints>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K11-Y6-djG">
-                        <rect key="frame" x="10" y="111.5" width="8" height="8"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="8" id="T9G-zM-OF2"/>
-                            <constraint firstAttribute="height" constant="8" id="hC1-NI-Lmg"/>
-                        </constraints>
-                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="XAf-2g-gY9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5tE-gk-nc6"/>
@@ -82,24 +66,18 @@
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="cOC-gq-hxm" secondAttribute="bottom" constant="24" id="FqL-LX-2Pc"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="trailing" secondItem="cOC-gq-hxm" secondAttribute="trailing" constant="12" id="Ihe-CG-acG"/>
                     <constraint firstItem="XAf-2g-gY9" firstAttribute="leading" secondItem="SJo-qR-Hsa" secondAttribute="leading" constant="15" id="OVC-u2-lsp"/>
-                    <constraint firstItem="SJo-qR-Hsa" firstAttribute="trailing" secondItem="yYf-tA-hm5" secondAttribute="trailing" constant="10" id="Q4g-Ew-FYn"/>
                     <constraint firstItem="BtZ-13-6WF" firstAttribute="leading" secondItem="XAf-2g-gY9" secondAttribute="trailing" constant="18" id="Trv-VZ-u0H"/>
                     <constraint firstItem="XzX-rI-49Y" firstAttribute="leading" secondItem="SJo-qR-Hsa" secondAttribute="leading" constant="10" id="UpV-tM-OGW"/>
                     <constraint firstItem="XzX-rI-49Y" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YJO-bf-KBX"/>
-                    <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="yYf-tA-hm5" secondAttribute="bottom" constant="4.25" id="iJ0-0S-SHe"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="BtZ-13-6WF" secondAttribute="bottom" constant="24" id="j57-Qu-lLU"/>
                     <constraint firstItem="BtZ-13-6WF" firstAttribute="top" secondItem="k3s-p2-e65" secondAttribute="bottom" constant="8" id="pxs-b2-wAA"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="XzX-rI-49Y" secondAttribute="bottom" constant="8" id="tMd-dh-dcA"/>
-                    <constraint firstItem="K11-Y6-djG" firstAttribute="leading" secondItem="SJo-qR-Hsa" secondAttribute="leading" constant="10" id="uOs-jw-s3f"/>
-                    <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="K11-Y6-djG" secondAttribute="bottom" constant="4.25" id="xYN-fu-umS"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="SJo-qR-Hsa"/>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="bottomSeparatorLineView" destination="XzX-rI-49Y" id="gT1-jT-u4l"/>
-                <outlet property="bottomsSeparatorCircleViewLeft" destination="K11-Y6-djG" id="E5F-mV-N03"/>
-                <outlet property="bottomsSeparatorCircleViewRight" destination="yYf-tA-hm5" id="M4s-Ed-pEM"/>
                 <outlet property="distance" destination="BtZ-13-6WF" id="C2V-2R-GYZ"/>
                 <outlet property="routeImageView" destination="XAf-2g-gY9" id="GgM-9g-T6J"/>
                 <outlet property="routeName" destination="k3s-p2-e65" id="DvY-sf-hJZ"/>

@@ -18,8 +18,6 @@ class RouteTableViewCell: UITableViewCell {
     @IBAction func shareButton(_ sender: Any) {
     }
     @IBOutlet weak var bottomSeparatorLineView: UIView!
-    @IBOutlet weak var bottomsSeparatorCircleViewRight: UIView!
-    @IBOutlet weak var bottomsSeparatorCircleViewLeft: UIView!
     
     var indexPath = IndexPath()
     
@@ -52,13 +50,6 @@ class RouteTableViewCell: UITableViewCell {
     
     func setupBottomsSeparator() {
         bottomSeparatorLineView.backgroundColor = Palette.silverSand
-        
-        bottomsSeparatorCircleViewRight.backgroundColor = Palette.silverSand
-        bottomsSeparatorCircleViewRight.layer.cornerRadius = 4.0
-        
-        bottomsSeparatorCircleViewLeft.backgroundColor = Palette.silverSand
-        bottomsSeparatorCircleViewLeft.layer.cornerRadius = 4.0
-
     }
     
     func setupRouteImageView() {

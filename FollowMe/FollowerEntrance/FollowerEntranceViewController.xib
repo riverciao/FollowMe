@@ -9,10 +9,17 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="ChalkboardSE.ttc">
+            <string>ChalkboardSE-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FollowerEntranceViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="WgM-XH-dUr" id="2YV-cT-qg2"/>
                 <outlet property="invitationCodeTextField" destination="b5p-jq-9qy" id="mQb-hx-yRN"/>
+                <outlet property="titleLabel" destination="A6N-hP-RtB" id="GNi-NB-u7P"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,39 +28,40 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b5p-jq-9qy">
-                    <rect key="frame" x="108" y="283" width="148" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Invitation Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6N-hP-RtB">
+                    <rect key="frame" x="63.5" y="180" width="248" height="37"/>
+                    <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="26"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WgM-XH-dUr">
+                    <rect key="frame" x="10" y="30" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="30" id="5My-3n-49M"/>
+                        <constraint firstAttribute="height" constant="30" id="Beu-on-uTs"/>
+                    </constraints>
+                    <connections>
+                        <action selector="cancelButtonAction:" destination="-1" eventType="touchUpInside" id="K8M-ib-1E2"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b5p-jq-9qy">
+                    <rect key="frame" x="37.5" y="237" width="300" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="bX0-9B-Oex"/>
+                    </constraints>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter Invitation Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6N-hP-RtB">
-                    <rect key="frame" x="96" y="227" width="160" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1W-De-Lnv">
-                    <rect key="frame" x="172" y="362" width="30" height="30"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="IM9-74-1u2"/>
-                        <constraint firstAttribute="height" constant="30" id="xYF-2s-Cd9"/>
-                    </constraints>
-                    <state key="normal" title="Go">
-                        <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="goToARButton:" destination="-1" eventType="touchUpInside" id="s8s-Kp-7Br"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" red="0.3083356619" green="0.85123449559999997" blue="0.64486020799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="z1W-De-Lnv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="j0j-7p-JDf"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="z1W-De-Lnv" secondAttribute="bottom" constant="275" id="vOA-ic-99u"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="b5p-jq-9qy" secondAttribute="bottom" constant="400" id="3DB-dY-8bF"/>
+                <constraint firstItem="A6N-hP-RtB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bW5-ma-IUh"/>
+                <constraint firstItem="b5p-jq-9qy" firstAttribute="top" secondItem="A6N-hP-RtB" secondAttribute="bottom" constant="20" id="oVe-Lq-Lh1"/>
+                <constraint firstItem="WgM-XH-dUr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="srd-5B-dHu"/>
+                <constraint firstItem="WgM-XH-dUr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="uhf-5J-Emm"/>
+                <constraint firstItem="b5p-jq-9qy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="xiv-D7-LkA"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>

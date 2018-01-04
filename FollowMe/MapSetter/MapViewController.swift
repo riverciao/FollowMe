@@ -24,7 +24,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
     //Location Manager
-    lazy var locationSearchTableViewController = LocationSearchTableViewController()
+    let locationSearchTableViewController = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     private var route: MKRoute?
