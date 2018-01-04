@@ -177,6 +177,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        setupStatusBarColor()
         setupSearchBar()
         setupSearchBackgroundView()
         
@@ -468,6 +469,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         
         return coordinatesPerMeter
+    }
+    
+    // MARK: - Setup
+    func setupStatusBarColor() {
+        UIApplication.shared.statusBarView?.backgroundColor = .clear
     }
     
     //TODO: - make component

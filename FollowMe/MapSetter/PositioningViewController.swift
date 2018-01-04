@@ -99,21 +99,21 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         headerTitle.textColor = .white
         
-        headerContent.textColor = .white
+        headerContent.textColor = Palette.dandelion
         
-        headerTitle.font = UIFont.systemFont(ofSize: 20)
+        headerTitle.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         
-        headerContent.font = UIFont.systemFont(ofSize: 10)
+        headerContent.font = UIFont.systemFont(ofSize: 20)
         
     }
     
     func setupConfirmButton() {
         
-        confirmButtton.setTitleColor(Palette.mystic, for: .normal)
+        confirmButtton.setTitleColor(.white, for: .normal)
         
-        confirmButtton.backgroundColor = Palette.baliHai
+        confirmButtton.backgroundColor = Palette.duckBeak
         
-        confirmButtton.titleLabel?.font = UIFont(name: "ARCADECLASSIC", size: 36)
+        confirmButtton.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
         
         confirmButtton.layer.cornerRadius = 12
     }

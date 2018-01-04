@@ -32,24 +32,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qKE-ZY-8S6">
-                    <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                    <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                 </mapView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-current-location" translatesAutoresizingMaskIntoConstraints="NO" id="gC9-f2-R9s">
-                    <rect key="frame" x="172.5" y="318.5" width="30" height="30"/>
+                    <rect key="frame" x="173" y="319" width="30" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="30" id="P5d-a3-rKD"/>
                         <constraint firstAttribute="height" constant="30" id="ZPZ-XG-81s"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rq1-br-1Vc">
-                    <rect key="frame" x="12.5" y="592" width="350" height="50"/>
+                    <rect key="frame" x="13" y="592" width="350" height="50"/>
                     <color key="backgroundColor" red="0.3083356619" green="0.85123449559999997" blue="0.64486020799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="350" id="YFt-IJ-PPP"/>
                         <constraint firstAttribute="height" constant="50" id="fYv-1e-sYp"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <state key="normal" title="Confirm">
+                    <state key="normal" title="Confirm Location">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -57,25 +57,27 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6Q-YT-D4F">
-                    <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                    <rect key="frame" x="0.0" y="20" width="375" height="80"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Confirm Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-eA-mfk">
-                            <rect key="frame" x="104" y="8" width="166" height="24"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X4g-eA-mfk">
+                            <rect key="frame" x="104" y="23" width="166" height="24"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                             <color key="textColor" red="0.10715164027269128" green="0.22968216770562289" blue="0.48313194513320934" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Move the map to set exactly where you are" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqz-Ob-DkD">
-                            <rect key="frame" x="49" y="35" width="277" height="17"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Move the map to set exactly where you are" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqz-Ob-DkD">
+                            <rect key="frame" x="49" y="53" width="277" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.52587890625" green="0.52587890625" blue="0.52587890625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="cyH-he-dhH"/>
+                        <constraint firstItem="X4g-eA-mfk" firstAttribute="centerX" secondItem="F6Q-YT-D4F" secondAttribute="centerX" id="CMV-p6-0TK"/>
+                        <constraint firstItem="cqz-Ob-DkD" firstAttribute="centerX" secondItem="F6Q-YT-D4F" secondAttribute="centerX" id="PpO-IM-YlI"/>
+                        <constraint firstAttribute="height" constant="80" id="cyH-he-dhH"/>
+                        <constraint firstItem="cqz-Ob-DkD" firstAttribute="top" secondItem="X4g-eA-mfk" secondAttribute="bottom" constant="6" id="dIQ-J7-r0o"/>
+                        <constraint firstAttribute="bottom" secondItem="cqz-Ob-DkD" secondAttribute="bottom" constant="10" id="sKK-Ep-plA"/>
                     </constraints>
                 </view>
             </subviews>
