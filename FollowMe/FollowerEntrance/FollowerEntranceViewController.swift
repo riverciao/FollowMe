@@ -60,9 +60,15 @@ class FollowerEntranceViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        hideKeyboardWhenTappedAround()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setup()
+        setupStatusBarColor() 
     }
     
     // MARK: - Setup
@@ -75,9 +81,6 @@ class FollowerEntranceViewController: UIViewController {
         cancelButton.setImage(cancelImage, for: .normal)
         cancelButton.tintColor = Palette.baliHai
         
-        //setup title
-        titleLabel.textColor = Palette.seaBlue
-        
         //setup goToARButtonOutlet
         view.addSubview(goToARButtonOutlet)
         
@@ -86,5 +89,21 @@ class FollowerEntranceViewController: UIViewController {
         goToARButtonOutlet.widthAnchor.constraint(equalToConstant: 80).isActive = true
         goToARButtonOutlet.heightAnchor.constraint(equalToConstant: 80).isActive = true
     }
+    
+    func setupStatusBarColor() {
+        UIApplication.shared.statusBarView?.backgroundColor = Palette.dandelion
+    }
 
+}
+
+extension FollowerEntranceViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }

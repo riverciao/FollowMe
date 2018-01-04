@@ -12,6 +12,8 @@ class EntryListHeaderView: UIView, Identifiable {
 
     // MARK: Property
     
+    @IBOutlet weak var connectButton: UIButton!
+    
     class var identifier: String { return String(describing: self) }
     
     @IBOutlet private(set) weak var titleLabel: UILabel!
@@ -26,6 +28,7 @@ class EntryListHeaderView: UIView, Identifiable {
         setUp()
         
     }
+    
     
     // MARK: Set Up
     
@@ -42,6 +45,10 @@ class EntryListHeaderView: UIView, Identifiable {
             for: .normal
         )
         addButton.tintColor = .white
+        
+        let connectImage = #imageLiteral(resourceName: "icon-connect").withRenderingMode(.alwaysTemplate)
+        connectButton.setImage(connectImage, for: .normal)
+        connectButton.tintColor = .white
         
     }
 

@@ -127,6 +127,11 @@ class RoutesTableViewController: UITableViewController {
 //        self.navigationController?.pushViewController(positioningViewController, animated: true)
     }
     
+    @objc func goToInvitationCodePage() {
+        let followerEntranceViewController = FollowerEntranceViewController()
+        present(followerEntranceViewController, animated: true, completion: nil)
+    }
+    
     @objc func share(sender: UIButton) {
         
         // TODO: revise tag to super super
@@ -151,6 +156,7 @@ class RoutesTableViewController: UITableViewController {
         
         headerView.titleLabel.text = NSLocalizedString("Routes", comment: "")
         headerView.addButton.addTarget(self, action: #selector(addANewRoute(sender:)), for: .touchUpInside)
+        headerView.connectButton.addTarget(self, action: #selector(goToInvitationCodePage), for: .touchUpInside)
         
         tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none

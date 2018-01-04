@@ -402,14 +402,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return mapItem
     }
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.red
-        renderer.lineWidth = 4.0
-        
-        return renderer
-    }
+
     
     // MARK: - CLLocationManagerDelegate
     
@@ -647,6 +640,17 @@ extension MapViewController: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         
         mapView.setRegion(region, animated: true)
+    }
+    
+    // MARK: - Set route
+    
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        let renderer = MKPolylineRenderer(overlay: overlay)
+        renderer.strokeColor = Palette.baliHai
+        renderer.lineWidth = 4.0
+        
+        return renderer
     }
      
     func setRouteWith(currentLocationCoordinate: CLLocationCoordinate2D, destinationCoordinate: CLLocationCoordinate2D) {

@@ -99,11 +99,11 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         headerTitle.textColor = .white
         
-        headerContent.textColor = Palette.dandelion
+        headerContent.textColor = .white
         
-        headerTitle.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        headerTitle.font = UIFont(name: "ChalkboardSE-Regular", size: 24)
         
-        headerContent.font = UIFont.systemFont(ofSize: 20)
+        headerContent.font = UIFont.systemFont(ofSize: 18)
         
     }
     
@@ -113,7 +113,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         confirmButtton.backgroundColor = Palette.duckBeak
         
-        confirmButtton.titleLabel?.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
+        confirmButtton.titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 32)
         
         confirmButtton.layer.cornerRadius = 12
     }
