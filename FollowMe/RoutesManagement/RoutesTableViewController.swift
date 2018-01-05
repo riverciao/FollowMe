@@ -120,6 +120,18 @@ class RoutesTableViewController: UITableViewController {
         }
         return routeCell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let route = items[indexPath.row]
+        let arFollowerViewController = ARFollowerViewController()
+        if let id = route.id {
+            arFollowerViewController.currentPathId = id
+        } else {
+            // error message
+            print("path not existed")
+        }
+        present(arFollowerViewController, animated: true, completion: nil)
+    }
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
         let positioningViewController = PositioningViewController()
