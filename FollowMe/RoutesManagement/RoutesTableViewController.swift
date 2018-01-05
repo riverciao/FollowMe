@@ -31,8 +31,7 @@ class RoutesTableViewController: UITableViewController {
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
         
-        
-        
+
         self.view.backgroundColor = .white
         setupHeader()
 
@@ -189,9 +188,8 @@ class RoutesTableViewController: UITableViewController {
 //        self.navigationController?.pushViewController(positioningViewController, animated: true)
     }
     
-    @objc func goToInvitationCodePage() {
-        let followerEntranceViewController = FollowerEntranceViewController()
-        present(followerEntranceViewController, animated: true, completion: nil)
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func share(sender: UIButton) {
@@ -218,7 +216,7 @@ class RoutesTableViewController: UITableViewController {
         
         headerView.titleLabel.text = NSLocalizedString("Routes", comment: "")
         headerView.addButton.addTarget(self, action: #selector(addANewRoute(sender:)), for: .touchUpInside)
-        headerView.connectButton.addTarget(self, action: #selector(goToInvitationCodePage), for: .touchUpInside)
+        headerView.cancelButton.addTarget(self, action: #selector(back), for: .touchUpInside)
         
         tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none

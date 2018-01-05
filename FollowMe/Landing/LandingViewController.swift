@@ -55,11 +55,12 @@ class LandingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupStatusBarColor()
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        setupStatusBarColor()
         setupLandingImageView()
         setupWaterView()
     }
