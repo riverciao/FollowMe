@@ -132,6 +132,14 @@ class RoutesTableViewController: UITableViewController {
         }
         present(arFollowerViewController, animated: true, completion: nil)
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            CoreDataHandler.deleteObject(item: items[indexPath.row])
+            self.items = CoreDataHandler.fetchObject()!
+            self.tableView.reloadData()
+        }
+    }
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
         let positioningViewController = PositioningViewController()
