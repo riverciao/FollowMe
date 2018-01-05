@@ -77,23 +77,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
-    lazy var goToManageRoutesButton: UIButton = {
-        let button = UIButton()
-        button.frame = CGRect(origin: .zero, size: CGSize(width: 80, height: 80))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = Palette.duckBeak
-        button.layer.cornerRadius = button.bounds.height / 2
-        button.clipsToBounds = true
-        let routesImage = #imageLiteral(resourceName: "icon-routes").withRenderingMode(.alwaysTemplate)
-        button.setImage(routesImage, for: .normal)
-        button.tintColor = .white
-        button.imageEdgeInsets = UIEdgeInsetsMake(70, 70, 70, 70)
-        button.imageView?.contentMode = .scaleAspectFit
-        button.addTarget(self, action: #selector(goToManageRoutes), for: .touchUpInside)
-        
-        return button
-    }()
-    
     @objc func goToManageRoutes() {
         let routesTableViewController = RoutesTableViewController()
         routesTableViewController.pathId = self.currentPathId
@@ -165,7 +148,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         super.viewDidLayoutSubviews()
         
         setupStatusBarColor()
-        setupGoToManageRoutesButton()
         setupHeader()
     }
     
@@ -216,16 +198,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
     
     // MARK: - Setup
-    
-    private func setupGoToManageRoutesButton() {
-        self.view.addSubview(goToManageRoutesButton)
-        
-        goToManageRoutesButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        goToManageRoutesButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        goToManageRoutesButton.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        goToManageRoutesButton.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        
-    }
     
     private func setupHeader() {
         
