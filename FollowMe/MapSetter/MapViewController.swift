@@ -55,6 +55,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     lazy var searchController: NoCancelButtonSearchController = {
         let controller = NoCancelButtonSearchController(searchResultsController: locationSearchTableViewController)
+        controller.hidesNavigationBarDuringPresentation = false
         return controller
     }()
     
@@ -146,11 +147,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
-        //add addANewArticle navigationItem at rightside
-//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(search(sender:)))
-        
-
-        
         // Check for Location Services
         
         if CLLocationManager.locationServicesEnabled() {
@@ -178,14 +174,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         setupSearchController()
         hideKeyboardWhenTappedAround()
-        
-//        self.navigationController?.navigationBar.isHidden = true
         searchBackgroundView.isHidden = true
+        
+        
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         setupStatusBarColor()
         setupSearchBackgroundView()
         setupSearchBar()
@@ -204,7 +201,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewWillDisappear(animated)
         
 //        self.navigationController?.navigationBar.isHidden = false
-        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     
@@ -255,18 +252,33 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func setupSearchBar() {
         
-//        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
         self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
 
-        searchBar.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
-        searchBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
-        searchBar.widthAnchor.constraint(equalToConstant: mapView.frame.width).isActive = true
+        searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
+        searchBar.widthAnchor.constraint(equalToConstant: 300).isActive = true
         searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
+        
+//        if let navigationBar = self.navigationController?.navigationBar {
+//            searchBar.centerXAnchor.constraint(equalTo: navigationBar.centerXAnchor).isActive = true
+//            searchBar.topAnchor.constraint(equalTo: navigationBar.topAnchor).isActive = true
+//            searchBar.widthAnchor.constraint(equalToConstant: navigationBar.frame.width - 28).isActive = true
+//            searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
+//        } else {
+//            searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//            searchBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 60).isActive = true
+//            searchBar.widthAnchor.constraint(equalToConstant: view.frame.width - 28).isActive = true
+//            searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
+//        }
     }
     
     func setupSearchController() {
         searchController.searchResultsUpdater = locationSearchTableViewController
         searchController.searchBar.delegate = self
+        
+//        searchController.dimsBackgroundDuringPresentation = false
+        navigationItem.hidesBackButton = true
         definesPresentationContext = true
 
         if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
@@ -358,8 +370,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 
         searchBackgroundView.isHidden = false
+
+        navigationController?.navigationBar.isHidden = false
         
-        searchBar.showsCancelButton = false
+//        searchBar.showsCancelButton = false
         
     }
     
