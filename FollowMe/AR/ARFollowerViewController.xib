@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ARFollowerViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="TEQ-7e-qHs" id="88l-X3-ZpX"/>
                 <outlet property="distanceLabel" destination="QJv-yT-dkV" id="8Ze-Jh-pRv"/>
                 <outlet property="headerView" destination="eLB-Yz-eMz" id="u0j-fD-uTD"/>
                 <outlet property="instructionLabel" destination="cnd-Ms-Lky" id="khx-C9-kho"/>
@@ -39,24 +40,34 @@
                     <rect key="frame" x="0.0" y="20" width="375" height="68"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJv-yT-dkV">
-                            <rect key="frame" x="20" y="39" width="67" height="21"/>
+                            <rect key="frame" x="62" y="39" width="67" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.585759315" green="0.59956936080000001" blue="0.62458758589999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Instructions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnd-Ms-Lky">
-                            <rect key="frame" x="20" y="8" width="130.5" height="29"/>
+                            <rect key="frame" x="62" y="8" width="130.5" height="29"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TEQ-7e-qHs">
+                            <rect key="frame" x="8" y="12" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="5aj-ah-3oo"/>
+                                <constraint firstAttribute="height" constant="44" id="hsz-j9-INb"/>
+                            </constraints>
+                            <state key="normal" image="icon-cross"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="QJv-yT-dkV" firstAttribute="leading" secondItem="eLB-Yz-eMz" secondAttribute="leading" constant="20" id="Ff6-s2-SfI"/>
+                        <constraint firstItem="TEQ-7e-qHs" firstAttribute="leading" secondItem="eLB-Yz-eMz" secondAttribute="leading" constant="8" id="5zY-ca-YLk"/>
+                        <constraint firstItem="cnd-Ms-Lky" firstAttribute="leading" secondItem="TEQ-7e-qHs" secondAttribute="trailing" constant="10" id="PkH-CR-p3W"/>
                         <constraint firstItem="QJv-yT-dkV" firstAttribute="top" secondItem="cnd-Ms-Lky" secondAttribute="bottom" constant="2" id="UUT-RD-OuT"/>
                         <constraint firstItem="cnd-Ms-Lky" firstAttribute="top" secondItem="eLB-Yz-eMz" secondAttribute="top" constant="8" id="VGV-Am-cqn"/>
-                        <constraint firstItem="cnd-Ms-Lky" firstAttribute="leading" secondItem="eLB-Yz-eMz" secondAttribute="leading" constant="20" id="XVY-vZ-7wZ"/>
+                        <constraint firstItem="QJv-yT-dkV" firstAttribute="leading" secondItem="TEQ-7e-qHs" secondAttribute="trailing" constant="10" id="fty-rK-BR5"/>
+                        <constraint firstItem="TEQ-7e-qHs" firstAttribute="centerY" secondItem="eLB-Yz-eMz" secondAttribute="centerY" id="glB-D3-Tmf"/>
                         <constraint firstAttribute="height" constant="68" id="xa8-a2-IF1"/>
                     </constraints>
                 </view>
@@ -77,4 +88,7 @@
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon-cross" width="25" height="25"/>
+    </resources>
 </document>

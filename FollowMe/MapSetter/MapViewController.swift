@@ -113,8 +113,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         arFollowerViewController.routeImageView = self.routeImageView
         
-        //        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
-        present(arFollowerViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(arFollowerViewController, animated: true)
+//        present(arFollowerViewController, animated: true, completion: nil)
         
     }
 

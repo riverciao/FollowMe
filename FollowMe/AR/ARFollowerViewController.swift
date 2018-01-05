@@ -21,6 +21,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     let configuration = ARWorldTrackingConfiguration()
     var startNode: LocationSphereNode?
@@ -146,6 +147,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         fetchPath()
 
         getRouteInstructions()
+        
+        self.navigationController?.navigationBar.isHidden = true
 
     }
     
@@ -230,6 +233,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         instructionLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 24)
         instructionLabel.textColor = .white
         distanceLabel.textColor = .white
+        
+        //setup cancel button
+        let cancelImage = #imageLiteral(resourceName: "icon-cross").withRenderingMode(.alwaysTemplate)
+        cancelButton.setImage(cancelImage, for: .normal)
+        cancelButton.tintColor = .white
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+    }
+    
+    @objc func cancel() {
+        dismiss(animated: true, completion: nil)
     }
     
     private func setupSmallSyncMapView() {
