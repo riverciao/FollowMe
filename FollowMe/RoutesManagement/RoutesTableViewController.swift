@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class RoutesTableViewController: UITableViewController {
 
@@ -134,11 +135,52 @@ class RoutesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let route = items[indexPath.row]
         if editingStyle == .delete {
-            CoreDataHandler.deleteObject(item: items[indexPath.row])
+            guard let pathId = route.id else {
+                print("route not exist")
+                return
+            }
+            CoreDataHandler.deleteObject(item: route)
+            showDeleteAlert(with: pathId)
             self.items = CoreDataHandler.fetchObject()!
             self.tableView.reloadData()
         }
+    }
+    
+    private func showDeleteAlert(with pathId: pathId) {
+        
+        let alert = UIAlertController(
+            title: NSLocalizedString("Are you sure to delete this route?", comment: ""),
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        let delete = UIAlertAction(
+            title: NSLocalizedString("Delete", comment: ""),
+            style: .destructive,
+            handler: { action in self.deletePath(with: pathId) }
+        )
+        
+        let cancel = UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: ""),
+            style: .cancel,
+            handler: nil
+        )
+        
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
+    
+    private func deletePath(with pathId: pathId) {
+            
+        let pathRef = Database.database().reference().child("paths").child(pathId)
+        
+        pathRef.removeValue()
+        
     }
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
