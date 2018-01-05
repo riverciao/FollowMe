@@ -237,7 +237,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let searchBarHeight = searchBar.frame.size.height
         let searchBarWidth = searchBar.frame.size.width - 20
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let y = searchBarHeight + statusBarHeight
+        let y = searchBarHeight + statusBarHeight + 10
         let x = mapView.center.x - searchBarWidth/2
         
         locationSearchTableView?.frame = CGRect(x: x, y: y, width: searchBarWidth, height: view.frame.height - y)
@@ -252,25 +252,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func setupSearchBar() {
         
-        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+//        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
         self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
 
         searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        searchBar.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        searchBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
         searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
         
-//        if let navigationBar = self.navigationController?.navigationBar {
-//            searchBar.centerXAnchor.constraint(equalTo: navigationBar.centerXAnchor).isActive = true
-//            searchBar.topAnchor.constraint(equalTo: navigationBar.topAnchor).isActive = true
-//            searchBar.widthAnchor.constraint(equalToConstant: navigationBar.frame.width - 28).isActive = true
-//            searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
-//        } else {
-//            searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//            searchBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: 60).isActive = true
-//            searchBar.widthAnchor.constraint(equalToConstant: view.frame.width - 28).isActive = true
-//            searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
-//        }
     }
     
     func setupSearchController() {
