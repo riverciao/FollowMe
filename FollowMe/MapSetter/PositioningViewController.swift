@@ -15,6 +15,7 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     private var locationManager = CLLocationManager()
     let queue = OperationQueue()
     
+    @IBOutlet weak var cancelButton: UIButton!
     
     @IBOutlet weak var headerView: UIView!
     
@@ -105,6 +106,14 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
         
         headerContent.font = UIFont.systemFont(ofSize: 18)
         
+        let cancelImage = #imageLiteral(resourceName: "icon-cross").withRenderingMode(.alwaysTemplate)
+        cancelButton.setImage(cancelImage, for: .normal)
+        cancelButton.tintColor = .white
+        cancelButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+    }
+    
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
     }
     
     func setupConfirmButton() {

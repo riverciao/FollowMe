@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PositioningViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="OM2-2s-V7H" id="6ez-nk-exE"/>
                 <outlet property="confirmButtton" destination="rq1-br-1Vc" id="ZdP-k2-OKd"/>
                 <outlet property="currentLocationPointerImageView" destination="gC9-f2-R9s" id="Rsz-KZ-S11"/>
                 <outlet property="headerContent" destination="cqz-Ob-DkD" id="Luf-EN-6BO"/>
@@ -71,10 +72,20 @@
                             <color key="textColor" red="0.52587890625" green="0.52587890625" blue="0.52587890625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OM2-2s-V7H">
+                            <rect key="frame" x="8" y="8" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="G0w-V6-bDc"/>
+                                <constraint firstAttribute="height" constant="44" id="IU8-fH-CfC"/>
+                            </constraints>
+                            <state key="normal" image="icon-cross"/>
+                        </button>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="OM2-2s-V7H" firstAttribute="top" secondItem="F6Q-YT-D4F" secondAttribute="top" constant="8" id="0up-QJ-LMI"/>
                         <constraint firstItem="X4g-eA-mfk" firstAttribute="centerX" secondItem="F6Q-YT-D4F" secondAttribute="centerX" id="CMV-p6-0TK"/>
                         <constraint firstItem="cqz-Ob-DkD" firstAttribute="centerX" secondItem="F6Q-YT-D4F" secondAttribute="centerX" id="PpO-IM-YlI"/>
+                        <constraint firstItem="OM2-2s-V7H" firstAttribute="leading" secondItem="F6Q-YT-D4F" secondAttribute="leading" constant="8" id="Vvu-Jy-Nuk"/>
                         <constraint firstAttribute="height" constant="80" id="cyH-he-dhH"/>
                         <constraint firstItem="cqz-Ob-DkD" firstAttribute="top" secondItem="X4g-eA-mfk" secondAttribute="bottom" constant="6" id="dIQ-J7-r0o"/>
                         <constraint firstAttribute="bottom" secondItem="cqz-Ob-DkD" secondAttribute="bottom" constant="10" id="sKK-Ep-plA"/>
@@ -100,6 +111,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon-cross" width="25" height="25"/>
         <image name="icon-current-location" width="50" height="50"/>
     </resources>
 </document>
