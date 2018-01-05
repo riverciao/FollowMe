@@ -184,7 +184,7 @@ class RoutesTableViewController: UITableViewController {
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
         let positioningViewController = PositioningViewController()
-        let navigationController = UINavigationController(rootViewController: positioningViewController)
+        let navigationController = TransparentNavigationController(rootViewController: positioningViewController)
         present(navigationController, animated: true, completion: nil)
     }
     

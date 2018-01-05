@@ -36,6 +36,8 @@
 		5F9116461FF4B03D0030E9EF /* LandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116441FF4B03D0030E9EF /* LandingViewController.xib */; };
 		5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */; };
 		5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */; };
+		5FA656EB1FFF378B005C3598 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA656EA1FFF378B005C3598 /* BaseNavigationController.swift */; };
+		5FA656ED1FFF37AC005C3598 /* TransparentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA656EC1FFF37AC005C3598 /* TransparentNavigationController.swift */; };
 		5FAAE8841FFA403A00531AB2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAAE8831FFA403A00531AB2 /* UIColor.swift */; };
 		5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */; };
 		5FAAE88A1FFA936600531AB2 /* EntryListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */; };
@@ -89,6 +91,8 @@
 		5F9116441FF4B03D0030E9EF /* LandingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LandingViewController.xib; sourceTree = "<group>"; };
 		5F9116491FF4B4B50030E9EF /* FollowerEntranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerEntranceViewController.swift; sourceTree = "<group>"; };
 		5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowerEntranceViewController.xib; sourceTree = "<group>"; };
+		5FA656EA1FFF378B005C3598 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		5FA656EC1FFF37AC005C3598 /* TransparentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationController.swift; sourceTree = "<group>"; };
 		5FAAE8831FFA403A00531AB2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARCADECLASSIC.TTF; sourceTree = "<group>"; };
 		5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListHeaderView.swift; sourceTree = "<group>"; };
@@ -214,6 +218,15 @@
 			path = FollowerEntrance;
 			sourceTree = "<group>";
 		};
+		5FA656E91FFF375F005C3598 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				5FA656EA1FFF378B005C3598 /* BaseNavigationController.swift */,
+				5FA656EC1FFF37AC005C3598 /* TransparentNavigationController.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
 		5FAAE8821FFA402200531AB2 /* UIColor */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +264,7 @@
 		5FBE57311FDEB8FF002FDEB3 /* FollowMe */ = {
 			isa = PBXGroup;
 			children = (
+				5FA656E91FFF375F005C3598 /* Navigation */,
 				5FAAE8821FFA402200531AB2 /* UIColor */,
 				5FD7E3C61FF6679B00E8CFBA /* Route */,
 				5FD7E3B41FF6132800E8CFBA /* UIView */,
@@ -481,6 +495,7 @@
 				5FD7E3CB1FF668FE00E8CFBA /* RouteTableViewCell.swift in Sources */,
 				5F184E3E1FE283A800789BDF /* CLLocation+Extensions.swift in Sources */,
 				5FAAE8841FFA403A00531AB2 /* UIColor.swift in Sources */,
+				5FA656EB1FFF378B005C3598 /* BaseNavigationController.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
 				5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */,
@@ -494,6 +509,7 @@
 				5FD7E3C51FF664CE00E8CFBA /* Route.xcdatamodeld in Sources */,
 				5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */,
 				5F4526841FE9002B004012D1 /* LocationSearchTableViewController.swift in Sources */,
+				5FA656ED1FFF37AC005C3598 /* TransparentNavigationController.swift in Sources */,
 				5FE74AC51FEF706D0048C711 /* ARFollowerViewController.swift in Sources */,
 				5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */,
 				5FD7E3B81FF6138800E8CFBA /* UIImageExtension.swift in Sources */,
