@@ -92,10 +92,6 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     
     func setupHeader() {
         
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerTitle.translatesAutoresizingMaskIntoConstraints = false
-        headerContent.translatesAutoresizingMaskIntoConstraints = false
-        
         headerView.backgroundColor = Palette.seaBlue
         
         headerTitle.textColor = .white
