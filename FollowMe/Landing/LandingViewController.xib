@@ -34,7 +34,7 @@
                         <constraint firstAttribute="width" constant="250" id="VS4-YG-0X8"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="ArcadeClassic" family="ArcadeClassic" pointSize="36"/>
-                    <state key="normal" title="Invitation Code">
+                    <state key="normal" title="Route From Friends">
                         <color key="titleColor" red="0.5258789062" green="0.5258789062" blue="0.5258789062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
@@ -48,7 +48,7 @@
                         <constraint firstAttribute="height" constant="50" id="geb-Yf-R0s"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="ArcadeClassic" family="ArcadeClassic" pointSize="36"/>
-                    <state key="normal" title="New  Route">
+                    <state key="normal" title="Route For Self">
                         <color key="titleColor" red="0.5258789062" green="0.5258789062" blue="0.5258789062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
