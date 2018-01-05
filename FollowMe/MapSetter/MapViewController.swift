@@ -147,7 +147,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
         //add addANewArticle navigationItem at rightside
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(search(sender:)))
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(search(sender:)))
         
 
         
@@ -179,7 +179,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         setupSearchController()
         hideKeyboardWhenTappedAround()
         
-        self.navigationController?.navigationBar.isHidden = true
+//        self.navigationController?.navigationBar.isHidden = true
         searchBackgroundView.isHidden = true
     }
     
@@ -203,7 +203,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.navigationController?.navigationBar.isHidden = false
+//        self.navigationController?.navigationBar.isHidden = false
         
     }
 
@@ -255,7 +255,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func setupSearchBar() {
         
-        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+//        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+        self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
 
         searchBar.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
         searchBar.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor).isActive = true
