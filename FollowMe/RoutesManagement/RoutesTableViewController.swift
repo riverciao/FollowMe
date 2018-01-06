@@ -111,7 +111,7 @@ class RoutesTableViewController: UITableViewController {
 //                }
                 
                 // edit new route name
-                cell.routeName.addTarget(self, action: #selector(editRouteName), for: .touchUpInside)
+                cell.routeName.addTarget(self, action: #selector(editRouteName(sender:)), for: .touchUpInside)
                 
                 if let newRouteName = self.newRouteName {
                     cell.routeName.setTitle(newRouteName, for: .normal)
@@ -157,9 +157,18 @@ class RoutesTableViewController: UITableViewController {
         }
     }
     
-    @objc func editRouteName() {
-        print("123")
+    @objc func editRouteName(sender: UIButton) {
+        
+        if let cell = sender.superview?.superview as? RouteTableViewCell {
+            let indexPath = tableView.indexPath(for: cell)
+            guard let cellIndexPath = indexPath else {
+                print("indexpath not exist")
+                return
+            }
+            let route = items[cellIndexPath.row]
+        }
         let editRouteNameViewController = EditRouteNameViewController()
+        editRouteNameViewController.pathId = pathId
         present(editRouteNameViewController, animated: true, completion: nil)
     }
     

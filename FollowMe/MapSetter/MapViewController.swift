@@ -761,7 +761,7 @@ extension MapViewController {
             DispatchQueue.main.async {
                 if let pathId = self.currentPathId, let imageData = imageData {
                     
-                    CoreDataHandler.saveObject(id: pathId, image: imageData)
+                    CoreDataHandler.saveObject(id: pathId, image: imageData, name: "Route Name")
                     
                 }
             }

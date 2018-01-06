@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol RouteNameProviderDelegate: class {
     func manager(didGet newRouteName: String)
@@ -20,6 +21,7 @@ class EditRouteNameViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     weak var delegate: RouteNameProviderDelegate?
+    var pathId: pathId?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +35,7 @@ class EditRouteNameViewController: UIViewController {
     
     @objc func save() {
         if let newRouteName = newNameTextField.text {
-            self.delegate?.manager(didGet: newRouteName)
+//            CoreDataHandler.updateObject(object: Item, name: <#T##String#>)
         }
         self.dismiss(animated: true, completion: nil)
     }
