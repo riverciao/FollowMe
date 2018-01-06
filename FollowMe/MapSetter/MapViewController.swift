@@ -265,7 +265,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBackgroundView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
         
         let whiteWalkingBirdImageView = UIImageView()
-        whiteWalkingBirdImageView.image = #imageLiteral(resourceName: "icon-walking-bird-white")
+        let whiteWalkingBirdImage = #imageLiteral(resourceName: "icon-walking-bird").withRenderingMode(.alwaysTemplate)
+        whiteWalkingBirdImageView.image = whiteWalkingBirdImage
+        whiteWalkingBirdImageView.tintColor = .white
         whiteWalkingBirdImageView.translatesAutoresizingMaskIntoConstraints = false
         
         searchBackgroundView.addSubview(whiteWalkingBirdImageView)
