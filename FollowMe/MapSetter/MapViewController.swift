@@ -197,7 +197,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setupLocationSearchTableViewController()
+       
         
     }
     
@@ -221,7 +221,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let y = searchBarHeight + statusBarHeight + 10
         let x = mapView.center.x - searchBarWidth/2
         
-        locationSearchTableView?.frame = CGRect(x: x, y: y, width: searchBarWidth, height: view.frame.height - y)
+        locationSearchTableView?.frame = CGRect(x: x, y: y, width: searchBarWidth, height: view.frame.size.height - y)
         
         //corner radius
         if let locationSearchTableViewWidth = locationSearchTableView?.frame.width {
@@ -242,8 +242,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func setupSearchController() {
         searchController.searchResultsUpdater = locationSearchTableViewController
         searchController.searchBar.delegate = self
-        
-//        searchController.dimsBackgroundDuringPresentation = false
+
         navigationItem.hidesBackButton = true
         definesPresentationContext = true
 
@@ -338,7 +337,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBackgroundView.isHidden = false
 
         navigationController?.navigationBar.isHidden = false
-        
+        setupLocationSearchTableViewController()
 //        searchBar.showsCancelButton = false
         
     }
