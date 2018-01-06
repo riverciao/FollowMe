@@ -35,9 +35,15 @@ class EditRouteNameViewController: UIViewController {
     
     @objc func save() {
         if let newRouteName = newNameTextField.text {
-//            CoreDataHandler.updateObject(object: Item, name: <#T##String#>)
+            if let pathId = pathId {
+                let fetchResults = CoreDataHandler.filterData(selectedItemId: pathId)
+                if let fetchResults =  fetchResults {
+                    let managedObject = fetchResults[0]
+                    CoreDataHandler.updateObject(object: managedObject, name: newRouteName)
+                }
+            }
+            self.dismiss(animated: true, completion: nil)
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func cancel() {

@@ -166,10 +166,16 @@ class RoutesTableViewController: UITableViewController {
                 return
             }
             let route = items[cellIndexPath.row]
+            guard let pathId = route.id else {
+                print("pathId not exist")
+                return
+            }
+            
+            let editRouteNameViewController = EditRouteNameViewController()
+            editRouteNameViewController.pathId = pathId
+            present(editRouteNameViewController, animated: true, completion: nil)
+            
         }
-        let editRouteNameViewController = EditRouteNameViewController()
-        editRouteNameViewController.pathId = pathId
-        present(editRouteNameViewController, animated: true, completion: nil)
     }
     
     private func showDeleteAlert(with pathId: pathId) {
