@@ -121,6 +121,8 @@ class RoutesTableViewController: UITableViewController {
                 
                 if let newRouteName = route.name {
                     cell.routeName.setTitle(newRouteName, for: .normal)
+                    ////Test
+                    cell.routeNameTextField.text = newRouteName
                 }
                 
                 cell.shareButtonOutlet.addTarget(self, action: #selector(share(sender:)), for: .touchUpInside)

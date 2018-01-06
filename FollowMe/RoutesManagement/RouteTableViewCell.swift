@@ -29,6 +29,13 @@ class RouteTableViewCell: UITableViewCell {
         return textField
     }()
     
+    lazy var saveButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .red
+        return button
+    }()
+    
     var indexPath = IndexPath()
     
     override func awakeFromNib() {
@@ -46,6 +53,7 @@ class RouteTableViewCell: UITableViewCell {
         setupRoutesLabel()
         setupBottomsSeparator()
         setupRouteNameTextField()
+        setupSaveButton()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -66,6 +74,28 @@ class RouteTableViewCell: UITableViewCell {
         routeNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         routeNameTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
         routeNameTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        routeNameTextField.addTarget(self, action: #selector(showSaveButton), for: .editingDidBegin)
+        routeNameTextField.addTarget(self, action: #selector(hideSaveButton), for: .editingDidEnd)
+    }
+    
+    func setupSaveButton() {
+        self.contentView.addSubview(saveButton)
+        
+        saveButton.rightAnchor.constraint(equalTo: routeNameTextField.leftAnchor, constant: -5).isActive = true
+        saveButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        saveButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        saveButton.isHidden = true
+    }
+    
+    @objc func showSaveButton() {
+        saveButton.isHidden = false
+    }
+    
+    @objc func hideSaveButton() {
+        saveButton.isHidden = true
     }
     
     func setupBottomsSeparator() {
