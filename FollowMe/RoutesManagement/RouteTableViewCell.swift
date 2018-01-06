@@ -19,6 +19,16 @@ class RouteTableViewCell: UITableViewCell {
     }
     @IBOutlet weak var bottomSeparatorLineView: UIView!
     
+    lazy var routeNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = .blue
+        textField.text = "123"
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.textColor = .white
+        return textField
+    }()
+    
     var indexPath = IndexPath()
     
     override func awakeFromNib() {
@@ -35,6 +45,7 @@ class RouteTableViewCell: UITableViewCell {
         setupShareButtonOutlet()
         setupRoutesLabel()
         setupBottomsSeparator()
+        setupRouteNameTextField()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,6 +57,15 @@ class RouteTableViewCell: UITableViewCell {
     func setupRoutesLabel() {
         routeName.titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
         distance.font = UIFont(name: "ChalkboardSE-Regular", size: 17)
+    }
+    
+    func setupRouteNameTextField() {
+        self.contentView.addSubview(routeNameTextField)
+        
+        routeNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        routeNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
+        routeNameTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        routeNameTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setupBottomsSeparator() {
