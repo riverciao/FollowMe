@@ -245,6 +245,7 @@ class RoutesTableViewController: UITableViewController {
     }
     
     func setupHeader() {
+        self.view.backgroundColor = Palette.mystic
         let headerView = EntryListHeaderView.create()
         
         headerView.titleLabel.text = NSLocalizedString("Routes", comment: "")
