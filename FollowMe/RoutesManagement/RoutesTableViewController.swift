@@ -125,6 +125,8 @@ class RoutesTableViewController: UITableViewController {
                     cell.routeNameTextField.text = newRouteName
                 }
                 
+                cell.saveButton.addTarget(self, action: #selector(save(sender:)), for: .touchUpInside)
+                
                 cell.shareButtonOutlet.addTarget(self, action: #selector(share(sender:)), for: .touchUpInside)
                 
                 if let imageData = route.image {
@@ -163,6 +165,11 @@ class RoutesTableViewController: UITableViewController {
             self.items = CoreDataHandler.fetchObject()!
             self.tableView.reloadData()
         }
+    }
+    
+    ///test
+    @objc func save(sender: UIButton) {
+        
     }
     
     @objc func editRouteName(sender: UIButton) {
