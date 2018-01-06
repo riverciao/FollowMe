@@ -40,6 +40,7 @@ class EditRouteNameViewController: UIViewController {
                 if let fetchResults =  fetchResults {
                     let managedObject = fetchResults[0]
                     CoreDataHandler.updateObject(object: managedObject, name: newRouteName)
+                    print("\(managedObject.id) name: \(managedObject.name)")
                 }
             }
             self.dismiss(animated: true, completion: nil)
