@@ -17,13 +17,14 @@ class CoreDataHandler: NSObject {
     }
 
     
-    class func saveObject(id: String, image: Data) {
+    class func saveObject(id: String, image: Data, name: String) {
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Item", in: context)
         let managedObject = NSManagedObject(entity: entity!, insertInto: context)
         
         managedObject.setValue(id, forKey: "id")
         managedObject.setValue(image, forKey: "image")
+        managedObject.setValue(name, forKey: "name")
         
         do {
             try context.save()

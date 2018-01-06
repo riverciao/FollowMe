@@ -114,7 +114,7 @@ class RoutesTableViewController: UITableViewController {
                 cell.routeName.addTarget(self, action: #selector(editRouteName), for: .touchUpInside)
                 
                 if let newRouteName = self.newRouteName {
-                    cell.routeName.setTitle(<#T##title: String?##String?#>, for: <#T##UIControlState#>)
+                    cell.routeName.setTitle(newRouteName, for: .normal)
                 }
                 
                 cell.shareButtonOutlet.addTarget(self, action: #selector(share(sender:)), for: .touchUpInside)
@@ -255,3 +255,13 @@ extension UIApplication {
         return value(forKey: "statusBar") as? UIView
     }
 }
+
+//extension RoutesTableViewController: RouteNameProviderDelegate {
+//
+//    func manager(didGet newRouteName: String) {
+//
+//        self.newRouteName = newRouteName
+//
+//    }
+//}
+

@@ -24,6 +24,9 @@ class RouteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+//        let editRouteNameViewController = EditRouteNameViewController()
+//        editRouteNameViewController.delegate = self
+        
         self.contentView.backgroundColor = Palette.mystic
         
     }
@@ -66,3 +69,13 @@ class RouteTableViewCell: UITableViewCell {
     }
     
 }
+
+//extension RouteTableViewCell: RouteNameProviderDelegate {
+//
+//    func manager(didGet newRouteName: String) {
+//
+//        self.routeName.titleLabel?.text = newRouteName
+//
+//    }
+//}
+
