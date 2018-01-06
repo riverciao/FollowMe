@@ -49,8 +49,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     //Route screen shot
     var routeImageView: UIImageView?
     
-//    @IBOutlet weak var searchBar: UISearchBar!
-    
     @IBOutlet weak var mapView: MKMapView!
     
     lazy var searchController: NoCancelButtonSearchController = {
@@ -68,13 +66,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
-    
-//    lazy var searchBarContainerView: SearchBarContainerView = {
-//        let view = SearchBarContainerView(customSearchBar: searchBar)
-////        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 56)
-//        return view
-//    }()
     
     lazy var searchBackgroundView: UIView = {
         let view = UIView()
@@ -213,34 +204,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-//        self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     
     // MARK: - Search Controller
-    
-    @objc private func search(sender: UIBarButtonItem) {
-        
-//        //Setup search results controller
-//        let searchController = UISearchController(searchResultsController: locationSearchTableViewController)
-//
-//        searchController.searchResultsUpdater = locationSearchTableViewController
-//        searchController.searchBar.delegate = self
-//
-//        searchController.searchBar.barTintColor = UIColor.clear
-//
-//        definesPresentationContext = true
-//
-//        if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
-//            //Pass Value
-//            let currentLocationForARSetting = CLLocation(coordinate: currentLocationCoordinateForARSetting, altitude: 0)
-//            locationSearchTableViewController.currentLocation = currentLocationForARSetting
-//            locationSearchTableViewController.mapView = self.mapView
-//            present(searchController, animated: true, completion: nil)
-//        }
-
-    }
     
     func setupLocationSearchTableViewController() {
         
@@ -269,12 +237,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBarContainerView.frame = CGRect(x: 0, y: 0, width: view.frame.width - 20, height: 56)
         navigationItem.titleView = searchBarContainerView
         
-//        self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
-//        searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-//        searchBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-//        searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
-//
     }
     
     func setupSearchController() {
