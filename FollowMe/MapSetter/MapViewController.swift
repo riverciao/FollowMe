@@ -161,9 +161,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
         }
         
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -216,7 +213,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         //position and size
         let searchBarHeight = searchBar.frame.size.height
-        let searchBarWidth = searchBar.frame.size.width - 20
+        let searchBarWidth = searchBar.frame.size.width - 30
         let statusBarHeight = UIApplication.shared.statusBarFrame.height
         let y = searchBarHeight + statusBarHeight + 10
         let x = mapView.center.x - searchBarWidth/2
@@ -266,6 +263,33 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBackgroundView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         searchBackgroundView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
         searchBackgroundView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
+        
+        let whiteWalkingBirdImageView = UIImageView()
+        whiteWalkingBirdImageView.image = #imageLiteral(resourceName: "icon-walking-bird-white")
+        whiteWalkingBirdImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        searchBackgroundView.addSubview(whiteWalkingBirdImageView)
+        
+        whiteWalkingBirdImageView.centerXAnchor.constraint(equalTo: searchBackgroundView.centerXAnchor).isActive = true
+        whiteWalkingBirdImageView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: searchBackgroundView.frame.size.height * 2/9).isActive = true
+        whiteWalkingBirdImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        whiteWalkingBirdImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        let wordsFromBirdLabel = UILabel()
+        wordsFromBirdLabel.translatesAutoresizingMaskIntoConstraints = false
+        wordsFromBirdLabel.text = "Follow me by walking, I will lead you to whereever you want."
+        wordsFromBirdLabel.textAlignment = .center
+        wordsFromBirdLabel.textColor = .white
+        wordsFromBirdLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        wordsFromBirdLabel.numberOfLines = 0
+        
+        searchBackgroundView.addSubview(wordsFromBirdLabel)
+        
+        wordsFromBirdLabel.centerXAnchor.constraint(equalTo: searchBackgroundView.centerXAnchor).isActive = true
+        wordsFromBirdLabel.topAnchor.constraint(equalTo: whiteWalkingBirdImageView.bottomAnchor, constant: 12).isActive = true
+        wordsFromBirdLabel.widthAnchor.constraint(equalToConstant: searchBackgroundView.frame.width * 3/4).isActive = true
+        wordsFromBirdLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
         
     }
     
@@ -335,10 +359,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
 
         searchBackgroundView.isHidden = false
-
         navigationController?.navigationBar.isHidden = false
         setupLocationSearchTableViewController()
-//        searchBar.showsCancelButton = false
         
     }
     
