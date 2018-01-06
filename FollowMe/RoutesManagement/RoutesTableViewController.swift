@@ -22,10 +22,6 @@ class RoutesTableViewController: UITableViewController {
     //routes for coredata
     var items: [Item] = []
     
-    //for adjust frame
-//    let editRouteNameViewController = EditRouteNameViewController()
-//    let editNewRouteNameViewController = EditNewRouteNameViewController()
-    
     //for update route name
     var nameUpdateCount: Int = 0 {
         didSet {
@@ -181,12 +177,6 @@ class RoutesTableViewController: UITableViewController {
                 return
             }
             
-////            let editRouteNameViewController = EditRouteNameViewController()
-//            editRouteNameViewController.pathId = pathId
-////            addChildViewController(editRouteNameViewController)
-////            view.addSubview(editRouteNameViewController.view)
-            
-//            let editNewRouteNameViewController = EditNewRouteNameViewController()
             let editNewRouteNameStoruboard = UIStoryboard(name: "EditNewRouteName", bundle: nil)
             
             let editNewRouteNameViewController = editNewRouteNameStoruboard.instantiateViewController(withIdentifier: "EditNewRouteNameViewController") as? EditNewRouteNameViewController
@@ -260,10 +250,6 @@ class RoutesTableViewController: UITableViewController {
     }
     
     // MARK: Setup
-//    func setupEditRouteNameViewController() {
-//        let editRouteNameView = editRouteNameViewController.view
-//        editRouteNameView?.frame = CGRect(x: 30, y: 100, width: 300, height: 200)
-//    }
     
     func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = Palette.seaBlue
