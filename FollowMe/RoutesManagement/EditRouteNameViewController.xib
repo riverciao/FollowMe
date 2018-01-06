@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditRouteNameViewController" customModule="FollowMe" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="jui-f9-K4V" id="qtc-Tx-nOI"/>
+                <outlet property="newNameTextField" destination="dT5-jv-mP9" id="kSo-WF-l8G"/>
+                <outlet property="saveButton" destination="dr9-0i-O48" id="A8U-TS-mLh"/>
+                <outlet property="titleLabel" destination="7dm-sn-amH" id="LXz-C4-WRk"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dT5-jv-mP9">
+                    <rect key="frame" x="60" y="85" width="180" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="2kH-dZ-3E8"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edite Route Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7dm-sn-amH">
+                    <rect key="frame" x="60.5" y="42" width="179" height="27"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9K-HT-q0H">
+                    <rect key="frame" x="0.0" y="159" width="300" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="XXg-8f-pm1"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oYS-1A-GNO">
+                    <rect key="frame" x="150" y="160" width="1" height="40"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="xlJ-nM-S0H"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dr9-0i-O48">
+                    <rect key="frame" x="0.0" y="160" width="150" height="40"/>
+                    <state key="normal" title="Save"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jui-f9-K4V">
+                    <rect key="frame" x="150" y="160" width="150" height="40"/>
+                    <state key="normal" title="Cancel"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dr9-0i-O48" secondAttribute="bottom" id="1ME-kC-anC"/>
+                <constraint firstItem="7dm-sn-amH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2h5-c6-hgX"/>
+                <constraint firstItem="dT5-jv-mP9" firstAttribute="top" secondItem="7dm-sn-amH" secondAttribute="bottom" constant="16" id="4Il-bE-Nww"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="w9K-HT-q0H" secondAttribute="trailing" id="4Vu-Pu-TWD"/>
+                <constraint firstItem="dr9-0i-O48" firstAttribute="top" secondItem="w9K-HT-q0H" secondAttribute="bottom" id="4Xo-9n-1xB"/>
+                <constraint firstItem="jui-f9-K4V" firstAttribute="leading" secondItem="dr9-0i-O48" secondAttribute="trailing" id="B1s-wi-e3g"/>
+                <constraint firstItem="oYS-1A-GNO" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="DD7-wy-Jpd"/>
+                <constraint firstItem="jui-f9-K4V" firstAttribute="top" secondItem="w9K-HT-q0H" secondAttribute="bottom" id="E0E-dj-xPj"/>
+                <constraint firstItem="oYS-1A-GNO" firstAttribute="top" secondItem="w9K-HT-q0H" secondAttribute="bottom" id="PLP-q7-xpW"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="w9K-HT-q0H" secondAttribute="bottom" constant="40" id="Pb0-Ti-s8y"/>
+                <constraint firstItem="oYS-1A-GNO" firstAttribute="leading" secondItem="dr9-0i-O48" secondAttribute="trailing" id="RZt-Ae-Lbh"/>
+                <constraint firstItem="w9K-HT-q0H" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="SqR-P2-Xye"/>
+                <constraint firstItem="oYS-1A-GNO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Zxo-MO-php"/>
+                <constraint firstItem="dT5-jv-mP9" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cAp-jB-wop"/>
+                <constraint firstItem="jui-f9-K4V" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="d0h-aa-P2h"/>
+                <constraint firstItem="dT5-jv-mP9" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="fW7-fY-Obh"/>
+                <constraint firstItem="dr9-0i-O48" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hn7-07-xwi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jui-f9-K4V" secondAttribute="bottom" id="mLQ-Hw-2kf"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

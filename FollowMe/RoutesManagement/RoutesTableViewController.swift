@@ -22,6 +22,9 @@ class RoutesTableViewController: UITableViewController {
     //routes for coredata
     var items: [Item] = []
     
+    //for edit new route name
+    var newRouteName: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -107,6 +110,13 @@ class RoutesTableViewController: UITableViewController {
 //                    cell.routeName.text = id
 //                }
                 
+                // edit new route name
+                cell.routeName.addTarget(self, action: #selector(editRouteName), for: .touchUpInside)
+                
+                if let newRouteName = self.newRouteName {
+                    cell.routeName.setTitle(<#T##title: String?##String?#>, for: <#T##UIControlState#>)
+                }
+                
                 cell.shareButtonOutlet.addTarget(self, action: #selector(share(sender:)), for: .touchUpInside)
                 
                 if let imageData = route.image {
@@ -145,6 +155,12 @@ class RoutesTableViewController: UITableViewController {
             self.items = CoreDataHandler.fetchObject()!
             self.tableView.reloadData()
         }
+    }
+    
+    @objc func editRouteName() {
+        print("123")
+        let editRouteNameViewController = EditRouteNameViewController()
+        present(editRouteNameViewController, animated: true, completion: nil)
     }
     
     private func showDeleteAlert(with pathId: pathId) {

@@ -38,6 +38,8 @@
 		5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */; };
 		5FA656EB1FFF378B005C3598 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA656EA1FFF378B005C3598 /* BaseNavigationController.swift */; };
 		5FA656ED1FFF37AC005C3598 /* TransparentNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA656EC1FFF37AC005C3598 /* TransparentNavigationController.swift */; };
+		5FA656F02000AD64005C3598 /* EditRouteNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA656EE2000AD64005C3598 /* EditRouteNameViewController.swift */; };
+		5FA656F12000AD64005C3598 /* EditRouteNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FA656EF2000AD64005C3598 /* EditRouteNameViewController.xib */; };
 		5FAAE8841FFA403A00531AB2 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAAE8831FFA403A00531AB2 /* UIColor.swift */; };
 		5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */; };
 		5FAAE88A1FFA936600531AB2 /* EntryListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */; };
@@ -93,6 +95,8 @@
 		5F91164A1FF4B4B50030E9EF /* FollowerEntranceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowerEntranceViewController.xib; sourceTree = "<group>"; };
 		5FA656EA1FFF378B005C3598 /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		5FA656EC1FFF37AC005C3598 /* TransparentNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentNavigationController.swift; sourceTree = "<group>"; };
+		5FA656EE2000AD64005C3598 /* EditRouteNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRouteNameViewController.swift; sourceTree = "<group>"; };
+		5FA656EF2000AD64005C3598 /* EditRouteNameViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditRouteNameViewController.xib; sourceTree = "<group>"; };
 		5FAAE8831FFA403A00531AB2 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARCADECLASSIC.TTF; sourceTree = "<group>"; };
 		5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListHeaderView.swift; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				5FD7E3CA1FF668FE00E8CFBA /* RouteTableViewCell.xib */,
 				5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */,
 				5FAAE88B1FFA938400531AB2 /* EntryListHeaderView.xib */,
+				5FA656EE2000AD64005C3598 /* EditRouteNameViewController.swift */,
+				5FA656EF2000AD64005C3598 /* EditRouteNameViewController.xib */,
 			);
 			path = RoutesManagement;
 			sourceTree = "<group>";
@@ -404,6 +410,7 @@
 				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
 				5FD7E3CC1FF668FE00E8CFBA /* RouteTableViewCell.xib in Resources */,
+				5FA656F12000AD64005C3598 /* EditRouteNameViewController.xib in Resources */,
 				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
 				5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */,
@@ -497,6 +504,7 @@
 				5FAAE8841FFA403A00531AB2 /* UIColor.swift in Sources */,
 				5FA656EB1FFF378B005C3598 /* BaseNavigationController.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
+				5FA656F02000AD64005C3598 /* EditRouteNameViewController.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
 				5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */,
 				5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */,
