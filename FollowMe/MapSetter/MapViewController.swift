@@ -253,13 +253,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func setupSearchBar() {
         
 //        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
-        self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+//        self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
+        let searchBarContainer = SearchBarContainerView(customSearchBar: searchBar)
+        searchBarContainer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44)
+        navigationItem.titleView = searchBarContainer
 
-        searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
-        searchBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
-        searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
-        
+//        searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
+//        searchBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true
+//        searchBar.heightAnchor.constraint(equalToConstant: 56).isActive = true
+//
     }
     
     func setupSearchController() {
