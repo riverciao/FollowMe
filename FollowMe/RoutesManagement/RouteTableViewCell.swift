@@ -12,7 +12,7 @@ class RouteTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var routeImageView: UIImageView!
-    @IBOutlet weak var routeName: UILabel!
+    @IBOutlet weak var routeName: UIButton!
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var shareButtonOutlet: UIButton!
     @IBAction func shareButton(_ sender: Any) {
@@ -44,7 +44,7 @@ class RouteTableViewCell: UITableViewCell {
     }
     
     func setupRoutesLabel() {
-        routeName.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
+        routeName.titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
         distance.font = UIFont(name: "ChalkboardSE-Regular", size: 17)
     }
     
