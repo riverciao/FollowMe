@@ -70,9 +70,11 @@ class RouteTableViewCell: UITableViewCell {
     func setupRouteNameTextField() {
         self.contentView.addSubview(routeNameTextField)
         
+        let routeNameTextFieldWidth = contentView.frame.width - routeImageView.frame.width - saveButton.frame.width - 30
+        
         routeNameTextField.leftAnchor.constraint(equalTo: routeImageView.rightAnchor, constant: 18).isActive = true
         routeNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30).isActive = true
-        routeNameTextField.widthAnchor.constraint(equalToConstant: 123).isActive = true
+        routeNameTextField.widthAnchor.constraint(equalToConstant: routeNameTextFieldWidth).isActive = true
         routeNameTextField.heightAnchor.constraint(equalToConstant: 41).isActive = true
         
         routeNameTextField.addTarget(self, action: #selector(showSaveButton), for: .editingDidBegin)
@@ -82,7 +84,7 @@ class RouteTableViewCell: UITableViewCell {
     func setupSaveButton() {
         self.contentView.addSubview(saveButton)
         
-        saveButton.leftAnchor.constraint(equalTo: routeNameTextField.rightAnchor, constant: 5).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         saveButton.topAnchor.constraint(equalTo: routeNameTextField.topAnchor).isActive = true
         saveButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 41).isActive = true
