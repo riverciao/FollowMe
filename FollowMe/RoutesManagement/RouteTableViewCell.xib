@@ -51,19 +51,10 @@
                             <constraint firstAttribute="height" constant="0.5" id="5mO-6A-8YW"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E4z-Jc-z4Q">
-                        <rect key="frame" x="133" y="30" width="123" height="41"/>
-                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                        <state key="normal" title="Route Name">
-                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                        </state>
-                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="BtZ-13-6WF" firstAttribute="top" secondItem="E4z-Jc-z4Q" secondAttribute="bottom" constant="8" id="2lq-BY-2He"/>
                     <constraint firstItem="XAf-2g-gY9" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5tE-gk-nc6"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="trailing" secondItem="XzX-rI-49Y" secondAttribute="trailing" constant="10" id="Bv2-JN-ORM"/>
-                    <constraint firstItem="E4z-Jc-z4Q" firstAttribute="top" secondItem="SJo-qR-Hsa" secondAttribute="top" constant="30" id="DUI-VP-3XF"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="cOC-gq-hxm" secondAttribute="bottom" constant="24" id="FqL-LX-2Pc"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="trailing" secondItem="cOC-gq-hxm" secondAttribute="trailing" constant="12" id="Ihe-CG-acG"/>
                     <constraint firstItem="XAf-2g-gY9" firstAttribute="leading" secondItem="SJo-qR-Hsa" secondAttribute="leading" constant="15" id="OVC-u2-lsp"/>
@@ -72,7 +63,6 @@
                     <constraint firstItem="XzX-rI-49Y" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="YJO-bf-KBX"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="BtZ-13-6WF" secondAttribute="bottom" constant="24" id="j57-Qu-lLU"/>
                     <constraint firstItem="SJo-qR-Hsa" firstAttribute="bottom" secondItem="XzX-rI-49Y" secondAttribute="bottom" constant="8" id="tMd-dh-dcA"/>
-                    <constraint firstItem="E4z-Jc-z4Q" firstAttribute="leading" secondItem="XAf-2g-gY9" secondAttribute="trailing" constant="18" id="vq8-uK-HpG"/>
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="SJo-qR-Hsa"/>
             </tableViewCellContentView>
@@ -81,7 +71,6 @@
                 <outlet property="bottomSeparatorLineView" destination="XzX-rI-49Y" id="gT1-jT-u4l"/>
                 <outlet property="distance" destination="BtZ-13-6WF" id="C2V-2R-GYZ"/>
                 <outlet property="routeImageView" destination="XAf-2g-gY9" id="GgM-9g-T6J"/>
-                <outlet property="routeName" destination="E4z-Jc-z4Q" id="QC2-fE-VZ8"/>
                 <outlet property="shareButtonOutlet" destination="cOC-gq-hxm" id="QT0-eO-RaR"/>
             </connections>
             <point key="canvasLocation" x="60" y="92"/>

@@ -12,7 +12,6 @@ class RouteTableViewCell: UITableViewCell {
 
     
     @IBOutlet weak var routeImageView: UIImageView!
-    @IBOutlet weak var routeName: UIButton!
     @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var shareButtonOutlet: UIButton!
     @IBAction func shareButton(_ sender: Any) {
@@ -22,10 +21,9 @@ class RouteTableViewCell: UITableViewCell {
     lazy var routeNameTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = .blue
         textField.text = "123"
-        textField.font = UIFont.systemFont(ofSize: 20)
-        textField.textColor = .white
+        textField.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
+        textField.textColor = .black
         return textField
     }()
     
@@ -63,17 +61,16 @@ class RouteTableViewCell: UITableViewCell {
     }
     
     func setupRoutesLabel() {
-        routeName.titleLabel?.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
         distance.font = UIFont(name: "ChalkboardSE-Regular", size: 17)
     }
     
     func setupRouteNameTextField() {
         self.contentView.addSubview(routeNameTextField)
         
-        routeNameTextField.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-        routeNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        routeNameTextField.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        routeNameTextField.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        routeNameTextField.leftAnchor.constraint(equalTo: routeImageView.rightAnchor, constant: 18).isActive = true
+        routeNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30).isActive = true
+        routeNameTextField.widthAnchor.constraint(equalToConstant: 123).isActive = true
+        routeNameTextField.heightAnchor.constraint(equalToConstant: 41).isActive = true
         
         routeNameTextField.addTarget(self, action: #selector(showSaveButton), for: .editingDidBegin)
         routeNameTextField.addTarget(self, action: #selector(hideSaveButton), for: .editingDidEnd)

@@ -117,10 +117,10 @@ class RoutesTableViewController: UITableViewController {
 //                }
                 
                 // edit new route name
-                cell.routeName.addTarget(self, action: #selector(editRouteName(sender:)), for: .touchUpInside)
+//                cell.routeName.addTarget(self, action: #selector(editRouteName(sender:)), for: .touchUpInside)
                 
                 if let newRouteName = route.name {
-                    cell.routeName.setTitle(newRouteName, for: .normal)
+//                    cell.routeName.setTitle(newRouteName, for: .normal)
                     ////Test
                     cell.routeNameTextField.text = newRouteName
                 }
