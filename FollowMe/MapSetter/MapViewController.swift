@@ -277,7 +277,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let wordsFromBirdLabel = UILabel()
         wordsFromBirdLabel.translatesAutoresizingMaskIntoConstraints = false
-        wordsFromBirdLabel.text = "Follow me by walking, I will lead you to whereever you want."
+        wordsFromBirdLabel.text = "Follow me by walking,\nI will lead you to whereever you want."
         wordsFromBirdLabel.textAlignment = .center
         wordsFromBirdLabel.textColor = .white
         wordsFromBirdLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
@@ -289,6 +289,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         wordsFromBirdLabel.topAnchor.constraint(equalTo: whiteWalkingBirdImageView.bottomAnchor, constant: 12).isActive = true
         wordsFromBirdLabel.widthAnchor.constraint(equalToConstant: searchBackgroundView.frame.width * 3/4).isActive = true
         wordsFromBirdLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
         
         
     }
