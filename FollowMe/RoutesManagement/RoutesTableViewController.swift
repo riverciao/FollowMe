@@ -73,7 +73,6 @@ class RoutesTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupStatusBarColor()
-//        setupEditRouteNameViewController()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -85,11 +84,6 @@ class RoutesTableViewController: UITableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view = UIView()
-//        return view
-//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -116,12 +110,7 @@ class RoutesTableViewController: UITableViewController {
 //                    cell.routeName.text = id
 //                }
                 
-                // edit new route name
-//                cell.routeName.addTarget(self, action: #selector(editRouteName(sender:)), for: .touchUpInside)
-                
                 if let newRouteName = route.name {
-//                    cell.routeName.setTitle(newRouteName, for: .normal)
-                    ////Test
                     cell.routeNameTextField.text = newRouteName
                 }
                 
@@ -167,7 +156,6 @@ class RoutesTableViewController: UITableViewController {
         }
     }
     
-    ///test
     @objc func save(sender: UIButton) {
         if let cell = sender.superview?.superview as? RouteTableViewCell {
             let indexPath = tableView.indexPath(for: cell)
@@ -187,32 +175,6 @@ class RoutesTableViewController: UITableViewController {
                         self.tableView.reloadData()
                     }
                 }
-            }
-        }
-    }
-    
-    @objc func editRouteName(sender: UIButton) {
-        
-        if let cell = sender.superview?.superview as? RouteTableViewCell {
-            let indexPath = tableView.indexPath(for: cell)
-            guard let cellIndexPath = indexPath else {
-                print("indexpath not exist")
-                return
-            }
-            let route = items[cellIndexPath.row]
-            guard let pathId = route.id else {
-                print("pathId not exist")
-                return
-            }
-            
-            let editNewRouteNameStoruboard = UIStoryboard(name: "EditNewRouteName", bundle: nil)
-            
-            let editNewRouteNameViewController = editNewRouteNameStoruboard.instantiateViewController(withIdentifier: "EditNewRouteNameViewController") as? EditNewRouteNameViewController
-            if let editNewRouteNameViewController = editNewRouteNameViewController {
-                editNewRouteNameViewController.pathId = pathId
-                present(editNewRouteNameViewController, animated: true, completion: nil)
-            } else {
-                print("editNewRouteNameViewController not exist")
             }
         }
     }
