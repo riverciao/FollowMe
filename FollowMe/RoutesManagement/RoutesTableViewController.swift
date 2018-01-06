@@ -22,6 +22,9 @@ class RoutesTableViewController: UITableViewController {
     //routes for coredata
     var items: [Item] = []
     
+    //for adjust frame
+    let editRouteNameViewController = EditRouteNameViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -66,6 +69,7 @@ class RoutesTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupStatusBarColor()
+        setupEditRouteNameViewController()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -109,7 +113,7 @@ class RoutesTableViewController: UITableViewController {
                 
                 // edit new route name
                 cell.routeName.addTarget(self, action: #selector(editRouteName(sender:)), for: .touchUpInside)
-                
+
                 if let newRouteName = route.name {
                     cell.routeName.setTitle(newRouteName, for: .normal)
                 }
@@ -168,9 +172,13 @@ class RoutesTableViewController: UITableViewController {
                 return
             }
             
-            let editRouteNameViewController = EditRouteNameViewController()
+//            let editRouteNameViewController = EditRouteNameViewController()
             editRouteNameViewController.pathId = pathId
+//            addChildViewController(editRouteNameViewController)
+//            view.addSubview(editRouteNameViewController.view)
+            
             present(editRouteNameViewController, animated: true, completion: nil)
+            
             
         }
     }
@@ -233,6 +241,12 @@ class RoutesTableViewController: UITableViewController {
             self.present(activityViewController, animated: true, completion: nil)
         }
 
+    }
+    
+    // MARK: Setup
+    func setupEditRouteNameViewController() {
+        let editRouteNameView = editRouteNameViewController.view
+        editRouteNameView?.frame = CGRect(x: 30, y: 100, width: 300, height: 200)
     }
     
     func setupStatusBarColor() {

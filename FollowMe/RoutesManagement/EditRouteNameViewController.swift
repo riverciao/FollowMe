@@ -24,6 +24,7 @@ class EditRouteNameViewController: UIViewController {
     }
     
     func setup() {
+        
         saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
@@ -38,6 +39,9 @@ class EditRouteNameViewController: UIViewController {
                 }
             }
             self.dismiss(animated: true, completion: nil)
+//            self.view.removeFromSuperview()
+//            self.removeFromParentViewController()
+//            self.view.isHidden = true
         }
     }
     
