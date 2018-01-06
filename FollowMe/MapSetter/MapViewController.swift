@@ -69,6 +69,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return searchBar
     }()
     
+//    lazy var searchBarContainerView: SearchBarContainerView = {
+//        let view = SearchBarContainerView(customSearchBar: searchBar)
+////        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 56)
+//        return view
+//    }()
+    
     lazy var searchBackgroundView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -179,6 +186,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -195,6 +207,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupLocationSearchTableViewController()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -251,13 +264,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func setupSearchBar() {
-        
-//        mapView.insertSubview(searchBar, aboveSubview: searchBackgroundView)
-//        self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
-        let searchBarContainer = SearchBarContainerView(customSearchBar: searchBar)
-        searchBarContainer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44)
-        navigationItem.titleView = searchBarContainer
 
+        let searchBarContainerView = SearchBarContainerView(customSearchBar: searchBar)
+        searchBarContainerView.frame = CGRect(x: 0, y: 0, width: view.frame.width - 20, height: 56)
+        navigationItem.titleView = searchBarContainerView
+        
+//        self.navigationController?.navigationBar.insertSubview(searchBar, aboveSubview: searchBackgroundView)
 //        searchBar.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
 //        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 20).isActive = true
 //        searchBar.widthAnchor.constraint(equalToConstant: view.frame.width).isActive = true

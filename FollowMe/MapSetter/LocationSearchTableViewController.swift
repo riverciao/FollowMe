@@ -34,7 +34,7 @@ class LocationSearchTableViewController: UITableViewController {
 //        } else {
 //            automaticallyAdjustsScrollViewInsets = false
 //        }
-        automaticallyAdjustsScrollViewInsets = false
+//        automaticallyAdjustsScrollViewInsets = false
 
     }
     
