@@ -23,7 +23,15 @@ class RoutesTableViewController: UITableViewController {
     var items: [Item] = []
     
     //for adjust frame
-    let editRouteNameViewController = EditRouteNameViewController()
+//    let editRouteNameViewController = EditRouteNameViewController()
+//    let editNewRouteNameViewController = EditNewRouteNameViewController()
+    
+    //for update route name
+    var nameUpdateCount: Int = 0 {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,6 +111,7 @@ class RoutesTableViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "routeCell", for: indexPath) as? RouteTableViewCell {
             
             let route = items[indexPath.row]
+
             cell.shareButtonOutlet.tag = indexPath.row
             
             if items.count > indexPath.row {
@@ -113,7 +122,7 @@ class RoutesTableViewController: UITableViewController {
                 
                 // edit new route name
                 cell.routeName.addTarget(self, action: #selector(editRouteName(sender:)), for: .touchUpInside)
-
+                
                 if let newRouteName = route.name {
                     cell.routeName.setTitle(newRouteName, for: .normal)
                 }
@@ -172,14 +181,21 @@ class RoutesTableViewController: UITableViewController {
                 return
             }
             
-//            let editRouteNameViewController = EditRouteNameViewController()
-            editRouteNameViewController.pathId = pathId
-//            addChildViewController(editRouteNameViewController)
-//            view.addSubview(editRouteNameViewController.view)
+////            let editRouteNameViewController = EditRouteNameViewController()
+//            editRouteNameViewController.pathId = pathId
+////            addChildViewController(editRouteNameViewController)
+////            view.addSubview(editRouteNameViewController.view)
             
-            present(editRouteNameViewController, animated: true, completion: nil)
+//            let editNewRouteNameViewController = EditNewRouteNameViewController()
+            let editNewRouteNameStoruboard = UIStoryboard(name: "EditNewRouteName", bundle: nil)
             
-            
+            let editNewRouteNameViewController = editNewRouteNameStoruboard.instantiateViewController(withIdentifier: "EditNewRouteNameViewController") as? EditNewRouteNameViewController
+            if let editNewRouteNameViewController = editNewRouteNameViewController {
+                editNewRouteNameViewController.pathId = pathId
+                present(editNewRouteNameViewController, animated: true, completion: nil)
+            } else {
+                print("editNewRouteNameViewController not exist")
+            }
         }
     }
     
@@ -244,10 +260,10 @@ class RoutesTableViewController: UITableViewController {
     }
     
     // MARK: Setup
-    func setupEditRouteNameViewController() {
-        let editRouteNameView = editRouteNameViewController.view
-        editRouteNameView?.frame = CGRect(x: 30, y: 100, width: 300, height: 200)
-    }
+//    func setupEditRouteNameViewController() {
+//        let editRouteNameView = editRouteNameViewController.view
+//        editRouteNameView?.frame = CGRect(x: 30, y: 100, width: 300, height: 200)
+//    }
     
     func setupStatusBarColor() {
         UIApplication.shared.statusBarView?.backgroundColor = Palette.seaBlue

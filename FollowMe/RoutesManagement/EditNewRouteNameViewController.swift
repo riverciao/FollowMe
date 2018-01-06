@@ -1,5 +1,5 @@
 //
-//  EditRouteNameViewController.swift
+//  EditNewRouteNameViewController.swift
 //  FollowMe
 //
 //  Created by riverciao on 2018/1/6.
@@ -7,11 +7,9 @@
 //
 
 import UIKit
-import CoreData
 
-class EditRouteNameViewController: UIViewController {
+class EditNewRouteNameViewController: UIViewController {
 
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var newNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -20,13 +18,16 @@ class EditRouteNameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setup()
+
     }
-    
+
     func setup() {
-        
+        self.view.backgroundColor = Palette.duckFeather
         saveButton.addTarget(self, action: #selector(save), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        UIApplication.shared.statusBarView?.backgroundColor = Palette.duckFeather
     }
     
     @objc func save() {
@@ -38,7 +39,9 @@ class EditRouteNameViewController: UIViewController {
                     CoreDataHandler.updateObject(object: managedObject, name: newRouteName)
                 }
             }
+            
             self.dismiss(animated: true, completion: nil)
+            
         }
     }
     

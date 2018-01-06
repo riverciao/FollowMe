@@ -43,7 +43,6 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         mapView.delegate = self
         
         locationManager.delegate = self
