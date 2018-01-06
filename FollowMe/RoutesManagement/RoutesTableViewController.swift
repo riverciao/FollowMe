@@ -69,7 +69,7 @@ class RoutesTableViewController: UITableViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupStatusBarColor()
-        setupEditRouteNameViewController()
+//        setupEditRouteNameViewController()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
