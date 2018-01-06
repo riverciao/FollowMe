@@ -169,7 +169,26 @@ class RoutesTableViewController: UITableViewController {
     
     ///test
     @objc func save(sender: UIButton) {
-        
+        if let cell = sender.superview?.superview as? RouteTableViewCell {
+            let indexPath = tableView.indexPath(for: cell)
+            guard let cellIndexPath = indexPath else {
+                print("indexpath not exist")
+                return
+            }
+            
+            let route = items[cellIndexPath.row]
+            
+            if let pathId = route.id {
+                let fetchResults = CoreDataHandler.filterData(selectedItemId: pathId)
+                if let fetchResults =  fetchResults {
+                    let managedObject = fetchResults[0]
+                    if let newRouteName = cell.routeNameTextField.text {
+                        CoreDataHandler.updateObject(object: managedObject, name: newRouteName)
+                        self.tableView.reloadData()
+                    }
+                }
+            }
+        }
     }
     
     @objc func editRouteName(sender: UIButton) {
