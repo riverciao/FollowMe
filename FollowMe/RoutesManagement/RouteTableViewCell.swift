@@ -21,7 +21,7 @@ class RouteTableViewCell: UITableViewCell {
     lazy var routeNameTextField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.text = "123"
+        textField.text = "Route Name"
         textField.font = UIFont(name: "ChalkboardSE-Regular", size: 22)
         textField.textColor = .black
         return textField
@@ -30,7 +30,10 @@ class RouteTableViewCell: UITableViewCell {
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .red
+        button.backgroundColor = Palette.duckBeak
+        button.setTitle("Save", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 4
         return button
     }()
     
@@ -79,10 +82,10 @@ class RouteTableViewCell: UITableViewCell {
     func setupSaveButton() {
         self.contentView.addSubview(saveButton)
         
-        saveButton.rightAnchor.constraint(equalTo: routeNameTextField.leftAnchor, constant: -5).isActive = true
-        saveButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        saveButton.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        saveButton.leftAnchor.constraint(equalTo: routeNameTextField.rightAnchor, constant: 5).isActive = true
+        saveButton.topAnchor.constraint(equalTo: routeNameTextField.topAnchor).isActive = true
+        saveButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 41).isActive = true
         
         saveButton.isHidden = true
     }
