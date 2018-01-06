@@ -758,10 +758,17 @@ extension MapViewController {
             let image = self.routeImageView?.image
             let imageData = UIImageJPEGRepresentation(image!, 1)
             
+            //handle distance
+            guard let distance = self.route?.distance else {
+                print("distance not exist")
+                return
+            }
+            let intOfDistance = Int(distance)
+            
             DispatchQueue.main.async {
                 if let pathId = self.currentPathId, let imageData = imageData {
                     
-                    CoreDataHandler.saveObject(id: pathId, image: imageData, name: "Route Name")
+                    CoreDataHandler.saveObject(id: pathId, image: imageData, name: "Route Name", distance: intOfDistance)
                     
                 }
             }
@@ -816,6 +823,7 @@ extension MapViewController {
         
         //polyline coordinates
         let polylineCoordinates = self.route?.polyline.coordinates
+        
         
         // Here is the trick :
         // We use addLine() and move() to draw the line, this should be easy to understand.

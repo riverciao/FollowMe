@@ -106,9 +106,8 @@ class RoutesTableViewController: UITableViewController {
             
             if items.count > indexPath.row {
                 
-//                if let distance = route.id {
-//                    cell.routeName.text = id
-//                }
+                let distance = Int(route.distance)
+                cell.distance.text = "\(distance) m"
                 
                 if let newRouteName = route.name {
                     cell.routeNameTextField.text = newRouteName
