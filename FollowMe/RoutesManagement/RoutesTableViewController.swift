@@ -22,9 +22,6 @@ class RoutesTableViewController: UITableViewController {
     //routes for coredata
     var items: [Item] = []
     
-    //for edit new route name
-    var newRouteName: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -270,13 +267,4 @@ extension UIApplication {
         return value(forKey: "statusBar") as? UIView
     }
 }
-
-//extension RoutesTableViewController: RouteNameProviderDelegate {
-//
-//    func manager(didGet newRouteName: String) {
-//
-//        self.newRouteName = newRouteName
-//
-//    }
-//}
 

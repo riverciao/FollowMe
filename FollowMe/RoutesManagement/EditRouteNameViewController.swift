@@ -9,10 +9,6 @@
 import UIKit
 import CoreData
 
-protocol RouteNameProviderDelegate: class {
-    func manager(didGet newRouteName: String)
-}
-
 class EditRouteNameViewController: UIViewController {
 
     
@@ -20,7 +16,6 @@ class EditRouteNameViewController: UIViewController {
     @IBOutlet weak var newNameTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
-    weak var delegate: RouteNameProviderDelegate?
     var pathId: pathId?
     
     override func viewDidLoad() {
@@ -40,7 +35,6 @@ class EditRouteNameViewController: UIViewController {
                 if let fetchResults =  fetchResults {
                     let managedObject = fetchResults[0]
                     CoreDataHandler.updateObject(object: managedObject, name: newRouteName)
-                    print("\(managedObject.id) name: \(managedObject.name)")
                 }
             }
             self.dismiss(animated: true, completion: nil)
@@ -50,6 +44,5 @@ class EditRouteNameViewController: UIViewController {
     @objc func cancel() {
         self.dismiss(animated: true, completion: nil)
     }
-
 
 }
