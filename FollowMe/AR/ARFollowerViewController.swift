@@ -75,28 +75,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     var z: Float?
     
     //property for current location coordinate to start node 3D vector
-    var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
-    
-    @objc func goToManageRoutes() {
-        let routesTableViewController = RoutesTableViewController()
-        routesTableViewController.pathId = self.currentPathId
-        routesTableViewController.routeImageView = self.routeImageView
-        
-        //        let positioningViewController = PositioningViewController()
-        //        positioningViewController.dismiss(animated: true, completion: nil)
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-        
-        
-        //        present(routesTableViewController, animated: true, completion: nil)
-        
-        
-        //        if let routesTableViewController = self.navigationController?.viewControllers[0] as? RoutesTableViewController {
-        //            routesTableViewController.pathId = self.currentPathId
-        //            routesTableViewController.routeImageView = self.routeImageView
-        //            self.navigationController?.popToViewController(routesTableViewController, animated: true)
-        //        }
-    }
-    
+    var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?    
     
     // MARK: - View life cycle
     
