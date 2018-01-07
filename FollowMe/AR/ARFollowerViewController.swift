@@ -210,7 +210,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         cancelButton.setImage(cancelImage, for: .normal)
         cancelButton.tintColor = .white
         
-        if self.currentPathId != nil {
+        //if draw route by self, showSaveAlert, otherwise cancel
+        if self.navigationController?.viewControllers[1] != nil {
             cancelButton.addTarget(self, action: #selector(showSaveAlert), for: .touchUpInside)
         } else {
             cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
@@ -238,8 +239,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             handler: { action in self.cancel() }
         )
         
-        alert.addAction(cancel)
         alert.addAction(save)
+        alert.addAction(cancel)
         
         present(alert, animated: true, completion: nil)
         
