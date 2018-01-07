@@ -78,10 +78,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
     
     //notice for user to look around
+    var noticeViewAlpha: CGFloat = 0.5
     lazy var noticeView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: noticeViewAlpha)
         return view
     }()
     
@@ -89,7 +90,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     lazy var cautionView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: noticeViewAlpha)
         return view
     }()
     
@@ -250,8 +251,23 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
     
     @objc private func hideNoticeView() {
-        noticeView.isHidden = true
-        cautionView.isHidden = true
+        
+        let fadeOutTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: true)
+        if noticeViewAlpha <= 0 {
+            fadeOutTimer.invalidate()
+        }
+    }
+    
+    @objc private func fadeOut() {
+        
+        if noticeViewAlpha > 0 {
+            noticeViewAlpha -= 0.1
+            noticeView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: noticeViewAlpha)
+            cautionView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: noticeViewAlpha)
+        } else {
+            noticeView.isHidden = true
+            cautionView.isHidden = true
+        }
     }
     
     //timer for notice and caution view
