@@ -75,7 +75,15 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     var z: Float?
     
     //property for current location coordinate to start node 3D vector
-    var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?    
+    var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
+    
+    //notice for user to look around
+    lazy var noticeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        return view
+    }()
     
     // MARK: - View life cycle
     
@@ -127,6 +135,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         setupStatusBarColor()
         setupHeader()
+        setupNoticeView()
     }
     
     // MARK: - get instruction
@@ -176,6 +185,34 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
     
     // MARK: - Setup
+    
+    private func setupNoticeView() {
+//        let timer = Timer()
+        view.addSubview(noticeView)
+        
+        noticeView.layer.cornerRadius = view.frame.height * 1/30
+        noticeView.clipsToBounds = true
+        
+        noticeView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noticeView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 1/3).isActive = true
+        noticeView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        noticeView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        let noticeLabel = UILabel()
+        noticeLabel.translatesAutoresizingMaskIntoConstraints = false
+        noticeLabel.text = "Look around to find the route instructions in AR.\n\nPlease be aware of your surroundings."
+        noticeLabel.font = UIFont.systemFont(ofSize: 20)
+        noticeLabel.textColor = .white
+        noticeLabel.numberOfLines = 0
+        
+        noticeView.addSubview(noticeLabel)
+        
+        noticeLabel.centerXAnchor.constraint(equalTo: noticeView.centerXAnchor).isActive = true
+        noticeLabel.centerYAnchor.constraint(equalTo: noticeView.centerYAnchor).isActive = true
+        noticeLabel.widthAnchor.constraint(equalToConstant: 260).isActive = true
+        noticeLabel.heightAnchor.constraint(equalToConstant: noticeView.frame.height * 0.9).isActive = true
+    }
+    
     
     private func setupHeader() {
         
