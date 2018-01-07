@@ -94,6 +94,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         return view
     }()
     
+    //timer for notice view to fade out
+    var fadeOutTimer = Timer()
+    
     
     // MARK: - View life cycle
     
@@ -251,11 +254,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
     
     @objc private func hideNoticeView() {
-        
-        let fadeOutTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: true)
-        if noticeViewAlpha <= 0 {
-            fadeOutTimer.invalidate()
-        }
+        fadeOutTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: true)
     }
     
     @objc private func fadeOut() {
@@ -267,6 +266,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         } else {
             noticeView.isHidden = true
             cautionView.isHidden = true
+            fadeOutTimer.invalidate()
         }
     }
     
