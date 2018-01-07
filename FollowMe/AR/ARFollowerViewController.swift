@@ -93,6 +93,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         return view
     }()
     
+    
     // MARK: - View life cycle
     
     override func viewDidLoad() {
@@ -144,6 +145,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         setupStatusBarColor()
         setupHeader()
         setupNoticeViewAndCautionView()
+        setupTimer()
+        
     }
     
     // MARK: - get instruction
@@ -194,7 +197,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     // MARK: - Setup
     
-    private func setupNoticeViewAndCautionView() {
+    @objc private func setupNoticeViewAndCautionView() {
         
         //TODO: dynamic height for view
         view.addSubview(noticeView)
@@ -244,6 +247,16 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         cautionLabel.centerYAnchor.constraint(equalTo: cautionView.centerYAnchor).isActive = true
         cautionLabel.widthAnchor.constraint(equalToConstant: cautionView.frame.width * 0.9).isActive = true
         cautionLabel.heightAnchor.constraint(equalToConstant: cautionView.frame.height * 0.9).isActive = true
+    }
+    
+    @objc private func hideNoticeView() {
+        noticeView.isHidden = true
+        cautionView.isHidden = true
+    }
+    
+    //timer for notice and caution view
+    private func setupTimer() {
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(hideNoticeView), userInfo: nil, repeats: false)
     }
     
     
