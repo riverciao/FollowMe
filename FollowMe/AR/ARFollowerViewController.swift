@@ -85,6 +85,14 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         return view
     }()
     
+    //caution for user to be aware of surroundings
+    lazy var cautionView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        return view
+    }()
+    
     // MARK: - View life cycle
     
     override func viewDidLoad() {
@@ -135,7 +143,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         setupStatusBarColor()
         setupHeader()
-        setupNoticeView()
+        setupNoticeViewAndCautionView()
     }
     
     // MARK: - get instruction
@@ -186,22 +194,23 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     // MARK: - Setup
     
-    private func setupNoticeView() {
-//        let timer = Timer()
+    private func setupNoticeViewAndCautionView() {
+        
+        //TODO: dynamic height for view
         view.addSubview(noticeView)
         
-        noticeView.layer.cornerRadius = view.frame.height * 1/30
+        noticeView.layer.cornerRadius = view.frame.height * 1/40
         noticeView.clipsToBounds = true
         
         noticeView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         noticeView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height * 1/3).isActive = true
-        noticeView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        noticeView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        noticeView.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9).isActive = true
+        noticeView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         let noticeLabel = UILabel()
         noticeLabel.translatesAutoresizingMaskIntoConstraints = false
-        noticeLabel.text = "Look around to find the route instructions in AR.\n\nPlease be aware of your surroundings."
-        noticeLabel.font = UIFont.systemFont(ofSize: 20)
+        noticeLabel.text = "Look around to find the route instructions in AR."
+        noticeLabel.font = UIFont.systemFont(ofSize: 18)
         noticeLabel.textColor = .white
         noticeLabel.numberOfLines = 0
         
@@ -209,8 +218,32 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         noticeLabel.centerXAnchor.constraint(equalTo: noticeView.centerXAnchor).isActive = true
         noticeLabel.centerYAnchor.constraint(equalTo: noticeView.centerYAnchor).isActive = true
-        noticeLabel.widthAnchor.constraint(equalToConstant: 260).isActive = true
+        noticeLabel.widthAnchor.constraint(equalToConstant: noticeView.frame.width * 0.9).isActive = true
         noticeLabel.heightAnchor.constraint(equalToConstant: noticeView.frame.height * 0.9).isActive = true
+        
+        view.addSubview(cautionView)
+        
+        cautionView.layer.cornerRadius = view.frame.height * 1/40
+        cautionView.clipsToBounds = true
+        
+        cautionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        cautionView.topAnchor.constraint(equalTo: noticeView.bottomAnchor, constant: 10).isActive = true
+        cautionView.widthAnchor.constraint(equalToConstant: view.frame.width * 0.9).isActive = true
+        cautionView.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+        let cautionLabel = UILabel()
+        cautionLabel.translatesAutoresizingMaskIntoConstraints = false
+        cautionLabel.text = "Please be aware of your surroundings."
+        cautionLabel.font = UIFont.systemFont(ofSize: 18)
+        cautionLabel.textColor = .white
+        cautionLabel.numberOfLines = 0
+        
+        cautionView.addSubview(cautionLabel)
+        
+        cautionLabel.centerXAnchor.constraint(equalTo: cautionView.centerXAnchor).isActive = true
+        cautionLabel.centerYAnchor.constraint(equalTo: cautionView.centerYAnchor).isActive = true
+        cautionLabel.widthAnchor.constraint(equalToConstant: cautionView.frame.width * 0.9).isActive = true
+        cautionLabel.heightAnchor.constraint(equalToConstant: cautionView.frame.height * 0.9).isActive = true
     }
     
     
