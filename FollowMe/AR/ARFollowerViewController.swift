@@ -229,7 +229,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         let cancel = UIAlertAction(
             title: NSLocalizedString("Cancel", comment: ""),
             style: .default,
-            handler: nil
+            handler: { action in self.delete() }
         )
         
         let save = UIAlertAction(
@@ -243,6 +243,28 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    func delete() {
+        if let currentPathId = currentPathId {
+            
+            //delete from firebase
+            let pathRef = Database.database().reference().child("paths").child(currentPathId)
+            pathRef.removeValue()
+            
+            //delete from coredata
+            guard let fetchResults = CoreDataHandler.filterData(selectedItemId: currentPathId) else {
+                print("route not exist")
+                return
+            }
+            
+            let resultToBeDeleted = fetchResults[0]
+            CoreDataHandler.deleteObject(item: resultToBeDeleted)
+        } else {
+            print("currentPathId not exist")
+        }
+        
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func cancel() {
