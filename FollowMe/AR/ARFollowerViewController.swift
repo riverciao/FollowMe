@@ -116,7 +116,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         smallSyncMapView.showsCompass = false
         
         //add touch gesture
-//        let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
 
@@ -210,7 +209,40 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         let cancelImage = #imageLiteral(resourceName: "icon-cross").withRenderingMode(.alwaysTemplate)
         cancelButton.setImage(cancelImage, for: .normal)
         cancelButton.tintColor = .white
-        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        
+        if self.currentPathId != nil {
+            cancelButton.addTarget(self, action: #selector(showSaveAlert), for: .touchUpInside)
+        } else {
+            cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        }
+        
+    }
+    
+    @objc private func showSaveAlert() {
+        
+        let alert = UIAlertController(
+            title: NSLocalizedString("Do you want to save this route?", comment: ""),
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        let cancel = UIAlertAction(
+            title: NSLocalizedString("Cancel", comment: ""),
+            style: .default,
+            handler: nil
+        )
+        
+        let save = UIAlertAction(
+            title: NSLocalizedString("Save", comment: ""),
+            style: .default,
+            handler: { action in self.cancel() }
+        )
+        
+        alert.addAction(cancel)
+        alert.addAction(save)
+        
+        present(alert, animated: true, completion: nil)
+        
     }
     
     @objc func cancel() {
