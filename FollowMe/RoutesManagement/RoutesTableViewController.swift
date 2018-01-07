@@ -148,10 +148,7 @@ class RoutesTableViewController: UITableViewController {
                 print("route not exist")
                 return
             }
-            CoreDataHandler.deleteObject(item: route)
             showDeleteAlert(with: pathId)
-            self.items = CoreDataHandler.fetchObject()!
-            self.tableView.reloadData()
         }
     }
     
@@ -206,11 +203,23 @@ class RoutesTableViewController: UITableViewController {
     }
     
     private func deletePath(with pathId: pathId) {
-            
-        let pathRef = Database.database().reference().child("paths").child(pathId)
         
+        //delete from firebase
+        let pathRef = Database.database().reference().child("paths").child(pathId)
         pathRef.removeValue()
         
+        //delete from coredata
+        if let fetchResults = CoreDataHandler.filterData(selectedItemId: pathId) {
+            let resultToBeDeleted = fetchResults[0]
+            CoreDataHandler.deleteObject(item: resultToBeDeleted)
+        } else {
+            print("route not existed")
+        }
+        
+        DispatchQueue.main.async {
+            self.items = CoreDataHandler.fetchObject()!
+            self.tableView.reloadData()
+        }
     }
 
     @objc func addANewRoute(sender: UIBarButtonItem) {
