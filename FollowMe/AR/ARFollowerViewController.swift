@@ -263,7 +263,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             noticeViewAlpha -= 0.1
             noticeView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: noticeViewAlpha)
             cautionView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: noticeViewAlpha)
-        } else {
+        } else if noticeViewAlpha <= 0 {
             noticeView.isHidden = true
             cautionView.isHidden = true
             fadeOutTimer.invalidate()
@@ -272,7 +272,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     //timer for notice and caution view
     private func setupTimer() {
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(hideNoticeView), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideNoticeView), userInfo: nil, repeats: false)
     }
     
     
