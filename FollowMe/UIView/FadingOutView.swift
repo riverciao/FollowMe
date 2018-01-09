@@ -32,7 +32,7 @@ class FadingOutView: UIView {
             noticeLabel.text = noticeText
         }
     }
-    /// font sizr of notice label text (default: 18)
+    /// font size of notice label text (default: 18)
     open var noticeTextFontSize: CGFloat = 18 {
         didSet {
             noticeLabel.font = UIFont.systemFont(ofSize: noticeTextFontSize)
@@ -70,7 +70,9 @@ class FadingOutView: UIView {
      Init view with wave color
      
      - parameter frame: view frame
-     - parameter color: real wave color
+     - parameter startingAlpha: alpha of the background color of fade out view(black)
+     - parameter showingTime: fade out view will last for this period of time
+     - parameter noticeText: text on the fading out view. With default color(white) and default font(system). Can adjust font size by calling noticeTextFontSize
      
      - returns: view
      */
