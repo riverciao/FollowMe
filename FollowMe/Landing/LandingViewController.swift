@@ -68,11 +68,11 @@ class LandingViewController: UIViewController {
     
     func setupNoticeView() {
         let frame = CGRect(x: 20, y: 30, width: 300, height: 200)
-        noticeView = FadingOutView(frame: frame, startingAlpha: 0.5, showingTime: 5)
+        noticeView = FadingOutView(frame: frame, startingAlpha: 0.5, showingTime: 5, noticeText: "test 777")
         
         if let noticeView = noticeView {
             view.addSubview(noticeView)
-            noticeView.setupShowingTimer()
+            noticeView.start()
         }
         
     }

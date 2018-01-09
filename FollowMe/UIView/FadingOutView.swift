@@ -26,11 +26,33 @@ class FadingOutView: UIView {
     open var fadingTimeInterval: TimeInterval = 0.1
     /// view fading out alpha per viewFadingTimeInterval (default: 0.1)
     open var viewFadingOutAlpha: CGFloat = 0.1
+    /// notice label text that shows on fading out view
+    open var noticeText: String = "" {
+        didSet {
+            noticeLabel.text = noticeText
+        }
+    }
+    /// font sizr of notice label text (default: 18)
+    open var noticeTextFontSize: CGFloat = 18 {
+        didSet {
+            noticeLabel.font = UIFont.systemFont(ofSize: noticeTextFontSize)
+        }
+    }
     
     /// fadeOut timer
     fileprivate var fadeOutTimer = Timer()
     /// showing timer
     fileprivate var showingTimer = Timer()
+    /// noticeLabel
+    fileprivate lazy var noticeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 18)
+        label.textColor = .white
+        label.text = noticeText
+        label.numberOfLines = 0
+        return label
+    }()
     
     
     /**
@@ -42,11 +64,6 @@ class FadingOutView: UIView {
      */
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        var frame = self.bounds
-//        frame.origin.y = frame.size.height
-//        frame.size.height = 0
-//        self.backgroundColor = UIColor.clear
     }
     
     /**
@@ -57,13 +74,16 @@ class FadingOutView: UIView {
      
      - returns: view
      */
-    public convenience init(frame: CGRect, startingAlpha: CGFloat, showingTime: TimeInterval) {
+    public convenience init(frame: CGRect, startingAlpha: CGFloat, showingTime: TimeInterval, noticeText: String) {
         self.init(frame: frame)
         
         self.startingAlpha = startingAlpha
         self.showingTime = showingTime
+        self.noticeText = noticeText
         
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: startingAlpha)
+        self.layer.cornerRadius = frame.height / 35
+        setupNoticeLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -71,9 +91,18 @@ class FadingOutView: UIView {
     }
     
     
-    
-    open func setupShowingTimer() {
+    ///Srart to show the Fade Out View
+    open func start() {
         showingTimer = Timer.scheduledTimer(timeInterval: showingTime, target: self, selector: #selector(callFadeOutTimer), userInfo: nil, repeats: false)
+    }
+    
+    private func setupNoticeLabel() {
+        self.addSubview(noticeLabel)
+        
+        noticeLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        noticeLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        noticeLabel.widthAnchor.constraint(equalToConstant: self.bounds.width * 0.9).isActive = true
+        noticeLabel.heightAnchor.constraint(equalToConstant: self.bounds.height * 0.9).isActive = true
     }
 
     @objc private func callFadeOutTimer() {
