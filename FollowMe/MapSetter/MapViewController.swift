@@ -97,23 +97,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @IBOutlet weak var noticeLabel: UILabel!
     
-//    lazy var noticeFooterView: UIView = {
-//        let view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = Palette.transparentBlack
-//        return view
-//    }()
-    
-//    lazy var noticeLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = UIFont.systemFont(ofSize: 12)
-//        label.textColor = .blue
-//        label.text = "Tap your destination on map or search for it to get a walking route to it."
-//        label.numberOfLines = 0
-//        return label
-//    }()
-    
     @objc func goToARButton() {
         
         upload()
@@ -135,7 +118,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         arFollowerViewController.routeImageView = self.routeImageView
         
         self.navigationController?.pushViewController(arFollowerViewController, animated: true)
-//        present(arFollowerViewController, animated: true, completion: nil)
         
     }
 
@@ -228,9 +210,19 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         UIApplication.shared.statusBarView?.backgroundColor = .clear
     }
     
-    func setupSearchBackgroundView() {
+    private func setupGoToARButtonOutlet() {
+        noticeFooterView.addSubview(goToARButtonOutlet)
         
-        self.mapView.addSubview(searchBackgroundView)
+        goToARButtonOutlet.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        goToARButtonOutlet.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        goToARButtonOutlet.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        goToARButtonOutlet.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        
+    }
+    
+    func setupSearchBackgroundView() {
+
+        noticeFooterView.addSubview(searchBackgroundView)
         
         self.searchBackgroundView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
         
@@ -393,16 +385,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 
         searchBackgroundView.isHidden = true
-        
-    }
-    
-    private func setupGoToARButtonOutlet() {
-        noticeFooterView.addSubview(goToARButtonOutlet)
-        
-        goToARButtonOutlet.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        goToARButtonOutlet.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        goToARButtonOutlet.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        goToARButtonOutlet.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
     }
     
