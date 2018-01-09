@@ -46,6 +46,7 @@
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
 		5FC660FA20035A640004B501 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FC660F920035A640004B501 /* GoogleService-Info.plist */; };
+		5FC661352004584C0004B501 /* FadingOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC661342004584C0004B501 /* FadingOutView.swift */; };
 		5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */; };
 		5FD7E3B81FF6138800E8CFBA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */; };
 		5FD7E3BF1FF6645700E8CFBA /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */; };
@@ -103,6 +104,7 @@
 		5FBE573E1FDEB8FF002FDEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5FC660F920035A640004B501 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5FC661342004584C0004B501 /* FadingOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FadingOutView.swift; sourceTree = "<group>"; };
 		5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */,
+				5FC661342004584C0004B501 /* FadingOutView.swift */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				5FA656EB1FFF378B005C3598 /* BaseNavigationController.swift in Sources */,
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
+				5FC661352004584C0004B501 /* FadingOutView.swift in Sources */,
 				5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */,
 				5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */,
 				5F184E531FE3E42200789BDF /* NodeType.swift in Sources */,
