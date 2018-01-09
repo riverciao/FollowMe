@@ -99,8 +99,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @objc func goToARButton() {
         
-        guard let destinationCoordinate = self.destinationCoordinate else {
-            print("rrr")
+        if self.destinationCoordinate == nil {
+            showSetDestinationAlert()
             return
         }
         
@@ -124,6 +124,24 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         self.navigationController?.pushViewController(arFollowerViewController, animated: true)
         
+    }
+    
+    func showSetDestinationAlert() {
+        let alert = UIAlertController(
+            title: NSLocalizedString("Set the destination by tapping on map or searching for it.", comment: ""),
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        let ok = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""),
+            style: .default,
+            handler: nil
+        )
+        
+        alert.addAction(ok)
+        
+        present(alert, animated: true, completion: nil)
     }
 
     
