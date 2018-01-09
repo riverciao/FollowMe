@@ -49,7 +49,7 @@
                         <constraint firstAttribute="height" constant="50" id="fYv-1e-sYp"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <state key="normal" title="Confirm Location">
+                    <state key="normal" title="Confirm Starting Point">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>

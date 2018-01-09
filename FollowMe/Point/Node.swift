@@ -32,11 +32,18 @@ class Node: SCNNode {
         
         self.name = nodeType.name
         
-        self.geometry = SCNSphere(radius: nodeType.radius)
+        switch nodeType {
+        case .start: self.geometry = SCNSphere(radius: nodeType.radius)
+        case .end: self.geometry = SCNSphere(radius: nodeType.radius)
+        case .path: self.geometry = SCNCone(topRadius: 1, bottomRadius: 0, height: 1)
+        }
         
         self.geometry?.firstMaterial?.diffuse.contents = nodeType.diffuseContent
         
         self.geometry?.firstMaterial?.specular.contents = nodeType.specularContent
+        
+
+        
         
     }
     

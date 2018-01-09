@@ -253,6 +253,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         cautionLabel.heightAnchor.constraint(equalToConstant: cautionView.frame.height * 0.9).isActive = true
     }
     
+    //timer for notice and caution view
+    private func setupTimer() {
+        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideNoticeView), userInfo: nil, repeats: false)
+    }
+    
     @objc private func hideNoticeView() {
         fadeOutTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(fadeOut), userInfo: nil, repeats: true)
     }
@@ -269,12 +274,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             fadeOutTimer.invalidate()
         }
     }
-    
-    //timer for notice and caution view
-    private func setupTimer() {
-        Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(hideNoticeView), userInfo: nil, repeats: false)
-    }
-    
     
     private func setupHeader() {
         

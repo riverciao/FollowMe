@@ -20,7 +20,6 @@
 		5F184E451FE283A800789BDF /* SCNVector3+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E3C1FE283A700789BDF /* SCNVector3+Extensions.swift */; };
 		5F184E471FE283D800789BDF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E461FE283D800789BDF /* Main.storyboard */; };
 		5F184E491FE2848F00789BDF /* SceneLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E481FE2848F00789BDF /* SceneLocationView.swift */; };
-		5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */; };
 		5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E4D1FE37FC400789BDF /* NodeSchema.swift */; };
 		5F184E511FE3B42400789BDF /* FirebasePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E501FE3B42400789BDF /* FirebasePath.swift */; };
 		5F184E531FE3E42200789BDF /* NodeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F184E521FE3E42200789BDF /* NodeType.swift */; };
@@ -46,6 +45,7 @@
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
 		5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */; };
+		5FC660FA20035A640004B501 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FC660F920035A640004B501 /* GoogleService-Info.plist */; };
 		5FD7E3901FF51D2700E8CFBA /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */; };
 		5FD7E3B81FF6138800E8CFBA /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */; };
 		5FD7E3BF1FF6645700E8CFBA /* CoreDataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */; };
@@ -75,7 +75,6 @@
 		5F184E3C1FE283A700789BDF /* SCNVector3+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SCNVector3+Extensions.swift"; sourceTree = "<group>"; };
 		5F184E461FE283D800789BDF /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		5F184E481FE2848F00789BDF /* SceneLocationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneLocationView.swift; sourceTree = "<group>"; };
-		5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5F184E4D1FE37FC400789BDF /* NodeSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeSchema.swift; sourceTree = "<group>"; };
 		5F184E501FE3B42400789BDF /* FirebasePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebasePath.swift; sourceTree = "<group>"; };
 		5F184E521FE3E42200789BDF /* NodeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeType.swift; sourceTree = "<group>"; };
@@ -103,6 +102,7 @@
 		5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5FBE573E1FDEB8FF002FDEB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5FBE57401FDEB8FF002FDEB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5FC660F920035A640004B501 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5FD7E38F1FF51D2700E8CFBA /* RoutesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		5FD7E3B71FF6138800E8CFBA /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataHandler.swift; sourceTree = "<group>"; };
@@ -282,7 +282,6 @@
 				5FBE57341FDEB8FF002FDEB3 /* art.scnassets */,
 				5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */,
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
-				5F184E4A1FE3753E00789BDF /* GoogleService-Info.plist */,
 				5FD7E3BD1FF6644B00E8CFBA /* CoreData */,
 				5F184E331FE283A700789BDF /* SourceCode */,
 				5FAAE8861FFA521F00531AB2 /* Source */,
@@ -314,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */,
+				5FC660F920035A640004B501 /* GoogleService-Info.plist */,
 				5FD7E3C31FF664CE00E8CFBA /* Route.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -404,13 +404,13 @@
 				5F4526801FE761FC004012D1 /* MapViewController.xib in Resources */,
 				5FBE573F1FDEB8FF002FDEB3 /* LaunchScreen.storyboard in Resources */,
 				5FD7E3CC1FF668FE00E8CFBA /* RouteTableViewCell.xib in Resources */,
-				5F184E4B1FE3753F00789BDF /* GoogleService-Info.plist in Resources */,
 				5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */,
 				5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */,
 				5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */,
 				5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */,
 				5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */,
 				5F184E471FE283D800789BDF /* Main.storyboard in Resources */,
+				5FC660FA20035A640004B501 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
