@@ -11,9 +11,17 @@ import UIKit
 class FadingOutView: UIView {
 
     /// starting view alpha (default: 0.5)
-    open var startingAlpha: CGFloat = 0.5
+    open var startingAlpha: CGFloat = 0.5 {
+        didSet {
+            self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: startingAlpha)
+        }
+    }
     /// view showing time (default: 5)
-    open var showingTime: TimeInterval = 5
+    open var showingTime: TimeInterval = 5 {
+        didSet {
+            showingTimer = Timer.scheduledTimer(timeInterval: showingTime, target: self, selector: #selector(callFadeOutTimer), userInfo: nil, repeats: false)
+        }
+    }
     /// view fading out time (default: 0.1)
     open var fadingTimeInterval: TimeInterval = 0.1
     /// view fading out alpha per viewFadingTimeInterval (default: 0.1)
@@ -21,6 +29,8 @@ class FadingOutView: UIView {
     
     /// fadeOut timer
     fileprivate var fadeOutTimer = Timer()
+    /// showing timer
+    fileprivate var showingTimer = Timer()
     
     
     /**
@@ -33,10 +43,10 @@ class FadingOutView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        var frame = self.bounds
-        frame.origin.y = frame.size.height
-        frame.size.height = 0
-        self.backgroundColor = UIColor.clear
+//        var frame = self.bounds
+//        frame.origin.y = frame.size.height
+//        frame.size.height = 0
+//        self.backgroundColor = UIColor.clear
     }
     
     /**
@@ -63,7 +73,7 @@ class FadingOutView: UIView {
     
     
     private func setupTimer() {
-        Timer.scheduledTimer(timeInterval: showingTime, target: self, selector: #selector(callFadeOutTimer), userInfo: nil, repeats: false)
+        showingTimer = Timer.scheduledTimer(timeInterval: showingTime, target: self, selector: #selector(callFadeOutTimer), userInfo: nil, repeats: false)
     }
 
     @objc private func callFadeOutTimer() {
