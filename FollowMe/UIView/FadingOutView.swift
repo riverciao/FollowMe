@@ -63,7 +63,7 @@ class FadingOutView: UIView {
         self.startingAlpha = startingAlpha
         self.showingTime = showingTime
         
-        setupTimer()
+        self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: startingAlpha)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,7 +72,7 @@ class FadingOutView: UIView {
     
     
     
-    private func setupTimer() {
+    open func setupShowingTimer() {
         showingTimer = Timer.scheduledTimer(timeInterval: showingTime, target: self, selector: #selector(callFadeOutTimer), userInfo: nil, repeats: false)
     }
 

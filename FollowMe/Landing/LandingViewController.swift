@@ -52,7 +52,7 @@ class LandingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNoticeView()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,17 +60,21 @@ class LandingViewController: UIViewController {
         setupStatusBarColor()
         setupLandingImageView()
         setupWaterView()
+        
+        setupNoticeView()
     }
     
     // MARK: - Setup
     
     func setupNoticeView() {
         let frame = CGRect(x: 20, y: 30, width: 300, height: 200)
-        noticeView = FadingOutView(frame: frame, startingAlpha: 0.5, showingTime: 1)
+        noticeView = FadingOutView(frame: frame, startingAlpha: 0.5, showingTime: 5)
         
         if let noticeView = noticeView {
             view.addSubview(noticeView)
+            noticeView.setupShowingTimer()
         }
+        
     }
     
     func setupStatusBarColor() {
