@@ -183,10 +183,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             setupAnnotationsFor(currentLocationCoordinate: currentLocationCoordinate)
         }
         
-        //Set up
+        //Setup
         setupStatusBarColor()
         setupNoticeFooterView()
-//        setupNoticeLabel()
         setupGoToARButtonOutlet()
         setupSearchBackgroundView()
         setupSearchBar()
@@ -220,34 +219,58 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    // MARK: - Setup
+    func setupNoticeFooterView() {
+        noticeFooterView.backgroundColor = Palette.transparentBlack
+    }
 
+    func setupStatusBarColor() {
+        UIApplication.shared.statusBarView?.backgroundColor = .clear
+    }
+    
+    func setupSearchBackgroundView() {
+        
+        self.mapView.addSubview(searchBackgroundView)
+        
+        self.searchBackgroundView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        
+        searchBackgroundView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        searchBackgroundView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        searchBackgroundView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        searchBackgroundView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
+        
+        let whiteWalkingBirdImageView = UIImageView()
+        let whiteWalkingBirdImage = #imageLiteral(resourceName: "icon-walking-bird").withRenderingMode(.alwaysTemplate)
+        whiteWalkingBirdImageView.image = whiteWalkingBirdImage
+        whiteWalkingBirdImageView.tintColor = .white
+        whiteWalkingBirdImageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        searchBackgroundView.addSubview(whiteWalkingBirdImageView)
+        
+        whiteWalkingBirdImageView.centerXAnchor.constraint(equalTo: searchBackgroundView.centerXAnchor).isActive = true
+        whiteWalkingBirdImageView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: searchBackgroundView.frame.size.height * 2/9).isActive = true
+        whiteWalkingBirdImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        whiteWalkingBirdImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        let wordsFromBirdLabel = UILabel()
+        wordsFromBirdLabel.translatesAutoresizingMaskIntoConstraints = false
+        wordsFromBirdLabel.text = "Follow me by walking,\nI will lead you to whereever you want."
+        wordsFromBirdLabel.textAlignment = .center
+        wordsFromBirdLabel.textColor = .white
+        wordsFromBirdLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        wordsFromBirdLabel.numberOfLines = 0
+        
+        searchBackgroundView.addSubview(wordsFromBirdLabel)
+        
+        wordsFromBirdLabel.centerXAnchor.constraint(equalTo: searchBackgroundView.centerXAnchor).isActive = true
+        wordsFromBirdLabel.topAnchor.constraint(equalTo: whiteWalkingBirdImageView.bottomAnchor, constant: 12).isActive = true
+        wordsFromBirdLabel.widthAnchor.constraint(equalToConstant: searchBackgroundView.frame.width * 3/4).isActive = true
+        wordsFromBirdLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        
+    }
 
     
     // MARK: - Search Controller
-    
-    func setupNoticeFooterView() {
-        noticeFooterView.backgroundColor = Palette.transparentBlack
-////        mapView.insertSubview(noticeFooterView, belowSubview: goToARButtonOutlet)
-//        mapView.addSubview(noticeFooterView)
-//
-//        noticeFooterView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        noticeFooterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-//        noticeFooterView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-//        noticeFooterView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 8).isActive = true
-
-    }
-    
-//    func setupNoticeLabel() {
-//
-//        noticeLabel.backgroundColor = Palette.transparentBlack
-//////        mapView.insertSubview(noticeLabel, aboveSubview: noticeFooterView)
-////        noticeFooterView.addSubview(noticeLabel)
-////
-////        noticeLabel.leadingAnchor.constraint(equalTo: noticeFooterView.leadingAnchor, constant: 8).isActive = true
-////        noticeLabel.centerYAnchor.constraint(equalTo: noticeFooterView.centerYAnchor).isActive = true
-////        noticeLabel.widthAnchor.constraint(equalToConstant: noticeFooterView.frame.width - goToARButtonOutlet.frame.width - 16).isActive = true
-////        noticeLabel.heightAnchor.constraint(equalToConstant: noticeFooterView.frame.height * 0.8).isActive = true
-//    }
     
     func setupLocationSearchTableViewController() {
         
@@ -294,49 +317,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func setupSearchBackgroundView() {
 
-        self.mapView.addSubview(searchBackgroundView)
-//        mapView.bringSubview(toFront: searchBackgroundView)
-        
-        self.searchBackgroundView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        
-        searchBackgroundView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        searchBackgroundView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
-        searchBackgroundView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        searchBackgroundView.heightAnchor.constraint(equalTo: self.view.heightAnchor).isActive = true
-        
-        let whiteWalkingBirdImageView = UIImageView()
-        let whiteWalkingBirdImage = #imageLiteral(resourceName: "icon-walking-bird").withRenderingMode(.alwaysTemplate)
-        whiteWalkingBirdImageView.image = whiteWalkingBirdImage
-        whiteWalkingBirdImageView.tintColor = .white
-        whiteWalkingBirdImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        searchBackgroundView.addSubview(whiteWalkingBirdImageView)
-        
-        whiteWalkingBirdImageView.centerXAnchor.constraint(equalTo: searchBackgroundView.centerXAnchor).isActive = true
-        whiteWalkingBirdImageView.topAnchor.constraint(equalTo: searchBackgroundView.topAnchor, constant: searchBackgroundView.frame.size.height * 2/9).isActive = true
-        whiteWalkingBirdImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        whiteWalkingBirdImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        let wordsFromBirdLabel = UILabel()
-        wordsFromBirdLabel.translatesAutoresizingMaskIntoConstraints = false
-        wordsFromBirdLabel.text = "Follow me by walking,\nI will lead you to whereever you want."
-        wordsFromBirdLabel.textAlignment = .center
-        wordsFromBirdLabel.textColor = .white
-        wordsFromBirdLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
-        wordsFromBirdLabel.numberOfLines = 0
-        
-        searchBackgroundView.addSubview(wordsFromBirdLabel)
-        
-        wordsFromBirdLabel.centerXAnchor.constraint(equalTo: searchBackgroundView.centerXAnchor).isActive = true
-        wordsFromBirdLabel.topAnchor.constraint(equalTo: whiteWalkingBirdImageView.bottomAnchor, constant: 12).isActive = true
-        wordsFromBirdLabel.widthAnchor.constraint(equalToConstant: searchBackgroundView.frame.width * 3/4).isActive = true
-        wordsFromBirdLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
-        
-        
-    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -416,8 +397,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     private func setupGoToARButtonOutlet() {
-//        mapView.insertSubview(goToARButtonOutlet, belowSubview: searchBackgroundView)
-//        mapView.addSubview(goToARButtonOutlet)
         noticeFooterView.addSubview(goToARButtonOutlet)
         
         goToARButtonOutlet.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
@@ -537,10 +516,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return coordinatesPerMeter
     }
     
-    // MARK: - Setup
-    func setupStatusBarColor() {
-        UIApplication.shared.statusBarView?.backgroundColor = .clear
-    }
+
     
     //TODO: - make component
     //MARK: - upload to firebase
