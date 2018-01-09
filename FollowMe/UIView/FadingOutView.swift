@@ -26,6 +26,12 @@ class FadingOutView: UIView {
     open var fadingTimeInterval: TimeInterval = 0.1
     /// view fading out alpha per viewFadingTimeInterval (default: 0.1)
     open var viewFadingOutAlpha: CGFloat = 0.1
+    /// font size of notice label text (default: 18)
+    open var cornerRadius: CGFloat = 10 {
+        didSet {
+            self.layer.cornerRadius = cornerRadius
+        }
+    }
     /// notice label text that shows on fading out view
     open var noticeText: String = "" {
         didSet {
@@ -84,7 +90,7 @@ class FadingOutView: UIView {
         self.noticeText = noticeText
         
         self.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: startingAlpha)
-        self.layer.cornerRadius = frame.height / 35
+        self.layer.cornerRadius = cornerRadius
         setupNoticeLabel()
     }
     
