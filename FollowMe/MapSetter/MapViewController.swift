@@ -99,6 +99,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     @objc func goToARButton() {
         
+        guard let destinationCoordinate = self.destinationCoordinate else {
+            print("rrr")
+            return
+        }
+        
         upload()
         
         self.takeSnapShot()
