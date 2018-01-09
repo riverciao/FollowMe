@@ -26,7 +26,7 @@ class FadingOutView: UIView {
     open var fadingTimeInterval: TimeInterval = 0.1
     /// view fading out alpha per viewFadingTimeInterval (default: 0.1)
     open var viewFadingOutAlpha: CGFloat = 0.1
-    /// font size of notice label text (default: 18)
+    /// cornerRadius of fade out view (default: 10)
     open var cornerRadius: CGFloat = 10 {
         didSet {
             self.layer.cornerRadius = cornerRadius
