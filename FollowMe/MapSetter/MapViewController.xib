@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="FollowMe" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="Xan-MG-hrP" id="BA2-No-mwg"/>
+                <outlet property="noticeFooterView" destination="KlQ-eY-jMK" id="chP-p0-PTJ"/>
+                <outlet property="noticeLabel" destination="zN8-zr-TYU" id="qxb-ok-3km"/>
                 <outlet property="searchDisplayController" destination="AIp-O6-jn3" id="y9d-qx-KQD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -29,12 +31,33 @@
                         <outletCollection property="gestureRecognizers" destination="Lb3-2Z-yCK" appends="YES" id="Iz1-hV-DDC"/>
                     </connections>
                 </mapView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KlQ-eY-jMK">
+                    <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap your destination on map or search for it to get a walking route to it." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zN8-zr-TYU">
+                            <rect key="frame" x="8" y="30" width="269" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="zN8-zr-TYU" secondAttribute="trailing" constant="98" id="BXb-0j-OTY"/>
+                        <constraint firstItem="zN8-zr-TYU" firstAttribute="centerY" secondItem="KlQ-eY-jMK" secondAttribute="centerY" id="BiN-fK-8j4"/>
+                        <constraint firstItem="zN8-zr-TYU" firstAttribute="leading" secondItem="KlQ-eY-jMK" secondAttribute="leading" constant="8" id="Yx7-f8-V8j"/>
+                        <constraint firstAttribute="height" constant="80" id="wX9-00-wEa"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="BHX-Yz-ZrA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KlQ-eY-jMK" secondAttribute="trailing" id="LZE-Tb-Xe5"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="NfR-xB-DuU"/>
                 <constraint firstItem="Xan-MG-hrP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UgY-iQ-bLo"/>
+                <constraint firstItem="KlQ-eY-jMK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cX9-Z3-BMb"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KlQ-eY-jMK" secondAttribute="bottom" id="vZe-cj-JuW"/>
                 <constraint firstAttribute="trailing" secondItem="Xan-MG-hrP" secondAttribute="trailing" id="xGa-op-wab"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

@@ -92,12 +92,27 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return button
     }()
     
-    lazy var noticeFooterView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = Palette.transparentBlack
-        return view
-    }()
+    
+    @IBOutlet weak var noticeFooterView: UIView!
+    
+    @IBOutlet weak var noticeLabel: UILabel!
+    
+//    lazy var noticeFooterView: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = Palette.transparentBlack
+//        return view
+//    }()
+    
+//    lazy var noticeLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = UIFont.systemFont(ofSize: 12)
+//        label.textColor = .blue
+//        label.text = "Tap your destination on map or search for it to get a walking route to it."
+//        label.numberOfLines = 0
+//        return label
+//    }()
     
     @objc func goToARButton() {
         
@@ -171,7 +186,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         //Set up
         setupStatusBarColor()
         setupNoticeFooterView()
-        setupNoticeLabel()
+//        setupNoticeLabel()
         setupGoToARButtonOutlet()
         setupSearchBackgroundView()
         setupSearchBar()
@@ -211,32 +226,28 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     // MARK: - Search Controller
     
     func setupNoticeFooterView() {
-//        mapView.insertSubview(noticeFooterView, belowSubview: goToARButtonOutlet)
-        mapView.addSubview(noticeFooterView)
-        
-        noticeFooterView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        noticeFooterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-        noticeFooterView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        noticeFooterView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 8).isActive = true
-        
+        noticeFooterView.backgroundColor = Palette.transparentBlack
+////        mapView.insertSubview(noticeFooterView, belowSubview: goToARButtonOutlet)
+//        mapView.addSubview(noticeFooterView)
+//
+//        noticeFooterView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+//        noticeFooterView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+//        noticeFooterView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+//        noticeFooterView.heightAnchor.constraint(equalToConstant: self.view.frame.height / 8).isActive = true
+
     }
     
-    func setupNoticeLabel() {
-        let noticeLabel = UILabel()
-        noticeLabel.translatesAutoresizingMaskIntoConstraints = false
-        noticeLabel.font = UIFont.systemFont(ofSize: 12)
-        noticeLabel.textColor = .white
-        noticeLabel.text = "Tap your destination on map or search for it to get a walking route to it."
-        noticeLabel.numberOfLines = 0
-        
-//        mapView.insertSubview(noticeLabel, aboveSubview: noticeFooterView)
-        noticeFooterView.addSubview(noticeLabel)
-        
-        noticeLabel.leadingAnchor.constraint(equalTo: noticeFooterView.leadingAnchor, constant: 8).isActive = true
-        noticeLabel.centerYAnchor.constraint(equalTo: noticeFooterView.centerYAnchor).isActive = true
-        noticeLabel.widthAnchor.constraint(equalToConstant: noticeFooterView.frame.width - goToARButtonOutlet.frame.width - 16).isActive = true
-        noticeLabel.heightAnchor.constraint(equalToConstant: noticeFooterView.frame.height * 0.8).isActive = true
-    }
+//    func setupNoticeLabel() {
+//
+//        noticeLabel.backgroundColor = Palette.transparentBlack
+//////        mapView.insertSubview(noticeLabel, aboveSubview: noticeFooterView)
+////        noticeFooterView.addSubview(noticeLabel)
+////
+////        noticeLabel.leadingAnchor.constraint(equalTo: noticeFooterView.leadingAnchor, constant: 8).isActive = true
+////        noticeLabel.centerYAnchor.constraint(equalTo: noticeFooterView.centerYAnchor).isActive = true
+////        noticeLabel.widthAnchor.constraint(equalToConstant: noticeFooterView.frame.width - goToARButtonOutlet.frame.width - 16).isActive = true
+////        noticeLabel.heightAnchor.constraint(equalToConstant: noticeFooterView.frame.height * 0.8).isActive = true
+//    }
     
     func setupLocationSearchTableViewController() {
         
@@ -406,7 +417,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     private func setupGoToARButtonOutlet() {
 //        mapView.insertSubview(goToARButtonOutlet, belowSubview: searchBackgroundView)
-        mapView.addSubview(goToARButtonOutlet)
+//        mapView.addSubview(goToARButtonOutlet)
+        noticeFooterView.addSubview(goToARButtonOutlet)
         
         goToARButtonOutlet.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
         goToARButtonOutlet.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
