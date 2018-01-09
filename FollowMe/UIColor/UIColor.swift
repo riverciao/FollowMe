@@ -34,5 +34,7 @@ struct Palette {
     
     static let dandelion = UIColor(r: 255, g: 233, b: 129)
     
+    static let transparentBlack = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+    
 }
 
