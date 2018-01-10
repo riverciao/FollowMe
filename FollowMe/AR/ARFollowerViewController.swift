@@ -94,7 +94,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 
         setupSmallSyncMapView()
         
-        self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
+//        self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
         configuration.worldAlignment = .gravityAndHeading
         
