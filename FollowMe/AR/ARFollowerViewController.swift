@@ -699,27 +699,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
                 chickenNode.position = SCNVector3(x, position.y, z)
                 self.sceneLocationView.scene.rootNode.addChildNode(chickenNode)
-            } else {
-                print("chicken position or node can't draw")
-            }
-            
-        }
-    }
-    
-    private func drawStepBird(_ locationPathNode: LocationPathNode) {
-        if !locationPathNode.isDrawn {
-            
-            locationPathNode.isDrawn = true
-            self.x = locationPathNode.position.x
-            self.z = locationPathNode.position.z
-            
-            let chickenScene = SCNScene(named: "art.scnassets/pintinho.scn")
-            let chickenNode = chickenScene?.rootNode.childNode(withName: "Chicken", recursively: false)
-            
-            if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z, let chickenNode = chickenNode {
                 
-                chickenNode.position = SCNVector3(x, position.y, z)
-                self.sceneLocationView.scene.rootNode.addChildNode(chickenNode)
             } else {
                 print("chicken position or node can't draw")
             }
@@ -737,8 +717,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
 
-//                    draw(locationPathNode, inNodeType: .start)
-                    drawStepBird(locationPathNode)
+                    draw(locationPathNode, inNodeType: .start)
 
                 }
                 
@@ -760,11 +739,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
             case "step":
                 
-                print("step in")
-                
                 if let locationStepNode = locationNode as? LocationStepNode {
                     
-                    print("locationStepNode\(locationStepNode)")
                     drawStepBird(locationStepNode)
                     
                 }
