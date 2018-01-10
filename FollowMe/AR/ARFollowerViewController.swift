@@ -162,29 +162,35 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             let coordinates = step.polyline.coordinates
             let instructions = step.instructions
-
+            let distance = step.distance
             let coordinate = coordinates.last
             
-            // TODO: - change map annotation to ar node
-            //Add the last coordinate of polyline to observe instruction
-//            let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate!)
-//            self.smallSyncMapView.addAnnotation(annotation)
+            guard let stepCoordinate = coordinate else {
+                print("step coordinate not found")
+                return
+            }
+            
             
             if let currentLocation = self.currentLocation {
                 
-                let nextStepLocation = CLLocation(coordinate: coordinate!, altitude: 0)
+                let nextStepLocation = CLLocation(coordinate: stepCoordinate, altitude: 0)
                 let distanceToShowNextStep = currentLocation.distance(from: nextStepLocation)
                 
                 if distanceToShowNextStep < 5 {
                     
                     self.instructionLabel.text = step.instructions
-                    self.distanceLabel.text = "\(Int(step.distance)) m"
-
+                    self.distanceLabel.text = "\(Int(distance)) m"
 
                 }
                 
             }
             
+            // Add step chicken node when add new node
+            let location = CLLocation(latitude: stepCoordinate.latitude, longitude: stepCoordinate.longitude)
+            let locationStepNode = LocationStepNode(location: location, instruction: instructions, for: Int(distance))
+            locationStepNode.name = "step"
+
+            self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationStepNode)
         }
     }
     
