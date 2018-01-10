@@ -62,18 +62,7 @@ class FadingOutView: UIView {
     
     
     /**
-     Init view
-     
-     - parameter frame: view frame
-     
-     - returns: view
-     */
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//    }
-    
-    /**
-     Init view with wave color
+     Init view with fade out effect
      
      - parameter frame: view frame
      - parameter startingAlpha: alpha of the background color of fade out view(black)
@@ -82,9 +71,7 @@ class FadingOutView: UIView {
      
      - returns: view
      */
-//    public convenience
     init(frame: CGRect, startingAlpha: CGFloat, showingTime: TimeInterval, noticeText: String) {
-//        self.init(frame: frame)
         
         self.startingAlpha = startingAlpha
         self.showingTime = showingTime
@@ -98,7 +85,6 @@ class FadingOutView: UIView {
     }
     
     required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
     
