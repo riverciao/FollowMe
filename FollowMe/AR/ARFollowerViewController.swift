@@ -165,9 +165,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
 
             let coordinate = coordinates.last
             
+            // TODO: - change map annotation to ar node
             //Add the last coordinate of polyline to observe instruction
-            let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate!)
-            self.smallSyncMapView.addAnnotation(annotation)
+//            let annotation = Annotation(title: "\(instructions)", subtitle: "", coordinate: coordinate!)
+//            self.smallSyncMapView.addAnnotation(annotation)
             
             if let currentLocation = self.currentLocation {
                 
@@ -429,8 +430,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                     
                     let location = CLLocation(latitude: latitude, longitude: longitude)
                     let locationStepNode = LocationStepNode(location: location, instruction: instruction, for: distance)
+                    locationStepNode.name = "step"
+//                    let locationStepPathNode = LocationPathNode(location: location, belongToPathId: pathId)
 
                     self?.locationStepNodes.append(locationStepNode)
+                    self?.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationStepNode)
  
                 }
                 
@@ -681,6 +685,48 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         }
     }
     
+    private func drawStepBird(_ locationStepNode: LocationStepNode) {
+        if !locationStepNode.isDrawn {
+            
+            locationStepNode.isDrawn = true
+            self.x = locationStepNode.position.x
+            self.z = locationStepNode.position.z
+            
+            let chickenScene = SCNScene(named: "art.scnassets/pintinho.scn")
+            let chickenNode = chickenScene?.rootNode.childNode(withName: "Chicken", recursively: false)
+            
+            if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z, let chickenNode = chickenNode {
+            
+                chickenNode.position = SCNVector3(x, position.y, z)
+                self.sceneLocationView.scene.rootNode.addChildNode(chickenNode)
+            } else {
+                print("chicken position or node can't draw")
+            }
+            
+        }
+    }
+    
+    private func drawStepBird(_ locationPathNode: LocationPathNode) {
+        if !locationPathNode.isDrawn {
+            
+            locationPathNode.isDrawn = true
+            self.x = locationPathNode.position.x
+            self.z = locationPathNode.position.z
+            
+            let chickenScene = SCNScene(named: "art.scnassets/pintinho.scn")
+            let chickenNode = chickenScene?.rootNode.childNode(withName: "Chicken", recursively: false)
+            
+            if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z, let chickenNode = chickenNode {
+                
+                chickenNode.position = SCNVector3(x, position.y, z)
+                self.sceneLocationView.scene.rootNode.addChildNode(chickenNode)
+            } else {
+                print("chicken position or node can't draw")
+            }
+            
+        }
+    }
+    
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
         
         if let name = locationNode.name {
@@ -691,7 +737,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
 
-                    draw(locationPathNode, inNodeType: .start)
+//                    draw(locationPathNode, inNodeType: .start)
+                    drawStepBird(locationPathNode)
 
                 }
                 
@@ -708,6 +755,17 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 if let locationPathNode = locationNode as? LocationPathNode {
                     
                     draw(locationPathNode, inNodeType: .end)
+                    
+                }
+                
+            case "step":
+                
+                print("step in")
+                
+                if let locationStepNode = locationNode as? LocationStepNode {
+                    
+                    print("locationStepNode\(locationStepNode)")
+                    drawStepBird(locationStepNode)
                     
                 }
                 

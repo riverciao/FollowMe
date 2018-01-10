@@ -41,6 +41,7 @@
 		5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */; };
 		5FAAE88A1FFA936600531AB2 /* EntryListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */; };
 		5FAAE88C1FFA938400531AB2 /* EntryListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FAAE88B1FFA938400531AB2 /* EntryListHeaderView.xib */; };
+		5FB25F342005A84A00F666AA /* Textures in Resources */ = {isa = PBXBuildFile; fileRef = 5FB25F332005A84A00F666AA /* Textures */; };
 		5FBE57331FDEB8FF002FDEB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */; };
 		5FBE57351FDEB8FF002FDEB3 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE57341FDEB8FF002FDEB3 /* art.scnassets */; };
 		5FBE573C1FDEB8FF002FDEB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */; };
@@ -97,6 +98,7 @@
 		5FAAE8871FFA524B00531AB2 /* ARCADECLASSIC.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = ARCADECLASSIC.TTF; sourceTree = "<group>"; };
 		5FAAE8891FFA936600531AB2 /* EntryListHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryListHeaderView.swift; sourceTree = "<group>"; };
 		5FAAE88B1FFA938400531AB2 /* EntryListHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EntryListHeaderView.xib; sourceTree = "<group>"; };
+		5FB25F332005A84A00F666AA /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
 		5FBE572F1FDEB8FF002FDEB3 /* FollowMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FollowMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5FBE57341FDEB8FF002FDEB3 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -280,8 +282,9 @@
 				5FBE57321FDEB8FF002FDEB3 /* AppDelegate.swift */,
 				5F184DF81FE2353900789BDF /* NotSupportedViewController.swift */,
 				5F184E461FE283D800789BDF /* Main.storyboard */,
-				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
+				5FB25F332005A84A00F666AA /* Textures */,
 				5FBE57341FDEB8FF002FDEB3 /* art.scnassets */,
+				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
 				5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */,
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
 				5FD7E3BD1FF6644B00E8CFBA /* CoreData */,
@@ -412,6 +415,7 @@
 				5FAAE8881FFA524B00531AB2 /* ARCADECLASSIC.TTF in Resources */,
 				5F91164C1FF4B4B50030E9EF /* FollowerEntranceViewController.xib in Resources */,
 				5FE74AC21FEE8FC80048C711 /* PositioningViewController.xib in Resources */,
+				5FB25F342005A84A00F666AA /* Textures in Resources */,
 				5F184E471FE283D800789BDF /* Main.storyboard in Resources */,
 				5FC660FA20035A640004B501 /* GoogleService-Info.plist in Resources */,
 			);

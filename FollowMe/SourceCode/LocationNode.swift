@@ -95,6 +95,8 @@ open class LocationAnnotationNode: LocationNode {
 
 open class LocationStepNode: LocationNode {
     
+    var isDrawn = false
+    
     var instruction: String
     
     var distance: Int
