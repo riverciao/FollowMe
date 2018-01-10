@@ -96,6 +96,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
+        configuration.worldAlignment = .gravityAndHeading
+        
         self.sceneLocationView.session.run(configuration)
         
         self.sceneLocationView.autoenablesDefaultLighting = true
