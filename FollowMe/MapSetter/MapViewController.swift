@@ -487,11 +487,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             var count: Double = 1
             
-            if distance > 3 {
+            if distance > 5 {
                 
                 for _ in 1..<Int(distance/3) {
                     
-                    let  fraction = count * 3 / distance
+                    let  fraction = count * 5 / distance
                     
                     let startLatitude = coordinate.latitude
                     

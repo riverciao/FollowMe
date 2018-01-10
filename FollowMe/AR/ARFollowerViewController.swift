@@ -733,6 +733,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             if let triangleNode = triangleNode, let boxNode = boxNode {
                 arrowNode.addChildNode(triangleNode)
                 arrowNode.addChildNode(boxNode)
+                arrowNode.scale = SCNVector3(2,2,2)
                 
                 if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
                     
