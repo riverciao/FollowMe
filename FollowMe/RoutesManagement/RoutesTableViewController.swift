@@ -20,7 +20,14 @@ class RoutesTableViewController: UITableViewController {
     var routeImageView: UIImageView?
     
     //routes for coredata
-    var items: [Item] = []
+    var items: [Item] = [] {
+        didSet {
+            if items.count != 0 {
+                noticeView.isHidden = true
+                arrowImageView.isHidden = true
+            }
+        }
+    }
     
     //for update route name
     var nameUpdateCount: Int = 0 {
@@ -28,6 +35,28 @@ class RoutesTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
     }
+    
+    //view for notice user to add new route
+    lazy var noticeView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = Palette.transparentBlack
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        view.isHidden = false
+        return view
+    }()
+    
+    //arrow to point the add button
+    lazy var arrowImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        let arrowImage = #imageLiteral(resourceName: "icon-up-arrow").withRenderingMode(.alwaysTemplate)
+        imageView.image = arrowImage
+        imageView.tintColor = Palette.transparentBlack
+        return imageView
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,10 +67,10 @@ class RoutesTableViewController: UITableViewController {
         //add addANewArticle navigationItem at rightside
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addANewRoute(sender:)))
         
-
         self.view.backgroundColor = .white
         setupHeader()
-
+        setupNoticeView()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,7 +115,7 @@ class RoutesTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         return items.count
     }
     
@@ -95,6 +124,7 @@ class RoutesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         
         var routeCell = RouteTableViewCell()
         
@@ -264,6 +294,39 @@ class RoutesTableViewController: UITableViewController {
         tableView.tableHeaderView = headerView
         tableView.separatorStyle = .none
     }
+    
+    func setupNoticeView() {
+        tableView.addSubview(noticeView)
+        
+        noticeView.topAnchor.constraint(equalTo: tableView.topAnchor, constant: tableView.frame.height / 3).isActive = true
+        noticeView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        noticeView.widthAnchor.constraint(equalToConstant: 230).isActive = true
+        noticeView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        
+        let noticeLabel = UILabel()
+        noticeLabel.translatesAutoresizingMaskIntoConstraints = false
+        noticeLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        noticeLabel.textColor = .white
+        noticeLabel.text = "Add a new route here!"
+        
+        noticeView.addSubview(noticeLabel)
+        
+        noticeLabel.centerYAnchor.constraint(equalTo: noticeView.centerYAnchor).isActive = true
+        noticeLabel.centerXAnchor.constraint(equalTo: noticeView.centerXAnchor).isActive = true
+        
+        
+        
+        tableView.addSubview(arrowImageView)
+            
+        arrowImageView.bottomAnchor.constraint(equalTo: noticeView.topAnchor, constant: -10).isActive = true
+        arrowImageView.leadingAnchor.constraint(equalTo: noticeView.centerXAnchor).isActive = true
+        arrowImageView.widthAnchor.constraint(equalToConstant: tableView.frame.height / 8).isActive = true
+        arrowImageView.heightAnchor.constraint(equalToConstant: tableView.frame.height / 8).isActive = true
+        
+    }
+    
+    
 
     
 }
