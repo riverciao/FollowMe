@@ -695,6 +695,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         if !locationStepNode.isDrawn {
             
             locationStepNode.isDrawn = true
+            
+            //assign location node from GPS location to scsen node position
             self.x = locationStepNode.position.x
             self.z = locationStepNode.position.z
             
@@ -710,6 +712,37 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 print("chicken position or node can't draw")
             }
             
+        }
+    }
+    
+    private func drawArrow(_ locationPathNode: LocationPathNode) {
+        
+        if !locationPathNode.isDrawn {
+            
+            locationPathNode.isDrawn = true
+            
+            let arrowScene = SCNScene(named: "art.scnassets/arrow.scn")
+            let triangleNode = arrowScene?.rootNode.childNode(withName: "Box1", recursively: false)
+            let boxNode = arrowScene?.rootNode.childNode(withName: "Box", recursively: false)
+            
+            //assign location node from GPS location to scsen node position
+            self.x = locationPathNode.position.x
+            self.z = locationPathNode.position.z
+            
+            let arrowNode = SCNNode()
+            if let triangleNode = triangleNode, let boxNode = boxNode {
+                arrowNode.addChildNode(triangleNode)
+                arrowNode.addChildNode(boxNode)
+                
+                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
+                    
+                    arrowNode.position = SCNVector3(x, position.y, z)
+                    self.sceneLocationView.scene.rootNode.addChildNode(arrowNode)
+                }
+                
+            } else {
+                print("arrow node not found")
+            }
         }
     }
     
@@ -731,7 +764,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
 
-                    draw(locationPathNode, inNodeType: .path)
+//                    draw(locationPathNode, inNodeType: .path)
+                    drawArrow(locationPathNode)
 
                 }
                 
