@@ -123,6 +123,10 @@ open class LocationPathNode: LocationNode {
     
     var belongToPathId: String
     
+    var heading: Float?
+    
+    var isMoreThan180Degree: Bool?
+    
     public init(location: CLLocation?, belongToPathId: String) {
         
         self.belongToPathId = belongToPathId

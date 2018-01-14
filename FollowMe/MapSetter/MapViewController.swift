@@ -467,7 +467,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     public func getCoordinatesFromStraintLine(from coordinates: coordinates) -> coordinates {
         
-        var coordinatesPerMeter = coordinates
+        var coordinatesPerMeter: [CLLocationCoordinate2D] = []
         
         var segment: Int = 0
         
@@ -475,7 +475,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             // TODO: - add altitude to CLLocation argument
             
-            let coordinate = coordinates[segment]
+            var coordinate = coordinates[segment]
             
             let nextCoordinate = coordinates[segment + 1]
             
@@ -489,6 +489,53 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             let spacingInMeter: Double = 5
             
+            //calculate the radians for each straight line
+            let vectorInLatitude = Float(nextCoordinate.latitude - coordinate.latitude)
+            
+            let vectorInLongitude = Float(nextCoordinate.longitude - coordinate.longitude)
+            
+            let nodeHeading: NodeHeading?
+            
+            if vectorInLatitude == 0 {
+                
+                if vectorInLongitude > 0 {
+                    
+                    let heading = Float(Double.pi / 2)  // heading = + 90 degree -> east
+                    
+                    let isMoreThan180Degree = false
+                    
+                    nodeHeading = NodeHeading(heading: heading, isMoreThan180Degree: isMoreThan180Degree, coordinate: coordinate)
+                    
+                } else if vectorInLongitude < 0 {
+                    
+                    let heading = Float((-Double.pi) / 2) // heading = - 90 degree -> west
+                    
+                    let isMoreThan180Degree = false
+                    
+                    nodeHeading = NodeHeading(heading: heading, isMoreThan180Degree: isMoreThan180Degree, coordinate: coordinate)
+                    
+                }
+            } else if vectorInLatitude > 0 {
+                
+                let heading = atan(vectorInLongitude / vectorInLatitude) // -90 < heading < +90
+                
+                let isMoreThan180Degree = false
+                
+                nodeHeading = NodeHeading(heading: heading, isMoreThan180Degree: isMoreThan180Degree, coordinate: coordinate)
+            
+            } else if vectorInLatitude < 0 {
+            
+                let heading = atan(vectorInLongitude / vectorInLatitude) // 180 < heading < 360
+                
+                let isMoreThan180Degree = true
+            
+                nodeHeading = NodeHeading(heading: heading, isMoreThan180Degree: isMoreThan180Degree, coordinate: coordinate)
+                
+            }
+            
+            print("----------------")
+            
+            //calculate the node on same straight line with spacingInMeter
             if distance > spacingInMeter {
                 
                 for _ in 1..<Int(distance/spacingInMeter) {
@@ -507,9 +554,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                     
                     let newLongitude = startLongitude * fraction + endLongitude * (1 - fraction)
                     
-                    let newCoordinate = CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
+                    var newCoordinate = CLLocationCoordinate2D(latitude: newLatitude, longitude: newLongitude)
+                    
+                    newCoordinate.heading = coordinate.heading
+                    
+                    newCoordinate.isMoreThan180Degree = coordinate.isMoreThan180Degree
+                    
+                    print("XXXheading: \(newCoordinate.heading), isMoreThan180Degree: \(newCoordinate.isMoreThan180Degree)")
                     
                     coordinatesPerMeter.append(newCoordinate)
+                    
                     
                     count += 1
                 }
@@ -520,6 +574,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }
         
+        for i in coordinatesPerMeter {
+            print("OOOOheading: \(i.heading), isMoreThan180Degree: \(i.isMoreThan180Degree)")
+        }
         return coordinatesPerMeter
     }
     
@@ -575,9 +632,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             let pointsPositionRef = pathNodesRef.childByAutoId()
             
-            let latitude = pathNode.latitude, longitude = pathNode.longitude, altitude = 0
+            let latitude = pathNode.latitude, longitude = pathNode.longitude
             
-            let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, NodeCoordinate.Schema.altitude: altitude] as [String : Any]
+            guard let heading = pathNode.heading, let isMoreThan180Degree = pathNode.isMoreThan180Degree else {
+                print("heading and isMoreThan180Degree not found")
+                return
+            }
+            
+            let values = [NodeCoordinate.Schema.latitude: latitude, NodeCoordinate.Schema.longitude: longitude, "heading": heading, "isMoreThan180Degree": isMoreThan180Degree] as [String : Any]
             
             pointsPositionRef.updateChildValues(values, withCompletionBlock: { (error, ref) in
                 

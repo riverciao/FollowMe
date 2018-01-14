@@ -568,13 +568,17 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let dictionary = positionSnapshot.value as? [String: Any] {
                     
-                    guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let altitude = dictionary[NodeCoordinate.Schema.altitude] as? Double else { return }
+                    guard let latitude = dictionary[NodeCoordinate.Schema.latitude] as? Double, let longitude = dictionary[NodeCoordinate.Schema.longitude] as? Double, let heading = dictionary["heading"] as? Float, let isMoreThan180Degree = dictionary["isMoreThan180Degree"] as? Bool else { return }
                     
                     let location = CLLocation(latitude: latitude, longitude: longitude)
                     
                     self?.existedPathNode = LocationPathNode(location: location, belongToPathId: pathId)
                     
                     self?.existedPathNode?.name = "path"
+                    
+                    self?.existedPathNode?.heading = heading
+                    
+                    self?.existedPathNode?.isMoreThan180Degree = isMoreThan180Degree
                     
                     if let existedPathNode = self?.existedPathNode {
                         
@@ -740,6 +744,14 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
                     
                     arrowNode.position = SCNVector3(x, position.y, z)
+                    
+                    //calculate angle of z and x
+//                    let angle = atan(x/z)
+                    if let heading = locationPathNode.heading, let isMoreThan180Degree = locationPathNode.isMoreThan180Degree {
+//                        print("OOOOheading: \(heading), isMoreThan180Degree: \(isMoreThan180Degree)")
+                    }
+                    arrowNode.eulerAngles.y -= Float(90).degreesToRadians
+                    
                     self.sceneLocationView.scene.rootNode.addChildNode(arrowNode)
                 }
                 
