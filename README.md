@@ -21,3 +21,12 @@ App Store: <https://itunes.apple.com/tw/app/walking-bird/id1332543881>
 * Firebase Analytics
 * Crashlytics
 
+
+## Requirement
+* iOS 11.0+
+* Xcode 9.1
+
+
+## Contacts
+Ciao Huang
+<lionciao16@gmail.com>
