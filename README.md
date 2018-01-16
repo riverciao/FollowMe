@@ -1,1 +1,2 @@
-# FollowMe
+# WalkingBird
+再也不必拿著地圖對方位，實境導航直接告訴你該怎麼走
