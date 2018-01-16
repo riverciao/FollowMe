@@ -22,6 +22,16 @@ App Store: <https://itunes.apple.com/tw/app/walking-bird/id1332543881>
 * Crashlytics
 
 
+## ScreenShot
+<img src="https://github.com/riverciao/FollowMe/blob/feature/UI/Screenshot/1.PNG" width="200">
+<img src="https://github.com/riverciao/FollowMe/blob/feature/UI/Screenshot/2.PNG" width="200">
+<img src="https://github.com/riverciao/FollowMe/blob/feature/UI/Screenshot/3.PNG" width="200">
+<img src="https://github.com/riverciao/FollowMe/blob/feature/UI/Screenshot/4.PNG" width="200">
+<img src="https://github.com/riverciao/FollowMe/blob/feature/UI/Screenshot/5.PNG" width="200">
+<img src="https://github.com/riverciao/FollowMe/blob/feature/UI/Screenshot/6.PNG" width="200">
+
+
+
 ## Requirement
 * iOS 11.0+
 * Xcode 9.1
