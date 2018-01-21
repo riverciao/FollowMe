@@ -523,7 +523,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         //retrieve start node
         guard let startNode = dictionary["start-node"] as? [String: AnyObject] else { return }
         
-        guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double, let altitude = startNode[NodeCoordinate.Schema.altitude] as? Double else { return }
+        guard let latitude = startNode[NodeCoordinate.Schema.latitude] as? Double, let longitude = startNode[NodeCoordinate.Schema.longitude] as? Double else { return }
         
         let location = CLLocation(latitude: latitude, longitude: longitude)
         
@@ -781,7 +781,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
 
-//                    draw(locationPathNode, inNodeType: .path)
                     drawArrow(locationPathNode)
 
                 }
