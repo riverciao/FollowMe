@@ -14,4 +14,8 @@ target 'FollowMe' do
   pod 'Firebase/Database'
   pod 'YXWaveView'
 
+  # Pods for PodTest
+  pod 'Fabric', '~> 1.7.2'
+  pod 'Crashlytics', '~> 3.9.3'
+
 end
