@@ -357,6 +357,7 @@
 				5FBE572D1FDEB8FF002FDEB3 /* Resources */,
 				2E05892A70BE5D4F47065755 /* [CP] Embed Pods Frameworks */,
 				F1A12D13009620F2F232958A /* [CP] Copy Pods Resources */,
+				5F4063682014A10C00FBD8A6 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -456,6 +457,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FollowMe/Pods-FollowMe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		5F4063682014A10C00FBD8A6 /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\"\n";
 		};
 		C8F963D36AA1172AF3D6555C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
