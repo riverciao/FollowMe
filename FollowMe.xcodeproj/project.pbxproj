@@ -29,7 +29,7 @@
 		5F4526821FE791D6004012D1 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526811FE791D6004012D1 /* Annotation.swift */; };
 		5F4526841FE9002B004012D1 /* LocationSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */; };
 		5F4526891FEA15BD004012D1 /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4526881FEA15BD004012D1 /* Polyline.swift */; };
-		5F718A7F200B42CE00F4959B /* NodeHeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F718A7E200B42CE00F4959B /* NodeHeading.swift */; };
+		5F718A7F200B42CE00F4959B /* HeadingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F718A7E200B42CE00F4959B /* HeadingNode.swift */; };
 		5F9116381FF3AED90030E9EF /* LocationSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */; };
 		5F9116391FF3AED90030E9EF /* LocationSearchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */; };
 		5F9116451FF4B03D0030E9EF /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9116431FF4B03D0030E9EF /* LandingViewController.swift */; };
@@ -87,7 +87,7 @@
 		5F4526811FE791D6004012D1 /* Annotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		5F4526831FE9002B004012D1 /* LocationSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewController.swift; sourceTree = "<group>"; };
 		5F4526881FEA15BD004012D1 /* Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
-		5F718A7E200B42CE00F4959B /* NodeHeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeHeading.swift; sourceTree = "<group>"; };
+		5F718A7E200B42CE00F4959B /* HeadingNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeadingNode.swift; sourceTree = "<group>"; };
 		5F9116361FF3AED90030E9EF /* LocationSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTableViewCell.swift; sourceTree = "<group>"; };
 		5F9116371FF3AED90030E9EF /* LocationSearchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationSearchTableViewCell.xib; sourceTree = "<group>"; };
 		5F9116431FF4B03D0030E9EF /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 				5F184E4D1FE37FC400789BDF /* NodeSchema.swift */,
 				5F184E521FE3E42200789BDF /* NodeType.swift */,
 				5F184E541FE4C67D00789BDF /* Node.swift */,
-				5F718A7E200B42CE00F4959B /* NodeHeading.swift */,
+				5F718A7E200B42CE00F4959B /* HeadingNode.swift */,
 			);
 			path = Point;
 			sourceTree = "<group>";
@@ -509,7 +509,7 @@
 				5F184E441FE283A800789BDF /* SCNNode+Extensions.swift in Sources */,
 				5F184E4E1FE37FC400789BDF /* NodeSchema.swift in Sources */,
 				5FC661352004584C0004B501 /* FadingOutView.swift in Sources */,
-				5F718A7F200B42CE00F4959B /* NodeHeading.swift in Sources */,
+				5F718A7F200B42CE00F4959B /* HeadingNode.swift in Sources */,
 				5F91164B1FF4B4B50030E9EF /* FollowerEntranceViewController.swift in Sources */,
 				5F184DF91FE2353900789BDF /* NotSupportedViewController.swift in Sources */,
 				5F184E531FE3E42200789BDF /* NodeType.swift in Sources */,

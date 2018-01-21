@@ -8,12 +8,12 @@
 
 import MapKit
 
-struct NodeHeading {
+struct HeadingNode {
+    
+    var coordinate: CLLocationCoordinate2D
     
     var heading: Float
     
     var isMoreThan180Degree: Bool
-    
-    var coordinate: CLLocationCoordinate2D
-    
+
 }

@@ -746,11 +746,13 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                     arrowNode.position = SCNVector3(x, position.y, z)
                     
                     //calculate angle of z and x
-//                    let angle = atan(x/z)
                     if let heading = locationPathNode.heading, let isMoreThan180Degree = locationPathNode.isMoreThan180Degree {
-//                        print("OOOOheading: \(heading), isMoreThan180Degree: \(isMoreThan180Degree)")
+                        
+                        switch isMoreThan180Degree {
+                        case true: arrowNode.eulerAngles.y -= .pi + heading
+                        case false: arrowNode.eulerAngles.y -= heading
+                        }
                     }
-                    arrowNode.eulerAngles.y -= Float(90).degreesToRadians
                     
                     self.sceneLocationView.scene.rootNode.addChildNode(arrowNode)
                 }

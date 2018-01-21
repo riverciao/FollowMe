@@ -13,7 +13,7 @@ import Firebase
 
 protocol CoordinateManagerDelegate: class {
     
-    func didGet(coordinates: [CLLocationCoordinate2D])
+    func didGet(nodes: [HeadingNode])
 
 }
 
@@ -27,7 +27,7 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
     
     var isSaved: Bool = true
     var timer = Timer()
-    var coordinatesPerMeter: [CLLocationCoordinate2D]?
+    var directionNodes: [HeadingNode]?
     let mapViewController = MapViewController()
     private var currentLocation: CLLocation?
 
@@ -222,23 +222,18 @@ class ARViewController: UIViewController, SceneLocationViewDelegate {
 }
 
 extension ARViewController: CoordinateManagerDelegate {
-    
-    func didGet(coordinates: [CLLocationCoordinate2D]) {
-        //do something
-        // cash the coordinates
-        self.coordinatesPerMeter = coordinates
+    func didGet(nodes: [HeadingNode]) {
         
-        let coordinate = coordinates[0]
-        let location = CLLocation(coordinate: coordinate, altitude: 300)
+        self.directionNodes = nodes
+        
+        let node = nodes[0]
+        let location = CLLocation(coordinate: node.coordinate, altitude: 0)
         let image = UIImage(named: "pin")!
         
         let annotationNode = LocationAnnotationNode(location: location, image: image)
         
         sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: annotationNode)
         
-        
     }
-    
-    
 }
 
