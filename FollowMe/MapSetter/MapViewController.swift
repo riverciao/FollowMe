@@ -752,6 +752,7 @@ extension MapViewController: HandleMapSearch {
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         
         mapView.setRegion(region, animated: true)
+
     }
     
     // MARK: - Set route
@@ -780,6 +781,9 @@ extension MapViewController: HandleMapSearch {
         directionRequest.source = currentLocationMapItem
         directionRequest.destination = destinationMapItem
         directionRequest.transportType = .walking
+        
+        // Assign destinationCoordinate to avoid alert controller of setting destination
+        self.destinationCoordinate = destinationCoordinate
         
         // Calculate the direction
         let directions = MKDirections(request: directionRequest)
