@@ -499,8 +499,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 
             }
             
-            print("----------------")
-            
             //calculate the node on same straight line with spacingInMeter
             if distance > spacingInMeter {
                 
@@ -747,7 +745,7 @@ extension MapViewController: HandleMapSearch {
             annotation.subtitle = "\(city) \(state)"
         }
         
-        mapView.addAnnotation(annotation)
+//        mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
         
@@ -816,7 +814,22 @@ extension MapViewController: HandleMapSearch {
                 self.mapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
                 
             }
+            
         }
+        
+        // Set region
+        let centerCoordinate = CLLocationCoordinate2DMake(
+            (currentLocationCoordinate.latitude + destinationCoordinate.latitude) / 2,
+            (currentLocationCoordinate.longitude + destinationCoordinate.longitude) / 2 )
+        
+        let currentLocation = CLLocation(coordinate: currentLocationCoordinate, altitude: 0)
+        
+        let distance = currentLocation.distance(from: CLLocation(coordinate: destinationCoordinate, altitude: 0))
+        
+        let region = MKCoordinateRegionMakeWithDistance(centerCoordinate, distance, distance)
+        
+        mapView.setRegion(region, animated: true)
+        
     }
 }
 
@@ -829,15 +842,23 @@ extension MapViewController {
         
         // Set the region of the map that is rendered. (by polyline)
         //        let polyLine = MKPolyline(coordinates: &yourCoordinates, count: yourCoordinates.count)
-        guard let polyLine = self.route?.polyline else {
-            print("polyLine is nil")
+        guard
+            let polyLine = self.route?.polyline,
+            let currentLocationCoordinate = self.currentLocationCoordinateForARSetting,
+            let destinationCoordinate = self.destinationCoordinate
+        else {
+            print("polyLine, currentLocationCoordinate or destinationCoordinate is nil")
             return
         }
         
-        //change destinationCoordinate to polyline.coordinate
-        let span = MKCoordinateSpanMake(0.003, 0.003)
-        let region = MKCoordinateRegionMake(polyLine.coordinate, span)
+        // Set snapshot region
+        let currentLocation = CLLocation(coordinate: currentLocationCoordinate, altitude: 0)
         
+        let distance = currentLocation.distance(from: CLLocation(coordinate: destinationCoordinate, altitude: 0))
+        
+        let distancePlus = distance * 1.3
+        
+        let region = MKCoordinateRegionMakeWithDistance(polyLine.coordinate, distancePlus, distancePlus)
         
         mapSnapshotOptions.region = region
         
