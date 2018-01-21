@@ -539,9 +539,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
         }
         
-//        for i in coordinatesPerMeter {
-//            print("OOOOheading: \(i.heading), isMoreThan180Degree: \(i.isMoreThan180Degree)")
-//        }
         return directionCoordinates
     }
     
