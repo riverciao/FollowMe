@@ -744,12 +744,6 @@ extension MapViewController: HandleMapSearch {
         if let city = placemark.locality, let state = placemark.administrativeArea {
             annotation.subtitle = "\(city) \(state)"
         }
-        
-//        mapView.addAnnotation(annotation)
-//        let span = MKCoordinateSpanMake(0.05, 0.05)
-//        let region = MKCoordinateRegionMake(placemark.coordinate, span)
-        
-//        mapView.setRegion(region, animated: true)
 
     }
     
@@ -758,7 +752,7 @@ extension MapViewController: HandleMapSearch {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = Palette.baliHai
+        renderer.strokeColor = Palette.duckBeak
         renderer.lineWidth = 4.0
         
         return renderer
