@@ -290,6 +290,7 @@
 				5FBE573B1FDEB8FF002FDEB3 /* Assets.xcassets */,
 				5FBE573D1FDEB8FF002FDEB3 /* LaunchScreen.storyboard */,
 				5FBE57401FDEB8FF002FDEB3 /* Info.plist */,
+				5FC660F920035A640004B501 /* GoogleService-Info.plist */,
 				5FD7E3BD1FF6644B00E8CFBA /* CoreData */,
 				5F184E331FE283A700789BDF /* SourceCode */,
 				5FAAE8861FFA521F00531AB2 /* Source */,
@@ -322,7 +323,6 @@
 			isa = PBXGroup;
 			children = (
 				5FD7E3BE1FF6645700E8CFBA /* CoreDataHandler.swift */,
-				5FC660F920035A640004B501 /* GoogleService-Info.plist */,
 				5FD7E3C31FF664CE00E8CFBA /* Route.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -598,7 +598,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

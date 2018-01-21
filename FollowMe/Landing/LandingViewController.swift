@@ -8,6 +8,7 @@
 
 import UIKit
 import YXWaveView
+import Crashlytics
 
 class LandingViewController: UIViewController {
     
@@ -47,7 +48,6 @@ class LandingViewController: UIViewController {
         setupInvitationCodeButton()
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
