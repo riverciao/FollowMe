@@ -10,7 +10,7 @@ import UIKit
 import ARKit
 import MapKit
 import Firebase
-//import NVActivityIndicatorView
+import NVActivityIndicatorView
 
 typealias pathId = String
 
@@ -87,6 +87,14 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     //timer for notice view to fade out
     var fadeOutTimer = Timer()
     
+    //view for loading animation
+    lazy var loadingAnimationView: NVActivityIndicatorView = {
+        let view = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.color = Palette.seaBlue
+        view.type = .ballScaleMultiple
+        return view
+    }()
     
     // MARK: - View life cycle
     
@@ -108,6 +116,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         //add touch gesture
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.sceneLocationView.addGestureRecognizer(tapGestureRecognizer)
+        
+        setuploadingAnimationView()
 
     }
     
@@ -212,17 +222,30 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             view.addSubview(noticeView)
             noticeView.start()
             
-            // Setup cautionView
-            let YOfCautionView = YOfNoticeView + noticeViewHeight + 10
-            let cautionViewFrame = CGRect(x: XOfNoticeView, y: YOfCautionView, width: noticeViewWidth, height: noticeViewHeight)
-            
-            cautionView = FadingOutView(frame: cautionViewFrame, startingAlpha: 0.5, showingTime: 5, noticeText: "Please be aware of your surroundings.")
-            
-            if let cautionView = cautionView {
-                view.addSubview(cautionView)
-                cautionView.start()
-            }
+//            // Setup cautionView
+//            let YOfCautionView = YOfNoticeView + noticeViewHeight + 10
+//            let cautionViewFrame = CGRect(x: XOfNoticeView, y: YOfCautionView, width: noticeViewWidth, height: noticeViewHeight)
+//
+//            cautionView = FadingOutView(frame: cautionViewFrame, startingAlpha: 0.5, showingTime: 5, noticeText: "Please be aware of your surroundings.")
+//
+//            if let cautionView = cautionView {
+//                view.addSubview(cautionView)
+//                cautionView.start()
+//            }
         }
+    }
+    
+    private func setuploadingAnimationView() {
+        
+        view.addSubview(loadingAnimationView)
+        
+        loadingAnimationView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        loadingAnimationView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loadingAnimationView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        loadingAnimationView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        loadingAnimationView.startAnimating()
+    
     }
     
     private func setupHeader() {
@@ -595,9 +618,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     private func fetchPath() {
         
-        let queue = DispatchQueue.global()
+//        let queue = DispatchQueue.global()
         
-        Database.database().callbackQueue = queue
+//        Database.database().callbackQueue = queue
         
         Database.database().reference().child("paths").observe( .childAdded) { [weak self] (snapshot) in
             
