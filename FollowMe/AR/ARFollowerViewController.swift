@@ -595,6 +595,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     private func fetchPath() {
         
+        let queue = DispatchQueue.global()
+        
+        Database.database().callbackQueue = queue
+        
         Database.database().reference().child("paths").observe( .childAdded) { [weak self] (snapshot) in
             
             guard let pathId = self?.currentPathId else {
