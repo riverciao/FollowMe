@@ -55,6 +55,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - NVActivityIndicatorView (4.0.1):
+    - NVActivityIndicatorView/Presenter (= 4.0.1)
+  - NVActivityIndicatorView/Presenter (4.0.1)
   - YXWaveView (0.4.0)
 
 DEPENDENCIES:
@@ -66,6 +69,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - NVActivityIndicatorView
   - YXWaveView
 
 EXTERNAL SOURCES:
@@ -94,8 +98,9 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   leveldb-library: 4f9eedf84ab46b4fa3b7893bf30714b2a1a74022
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NVActivityIndicatorView: 77ed6d7b571643e24899e7858bf9ae2ee4c21f31
   YXWaveView: 57c411339d0adcd54c3443befadead8df9e12391
 
-PODFILE CHECKSUM: 1678e4f478169264712452cbdea68b08677f4d3a
+PODFILE CHECKSUM: 91ce8d0022e1340cc2b66b2fbc7fd7ae6a4e87c1
 
 COCOAPODS: 1.3.1

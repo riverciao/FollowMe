@@ -13,6 +13,7 @@ target 'FollowMe' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'YXWaveView'
+  pod 'NVActivityIndicatorView'
 
   # Pods for PodTest
   pod 'Fabric', '~> 1.7.2'

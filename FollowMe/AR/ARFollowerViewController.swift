@@ -10,6 +10,7 @@ import UIKit
 import ARKit
 import MapKit
 import Firebase
+//import NVActivityIndicatorView
 
 typealias pathId = String
 
@@ -93,8 +94,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         super.viewDidLoad()
 
         setupSmallSyncMapView()
-        
-//        self.sceneLocationView.debugOptions = [ARSCNDebugOptions.showWorldOrigin, ARSCNDebugOptions.showFeaturePoints]
         
         configuration.worldAlignment = .gravityAndHeading
         
@@ -420,37 +419,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
-    private func retrieveStepNodes(with pathId: pathId) {
-        
-        let stepNodesRef = Database.database().reference().child("paths").child(pathId).child("step-nodes")
-        
-        stepNodesRef.observe( .childAdded, with: { [weak self] (stepNodesSnapshot) in
-            
-            let stepNodeId = stepNodesSnapshot.key
-            
-            let stepNodeRef = Database.database().reference().child("paths").child(pathId).child("step-nodes").child(stepNodeId)
-            
-            stepNodeRef.observeSingleEvent(of: .value, with: { (snapShot) in
-                
-                if let dictionary = snapShot.value as? [String: Any] {
-                    
-                    guard let latitude = dictionary["latitude"] as? Double, let longitude = dictionary["longitude"] as? Double, let instruction = dictionary["instruction"] as? String, let distance = dictionary["distance"] as? Int else { return }
-                    
-                    let location = CLLocation(latitude: latitude, longitude: longitude)
-                    let locationStepNode = LocationStepNode(location: location, instruction: instruction, for: distance)
-                    locationStepNode.name = "step"
-//                    let locationStepPathNode = LocationPathNode(location: location, belongToPathId: pathId)
-
-                    self?.locationStepNodes.append(locationStepNode)
-                    self?.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationStepNode)
- 
-                }
-                
-            }, withCancel: nil)
-            
-        }, withCancel: nil)
-    }
-    
     // MARK: - CLLocationManagerDelegate
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -593,13 +561,41 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
         }, withCancel: nil)
     }
+    
+    private func retrieveStepNodes(with pathId: pathId) {
+        
+        let stepNodesRef = Database.database().reference().child("paths").child(pathId).child("step-nodes")
+        
+        stepNodesRef.observe( .childAdded, with: { [weak self] (stepNodesSnapshot) in
+            
+            let stepNodeId = stepNodesSnapshot.key
+            
+            let stepNodeRef = Database.database().reference().child("paths").child(pathId).child("step-nodes").child(stepNodeId)
+            
+            stepNodeRef.observeSingleEvent(of: .value, with: { (snapShot) in
+                
+                if let dictionary = snapShot.value as? [String: Any] {
+                    
+                    guard let latitude = dictionary["latitude"] as? Double, let longitude = dictionary["longitude"] as? Double, let instruction = dictionary["instruction"] as? String, let distance = dictionary["distance"] as? Int else { return }
+                    
+                    let location = CLLocation(latitude: latitude, longitude: longitude)
+                    let locationStepNode = LocationStepNode(location: location, instruction: instruction, for: distance)
+                    locationStepNode.name = "step"
+                    
+                    self?.locationStepNodes.append(locationStepNode)
+                    self?.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: locationStepNode)
+                    
+                }
+                
+            }, withCancel: nil)
+            
+            }, withCancel: nil)
+    }
 
     
     private func fetchPath() {
         
         Database.database().reference().child("paths").observe( .childAdded) { [weak self] (snapshot) in
-            
-//            let pathId = snapshot.key
             
             guard let pathId = self?.currentPathId else {
                 
