@@ -98,6 +98,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     // MARK: - View life cycle
     
+    deinit {
+        print(" AR follower view controller is dead")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -150,6 +154,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         setupHeader()
         setupNoticeView()
         
+    }
+    
+    override func didReceiveMemoryWarning() {
+        print("Memory warning")
     }
     
     // MARK: - get instruction
@@ -618,10 +626,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     private func fetchPath() {
         
-//        let queue = DispatchQueue.global()
-        
-//        Database.database().callbackQueue = queue
-        
         Database.database().reference().child("paths").observe( .childAdded) { [weak self] (snapshot) in
             
             guard let pathId = self?.currentPathId else {
@@ -643,13 +647,11 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                     self?.retrieveEndNode(from: dictionary, with: pathId)
                     
                     self?.retrievePathNodes(with: pathId)
-
+                    
                 }
                 
             }, withCancel: nil)
-            
         }
-        
     }
     
     private func setupAnnotationsFor(destinationCoordinate: CLLocationCoordinate2D) {
@@ -676,6 +678,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
 
 
+    // MARK: SceneLocationViewDelegate
     
     func sceneLocationViewDidAddSceneLocationEstimate(sceneLocationView: SceneLocationView, position: SCNVector3, location: CLLocation) {
         
@@ -795,33 +798,34 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             case "start":
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
-
-                    draw(locationPathNode, inNodeType: .start)
-
+                    DispatchQueue.main.async {
+                        self.draw(locationPathNode, inNodeType: .start)
+                    }
                 }
                 
             case "path":
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
-
-                    drawArrow(locationPathNode)
-
+                    DispatchQueue.main.async {
+                        self.loadingAnimationView.stopAnimating()
+                        self.drawArrow(locationPathNode)
+                    }
                 }
                 
             case "end":
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
-                    
-                    draw(locationPathNode, inNodeType: .end)
-                    
+                    DispatchQueue.main.async {
+                        self.draw(locationPathNode, inNodeType: .end)
+                    }
                 }
                 
             case "step":
                 
                 if let locationStepNode = locationNode as? LocationStepNode {
-                    
-                    drawStepBird(locationStepNode)
-                    
+                    DispatchQueue.main.async {
+                        self.drawStepBird(locationStepNode)
+                    }
                 }
                 
             default: break
@@ -830,3 +834,5 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         }
     }
 }
+
+

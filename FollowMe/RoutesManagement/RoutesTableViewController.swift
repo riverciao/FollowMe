@@ -57,6 +57,11 @@ class RoutesTableViewController: UITableViewController {
         return imageView
     }()
     
+    // MARK: View life cycle
+    
+    deinit {
+        print("routes tavle view controller is dead")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

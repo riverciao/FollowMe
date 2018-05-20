@@ -37,7 +37,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            self.window!.rootViewController = NotSupportedViewController()
 //        }
         
+//        let queue = DispatchQueue.global()
         
+//        Database.database().callbackQueue = queue
         
         return true
     }

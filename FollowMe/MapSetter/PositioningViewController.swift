@@ -41,6 +41,12 @@ class PositioningViewController: UIViewController, CLLocationManagerDelegate, MK
 
     }
     
+    // MARK: View life cycle
+    
+    deinit {
+        print("positioning view controller is dead")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self

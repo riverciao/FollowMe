@@ -22,6 +22,10 @@ class LocationSearchTableViewController: UITableViewController {
     
     // MARK: - View life cycle
     
+    deinit {
+        print("location search view controller is dead")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

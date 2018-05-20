@@ -54,6 +54,12 @@ class FollowerEntranceViewController: UIViewController {
         present(arFollowerViewController, animated: true, completion: nil)
     }
     
+    // MARK: View life cycle
+    
+    deinit {
+        print("follower entance view controller is dead")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

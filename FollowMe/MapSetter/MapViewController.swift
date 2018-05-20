@@ -24,7 +24,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 
 
     //Location Manager
-    let locationSearchTableViewController = LocationSearchTableViewController()
+    var locationSearchTableViewController: LocationSearchTableViewController? = LocationSearchTableViewController()
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
     private var route: MKRoute?
@@ -161,12 +161,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     // MARK: - View life cycle
+
+    deinit {
+        print("map view controller is dead")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         mapView.delegate = self
-        locationSearchTableViewController.handleMapSearchDelegate = self
+        locationSearchTableViewController?.handleMapSearchDelegate = self
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -289,7 +293,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func setupLocationSearchTableViewController() {
         
-        let locationSearchTableView = locationSearchTableViewController.view
+        let locationSearchTableView = locationSearchTableViewController?.view
         
         //position and size
         let searchBarHeight = searchBar.frame.size.height
@@ -326,8 +330,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         if let currentLocationCoordinateForARSetting = self.currentLocationCoordinateForARSetting {
             //Pass Value
             let currentLocationForARSetting = CLLocation(coordinate: currentLocationCoordinateForARSetting, altitude: 0)
-            locationSearchTableViewController.currentLocation = currentLocationForARSetting
-            locationSearchTableViewController.mapView = self.mapView
+            locationSearchTableViewController?.currentLocation = currentLocationForARSetting
+            locationSearchTableViewController?.mapView = self.mapView
             present(searchController, animated: true, completion: nil)
         }
     }
@@ -408,6 +412,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
 
         searchBackgroundView.isHidden = true
+        locationSearchTableViewController = nil
         
     }
     

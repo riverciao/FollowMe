@@ -39,6 +39,11 @@ class LandingViewController: UIViewController {
         return imageView
     }()
     
+    // MARK: View life cycle
+    
+    deinit {
+        print("landing view controller is dead")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +65,7 @@ class LandingViewController: UIViewController {
         setupLandingImageView()
         setupWaterView()
     }
+    
     
     // MARK: - Setup
     
