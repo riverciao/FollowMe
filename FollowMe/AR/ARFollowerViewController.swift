@@ -98,10 +98,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     
     // MARK: - View life cycle
     
-    deinit {
-        print(" AR follower view controller is dead")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -132,7 +128,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
         fetchPath()
 
-        getRouteInstructions()
+        try? getRouteInstructions()
         
         self.navigationController?.navigationBar.isHidden = true
 
@@ -156,13 +152,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
-    override func didReceiveMemoryWarning() {
-        print("Memory warning")
-    }
-    
     // MARK: - get instruction
     
-    private func getRouteInstructions() {
+    private func getRouteInstructions() throws {
         
         guard let steps = self.route?.steps else {
             
@@ -185,8 +177,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             let coordinate = coordinates.last
             
             guard let stepCoordinate = coordinate else {
-                print("step coordinate not found")
-                return
+                throw RouteError.stepCoordinateNotFound
             }
             
             
@@ -288,7 +279,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         let cancel = UIAlertAction(
             title: NSLocalizedString("Cancel", comment: ""),
             style: .default,
-            handler: { action in self.delete() }
+            handler: { action in try? self.delete() }
         )
         
         let save = UIAlertAction(
@@ -304,8 +295,8 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
-    func delete() {
-        if let currentPathId = currentPathId {
+    func delete() throws {
+        if let currentPathId = currentPathId  {
             
             //delete from firebase
             let pathRef = Database.database().reference().child("paths").child(currentPathId)
@@ -313,14 +304,13 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             
             //delete from coredata
             guard let fetchResults = CoreDataHandler.filterData(selectedItemId: currentPathId) else {
-                print("route not exist")
-                return
+                throw RouteError.routeNotExist
             }
             
             let resultToBeDeleted = fetchResults[0]
             CoreDataHandler.deleteObject(item: resultToBeDeleted)
         } else {
-            print("currentPathId not exist")
+            throw RouteError.currentPathIdNotExist
         }
         
         dismiss(animated: true, completion: nil)
@@ -723,7 +713,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         }
     }
     
-    private func drawStepBird(_ locationStepNode: LocationStepNode) {
+    private func drawStepBird(_ locationStepNode: LocationStepNode) throws {
         if !locationStepNode.isDrawn {
             
             locationStepNode.isDrawn = true
@@ -741,13 +731,13 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 self.sceneLocationView.scene.rootNode.addChildNode(chickenNode)
                 
             } else {
-                print("chicken position or node can't draw")
+                throw RouteError.chickenNodeNotFound
             }
             
         }
     }
     
-    private func drawArrow(_ locationPathNode: LocationPathNode) {
+    private func drawArrow(_ locationPathNode: LocationPathNode) throws {
         
         if !locationPathNode.isDrawn {
             
@@ -784,7 +774,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 }
                 
             } else {
-                print("arrow node not found")
+                throw RouteError.arrowNodeNotFound
             }
         }
     }
@@ -808,7 +798,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 if let locationPathNode = locationNode as? LocationPathNode {
                     DispatchQueue.main.async {
                         self.loadingAnimationView.stopAnimating()
-                        self.drawArrow(locationPathNode)
+                        try? self.drawArrow(locationPathNode)
                     }
                 }
                 
@@ -824,7 +814,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationStepNode = locationNode as? LocationStepNode {
                     DispatchQueue.main.async {
-                        self.drawStepBird(locationStepNode)
+                        try? self.drawStepBird(locationStepNode)
                     }
                 }
                 
@@ -835,4 +825,10 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
 }
 
-
+enum RouteError: Error {
+    case stepCoordinateNotFound
+    case routeNotExist
+    case currentPathIdNotExist
+    case arrowNodeNotFound
+    case chickenNodeNotFound
+}
