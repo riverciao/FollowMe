@@ -825,10 +825,4 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
     }
 }
 
-enum RouteError: Error {
-    case stepCoordinateNotFound
-    case routeNotExist
-    case currentPathIdNotExist
-    case arrowNodeNotFound
-    case chickenNodeNotFound
-}
+

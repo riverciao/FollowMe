@@ -6,9 +6,14 @@
 //  Copyright © 2017年 riverciao. All rights reserved.
 //
 
-import UIKit
+struct RouteManager {
+    
+}
 
-struct Route {
-    var id: String
-    var routeImage: UIImage
+enum RouteError: Error {
+    case stepCoordinateNotFound
+    case routeNotExist
+    case currentPathIdNotExist
+    case arrowNodeNotFound
+    case chickenNodeNotFound
 }
