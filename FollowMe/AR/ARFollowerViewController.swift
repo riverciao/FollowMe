@@ -70,10 +70,9 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
             }
         }
     }
-    
-    //x, z for 3DVector converted from GPS
-    var x: Float?
-    var z: Float?
+
+    // Route Draw
+    var routeManager = RouteManager()
     
     //property for current location coordinate to start node 3D vector
     var currentLocationCoordinateForARSetting: CLLocationCoordinate2D?
@@ -686,99 +685,6 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
         
     }
     
-    private func draw(_ locationPathNode: LocationPathNode, inNodeType nodeType: NodeType) {
-        
-        if !locationPathNode.isDrawn {
-            
-            if self.x != locationPathNode.position.x || self.z != locationPathNode.position.z {
-                
-                self.x = locationPathNode.position.x
-                
-                self.z = locationPathNode.position.z
-                
-                locationPathNode.isDrawn = true
-                
-                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
-                    
-                    let pathId = locationPathNode.belongToPathId
-                    
-                    let targetNode = Node(nodeType: nodeType, pathId: pathId)
-                    
-                    targetNode.position = SCNVector3(x, position.y, z)
-                    
-                    self.sceneLocationView.scene.rootNode.addChildNode(targetNode)
-                    
-                }
-            }
-        }
-    }
-    
-    private func drawStepBird(_ locationStepNode: LocationStepNode) throws {
-        if !locationStepNode.isDrawn {
-            
-            locationStepNode.isDrawn = true
-            
-            //assign location node from GPS location to scsen node position
-            self.x = locationStepNode.position.x
-            self.z = locationStepNode.position.z
-            
-            let chickenScene = SCNScene(named: "art.scnassets/pintinho.scn")
-            let chickenNode = chickenScene?.rootNode.childNode(withName: "Chicken", recursively: false)
-            
-            if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z, let chickenNode = chickenNode {
-            
-                chickenNode.position = SCNVector3(x, position.y, z)
-                self.sceneLocationView.scene.rootNode.addChildNode(chickenNode)
-                
-            } else {
-                throw RouteError.chickenNodeNotFound
-            }
-            
-        }
-    }
-    
-    private func drawArrow(_ locationPathNode: LocationPathNode) throws {
-        
-        if !locationPathNode.isDrawn {
-            
-            locationPathNode.isDrawn = true
-            
-            let arrowScene = SCNScene(named: "art.scnassets/arrow.scn")
-            let triangleNode = arrowScene?.rootNode.childNode(withName: "Box1", recursively: false)
-            let boxNode = arrowScene?.rootNode.childNode(withName: "Box", recursively: false)
-            
-            //assign location node from GPS location to scsen node position
-            self.x = locationPathNode.position.x
-            self.z = locationPathNode.position.z
-            
-            let arrowNode = SCNNode()
-            if let triangleNode = triangleNode, let boxNode = boxNode {
-                arrowNode.addChildNode(triangleNode)
-                arrowNode.addChildNode(boxNode)
-                arrowNode.scale = SCNVector3(2,2,2)
-                
-                if let position = sceneLocationView.currentScenePosition(), let x = self.x, let z = self.z {
-                    
-                    arrowNode.position = SCNVector3(x, position.y, z)
-                    
-                    //calculate angle of z and x
-                    if let heading = locationPathNode.heading, let isMoreThan180Degree = locationPathNode.isMoreThan180Degree {
-                        
-                        switch isMoreThan180Degree {
-                        case true: arrowNode.eulerAngles.y -= .pi + heading
-                        case false: arrowNode.eulerAngles.y -= heading
-                        }
-                    }
-                    
-                    self.sceneLocationView.scene.rootNode.addChildNode(arrowNode)
-                }
-                
-            } else {
-                throw RouteError.arrowNodeNotFound
-            }
-        }
-    }
-    
     func sceneLocationViewDidUpdateLocationAndScaleOfLocationNode(sceneLocationView: SceneLocationView, locationNode: LocationNode) {
         
         if let name = locationNode.name {
@@ -789,7 +695,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
                     DispatchQueue.main.async {
-                        self.draw(locationPathNode, inNodeType: .start)
+                        self.routeManager.draw(locationPathNode, inNodeType: .start, atSceneLocationView: self.sceneLocationView)
                     }
                 }
                 
@@ -798,7 +704,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 if let locationPathNode = locationNode as? LocationPathNode {
                     DispatchQueue.main.async {
                         self.loadingAnimationView.stopAnimating()
-                        try? self.drawArrow(locationPathNode)
+                        try? self.routeManager.drawArrow(locationPathNode, atSceneLocationView: self.sceneLocationView)
                     }
                 }
                 
@@ -806,7 +712,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationPathNode = locationNode as? LocationPathNode {
                     DispatchQueue.main.async {
-                        self.draw(locationPathNode, inNodeType: .end)
+                        self.routeManager.draw(locationPathNode, inNodeType: .end, atSceneLocationView: self.sceneLocationView)
                     }
                 }
                 
@@ -814,7 +720,7 @@ class ARFollowerViewController: UIViewController, SceneLocationViewDelegate, MKM
                 
                 if let locationStepNode = locationNode as? LocationStepNode {
                     DispatchQueue.main.async {
-                        try? self.drawStepBird(locationStepNode)
+                        try? self.routeManager.drawStepBird(locationStepNode, atSceneLocationView: self.sceneLocationView)
                     }
                 }
                 
